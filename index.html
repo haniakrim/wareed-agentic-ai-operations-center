@@ -968,152 +968,6 @@ html[lang="ar"] .msg .ev{ unicode-bidi:plaintext; }
     {id:'S3', name:'AI Vision Event', release:'Optional', role:'Event-driven camera analytics with privacy and false-positive controls', level:2}
   ];
 
-  var AGENT_DETAIL = {
-    A0:{mission:'Act as the central control plane that coordinates domain agents, applies policy, prioritizes enterprise exceptions and routes decisions to the right human or system workflow.',
-      monitors:['All agent-generated alerts and recommendations','Enterprise severity and business impact','Open tickets, owners, SLAs and overdue actions','Cross-domain dependencies and repeated issues','Human approval queues and escalation status'],
-      reasons:['Correlates issues across branch, lab, Home Visit, CX, quality and growth','Prioritizes issues by severity, urgency and business impact','Suppresses duplicate or low-value alerts','Determines which agent or owner should act next'],
-      actions:['Create/route approved tickets or tasks','Assign accountable owner according to policy','Escalate when response targets are exceeded','Maintain complete action and decision history','Feed resolved outcomes back into recurring-issue analytics'],
-      escalates:['Executive-severity events','Repeated unresolved issues','Cross-functional blockers','Actions outside AI authority','Conflicting recommendations from domain agents'],
-      kpis:['Alert-to-owner time','SLA compliance','Escalation accuracy','Duplicate alert reduction','Corrective action closure rate'],
-      connections:['Alert engine','Ticketing/work management','All domain agents','Role/identity service','Enterprise event logs'],
-      boundary:'No independent high-risk business action. The Orchestrator executes only pre-approved workflow actions and routes all other actions for human approval.',
-      legacy:'BR-004 to BR-010; FR-INT-001 to FR-INT-010; AR-001 to AR-012.'},
-    A1:{mission:'Convert enterprise operational data into a concise decision-oriented view for the CEO and executive leadership.',
-      monitors:['Revenue and customer volume','Branch performance and risk','Home Visit performance','Laboratory TAT and QC','Quality and customer satisfaction','Workforce availability','Marketing/growth performance','Critical operational and business alerts'],
-      reasons:['Identifies the few issues that materially require executive attention','Correlates operational risk with financial or customer impact','Summarizes likely root cause and options','Separates information items from true decision items'],
-      actions:['Generate daily CEO brief','Create executive decision queue','Provide 30-second enterprise summary','Allow drill-down to region, city, branch, service, issue or root cause','Generate weekly executive trend summary'],
-      escalates:['Critical safety/quality or continuity risks','Material revenue decline','Enterprise-wide system failure','Persistent TAT or Home Visit disruption','High-impact reputation/CX issue'],
-      kpis:['Brief relevance/precision','Decision response time','Number of avoidable executive alerts','Time from event to executive awareness','Action closure after executive decision'],
-      connections:['All domain agents','Executive KPI layer','Finance/revenue feeds','Alert service','Historical trend store'],
-      boundary:'Summarizes and recommends. Executive decisions remain with authorized Wareed leaders.',
-      legacy:'SR-001, SR-009; FR-EXE-001 to FR-EXE-015; FR-INT-010.'},
-    A2:{mission:'Continuously monitor branch operating health and convert branch-level performance deviations into prioritized corrective action.',
-      monitors:['Open/closed status','Customer volume and waiting time','Daily branch revenue and target performance','Staff attendance/availability','Customer satisfaction and complaints','Camera/VMS operational status where available','Normal / Warning / Critical status','Corrective action lifecycle'],
-      reasons:['Detects abnormal decline versus branch baseline or peer branches','Ranks branches by risk and performance','Correlates staffing, waiting time, complaints and revenue','Identifies recurring underperformance patterns'],
-      actions:['Create branch risk alert','Recommend corrective action','Assign branch/cluster owner','Track action to closure','Produce regional/city comparisons and branch ranking'],
-      escalates:['Critical branch service disruption','Repeated underperformance','Unresolved complaints with business impact','Staffing gap affecting service','Revenue decline beyond approved threshold'],
-      kpis:['Branch risk detection lead time','Waiting time reduction','Revenue recovery after intervention','Corrective action closure','Complaint recurrence'],
-      connections:['Branch systems','LIS/registration where relevant','POS/finance','HR/attendance','CX platform','VMS/camera status'],
-      boundary:'May recommend and open tasks. Branch closure, pricing, staffing changes or customer communications require authorized approval.',
-      legacy:'SR-002; FR-BR-001 to FR-BR-015; FR-OPS-002; FR-EXE-005.'},
-    A3:{mission:'Protect laboratory service performance by continuously monitoring sample flow, analyzer status, QC, TAT and operational bottlenecks.',
-      monitors:['Sample receipt through result release','Pending and delayed samples','STAT samples','Rejected samples and reasons','Analyzer uptime/downtime and maintenance','QC pass/fail','TAT by department and test category','Reagent/consumable risk','Historical and live trends'],
-      reasons:['Detects bottlenecks before widespread TAT breach','Identifies departments/analyzers/test categories driving delay','Correlates downtime, QC or reagent risk with pending workload','Recognizes recurring delay patterns'],
-      actions:['Generate TAT risk alert','Prioritize operational queue for review','Recommend workload or process intervention','Create escalation ticket to lab owner','Produce daily lab risk summary'],
-      escalates:['Critical TAT breach','STAT delay','QC failure affecting operations','Analyzer outage creating capacity risk','Reagent shortage threatening service continuity'],
-      kpis:['TAT breach rate','Time-to-detect bottleneck','STAT compliance','Analyzer availability','Rejected sample rate','Intervention effectiveness'],
-      connections:['LIS/LDM','Analyzer middleware/status feeds','QC systems','Inventory/reagent data where available','Maintenance records'],
-      boundary:'No diagnostic or clinical interpretation and no clinical result release. The agent is operational, not clinical.',
-      legacy:'SR-004; FR-LAB-001 to FR-LAB-018; FR-EXE-007 and FR-EXE-008.'},
-    A4:{mission:'Improve Home Visit punctuality, field productivity and capacity utilization through live operational intelligence.',
-      monitors:['Scheduled, completed and delayed visits','Technician/vehicle location where GPS is available','ETA','Technician productivity','Idle time and travel time','Revenue by technician/route/area/service where available','Customer satisfaction','Repeated delays and bottlenecks'],
-      reasons:['Predicts delay based on route, location and workload','Identifies idle capacity or overloaded areas','Detects repeated technician/route exceptions','Compares productivity across zones'],
-      actions:['Generate delay alert','Recommend route/capacity rebalancing','Escalate repeated delays','Produce area-level capacity view','Track recovery after intervention'],
-      escalates:['High-risk delay clusters','Repeated missed SLA','Insufficient field capacity','Systemic route bottleneck','Customer-impacting exception requiring manager action'],
-      kpis:['On-time arrival rate','Average delay','Technician productivity','Travel vs productive time','Capacity utilization','Repeat delay rate'],
-      connections:['Home Visit scheduling','GPS/fleet','CRM/order platform','Payment/revenue data','CX feedback'],
-      boundary:'Automated route recommendations are allowed; dispatch changes should follow approved operating rules or human approval during early phases.',
-      legacy:'SR-003; FR-HV-001 to FR-HV-015; FR-EXE-006; IR-006.'},
-    A5:{mission:'Detect service-recovery opportunities, unresolved customer issues and recurring experience problems across branches and channels.',
-      monitors:['Customer complaints and unresolved complaints','Customer satisfaction metrics and trends','Call center operational indicators where available','Customer feedback platform signals','Waiting-time-related CX risk','Branch-level complaint patterns'],
-      reasons:['Clusters recurring complaint themes','Links complaints to branch/service/operational cause','Prioritizes unresolved cases by severity and customer impact','Identifies contact-center or service bottlenecks'],
-      actions:['Create case/ticket and assign owner','Recommend recovery action','Escalate overdue customer issues','Generate branch/CX risk trend','Feed recurring issues to Quality and Branch agents'],
-      escalates:['High-severity complaint','Repeated unresolved customer issue','Reputation-sensitive pattern','Customer safety/quality concern','Service breakdown requiring executive attention'],
-      kpis:['First response time','Resolution time','Repeat complaint rate','Customer satisfaction trend','Escalation accuracy'],
-      connections:['Call center platform','CRM','Customer feedback/CX platform','Branch complaints','Quality Hub'],
-      boundary:'Sensitive customer communications require approved templates and human authorization unless Wareed explicitly pre-approves an automated workflow.',
-      legacy:'SR-001, SR-002; FR-OPS-006; FR-QL-002 and FR-QL-010; IR-009 and IR-010; FR-EXE-010.'},
-    A6:{mission:'Treat marketing as a direct operating and revenue function by linking campaigns, acquisition, offers, products and branch performance to measurable commercial outcomes.',
-      monitors:['Branch revenue against commercial targets','Campaign performance','Product and package uptake','Customer acquisition indicators','SMS response','Push notification response','Call center campaign response','Digital advertising and promotional offers','Regional/branch campaign comparisons','New product/service launch performance'],
-      reasons:['Identifies campaign/channel effectiveness by region and branch','Detects revenue decline and likely commercial drivers','Compares offers and product uptake','Identifies weak branches that need activation','Measures whether corrective commercial actions improved outcomes'],
-      actions:['Recommend Stop / Continue / Adjust for campaigns','Recommend branch-level activation','Recommend channel/budget reallocation for human approval','Open marketing action ticket','Produce campaign ROI and growth opportunity brief'],
-      escalates:['Material revenue decline','Campaign spend with poor outcome','Offer creating potential margin/value concern where finance data is available','Major launch underperformance','Region-wide acquisition decline'],
-      kpis:['Incremental revenue','Conversion rate','Customer acquisition trend','Campaign ROI where cost data is integrated','Offer/product uptake','Revenue recovery after action'],
-      connections:['CRM','Marketing automation','SMS/push platforms','Call center campaign data','Digital advertising data','Branch revenue/finance','Product/package catalog'],
-      boundary:'The agent recommends and prepares actions. It must not launch campaigns, change prices, allocate major budget or message customers without approved authority.',
-      legacy:'SR-005; FR-GR-001 to FR-GR-012; FR-EXE-012.'},
-    A7:{mission:'Provide operational visibility and exception management for courier, transport and fleet-supported workflows.',
-      monitors:['Courier/logistics operational status where data is available','GPS/fleet location where integrated','Transport delays/exceptions','Interface health for logistics data'],
-      reasons:['Identifies transport exceptions that may affect branch or laboratory flow','Detects repeated route/service issues','Correlates courier delay with downstream sample or service impact where data supports it'],
-      actions:['Create logistics exception alert','Assign logistics owner','Recommend route/service review','Track closure and recurrence'],
-      escalates:['Transport issue threatening sample/service continuity','Repeated route failure','Fleet/system outage affecting visibility'],
-      kpis:['On-time transport where data is available','Exception closure time','Repeat route issue rate','Downstream impact avoided'],
-      connections:['GPS/fleet management','Courier/logistics systems','Operations Hub','Lab/branch events where correlated'],
-      boundary:'The original RFP contains limited direct courier functional requirements; this agent should remain narrow until Wareed defines detailed courier KPIs and operating rules.',
-      legacy:'BR-004; FR-OPS-005; IR-006.'},
-    A8:{mission:'Ensure every new product or service launch is operationally ready across branches and that early adoption is measured.',
-      monitors:['Launch readiness by branch','Receipt of launch materials','Required training completion','Staff acknowledgment/readiness','Checklist completion','Testing/verification/approval','Planned vs actual launch date','Early-stage performance and adoption'],
-      reasons:['Identifies branches not ready to launch','Detects missing prerequisites and training gaps','Correlates readiness with early launch performance','Prioritizes delayed locations'],
-      actions:['Generate readiness alert','Create prerequisite tasks','Assign responsible owner','Escalate delayed readiness','Produce enterprise adoption report'],
-      escalates:['Launch date at risk','Critical prerequisite missing','Low adoption after launch','Multiple branches not ready'],
-      kpis:['On-time launch readiness','Training completion','Branch readiness rate','Early adoption','Time to resolve launch blockers'],
-      connections:['Product Launch Center/work management','Training/LMS where available','Marketing/product data','Branch readiness inputs','Sales/revenue after launch'],
-      boundary:'Does not approve clinical product content or commercial pricing; it manages readiness and adoption workflow.',
-      legacy:'FR-PLC-001 to FR-PLC-012; FR-GR-012.'},
-    A9:{mission:'Continuously monitor enterprise quality signals, identify recurring non-compliance and ensure corrective/preventive actions are owned and closed.',
-      monitors:['Customer complaints and trends','Branch audit results/compliance scores','Mystery Shopper results where available','AI camera quality events','Hygiene alerts','Uniform/PPE compliance','Cleaning issues','Waiting-time-related quality risk','CAPA status'],
-      reasons:['Detects recurring violations','Ranks quality issues by risk and recurrence','Correlates quality trends by branch, region, category and owner','Identifies CAPA overdue or ineffective patterns'],
-      actions:['Create quality issue/CAPA task','Assign owner','Escalate repeated non-compliance','Track closure evidence','Produce trend and hotspot analysis'],
-      escalates:['Repeated quality violation','Critical hygiene/PPE event','CAPA overdue beyond threshold','Quality pattern with patient/customer risk'],
-      kpis:['CAPA closure time','Repeat non-compliance rate','Audit score trend','Quality alert precision','Issue recurrence after closure'],
-      connections:['Quality/audit systems','Mystery Shopper data','CX/complaints','AI vision event service','Branch operating data'],
-      boundary:'Supports quality governance; final regulatory/clinical judgments remain with authorized Wareed quality and medical leadership.',
-      legacy:'SR-006; FR-QL-001 to FR-QL-014; FR-EXE-009.'},
-    A10:{mission:'Identify staffing availability risks that affect branch and operational service continuity.',
-      monitors:['Staff attendance','Workforce availability','Branch staffing status','Attendance-related service risk'],
-      reasons:['Links staffing gaps to branch wait time or service availability','Identifies recurring attendance-related risk by location','Prioritizes operationally material gaps'],
-      actions:['Create staffing risk alert','Notify/assign authorized operations or HR owner','Recommend temporary operational mitigation for approval','Track closure'],
-      escalates:['Branch unable to operate normally due to staffing','Repeated critical staffing shortage','Attendance system/data outage affecting visibility'],
-      kpis:['Staffing exception detection time','Uncovered critical shifts','Branch service impact from staffing','Resolution time'],
-      connections:['HR/attendance systems','Branch Operations Agent','Operations Hub'],
-      boundary:'The original RFP does not define full HR management. This agent is limited to attendance/workforce availability and operational impact; payroll, performance management and HR decisions are out of scope unless separately approved.',
-      legacy:'BR-004; SR-001; FR-BR-007; FR-EXE-011; IR-005.'},
-    A11:{mission:'Turn branch employee feedback into a structured operational intelligence stream rather than unstructured messages.',
-      monitors:['Improvement ideas','Operational issues/service disruptions','Administrative/service complaints','Competitor observations and market intelligence','Equipment faults','Training requests','Supply shortages','Photos/supporting evidence'],
-      reasons:['Automatically classifies submissions','Prioritizes by severity, urgency and business impact','Routes to correct owner','Identifies recurring themes and field hotspots'],
-      actions:['Categorize and prioritize submission','Assign owner','Track lifecycle to closure','Generate trend analytics','Feed competitor intelligence to Marketing/Growth Agent'],
-      escalates:['High-impact operational disruption','Repeated unresolved field issue','Major competitor signal','Supply shortage affecting service','Equipment failure requiring urgent action'],
-      kpis:['Time to classification','Time to owner assignment','Closure time','Repeat issue rate','Actionable idea conversion'],
-      connections:['Voice of Branch portal/app','Photos/evidence','Branch user submissions','Ticketing/work management'],
-      boundary:'AI classification and prioritization are allowed; material business decisions remain with accountable owners.',
-      legacy:'FR-VOB-001 to FR-VOB-015; SR-008.'},
-    A12:{mission:'Protect the reliability of the agentic operating model by continuously monitoring systems, interfaces, data refresh and integration failures.',
-      monitors:['System health','Integration status','Data refresh status','API failures','Dashboard/agent service availability','Interface logs and errors','Retry/failure-recovery status','Security-relevant operational events where integrated'],
-      reasons:['Distinguishes source-system issue from integration issue','Detects stale data before business agents act on it','Identifies recurring interface failure','Prioritizes failures by business impact'],
-      actions:['Create IT incident','Trigger approved automated retry','Escalate persistent failures','Mark affected data/agent output as degraded','Produce integration health report'],
-      escalates:['Critical integration outage','Stale/invalid data affecting decision agents','Repeated API failure','Security or availability issue with enterprise impact'],
-      kpis:['Integration uptime','API failure rate','Mean time to recover','Data freshness compliance','Automated retry success'],
-      connections:['API gateway','Middleware/integration platform','Monitoring/logging','Source-system health','Data pipeline telemetry'],
-      boundary:'May execute only pre-approved technical recovery actions. Security-sensitive or production-impacting changes require authorized IT approval.',
-      legacy:'SR-007; IR-001 to IR-018; NFR-001 to NFR-012; CSR controls as applicable.'},
-    S1:{mission:'Ensure that every business agent operates on trusted, governed and auditable data.',
-      monitors:['Data completeness, accuracy, consistency and integrity','Refresh frequency/synchronization','Master data consistency','Data quality rule violations','Retention and auditability'],
-      reasons:['Detects data anomalies that can invalidate agent conclusions','Separates missing data from real operational exception','Tracks data ownership and unresolved quality issues'],
-      actions:['Flag unreliable datasets','Quarantine or mark degraded data for agent use','Create data-quality issue','Produce quality score by domain','Maintain audit evidence'],
-      escalates:['Critical data-quality failure','Stale data supporting high-risk decision','Master data conflict','Repeated data ownership gap'],
-      kpis:['Data quality score','Freshness compliance','Issue resolution time','False operational alerts caused by data quality'],
-      connections:['Operational data platform','MDM','Data pipelines','Data catalog/governance metadata'],
-      boundary:'Does not alter authoritative source data without approved data stewardship workflow.',
-      legacy:'DR-001 to DR-012; IR-013 to IR-015.'},
-    S2:{mission:'Provide one governed mechanism for turning operational exceptions into owned, timed and auditable resolution.',
-      monitors:['All alert rules','Severity levels','Owner assignment','Response targets','Acknowledgment','Escalation','Closure evidence','Alert trends and recurrence'],
-      reasons:['Deduplicates and suppresses low-value alerts','Prioritizes by Information / Warning / Critical / Executive Escalation','Identifies overdue actions','Detects recurring issue patterns'],
-      actions:['Create alert/ticket','Assign owner','Start SLA timer','Escalate automatically','Close only after controlled resolution','Produce alert analytics'],
-      escalates:['SLA breach','Executive severity','Repeated unresolved alert','No accountable owner','Failed corrective action'],
-      kpis:['Alert fatigue reduction','Acknowledgment time','Resolution time','SLA compliance','Repeat alert frequency'],
-      connections:['All agents','Ticketing/work management','Email/SMS/notification systems'],
-      boundary:'Closure rules must be controlled and auditable; executive escalation cannot be suppressed by an agent without approved policy.',
-      legacy:'AR-001 to AR-012; BR-007 and BR-010.'},
-    S3:{mission:'Convert approved camera analytics into event-driven operational signals instead of passive surveillance.',
-      monitors:['No receptionist event where feasible','Crowding/queue congestion','Cleaning/hygiene events','PPE compliance','Uniform compliance','Unattended service desk','Camera offline/communication failure'],
-      reasons:['Classifies camera event type','Scores confidence and business relevance','Suppresses repeated false-positive patterns according to approved rules','Links events to branch/quality workflow'],
-      actions:['Create event for Branch or Quality Agent','Attach evidence metadata where permitted','Track camera health','Escalate repeated high-confidence violations'],
-      escalates:['Repeated quality/compliance event','Critical service-desk absence','Persistent queue congestion','Camera service outage where coverage is required'],
-      kpis:['Detection precision/recall where validated','False-positive rate','Event-to-action time','Repeat violation rate'],
-      connections:['AI camera/video analytics','VMS','Branch metadata','Quality Hub'],
-      boundary:'Privacy-aware, event-driven only. No facial identification or unsupported surveillance use case is included by this proposal. Vendor must define limitations, accuracy and privacy controls.',
-      legacy:'AIR-CAM-001 to AIR-CAM-012; CSR-014; IR-007 and IR-008.'}
-  };
 
   var AUTHORITY = [
     {lvl:1, name:'Observe', cap:'Read, summarize and detect', gate:'No approval for read-only analysis'},
@@ -1123,65 +977,10 @@ html[lang="ar"] .msg .ev{ unicode-bidi:plaintext; }
     {lvl:5, name:'Act with approval', cap:'Execute reversible low-risk action', gate:'Approval, rollback and audit test'}
   ];
 
-  var RESP_MATRIX = [
-    {domain:'LIS / LDM', wareed:'Access, SMEs and definitions', neo:'Connector, mapping, quality and monitoring', accept:'TAT and sample reconciliation'},
-    {domain:'ERP / CRM / CX', wareed:'Approved fields, access and owners', neo:'Secure ingestion and workflow links', accept:'KPI and case reconciliation'},
-    {domain:'HR / Attendance', wareed:'Purpose, minimization and access', neo:'Protected integration and risk logic', accept:'Privacy and accuracy tests'},
-    {domain:'GPS / Fleet', wareed:'Provider access and route definitions', neo:'Event ingestion and exceptions', accept:'Delay scenarios'},
-    {domain:'VMS / Vision', wareed:'Approved cameras and privacy basis', neo:'Optional metadata events only', accept:'Precision and false-positive limits'},
-    {domain:'Work management', wareed:'Owners, SLAs and templates', neo:'Ticket API, escalation and closure', accept:'End-to-end workflow'},
-    {domain:'Identity / security', wareed:'Directory, roles and SOC process', neo:'Federation, RBAC and log integration', accept:'Access and incident tests'}
-  ];
 
-  var PHASES = [
-    {n:'Phase 1', t:'Discovery & Sovereign Design', d:'Weeks 1–6', on:true},
-    {n:'Phase 2', t:'Data & Control Foundation', d:'Weeks 7–20', on:false},
-    {n:'Phase 3', t:'MVP Agents A1–A6', d:'Weeks 21–32', on:false},
-    {n:'Phase 4', t:'Extended Agents & Automation', d:'Weeks 33–48', on:false},
-    {n:'Phase 5', t:'Predictive & Scale', d:'Ongoing', on:false}
-  ];
 
-  var EVAL_WEIGHTS = [
-    {area:'Agentic AI architecture and practical autonomy model', w:20},
-    {area:'Integration and data architecture', w:20},
-    {area:'Sovereign AI, cybersecurity and governance', w:15},
-    {area:'Business & healthcare understanding', w:10},
-    {area:'Operating model and workflow design', w:10},
-    {area:'POC quality and measurable value', w:10},
-    {area:'Implementation methodology and change management', w:5},
-    {area:'Support, SLA and local/regional capability', w:5},
-    {area:'Commercial value / TCO', w:5}
-  ];
 
-  var ALIGN = [
-    {n:1,  req:'Executive proposal and understanding of Wareed', status:'Proto',   view:'brief',        vlabel:'Executive Brief',   note:'AI-first executive brief, decision queue and one-click traceability, now with live 2-hour KPI forecasts, a what-if simulator and a guided demo.'},
-    {n:2,  req:'Agentic operating model and agent catalogue', status:'Proto',   view:'blueprint',    vlabel:'Blueprint',         note:'A0-A12 and S1-S3 catalogue with release phase and maximum authority; agents act proactively on screen, raising alerts and running pre-approved L1–L2 actions.'},
-    {n:3,  req:'Sovereign AI / hosting architecture', status:'Proto',   view:'architecture', vlabel:'Sovereign Architecture', note:'Layer model, mandatory controls and the open sovereignty questions are now on screen; the named hosting provider remains a Phase 1 decision.'},
-    {n:4,  req:'Solution architecture', status:'Proto', view:'architecture', vlabel:'Sovereign Architecture',      note:'Six-layer architecture table now on screen alongside the orchestrator control-plane walkthrough.'},
-    {n:5,  req:'Integration architecture and Responsibility Matrix', status:'Proto',   view:'health',       vlabel:'Integration Health',note:'Nine sources with freshness and degradation, plus Wareed/NeoLimits/acceptance matrix.'},
-    {n:6,  req:'Data architecture, governance and quality model', status:'Proto', view:'health',       vlabel:'Integration Health',        note:'Catalogue, MDM, quality and freshness measures shown live; retention/privacy policy text remains in the response.'},
-    {n:7,  req:'Agentic control plane, policy and approval model', status:'Proto',   view:'govern',       vlabel:'Governance',        note:'Authority levels 1-5, non-delegable boundaries and emergency stop, plus human-on-the-loop autonomy: 10-second cancel window, 30-second undo and an auto-execution switch.'},
-    {n:8,  req:'Detailed role definition for each proposed agent', status:'Proto',   view:'blueprint',    vlabel:'Catalogue',         note:'Every one of the 16 agents/services has a full mission/monitors/reasoning/actions/escalation/KPI drawer sourced from RFP §5; MVP+Foundation agents also get a live domain view.'},
-    {n:9,  req:'Dashboard / executive experience concept', status:'Proto',   view:'brief',        vlabel:'All views',         note:'This prototype is the executive experience: a live, predictive dashboard with a conversational copilot, proactive insight on every page and a notification center.'},
-    {n:10, req:'Alert, ticketing and corrective-action workflow', status:'Proto',   view:'actions',      vlabel:'Corrective Actions',note:'S2 lifecycle Detect to Learn with SLA states and mandatory closure evidence; agents open tasks when a KPI crosses its alert line and pre-empt forecast breaches.'},
-    {n:11, req:'Cybersecurity and privacy architecture', status:'Proto', view:'architecture',       vlabel:'Sovereign Architecture', note:'Secure design, access, AI security, monitoring, privacy and continuity now tabulated on screen.'},
-    {n:12, req:'POC plan', status:'Proto', view:'delivery',    vlabel:'Delivery',         note:'Full eight-week POC schedule with exit evidence; the guided demo rehearses the POC storyline end to end on synthetic data.'},
-    {n:13, req:'Phased implementation schedule', status:'Proto',   view:'blueprint',    vlabel:'Blueprint',         note:'Five-phase, 48-week roadmap stating what each phase must prove.'},
-    {n:14, req:'Testing and acceptance plan', status:'Proto',   view:'delivery',           vlabel:'Delivery', note:'Six-stream testing and acceptance table (data, agent, workflow, security, performance, UAT/ORT) on screen; an automated headless-browser test exercises agent behaviour, autonomy guardrails and every view.'},
-    {n:15, req:'Training and change-management plan', status:'Proto',   view:'delivery',           vlabel:'Delivery', note:'Audience-by-audience training outcomes and formats on screen.'},
-    {n:16, req:'Support / SLA and managed service model', status:'Partial',   view:'delivery',           vlabel:'Delivery', note:'Priority tiers and managed-service scope on screen; committed response-time SLAs remain to confirm with Wareed hours and topology.'},
-    {n:17, req:'Commercial proposal and recurring-cost model', status:'Partial',   view:'delivery',           vlabel:'Delivery', note:'Work-package structure and payment principles on screen; SAR figures remain to confirm pending volumes and hosting choice.'},
-    {n:18, req:'Risk register', status:'Proto', view:'delivery',    vlabel:'Delivery',         note:'Full twelve-risk register with rating and mitigation on screen alongside the three root-cause findings in Blueprint; Delivery streams live signals for R3, R4, R5 and R9.'},
-    {n:19, req:'Assumptions, exclusions and deviation log', status:'Proto',   view:'delivery',           vlabel:'Delivery', note:'Assumptions, exclusions and deviation log fully tabulated on screen.'},
-    {n:20, req:'IP, data ownership, model ownership and portability position', status:'Proto',   view:'delivery',           vlabel:'Delivery', note:'Asset-by-asset ownership and exit/portability position tabulated on screen.'}
-  ];
 
-  var GAPS = [
-    {k:'People & references', items:['Named delivery team and role CVs','Regional and local capability evidence','Client references and comparable deliveries']},
-    {k:'Sovereign hosting decision', items:['Named hosting provider and Saudi topology selection','Approved cloud/model list confirmed by Wareed legal and security']},
-    {k:'Commercial confirmation', items:['Phased SAR figures once volumes and hosting are known','Five-year TCO calculation','VAT and contractual payment-percentage terms']},
-    {k:'Committed service levels', items:['Confirmed P1–P4 response-time SLAs and support hours']}
-  ];
 
   var ARCH_LAYERS = [
     {layer:'Experience', components:'CEO brief, dashboards, alerts and approval queues', intent:'Push decisions with evidence'},
@@ -1202,27 +1001,6 @@ html[lang="ar"] .msg .ev{ unicode-bidi:plaintext; }
     'No Wareed data trains a shared or third-party model without written approval.'
   ];
 
-  var RFP_MAPPING = [
-    {domain:'Business coordination / enterprise visibility', basis:'BR-001 to BR-010', agent:'A0 Orchestrator, A1 CEO Agent', view:'orchestrator', vlabel:'Orchestrator'},
-    {domain:'Executive dashboard', basis:'FR-EXE-001 to FR-EXE-015', agent:'A1 Executive Intelligence & CEO Briefing', view:'brief', vlabel:'Executive Brief'},
-    {domain:'Operations Hub', basis:'FR-OPS-001 to FR-OPS-010', agent:'A0, A2, A4, A7, A5', view:'blueprint', vlabel:'Agent catalogue'},
-    {domain:'Branch monitoring', basis:'FR-BR-001 to FR-BR-015', agent:'A2 Branch Operations', view:'branch', vlabel:'Branch Operations'},
-    {domain:'Home Visit', basis:'FR-HV-001 to FR-HV-015', agent:'A4 Home Visit', view:'home', vlabel:'Home Visit'},
-    {domain:'Main laboratory', basis:'FR-LAB-001 to FR-LAB-018', agent:'A3 Main Laboratory', view:'lab', vlabel:'Laboratory & TAT'},
-    {domain:'Growth / marketing', basis:'FR-GR-001 to FR-GR-012', agent:'A6 Marketing & Growth', view:'mkt', vlabel:'Marketing & Growth'},
-    {domain:'Quality Hub', basis:'FR-QL-001 to FR-QL-014', agent:'A9 Quality & Compliance', view:'blueprint', vlabel:'Agent catalogue'},
-    {domain:'Intelligence Hub', basis:'FR-INT-001 to FR-INT-010', agent:'A0 Orchestrator, A1 CEO Agent', view:'orchestrator', vlabel:'Orchestrator'},
-    {domain:'Voice of Branch', basis:'FR-VOB-001 to FR-VOB-015', agent:'A11 Voice of Branch', view:'blueprint', vlabel:'Agent catalogue'},
-    {domain:'Product Launch Center', basis:'FR-PLC-001 to FR-PLC-012', agent:'A8 Product Launch', view:'blueprint', vlabel:'Agent catalogue'},
-    {domain:'AI camera events', basis:'AIR-CAM-001 to AIR-CAM-012', agent:'S3 AI Vision Event Service', view:'vision', vlabel:'AI Vision Events'},
-    {domain:'Integrations', basis:'IR-001 to IR-018', agent:'A12 IT & Integration Health', view:'health', vlabel:'Integration & Health'},
-    {domain:'Data', basis:'DR-001 to DR-012', agent:'S1 Data Quality & Governance', view:'health', vlabel:'Integration & Health'},
-    {domain:'Alerts', basis:'AR-001 to AR-012', agent:'S2 Alert/Ticketing/Corrective Action', view:'actions', vlabel:'Corrective Actions'},
-    {domain:'Non-functional / continuity', basis:'NFR-001 to NFR-012', agent:'A12 + platform architecture', view:'health', vlabel:'Integration & Health'},
-    {domain:'Cybersecurity', basis:'CSR-001 to CSR-014', agent:'Platform security + all agents', view:'architecture', vlabel:'Sovereign Architecture'},
-    {domain:'Workforce attendance', basis:'SR-001, FR-BR-007, FR-EXE-011, IR-005', agent:'A10 Workforce & Attendance', view:'blueprint', vlabel:'Agent catalogue'},
-    {domain:'Courier/logistics', basis:'BR-004, FR-OPS-005, IR-006', agent:'A7 Logistics & Courier', view:'blueprint', vlabel:'Agent catalogue'}
-  ];
 
   var SOVEREIGN_QUESTIONS = [
     'What does "sovereign" specifically mean: Saudi public cloud, private cloud, on-premises, or a hybrid model?',
@@ -1241,120 +1019,18 @@ html[lang="ar"] .msg .ev{ unicode-bidi:plaintext; }
     {area:'Continuity', response:'Backup, restore testing, tiering and agreed RPO/RTO'}
   ];
 
-  var POC_WEEKS = [
-    {w:'1',   a:'Charter, scenarios, baseline, data and scoring', e:'Signed charter and scorecard'},
-    {w:'2',   a:'Load data and configure quality/freshness', e:'Reconciled dataset'},
-    {w:'3–4', a:'CEO, Branch, Lab, Home Visit, Marketing and IT scenarios', e:'Traces and evaluations'},
-    {w:'5',   a:'Alert-to-ticket and approvals', e:'Owner, SLA, escalation and replay'},
-    {w:'6',   a:'Degraded, adversarial and prohibited-action tests', e:'Test and defect report'},
-    {w:'7',   a:'Business-user evaluation', e:'Scored results'},
-    {w:'8',   a:'Final demonstration and value case', e:'POC report and go/no-go'}
-  ];
 
-  var POC_PROOFS = [
-    'CEO brief identifies three material decisions with evidence.',
-    'Branch decline correlates revenue, waiting, staffing and complaints.',
-    'Lab scenario identifies an operational TAT bottleneck without clinical decision.',
-    'Home Visit recommends route/capacity response and escalates recurrence.',
-    'Marketing gives evidence-based Stop, Continue or Adjust recommendation.',
-    'Integration failure degrades affected outputs; governance tests permissions, approval and override.'
-  ];
 
-  var TEST_STREAMS = [
-    {s:'Data / integration', c:'Mapping, reconciliation, freshness, retry and recovery', e:'Critical sources reconciled and monitored'},
-    {s:'Agent evaluation', c:'Golden cases, grounding, confidence and prohibited behavior', e:'Agreed thresholds met'},
-    {s:'Workflow', c:'Ownership, SLA, approval, override and closure', e:'End-to-end pass'},
-    {s:'Security / privacy', c:'Access, vulnerability, adversarial AI and logs', e:'No unresolved critical/high issue unless accepted'},
-    {s:'Performance', c:'Latency, throughput, scale, recovery and cost', e:'Service targets met'},
-    {s:'UAT / ORT', c:'Usability, correctness, people, support and runbooks', e:'Authorized sign-off'}
-  ];
 
-  var TRAINING_AUD = [
-    {aud:'Executives', out:'Use brief, queue and evidence', fmt:'Scenario briefing'},
-    {aud:'Domain owners', out:'Own KPIs, policy, playbooks and authority', fmt:'Design workshops'},
-    {aud:'Operations', out:'Acknowledge, resolve, escalate and close', fmt:'Role practice'},
-    {aud:'Data stewards', out:'Manage definitions, quality and lineage', fmt:'Hands-on sessions'},
-    {aud:'IT / security', out:'Operate controls, integrations and incidents', fmt:'Technical training'},
-    {aud:'Administrators', out:'Manage registry, policy and evaluations', fmt:'Certification'}
-  ];
 
-  var SUPPORT_TIERS = [
-    {p:'P1', ex:'Outage, unauthorized action or severe security/data risk', r:'15 minutes, 24×7 [TO CONFIRM]'},
-    {p:'P2', ex:'Material degradation of critical workflow', r:'30 minutes [TO CONFIRM]'},
-    {p:'P3', ex:'Non-critical defect with workaround', r:'4 business hours [TO CONFIRM]'},
-    {p:'P4', ex:'Request or minor defect', r:'1 business day [TO CONFIRM]'}
-  ];
 
-  var SUPPORT_SCOPE = [
-    'Monitor platform, agent, integration, freshness, quality, security and cost.',
-    'Incident, problem and controlled change management.',
-    'Monthly evaluation, drift and false-alert review.',
-    'Patch, vulnerability, backup and recovery coordination.',
-    'Quarterly value review, runbook maintenance and exit support.'
-  ];
 
-  var COMMERCIAL_PKGS = [
-    {pkg:'Discovery and design', basis:'Fixed fee', one:'[TO CONFIRM]', rec:'–'},
-    {pkg:'Data and control foundation', basis:'Milestone fee', one:'[TO CONFIRM]', rec:'[Infrastructure]'},
-    {pkg:'MVP agents', basis:'Per accepted release', one:'[TO CONFIRM]', rec:'[Platform/model use]'},
-    {pkg:'Extended agents', basis:'Unit or phase fee', one:'[TO CONFIRM]', rec:'[Incremental use]'},
-    {pkg:'Managed service', basis:'Monthly fee', one:'–', rec:'[TO CONFIRM]'},
-    {pkg:'Optional vision service', basis:'Separate option', one:'[TO CONFIRM]', rec:'[TO CONFIRM]'},
-    {pkg:'Optional physical layer', basis:'Separate option', one:'[TO CONFIRM]', rec:'[TO CONFIRM]'}
-  ];
 
-  var COMMERCIAL_PRINCIPLES = [
-    'Payments align to accepted discovery, architecture, foundation, MVP, pilot, extended workflow, stabilization and final acceptance.',
-    'Third-party, infrastructure and model costs are transparent and separate.',
-    'Usage assumptions and overage rules are explicit.',
-    'VAT and contractual payment percentages are to be confirmed.'
-  ];
 
-  var RISKS = [
-    {id:'R1',  risk:'Source access/quality', rating:'High', mit:'Early discovery, synthetic POC, quality gates and owner escalation'},
-    {id:'R2',  risk:'Unclear KPI definitions', rating:'High', mit:'Signed dictionary and reconciliation'},
-    {id:'R3',  risk:'Alert fatigue', rating:'High', mit:'Severity, deduplication and outcome review'},
-    {id:'R4',  risk:'Unsupported confidence', rating:'High', mit:'Grounding, evaluation and human approval'},
-    {id:'R5',  risk:'Unauthorized action', rating:'Critical', mit:'Allow-lists, policy, negative tests and emergency stop'},
-    {id:'R6',  risk:'Privacy/residency breach', rating:'Critical', mit:'Classification, Saudi boundary, encryption and audit'},
-    {id:'R7',  risk:'Model lock-in', rating:'Medium', mit:'Gateway and portable policies/evaluations'},
-    {id:'R8',  risk:'User resistance', rating:'Medium', mit:'Co-design, training and adoption measures'},
-    {id:'R9',  risk:'API instability', rating:'High', mit:'Health monitoring, retries and degraded state'},
-    {id:'R10', risk:'Benefits not attributable', rating:'Medium', mit:'Baseline and agreed attribution'},
-    {id:'R11', risk:'Vision false positives', rating:'High', mit:'Optional controlled pilot'},
-    {id:'R12', risk:'Scope expansion', rating:'Medium', mit:'Catalogue boundaries and change control'}
-  ];
 
-  var ASSUMPTIONS = [
-    'Wareed provides SMEs, owners, lawful access, APIs, test environments and timely approvals.',
-    'Wareed approves KPI definitions, authority, rosters, templates and retention.',
-    'Production hosting, volumes, languages, hours and recovery targets are confirmed in Phase 1.'
-  ];
 
-  var EXCLUSIONS = [
-    'Clinical diagnosis, medical advice and result release.',
-    'Autonomous pricing, campaign, HR or privileged-security decisions.',
-    'Replacement of systems of record, camera hardware or facial identification.',
-    'Physical command room and source-vendor/API charges unless separately priced.'
-  ];
 
-  var DEVIATIONS = [
-    {item:'Sovereign deployment', pos:'Comply, subject to approved topology'},
-    {item:'Agent catalogue', pos:'Phased as requested; S3 optional'},
-    {item:'Schedule', pos:'48 weeks indicative, subject to access'},
-    {item:'Commercials', pos:'Structure complete; figures require bidder input'},
-    {item:'Credentials and local capability', pos:'Final evidence required'}
-  ];
 
-  var IP_ASSETS = [
-    {asset:'Business, operational, customer, laboratory, financial, employee, branch and performance data', pos:'Wareed owned'},
-    {asset:'Prompts, policies, playbooks, evaluations and configurations', pos:'Wareed ownership or perpetual transferable rights; exportable'},
-    {asset:'Traces, embeddings and audit evidence', pos:'Wareed controlled and exportable under retention policy'},
-    {asset:'NeoLimits pre-existing assets', pos:'Remain NeoLimits property with contracted Wareed use rights'},
-    {asset:'Third-party models/software', pos:'Disclosed terms and dependencies'},
-    {asset:'Custom integration code', pos:'Ownership or perpetual license to agree'},
-    {asset:'Exit', pos:'Documented exports and transparent transition assistance'}
-  ];
 
   var AUDIT = [
     {t:'09:42:11', a:'CEO approved decision DQ-104 (Abha revenue decline) — routed to Regional Director South', w:'u:ceo.office'},
@@ -1902,10 +1578,7 @@ html[lang="ar"] .msg .ev{ unicode-bidi:plaintext; }
     {group:'gov', view:'vision',  label:'AI Vision Events',   icon:'eye',    title:'AI Vision Events & Privacy', crumb:'S3 · Event-driven camera analytics with privacy controls'},
     {group:'gov', view:'govern',  label:'Governance & Control',icon:'shield', title:'Governance & Control', crumb:'A0 · Control plane, policy & approval model'},
     {group:'gov', view:'architecture',label:'Sovereign Architecture',icon:'link', title:'Sovereign Architecture & Cybersecurity', crumb:'Sovereign AI hosting, solution architecture layers & mandatory controls'},
-    {group:'gov', view:'health',  label:'Integration & Health',icon:'pulse',  title:'Integration & Data Health', crumb:'A12 / S1 · Integrations, data quality & freshness'},
-    {group:'gov', view:'blueprint',label:'Program Blueprint',  icon:'layers', title:'Program Blueprint', crumb:'Phased roadmap, catalogue & implementation approach'},
-    {group:'gov', view:'delivery',label:'Delivery & Commercial',icon:'clock', title:'Delivery, Risk & Commercial', crumb:'POC, testing, training, support, commercial terms & risk register'},
-    {group:'gov', view:'alignment',label:'Bid Alignment',       icon:'doc',    title:'Bid Alignment & Compliance', crumb:'RFP response coverage · 20 vendor requirements & evaluation weighting'}
+    {group:'gov', view:'health',  label:'Integration & Health',icon:'pulse',  title:'Integration & Data Health', crumb:'A12 / S1 · Integrations, data quality & freshness'}
   ];
 
   function renderNav(){
@@ -2378,156 +2051,7 @@ html[lang="ar"] .msg .ev{ unicode-bidi:plaintext; }
     return body;
   }
 
-  /* ---------- Program blueprint ---------- */
-  function viewBlueprint(){
-    var body='';
-    body+='<div class="agenthead mb-4"><div class="bubble bubble-dark">OD</div><div><h2>Implementation Blueprint</h2><p>How the Sovereign Agentic AI Operations Center is best delivered: foundation-first, evidence-first, and executive-experience-first — aligning the RFP mandate, the agent catalogue and the delivery roadmap in one view.</p></div></div>';
 
-    body+='<div class="sectiontitle"><h2>Findings that shape the approach</h2><span class="hint">Root-cause read of the RFP and the draft response</span></div>';
-    body+='<div class="grid3">'+
-      finding('01','Constraint: trust before autonomy','The RFP states the platform cannot outperform the trustworthiness of its data and spends Phases 1–2 on data, integrations, identity, audit and the control plane before broad autonomy. Implementation must lead with the foundation, not the agents.')+
-      finding('02','Gap: the response is structurally complete but evidence-empty','The draft answers all twenty requirements yet carries no named personnel, references, prices, chosen hosting topology, volumes or SLAs. It is a skeleton. Each placeholder is a differentiator that must be closed before submission.')+
-      finding('03','Missing artifact: the visible product','The RFP thesis is "AI-first, dashboard-second" and lists an executive-experience concept, but no artifact shows it. This prototype is that artifact — it proves the thesis and de-risks the POC.')+
-    '</div>';
-
-    body+='<div class="sectiontitle"><h2>Phased roadmap</h2><span class="hint">48 weeks indicative, subject to access and hosting readiness</span></div>';
-    body+='<div class="phasebar">'+PHASES.map(function(p){
-      return '<div class="ph '+(p.on?'on':'')+'"><div class="pn">'+esc(p.n)+'</div><div class="pt">'+esc(p.t)+'</div><div class="pd">'+esc(p.d)+'</div></div>';
-    }).join('')+'</div>';
-    body+='<div class="grid2 mt-4">'+
-      '<div class="card"><div class="card-h"><h3>What each phase must prove</h3></div><div class="card-b">'+
-        ['Phase 1 · Sovereign architecture approved and MVP baseline signed.',
-         'Phase 2 · SIT and security acceptance; data, identity, S1/S2 and A0 live.',
-         'Phase 3 · A1–A6 pass UAT/ORT; pilot targets met.',
-         'Phase 4 · Extended agents and approved assignment/SLA automation.',
-         'Phase 5 · Prediction, expansion and quarterly value review.'].map(function(x,i){
-          return '<div class="mini"><span class="mnum">'+(i+1)+'</span><div class="mbody"><div class="mlabel fw-5">'+esc(x)+'</div></div></div>';
-        }).join('')+
-      '</div></div>'+
-      '<div class="card"><div class="card-h"><h3>Pilot success targets</h3><span class="sub">Provisional — to be confirmed with Wareed</span></div><div class="card-b">'+
-        hbar('Zero unauthorized action',100,100,'var(--green)','100%')+
-        hbar('Material traceability',100,100,'var(--green)','100%')+
-        hbar('Duplicate-alert reduction',31,100,'var(--teal-500)','≥ 30%')+
-        hbar('Closure-evidence completeness',95,100,'var(--teal-500)','≥ 95%')+
-        '<p class="muted fs-sm mt-3">Numeric baselines must be replaced with Wareed-approved values during Phase 1.</p>'+
-      '</div></div>'+
-    '</div>';
-
-    body+='<div class="sectiontitle"><h2>Agent catalogue</h2><span class="hint">A0–A12 domain agents, S1–S3 shared services · release phase and max authority · click any row for its full RFP §5 role spec</span></div>';
-    body+='<div class="card"><div class="tblwrap"><table class="tbl"><thead><tr><th>ID</th><th>Agent / service</th><th>Release</th><th>Primary role</th><th>Max level</th><th>Full spec</th></tr></thead><tbody>'+
-      AGENTS.map(function(a){
-        return '<tr><td class="mono fw-6">'+esc(a.id)+'</td><td class="cellmain">'+esc(a.name)+'</td><td><span class="tag '+(a.release==='MVP'?'teal':a.release==='Foundation'?'info':'neutral')+'">'+esc(a.release)+'</span></td><td class="muted">'+esc(a.role)+'</td><td>'+lvlTag(a.level)+'</td>'+
-          '<td><button class="btn ghost xs" data-agent="'+esc(a.id)+'">'+I.doc+' Detail</button></td></tr>';
-      }).join('')+'</tbody></table></div></div>';
-
-    body+='<div class="sectiontitle"><h2>Integration responsibility matrix</h2><span class="hint">Wareed vs delivery partner vs acceptance evidence</span></div>';
-    body+='<div class="card"><div class="tblwrap"><table class="tbl matrix"><thead><tr><th>Domain</th><th>Wareed</th><th>NeoLimits</th><th>Acceptance</th></tr></thead><tbody>'+
-      RESP_MATRIX.map(function(r){
-        return '<tr><td class="cellmain">'+esc(r.domain)+'</td><td class="muted">'+esc(r.wareed)+'</td><td class="muted">'+esc(r.neo)+'</td><td><span class="tag teal">'+esc(r.accept)+'</span></td></tr>';
-      }).join('')+'</tbody></table></div></div>';
-
-    body+='<div class="sectiontitle"><h2>Questions that de-risk delivery</h2><span class="hint">Answers that would materially change architecture, timeline and cost</span></div>';
-    body+='<div class="grid2">'+
-      '<div class="card"><div class="card-h"><h3>If only one conversation is possible</h3></div><div class="card-b">'+
-        ['Are phase durations sequential or may we propose an overlapping delivery model?',
-         'What is the POC duration, its point in procurement, and the highest-priority scenarios?',
-         'What source systems and interfaces actually exist (LIS, ERP, CRM, HR, call center, ticketing)?',
-         'What exactly constitutes an acceptable sovereign deployment, and which providers/models are approved?',
-         'What autonomy level must MVP agents reach at go-live — observe/recommend, or assign/escalate?',
-         'What measurable criteria decide POC and MVP success?'].map(function(q,i){
-          return '<div class="mini"><span class="mnum">'+(i+1)+'</span><div class="mbody"><div class="mlabel fw-5">'+esc(q)+'</div></div></div>';
-        }).join('')+
-      '</div></div>'+
-      '<div class="card"><div class="card-h"><h3>Priority if only three agents ship first</h3></div><div class="card-b">'+
-        '<div class="usecase"><span class="uic c">'+I.spark+'</span><div><div class="ut">A1 · Executive Intelligence</div><div class="ud">Highest executive value; proves AI-first over dashboard-first.</div></div></div>'+
-        '<div class="usecase"><span class="uic c">'+I.flask+'</span><div><div class="ut">A3 · Laboratory &amp; TAT</div><div class="ud">Directly protects the core clinical-operations service level.</div></div></div>'+
-        '<div class="usecase"><span class="uic c">'+I.build+'</span><div><div class="ut">A2 · Branch Operations</div><div class="ud">Revenue and experience impact across the widest footprint.</div></div></div>'+
-        '<p class="muted fs-sm mt-3">Ranking must be confirmed by Wareed — it reveals true business priority.</p>'+
-      '</div></div>'+
-    '</div>';
-    return body;
-  }
-  function finding(n,title,text){
-    return '<div class="finding"><div class="fh"><span class="badge">'+esc(n)+'</span>'+esc(title)+'</div><p>'+esc(text)+'</p></div>';
-  }
-  function alignTag(s){
-    if(s==='Proto') return '<span class="tag teal"><span class="td"></span>Demonstrated</span>';
-    if(s==='Partial') return '<span class="tag info"><span class="td"></span>Partial</span>';
-    return '<span class="tag warn"><span class="td"></span>Response only</span>';
-  }
-
-  /* ---------- Bid alignment & compliance ---------- */
-  function viewAlignment(){
-    var demo=ALIGN.filter(function(a){return a.status==='Proto';}).length;
-    var part=ALIGN.filter(function(a){return a.status==='Partial';}).length;
-    var gap=ALIGN.filter(function(a){return a.status==='Gap';}).length;
-    var body='';
-    body+='<div class="agenthead mb-4"><div class="bubble bubble-dark">RFP</div><div><h2>Bid Alignment &amp; Compliance</h2><p>Traceability between the twenty vendor response requirements of the RFP, its recommended evaluation model and what this prototype actually demonstrates. Use it to see where the submission proves value on screen and where the written response still carries the burden.</p></div><div class="hact"><span class="tag info"><span class="td"></span>20 requirements</span><button class="btn sm" data-act="print">'+I.doc+' Print / export PDF</button></div></div>';
-
-    body+='<div class="sectiontitle"><h2>Recommended evaluation model</h2><span class="hint">Wareed weighting for the AI-first procurement</span></div>';
-    body+='<div class="grid-side mt-0">';
-    body+='<div class="card"><div class="card-h"><h3>Evaluation weighting</h3><span class="sub">Technical + commercial</span></div><div class="card-b">'+
-      EVAL_WEIGHTS.map(function(e){ return hbar(e.area, e.w, 20, e.w>=20?'var(--teal-500)':'var(--teal-600)', e.w+'%'); }).join('')+
-      '<p class="muted fs-sm mt-3">Agentic architecture and integration and data architecture carry 40% of the total weighting; this prototype speaks most directly to those two areas.</p>'+
-    '</div></div>';
-    body+='<div class="od-stack g-4">'+
-      '<div class="card"><div class="card-h"><h3>Prototype coverage</h3><span class="sub">20 vendor requirements</span></div><div class="card-b">'+
-        '<div class="row-center">'+ring(Math.round(demo/20*100),'demonstrated','var(--green)')+'</div>'+
-        '<div class="od-stack g-2 mt-4">'+
-          hbar('Demonstrated in prototype',demo,20,'var(--green)',demo+' / 20')+
-          hbar('Partial — prototype and response',part,20,'var(--teal-500)',part+' / 20')+
-          hbar('Written response only',gap,20,'var(--amber)',gap+' / 20')+
-        '</div>'+
-      '</div></div>'+
-      '<div class="card"><div class="card-h"><h3>Pass / fail conditions</h3><span class="sub">Mandatory, per RFP §13</span></div><div class="card-b tight">'+
-        ['Demonstrated integration capability','Healthcare relevance','AI governance','Data security','Auditable agent actions','Implementation schedule','Local / regional support','Successful POC'].map(function(c){
-          var met=(c!=='Local / regional support' && c!=='Successful POC');
-          return '<div class="mini"><span class="tag '+(met?'ok':'warn')+'">'+(met?I.check:I.clock)+'</span><div class="mbody"><div class="mlabel">'+esc(c)+'</div><div class="mhint">'+(met?'Demonstrated or covered in proposal':'Pending evidence — must close before submission')+'</div></div></div>';
-        }).join('')+
-      '</div></div>'+
-    '</div>';
-    body+='</div>';
-
-    body+='<div class="sectiontitle"><h2>Agentic capabilities demonstrated live</h2><span class="hint">Live evidence from this session · each links to its step in the guided demo</span></div>';
-    body+='<div class="card"><div class="tblwrap"><table class="tbl"><thead><tr><th>Capability</th><th>What the prototype shows</th><th>RFP items</th><th>This session</th><th></th></tr></thead><tbody>'+
-      capabilitiesShown().map(function(c){
-        return '<tr><td class="cellmain" data-no-i18n>'+esc(T(c.en,c.ar))+'</td><td class="muted" data-no-i18n>'+esc(T(c.what,c.whatAr))+'</td><td class="mono">'+esc(c.rfp)+'</td>'+
-          '<td data-no-i18n>'+(c.on?'<span class="tag ok">'+I.check+' '+esc(T('Shown','عُرض'))+'</span>':'<span class="tag neutral">'+esc(T('Not yet','ليس بعد'))+'</span>')+'</td>'+
-          '<td data-no-i18n><button class="btn ghost xs" data-demo-step="'+c.step+'">'+I.arrow+' '+esc(T('Show me','أرني'))+'</button></td></tr>';
-      }).join('')+
-    '</tbody></table></div></div>';
-
-    body+='<div class="sectiontitle"><h2>Vendor response requirements</h2><span class="hint">RFP §12 · twenty items mapped to screen evidence and response status</span></div>';
-    body+='<div class="card"><div class="tblwrap"><table class="tbl"><thead><tr><th class="w-num">#</th><th>Requirement</th><th>Where addressed</th><th>Prototype evidence</th><th>Status</th></tr></thead><tbody>'+
-      ALIGN.map(function(a){
-        return '<tr><td class="mono fw-6">'+a.n+'</td>'+
-          '<td class="cellmain">'+esc(a.req)+'</td>'+
-          '<td>'+(a.view? '<button class="btn ghost xs" data-nav="'+a.view+'">'+I.arrow+' '+esc(a.vlabel)+'</button>' : '<span class="muted">'+esc(a.vlabel)+'</span>')+'</td>'+
-          '<td class="muted">'+esc(a.note)+'</td>'+
-          '<td>'+alignTag(a.status)+'</td></tr>';
-      }).join('')+
-    '</tbody></table></div></div>';
-
-    body+='<div class="sectiontitle"><h2>Appendix A — RFP-to-agent mapping</h2><span class="hint">Legacy WBOC RFP requirement codes traced to their agentic replacement</span></div>';
-    body+='<div class="card"><div class="tblwrap"><table class="tbl"><thead><tr><th>Legacy RFP domain</th><th>Requirement basis</th><th>Agentic replacement</th><th>View</th></tr></thead><tbody>'+
-      RFP_MAPPING.map(function(m){
-        return '<tr><td class="cellmain">'+esc(m.domain)+'</td><td class="mono muted">'+esc(m.basis)+'</td><td class="muted">'+esc(m.agent)+'</td>'+
-          '<td>'+(m.view? '<button class="btn ghost xs" data-nav="'+m.view+'">'+I.arrow+' '+esc(m.vlabel)+'</button>' : '')+'</td></tr>';
-      }).join('')+
-    '</tbody></table></div></div>';
-
-    body+='<div class="sectiontitle"><h2>Evidence gaps to close before submission</h2><span class="hint">Draft-response placeholders that still carry no committed answer</span></div>';
-    body+='<div class="grid3">'+
-      GAPS.map(function(g){
-        return '<div class="card"><div class="card-h"><h3>'+esc(g.k)+'</h3><span class="sub">'+g.items.length+' items</span></div><div class="card-b tight">'+
-          g.items.map(function(it){ return '<div class="mini"><span class="tag warn">'+I.clock+'</span><div class="mbody"><div class="mlabel fw-5">'+esc(it)+'</div></div></div>'; }).join('')+
-        '</div></div>';
-      }).join('')+
-    '</div>';
-
-    body+='<div class="card pad mt-4"><div class="od-cluster items-start"><span class="tag teal">'+I.info+' Next</span><div><b>Bring the six de-risking questions to the client meeting first.</b> <span class="muted">Answers on POC criteria, required autonomy level at go-live, approved sovereign hosting and the real source systems convert the largest gaps above into scored differentiators.</span></div></div></div>';
-    return body;
-  }
 
   /* ---------- Sovereign architecture & cybersecurity ---------- */
   function viewArchitecture(){
@@ -2555,68 +2079,6 @@ html[lang="ar"] .msg .ev{ unicode-bidi:plaintext; }
     return body;
   }
 
-  /* ---------- Delivery, risk & commercial ---------- */
-  function viewDelivery(){
-    var body='';
-    body+='<div class="agenthead mb-4"><div class="bubble bubble-dark">DEL</div><div><h2>Delivery, Risk &amp; Commercial</h2><p>Proof of concept, testing and acceptance, training and change management, support and managed service, commercial structure, risk register, assumptions/exclusions and IP position — the remaining written-response sections, brought on screen.</p></div></div>';
-
-    body+='<div class="sectiontitle mt-0"><h2>Proof of concept</h2><span class="hint">Eight weeks, representative or synthetic data — signal to recommendation to governed action</span></div>';
-    body+='<div class="card"><div class="tblwrap"><table class="tbl"><thead><tr><th class="w-num">Weeks</th><th>Activity</th><th>Exit evidence</th></tr></thead><tbody>'+
-      POC_WEEKS.map(function(p){ return '<tr><td class="mono fw-6">'+esc(p.w)+'</td><td class="cellmain">'+esc(p.a)+'</td><td class="muted">'+esc(p.e)+'</td></tr>'; }).join('')+
-    '</tbody></table></div></div>';
-    body+='<div class="card mt-4"><div class="card-h"><h3>What the POC proves</h3></div><div class="card-b tight">'+
-      POC_PROOFS.map(function(x){ return '<div class="mini"><span class="tag ok">'+I.check+'</span><div class="mbody"><div class="mlabel">'+esc(x)+'</div></div></div>'; }).join('')+
-    '</div></div>';
-
-    body+='<div class="sectiontitle"><h2>Testing &amp; acceptance</h2><span class="hint">Every release passes data, agent, workflow, security, performance and readiness tests</span></div>';
-    body+='<div class="card"><div class="tblwrap"><table class="tbl"><thead><tr><th>Stream</th><th>Coverage</th><th>Exit</th></tr></thead><tbody>'+
-      TEST_STREAMS.map(function(t){ return '<tr><td class="cellmain">'+esc(t.s)+'</td><td class="muted">'+esc(t.c)+'</td><td>'+esc(t.e)+'</td></tr>'; }).join('')+
-    '</tbody></table></div></div>';
-
-    body+='<div class="grid2 mt-4">'+
-      '<div class="card"><div class="card-h"><h3>Training &amp; change management</h3><span class="sub">Adoption focuses on changed decisions, not just navigation</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Audience</th><th>Outcome</th><th>Format</th></tr></thead><tbody>'+
-        TRAINING_AUD.map(function(t){ return '<tr><td class="cellmain">'+esc(t.aud)+'</td><td class="muted">'+esc(t.out)+'</td><td>'+esc(t.fmt)+'</td></tr>'; }).join('')+
-      '</tbody></table></div></div>'+
-      '<div class="card"><div class="card-h"><h3>Support &amp; managed service</h3><span class="sub">Joint service desk — commitments depend on topology and hours</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Priority</th><th>Example</th><th>Initial response</th></tr></thead><tbody>'+
-        SUPPORT_TIERS.map(function(s){ return '<tr><td><span class="tag '+(s.p==='P1'?'crit':s.p==='P2'?'warn':'neutral')+'">'+esc(s.p)+'</span></td><td class="cellmain">'+esc(s.ex)+'</td><td class="muted">'+esc(s.r)+'</td></tr>'; }).join('')+
-      '</tbody></table></div></div>'+
-    '</div>';
-    body+='<div class="card mt-4"><div class="card-h"><h3>Managed service scope</h3></div><div class="card-b tight">'+
-      SUPPORT_SCOPE.map(function(x){ return '<div class="mini"><span class="tag neutral">'+I.info+'</span><div class="mbody"><div class="mlabel">'+esc(x)+'</div></div></div>'; }).join('')+
-    '</div></div>';
-
-    body+='<div class="sectiontitle"><h2>Commercial proposal</h2><span class="hint">Phased and milestone-based; final prices require confirmed volumes, hosting and SLAs</span></div>';
-    body+='<div class="card"><div class="tblwrap"><table class="tbl"><thead><tr><th>Work package</th><th>Basis</th><th>One-time SAR</th><th>Recurring SAR</th></tr></thead><tbody>'+
-      COMMERCIAL_PKGS.map(function(c){ return '<tr><td class="cellmain">'+esc(c.pkg)+'</td><td class="muted">'+esc(c.basis)+'</td><td class="num mono">'+esc(c.one)+'</td><td class="num mono">'+esc(c.rec)+'</td></tr>'; }).join('')+
-    '</tbody></table></div></div>';
-    body+='<div class="card mt-4"><div class="card-b tight">'+
-      COMMERCIAL_PRINCIPLES.map(function(x){ return '<div class="mini"><span class="tag neutral">'+I.doc+'</span><div class="mbody"><div class="mlabel">'+esc(x)+'</div></div></div>'; }).join('')+
-    '</div></div>';
-
-    body+='<div class="sectiontitle"><h2>Risk register</h2><span class="hint">Jointly owned and reviewed through phase gates</span></div>';
-    body+='<div class="card"><div class="tblwrap"><table class="tbl matrix"><thead><tr><th class="w-num">ID</th><th>Risk</th><th>Rating</th><th>Mitigation</th></tr></thead><tbody>'+
-      RISKS.map(function(r){ return '<tr><td class="mono fw-6">'+esc(r.id)+'</td><td class="cellmain">'+esc(r.risk)+'</td><td><span class="tag '+(r.rating==='Critical'?'crit':r.rating==='High'?'warn':'neutral')+'">'+esc(r.rating)+'</span></td><td class="muted">'+esc(r.mit)+'</td></tr>'; }).join('')+
-    '</tbody></table></div></div>';
-
-    body+='<div class="sectiontitle"><h2>Assumptions, exclusions &amp; deviations</h2><span class="hint">Prevents hidden scope and unsafe autonomy</span></div>';
-    body+='<div class="grid2">'+
-      '<div class="card"><div class="card-h"><h3>Assumptions</h3></div><div class="card-b tight">'+
-        ASSUMPTIONS.map(function(x){ return '<div class="mini"><span class="tag info">'+I.info+'</span><div class="mbody"><div class="mlabel">'+esc(x)+'</div></div></div>'; }).join('')+
-      '</div></div>'+
-      '<div class="card"><div class="card-h"><h3>Exclusions</h3></div><div class="card-b tight">'+
-        EXCLUSIONS.map(function(x){ return '<div class="mini"><span class="tag crit">'+I.x+'</span><div class="mbody"><div class="mlabel">'+esc(x)+'</div></div></div>'; }).join('')+
-      '</div></div>'+
-    '</div>';
-    body+='<div class="card mt-4"><div class="card-h"><h3>Deviations</h3><span class="sub">Where this response departs from a literal read of the RFP</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Item</th><th>Position</th></tr></thead><tbody>'+
-      DEVIATIONS.map(function(d){ return '<tr><td class="cellmain">'+esc(d.item)+'</td><td class="muted">'+esc(d.pos)+'</td></tr>'; }).join('')+
-    '</tbody></table></div></div>';
-
-    body+='<div class="sectiontitle"><h2>Intellectual property, data &amp; portability</h2><span class="hint">Wareed retains ownership of its data; final contract defines derived-asset rights</span></div>';
-    body+='<div class="card"><div class="tblwrap"><table class="tbl"><thead><tr><th>Asset</th><th>Position</th></tr></thead><tbody>'+
-      IP_ASSETS.map(function(a){ return '<tr><td class="cellmain">'+esc(a.asset)+'</td><td class="muted">'+esc(a.pos)+'</td></tr>'; }).join('')+
-    '</tbody></table></div></div>';
-    return body;
-  }
 
   /* ---------- Orchestrator (A0) ---------- */
   function viewOrchestrator(){
@@ -3912,22 +3374,6 @@ html[lang="ar"] .msg .ev{ unicode-bidi:plaintext; }
     s.preempt=fresh.filter(function(t){ return /^(Pre-emptive|Auto-opened)/.test(t.title); }).length;
     return s;
   }
-  /* the five agentic capabilities the prototype proves on screen, with live session status */
-  function capabilitiesShown(){
-    var s=sessionStats();
-    return [
-      {en:'Predictive forecasting', ar:'التنبؤ الاستباقي', rfp:'1, 9', step:2, on:true,
-        what:'Every live KPI carries a 2-hour forecast with a confidence band; breach times are predicted before they happen.', whatAr:'لكل مؤشر حي توقع لساعتين مع نطاق ثقة، ويُتنبأ بوقت التجاوز قبل حدوثه.'},
-      {en:'Proactive agent alerts', ar:'تنبيهات استباقية من الوكلاء', rfp:'2, 10', step:9, on:s.alerts>0,
-        what:'Agents raise alerts unprompted, open L3 tasks when a KPI crosses its alert line and brief the CEO on every page.', whatAr:'يرفع الوكلاء التنبيهات دون طلب، ويفتحون مهام L3 عند تجاوز المؤشر حد التنبيه، ويقدمون موجزًا للرئيس التنفيذي في كل صفحة.'},
-      {en:'Human-on-the-loop autonomy', ar:'استقلالية بإشراف بشري', rfp:'7', step:4, on:s.auto+s.cancelled>0,
-        what:'Pre-approved L1–L2 actions run after a 10-second cancel window with 30-second undo; the emergency stop holds them.', whatAr:'تُنفَّذ إجراءات L1–L2 المعتمدة مسبقًا بعد نافذة إلغاء 10 ثوانٍ مع تراجع خلال 30 ثانية، ويعلّقها الإيقاف الطارئ.'},
-      {en:'Conversational copilot with guardrails', ar:'مساعد حواري بضوابط', rfp:'7, 9', step:5, on:s.questions>0,
-        what:'Grounded answers with reasoning steps, evidence and confidence; non-delegable requests are refused.', whatAr:'إجابات مستندة إلى البيانات مع خطوات الاستدلال والأدلة والثقة، ورفض الطلبات غير القابلة للتفويض.'},
-      {en:'What-if simulation', ar:'محاكاة السيناريوهات', rfp:'1, 9', step:7, on:state.decisions.some(function(d){ return /^What-if plan/.test(d.title); }),
-        what:'Plans are simulated with trade-offs and confidence, then routed for L3 approval.', whatAr:'تُحاكى الخطط مع المفاضلات والثقة، ثم تُوجَّه لاعتماد L3.'}
-    ];
-  }
   var VIEW_INSIGHT={
     brief:{agent:'A1', custom:function(){
       var s=sessionStats(), r=riskiest(), open=openDecs().length;
@@ -3959,27 +3405,7 @@ html[lang="ar"] .msg .ev{ unicode-bidi:plaintext; }
                'جرت جميع استدعاءات الوكلاء والنماذج في هذه الجلسة (**'+calls+'**) داخل **النطاق السيادي السعودي** دون أي خروج عابر للحدود. زمن استجابة بوابة النماذج p95 هو **'+p95+' ملّي ثانية** ومؤشر جودة البيانات '+fmtV('dq',KPI.dq.v)+'.'+(state.degraded?' مصدران متقادمان، لذا تُثبَّت الوكلاء المعتمدة عليهما عند L2.':'')),
         acts:[{label:T('Open integration health','فتح صحة التكامل'), nav:'health', primary:1},{label:T('Ask about data freshness','اسأل عن حداثة البيانات'), ask:T('Are any data sources stale?','هل هناك مصادر بيانات متقادمة؟'), ghost:1}]};
     }},
-    health:{key:'dq', agent:'A12', q:'Are any data sources stale?'},
-    blueprint:{agent:'A0', custom:function(){
-      var s=sessionStats();
-      return {agent:'A0', level:'stable', tag:['teal',T('Gate evidence','أدلة البوابة')], conf:0.9,
-        text:T('Evidence for the Phase 2 gate is building live: **'+plural(s.handled,'decision')+'** dispositioned, **'+plural(s.preempt+s.auto,'pre-emptive or autonomous action')+'**, **'+plural(s.alerts,'proactive alert')+'** and **'+plural(s.questions,'copilot answer')+'**, each with trace, confidence and an accountable owner.',
-               'تتراكم أدلة بوابة المرحلة الثانية مباشرة: **'+s.handled+'** من القرارات المبتوت فيها، و**'+(s.preempt+s.auto)+'** من الإجراءات الاستباقية أو الذاتية، و**'+s.alerts+'** من التنبيهات الاستباقية، و**'+s.questions+'** من إجابات المساعد — لكل منها أثر وثقة ومالك مساءل.'),
-        acts:[{label:T('Open delivery & risk','فتح التسليم والمخاطر'), nav:'delivery', primary:1},{label:T('What changed today?','ما الذي تغيّر اليوم؟'), ask:T('What changed since the 06:45 brief?','ما الذي تغيّر منذ موجز 06:45؟'), ghost:1}]};
-    }},
-    delivery:{agent:'A0', custom:function(){
-      var s=sessionStats();
-      return {agent:'A0', level:state.degraded?'watch':'stable', tag:state.degraded?['warn',T('Watch','مراقبة')]:['ok',T('On track','على المسار')], conf:0.9,
-        text:T('Live risk-register signals: **R3 alert fatigue**: duplicate alerts down 31% (target ≥ 30%). **R4 unsupported confidence**: every AI answer shows confidence and evidence. **R5 unauthorized action**: 0 actions above L2 without approval; '+plural(s.cancelled,'cancel')+' and '+plural(s.undone,'undo')+' recorded. **R9 API instability**: '+(state.degraded?'2 sources stale, degraded mode active':'all sources fresh')+'.',
-               'إشارات حية من سجل المخاطر: **R3 إرهاق التنبيهات**: انخفضت التنبيهات المكررة 31% (المستهدف ≥ 30%). **R4 ثقة غير مسندة**: كل إجابة ذكاء اصطناعي تعرض الثقة والأدلة. **R5 إجراء غير مصرح**: 0 إجراءات فوق L2 دون اعتماد؛ وسُجّل '+s.cancelled+' إلغاء و'+s.undone+' تراجع. **R9 عدم استقرار الواجهات**: '+(state.degraded?'مصدران متقادمان ووضع التدهور مفعّل':'جميع المصادر حديثة')+'.'),
-        acts:[{label:T('Open notifications','فتح التنبيهات'), notif:1, primary:1},{label:T('Open governance','فتح الحوكمة'), nav:'govern'}]};
-    }},
-    alignment:{agent:'A1', custom:function(){
-      var caps=capabilitiesShown(), n=caps.filter(function(c){ return c.on; }).length;
-      return {agent:'A1', level:n===5?'good':'watch', tag:n===5?['ok',T('All shown','عُرضت كلها')]:['warn',T(n+' of 5 shown','عُرض '+n+' من 5')], conf:0.92,
-        text:T('This session has demonstrated **'+n+' of 5** agentic capabilities live on screen: ','عرضت هذه الجلسة مباشرة **'+n+' من 5** قدرات وكيلية: ')+caps.map(function(c){ return (c.on?'✓ ':'○ ')+T(c.en,c.ar); }).join(' · ')+T('. The audit trail holds the evidence behind the written response.','. ويحتفظ سجل التدقيق بالأدلة الداعمة للرد المكتوب.'),
-        acts:[{label:DEMO?T('Restart guided demo','إعادة العرض الموجّه'):T('Run the guided demo','تشغيل العرض الموجّه'), demo:1, primary:!DEMO},{label:T('Print / export PDF','طباعة / تصدير PDF'), act:'print'}]};
-    }}
+    health:{key:'dq', agent:'A12', q:'Are any data sources stale?'}
   };
   var LEVEL_TAG={risk:['crit','Risk'], watch:['warn','Watch'], good:['ok','Improving'], stable:['teal','Stable']};
   function insightSpec(v){
@@ -4132,9 +3558,6 @@ html[lang="ar"] .msg .ev{ unicode-bidi:plaintext; }
     tour('govern','The control plane tracks every approval, auto-action, cancel and undo live. Nothing above L2 runs without a human.','تتتبع طبقة التحكم كل اعتماد وإجراء تلقائي وإلغاء وتراجع مباشرة. ولا يُنفَّذ شيء فوق L2 دون إنسان.'),
     tour('architecture','A12 confirms that every agent and model call stays inside the Saudi sovereign boundary.','يؤكد A12 أن كل استدعاء للوكلاء والنماذج يبقى داخل النطاق السيادي السعودي.'),
     tour('health','A12 predicts an API timeout before it happens and runs the standard retry and failover runbook on its own.','يتوقع A12 انتهاء مهلة الواجهة قبل حدوثه وينفّذ ذاتيًا دليل إعادة المحاولة والتحويل الاحتياطي القياسي.', function(){ autoNudge(AUTO_POOL[2]); }),
-    tour('blueprint','Evidence for the phase gates builds up live: decisions, actions, alerts and copilot answers, each with a trace.','تتراكم أدلة بوابات المراحل مباشرة: قرارات وإجراءات وتنبيهات وإجابات المساعد، لكل منها أثر.'),
-    tour('delivery','The risk register is monitored live: alert fatigue, unsupported confidence, unauthorized action and API instability.','يُراقَب سجل المخاطر مباشرة: إرهاق التنبيهات، والثقة غير المسندة، والإجراء غير المصرح، وعدم استقرار الواجهات.'),
-    tour('alignment','A1 tracks which agentic capabilities this session has shown on screen: the proof behind the written response.','يتتبع A1 القدرات الوكيلية التي عرضتها هذه الجلسة على الشاشة: البرهان وراء الرد المكتوب.'),
     {title:'Control & audit', titleAr:'التحكم والتدقيق', say:'Every alert, auto-action, cancel and undo lands in the notification center and the audit trail. Auto-execution can be switched off, and the emergency stop suspends all L3–L5 actions instantly.', sayAr:'كل تنبيه وإجراء تلقائي وإلغاء وتراجع يصل إلى مركز التنبيهات وسجل التدقيق. يمكن إيقاف التنفيذ التلقائي، ويعلّق الإيقاف الطارئ جميع إجراءات L3–L5 فورًا.',
       run:function(){ closeCopilot(); demoView('brief'); openNotif(); }}
   ];
@@ -4158,8 +3581,6 @@ html[lang="ar"] .msg .ev{ unicode-bidi:plaintext; }
   }
   document.addEventListener('click',function(ev){
     var t=ev.target;
-    var ds=t.closest('[data-demo-step]');
-    if(ds){ var sn=+ds.getAttribute('data-demo-step'); if(DEMO) demoGo(sn-1); else location.href=location.pathname+'?demo=1&step='+sn+'#brief'; return; }
     if(t.closest('[data-demo]')){ location.href=location.pathname+'?demo=1&run='+Date.now()+'#brief'; return; }
     if(t.closest('[data-demo-exit]')){ location.href=location.pathname+'#brief'; return; }
     if(t.closest('[data-demo-next]')){ demoGo(demoIx+1); return; }
@@ -4218,22 +3639,10 @@ html[lang="ar"] .msg .ev{ unicode-bidi:plaintext; }
     'Agentic Orchestrator & Operations Control':'المنسّق الوكيلي والتحكم بالعمليات', 'Executive Intelligence & CEO Briefing':'الذكاء التنفيذي وموجز الرئيس التنفيذي', 'Main Laboratory & TAT':'المختبر الرئيسي وزمن الإنجاز',
     'Home Visit Operations':'عمليات الزيارات المنزلية', 'Customer Experience & Call Center':'تجربة العملاء ومركز الاتصال', 'Marketing & Growth Intelligence':'ذكاء التسويق والنمو',
     'IT & Integration Health':'صحة التقنية والتكامل', 'Integration & Data Health':'صحة التكامل والبيانات', 'Alert, Ticketing & Corrective Action':'التنبيهات والتذاكر والإجراءات التصحيحية', 'AI Vision Event Service':'خدمة أحداث الرؤية الذكية',
-    /* guided demo, alignment capabilities */
-    'Agentic capabilities demonstrated live':'القدرات الوكيلية المعروضة مباشرة', 'Live evidence from this session · each links to its step in the guided demo':'أدلة حية من هذه الجلسة · كل منها يرتبط بخطوته في العرض الموجّه',
-    'Capability':'القدرة', 'What the prototype shows':'ما يعرضه النموذج', 'RFP items':'بنود كراسة الطلب', 'This session':'هذه الجلسة'
-  ,
-    'AI-first executive brief, decision queue and one-click traceability, now with live 2-hour KPI forecasts, a what-if simulator and a guided demo.':'موجز تنفيذي قائم على الذكاء الاصطناعي وقائمة قرارات وتتبع بنقرة واحدة، مع توقعات حية لساعتين للمؤشرات ومحاكي سيناريوهات وعرض توضيحي موجّه.',
-    'A0-A12 and S1-S3 catalogue with release phase and maximum authority; agents act proactively on screen, raising alerts and running pre-approved L1–L2 actions.':'كتالوج A0–A12 وS1–S3 مع مرحلة الإطلاق والصلاحية القصوى؛ ويعمل الوكلاء استباقيًا على الشاشة برفع التنبيهات وتنفيذ إجراءات L1–L2 المعتمدة مسبقًا.',
-    'Authority levels 1-5, non-delegable boundaries and emergency stop, plus human-on-the-loop autonomy: 10-second cancel window, 30-second undo and an auto-execution switch.':'مستويات الصلاحية 1–5 والحدود غير القابلة للتفويض والإيقاف الطارئ، إضافة إلى استقلالية بإشراف بشري: نافذة إلغاء 10 ثوانٍ وتراجع خلال 30 ثانية ومفتاح للتنفيذ التلقائي.',
-    'This prototype is the executive experience: a live, predictive dashboard with a conversational copilot, proactive insight on every page and a notification center.':'هذا النموذج هو التجربة التنفيذية ذاتها: لوحة حية تنبؤية مع مساعد حواري ورؤية استباقية في كل صفحة ومركز للتنبيهات.',
-    'S2 lifecycle Detect to Learn with SLA states and mandatory closure evidence; agents open tasks when a KPI crosses its alert line and pre-empt forecast breaches.':'دورة حياة S2 من الرصد إلى التعلّم مع حالات اتفاقية الخدمة ودليل إغلاق إلزامي؛ ويفتح الوكلاء المهام عند تجاوز المؤشر حد التنبيه ويستبقون التجاوزات المتوقعة.',
-    'Full eight-week POC schedule with exit evidence; the guided demo rehearses the POC storyline end to end on synthetic data.':'جدول كامل لإثبات المفهوم في ثمانية أسابيع مع أدلة الخروج؛ ويستعرض العرض الموجّه قصة إثبات المفهوم كاملة على بيانات تجريبية.',
-    'Six-stream testing and acceptance table (data, agent, workflow, security, performance, UAT/ORT) on screen; an automated headless-browser test exercises agent behaviour, autonomy guardrails and every view.':'جدول الاختبار والقبول بستة مسارات (البيانات، الوكلاء، سير العمل، الأمن، الأداء، UAT/ORT) على الشاشة؛ ويختبر فحص آلي بمتصفح دون واجهة سلوك الوكلاء وضوابط الاستقلالية وكل الشاشات.',
-    'Full twelve-risk register with rating and mitigation on screen alongside the three root-cause findings in Blueprint; Delivery streams live signals for R3, R4, R5 and R9.':'سجل كامل من اثني عشر خطرًا مع التقييم والمعالجة إلى جانب نتائج الأسباب الجذرية الثلاث في المخطط؛ وتعرض شاشة التسليم إشارات حية للمخاطر R3 وR4 وR5 وR9.',
     'AI Vision Event':'حدث الرؤية الذكية',
     'Data Quality & Governance':'جودة البيانات وحوكمتها'
   });
-  var VIEWS={brief:viewBrief,branch:viewBranch,lab:viewLab,home:viewHome,cx:viewCX,mkt:viewMkt,orchestrator:viewOrchestrator,actions:viewActions,govern:viewGovern,vision:viewVision,health:viewHealth,blueprint:viewBlueprint,architecture:viewArchitecture,delivery:viewDelivery,alignment:viewAlignment};
+  var VIEWS={brief:viewBrief,branch:viewBranch,lab:viewLab,home:viewHome,cx:viewCX,mkt:viewMkt,orchestrator:viewOrchestrator,actions:viewActions,govern:viewGovern,vision:viewVision,health:viewHealth,architecture:viewArchitecture};
 
   /* =========================================================
      Render
@@ -4339,31 +3748,6 @@ html[lang="ar"] .msg .ev{ unicode-bidi:plaintext; }
     openDrawer(html);
   }
 
-  var AGENT_VIEW = {A0:'orchestrator', A1:'brief', A2:'branch', A3:'lab', A4:'home', A5:'cx', A6:'mkt', A12:'health', S1:'health', S2:'actions', S3:'vision'};
-  function agentDrawer(id){
-    var a=AGENTS.filter(function(x){return x.id===id;})[0]; var d=AGENT_DETAIL[id];
-    if(!a||!d) return;
-    var view=AGENT_VIEW[id];
-    var html='<div class="drawer-h"><div class="od-fill"><h3 id="drawerTitle">'+esc(a.id)+' · '+esc(a.name)+'</h3><div class="mono muted fs-sm mt-1">RFP §5 detailed agent role · '+esc(a.release)+'</div></div><button class="iconbtn" data-close="drawer" aria-label="Close">'+I.x+'</button></div>'+
-      '<div class="drawer-b">'+
-      '<div class="od-cluster mb-4"><span class="tag '+(a.release==='MVP'?'teal':a.release==='Foundation'?'info':'neutral')+'">'+esc(a.release)+'</span>'+lvlTag(a.level)+'</div>'+
-      '<div class="card pad mb-4"><div class="fw-6 mb-2">Mission</div><p class="muted fs-md">'+esc(d.mission)+'</p></div>'+
-      '<div class="grid2">'+
-        '<div class="card"><div class="card-h"><h3>What it monitors</h3></div><div class="card-b tight">'+d.monitors.map(function(x){return '<div class="mini"><span class="tag info">'+I.info+'</span><div class="mbody"><div class="mlabel">'+esc(x)+'</div></div></div>';}).join('')+'</div></div>'+
-        '<div class="card"><div class="card-h"><h3>How it reasons</h3></div><div class="card-b tight">'+d.reasons.map(function(x){return '<div class="mini"><span class="tag neutral">'+I.spark+'</span><div class="mbody"><div class="mlabel">'+esc(x)+'</div></div></div>';}).join('')+'</div></div>'+
-      '</div>'+
-      '<div class="grid2 mt-4">'+
-        '<div class="card"><div class="card-h"><h3>Actions it may perform</h3></div><div class="card-b tight">'+d.actions.map(function(x){return '<div class="mini"><span class="tag ok">'+I.check+'</span><div class="mbody"><div class="mlabel">'+esc(x)+'</div></div></div>';}).join('')+'</div></div>'+
-        '<div class="card"><div class="card-h"><h3>When it escalates</h3></div><div class="card-b tight">'+d.escalates.map(function(x){return '<div class="mini"><span class="tag warn">'+I.esc+'</span><div class="mbody"><div class="mlabel">'+esc(x)+'</div></div></div>';}).join('')+'</div></div>'+
-      '</div>'+
-      '<div class="sectiontitle mt-4"><h2>Core KPIs</h2></div><div class="evidence">'+d.kpis.map(function(k){return '<span class="ev">'+esc(k)+'</span>';}).join('')+'</div>'+
-      '<div class="sectiontitle"><h2>Primary connections</h2></div><div class="evidence">'+d.connections.map(function(c){return '<span class="ev">'+esc(c)+'</span>';}).join('')+'</div>'+
-      '<div class="card pad mt-4"><div class="od-cluster items-start"><span class="tag crit">'+I.warn+' Boundary</span><div class="muted fs-sm">'+esc(d.boundary)+'</div></div></div>'+
-      '<p class="muted fs-xs mono mt-3">Legacy RFP basis: '+esc(d.legacy)+'</p>'+
-      '</div>'+
-      '<div class="drawer-f">'+(view?'<button class="btn primary sm" data-nav="'+view+'" data-close="drawer">'+I.arrow+' Open live view</button>':'<span class="muted fs-sm">Extended phase — no live view yet; catalogued here from the RFP.</span>')+'<span class="grow"></span><button class="btn ghost sm" data-close="drawer">Close</button></div>';
-    openDrawer(html);
-  }
 
   function estopModal(engage){
     openModal('<div class="mh"><h3>'+(engage?'Engage emergency stop?':'Resume operations?')+'</h3></div><div class="mb"><p class="muted">'+(engage?
@@ -4407,7 +3791,7 @@ html[lang="ar"] .msg .ev{ unicode-bidi:plaintext; }
   document.addEventListener('click',function(ev){
     var lb=ev.target.closest('[data-lang]');
     if(lb){ if(lb.getAttribute('data-lang')!==LANG) setLang(lb.getAttribute('data-lang')); return; }
-    var el=ev.target.closest('[data-nav],[data-act],[data-decision],[data-ticket],[data-tech],[data-branch],[data-camp],[data-close],[data-confirm],[data-ticket-act],[data-branch-act],[data-tech-act],[data-vision-act],[data-orch-act],[data-agent]');
+    var el=ev.target.closest('[data-nav],[data-act],[data-decision],[data-ticket],[data-tech],[data-branch],[data-camp],[data-close],[data-confirm],[data-ticket-act],[data-branch-act],[data-tech-act],[data-vision-act],[data-orch-act]');
     if(!el) return;
 
     if(el.hasAttribute('data-nav')){ closeDrawer(); closeModal(); go(el.getAttribute('data-nav')); return; }
@@ -4451,8 +3835,6 @@ html[lang="ar"] .msg .ev{ unicode-bidi:plaintext; }
     var tk=el.getAttribute('data-ticket');
     if(tk){ ticketDrawer(tk); return; }
 
-    var ag=el.getAttribute('data-agent');
-    if(ag){ agentDrawer(ag); return; }
 
     var ta=el.getAttribute('data-ticket-act');
     if(ta){

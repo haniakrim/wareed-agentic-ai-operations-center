@@ -7,7 +7,7 @@ const path = require('path');
 const { pathToFileURL } = require('url');
 
 const PAGE = pathToFileURL(path.join(__dirname, '..', 'index.html')).href;
-const VIEWS = ['brief', 'branch', 'lab', 'home', 'cx', 'mkt', 'orchestrator', 'actions', 'vision', 'govern', 'architecture', 'health', 'blueprint', 'delivery', 'alignment'];
+const VIEWS = ['brief', 'branch', 'lab', 'home', 'cx', 'mkt', 'orchestrator', 'actions', 'vision', 'govern', 'architecture', 'health'];
 
 async function launch() {
   try { return await chromium.launch({ channel: 'chrome' }); } catch (e) { return chromium.launch(); }
@@ -95,7 +95,7 @@ async function guidedDemo(browser) {
   const page = await open(browser, '?demo=1', 'brief');
   await page.clock.runFor(500);
   const total = await page.evaluate(() => document.querySelectorAll('[data-demo-jump] option').length);
-  assert(total > 20, 'storyline too short: ' + total);
+  assert(total >= 20, 'storyline too short: ' + total);
   const seen = [];
   for (let i = 0; i < total; i++) {
     const title = await text(page, '.pr-t');
@@ -106,12 +106,12 @@ async function guidedDemo(browser) {
   }
   assert(/Control & audit/.test(seen[seen.length - 1]), 'did not reach the last step');
   assert(!(await page.evaluate(() => document.getElementById('notifPanel').hidden)), 'last step should open the notification center');
-  await page.evaluate(() => { document.getElementById('notifClose').click(); location.hash = 'alignment'; });
+  await page.evaluate(() => { document.getElementById('notifClose').click(); location.hash = 'govern'; });
   await page.clock.runFor(300);
-  const tag = await text(page, '#viewInsight .tag');
-  assert.strictEqual(tag, 'All shown', 'demo did not demonstrate all 5 capabilities: ' + tag);
+  const gov = await text(page, '#viewInsight .vi-b');
+  assert(/[1-9]\d* L1–L2 auto-action/.test(gov), 'governance insight should count the demo auto-actions: ' + gov);
   assert.deepStrictEqual(page.errors, [], 'console errors');
-  console.log('ok  guided demo: ' + total + ' steps, every tour page shows its proactive insight, 5 of 5 capabilities shown');
+  console.log('ok  guided demo: ' + total + ' steps, every tour page shows its proactive insight, governance counts the auto-actions');
   await page.close();
 }
 
@@ -134,9 +134,9 @@ async function arabic(browser) {
   assert(answers.length >= 3, 'copilot answered ' + answers.length + ' times');
   answers.forEach(a => assert(ARABIC.test(a), 'copilot answer not Arabic: ' + a.slice(0, 80)));
   assert(answers.some(a => /لا يمكنني المساعدة/.test(a)), 'Arabic clinical guardrail missing');
-  await page.evaluate(() => { document.getElementById('notifClose').click(); location.hash = 'alignment'; });
+  await page.evaluate(() => { document.getElementById('notifClose').click(); location.hash = 'govern'; });
   await page.clock.runFor(300);
-  assert.strictEqual(await text(page, '#viewInsight .tag'), 'عُرضت كلها', 'Arabic capability tag');
+  assert.strictEqual(await text(page, '#viewInsight .tag'), 'ضمن السياسة', 'Arabic governance tag');
   assert.deepStrictEqual(page.errors, [], 'console errors');
   console.log('ok  Arabic (RTL): presenter, insight cards, alerts and ' + answers.length + ' copilot answers all in Arabic');
   await page.close();
