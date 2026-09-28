@@ -652,6 +652,28 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
 @media (max-width:480px){ #freshPill{ display:none; } }
 @media (max-width:1200px){ .topbar .clock{ display:none; } }
 @media (max-width:1100px){ .simbtn .lbl{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; } }
+.presenter{ position:fixed; bottom:var(--s5); inset-inline-start:var(--s5); z-index:88; width:min(400px,calc(100vw - 2 * var(--s5))); background:var(--navy-800); color:var(--chrome-bright); border-radius:var(--r-lg); box-shadow:var(--sh-3); padding:var(--s3) var(--s4) var(--s4); }
+.presenter[hidden]{ display:none; }
+.pr-h{ display:flex; align-items:center; gap:var(--s2); }
+.pr-h .iconbtn{ background:transparent; border-color:rgba(255,255,255,.22); color:var(--chrome-bright); width:30px; height:30px; }
+.pr-m{ color:var(--chrome-muted); }
+.pr-t{ font-family:var(--font-display); font-weight:600; font-size:var(--fs-base); margin-top:var(--s2); }
+.pr-s{ font-size:var(--fs-sm); line-height:1.55; color:var(--chrome-text); margin-top:var(--s1); }
+.pr-a{ display:flex; gap:var(--s2); align-items:center; margin-top:var(--s3); }
+.pr-a select{ flex:1; min-width:0; min-height:36px; border-radius:var(--r-sm); border:1px solid rgba(255,255,255,.22); background:var(--navy-700); color:var(--chrome-bright); font:inherit; font-size:var(--fs-sm); padding:0 var(--s2); }
+.pr-a .btn:not(.primary){ background:transparent; color:var(--chrome-bright); border-color:rgba(255,255,255,.28); }
+.pr-a .btn:disabled{ opacity:.45; }
+.pr-p{ height:3px; background:rgba(255,255,255,.12); border-radius:2px; margin-top:var(--s3); overflow:hidden; }
+.pr-p span{ display:block; height:100%; background:var(--brand-teal); transition:width .3s var(--ease); }
+.demo-on .content{ padding-bottom:240px; }
+.demo-on .nudgewrap{ top:auto; bottom:var(--s5); }
+.demo-on .toastwrap{ top:76px; bottom:auto; }
+@media (max-width:640px){
+  .presenter{ inset-inline:var(--s3); bottom:var(--s3); width:auto; }
+  .demo-on .nudgewrap{ bottom:230px; }
+  .demo-on .toastwrap{ top:64px; }
+}
+@media print{ .presenter{ display:none !important; } }
 @media print{ .copilot, .nudgewrap, .notif{ display:none !important; } }
 .cpbtn{ position:relative; }
 .cpdot, .bdg{ position:absolute; top:-6px; inset-inline-end:-6px; min-width:18px; height:18px; padding:0 5px; border-radius:9px; background:var(--brand-coral); color:#fff; font-size:11px; font-weight:700; line-height:18px; text-align:center; box-shadow:0 0 0 2px var(--surface); }
@@ -780,6 +802,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
 <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" hidden></aside>
 <div id="modalRoot"></div>
 <div class="toastwrap" id="toasts" aria-live="polite"></div>
+<div class="presenter" id="presenter" role="region" aria-label="Guided demo presenter" hidden></div>
 <div class="nudgewrap" id="nudges" aria-live="polite" aria-label="Proactive agent insights"></div>
 <div class="notif" id="notifPanel" role="dialog" aria-labelledby="notifTitle" hidden>
   <div class="nt-h"><h3 id="notifTitle">Agent notifications</h3><button class="iconbtn" id="notifClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
@@ -1915,6 +1938,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     return '<div class="od-cluster mb-4">'+
       '<button class="btn sm" data-act="refresh">'+I.pulse+' Refresh intelligence</button>'+
       '<button class="btn sm" data-act="brief">'+I.doc+' Generate daily brief</button>'+
+      '<button class="btn sm" data-demo>'+I.spark+' '+(DEMO?'Restart guided demo':'Guided demo')+'</button>'+
       '<span class="grow"></span>'+
       '<span class="disclaim">'+I.info+' Illustrative synthetic data — not connected to live Wareed sources</span>'+
     '</div>';
@@ -2762,6 +2786,9 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
      ========================================================= */
   var TICK_MS=5000, SIM_MIN=5, HORIZON=24;   /* one tick = 5 simulated minutes; 24 ticks = 2h */
   var REDUCED=!!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var DEMO=/[?&]demo=1\b/.test(location.search);
+  function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; var t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+  var rnd=DEMO?mulberry32(20260928):Math.random;   /* demo runs are repeatable */
   function T(en,ar){ return LANG==='ar'&&ar ? ar : en; }
   function $(id){ return document.getElementById(id); }
 
@@ -2788,13 +2815,14 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     k.hist[23]=k.v;
   });
 
+  if(DEMO) KPI.tat.trend=-0.05;   /* the storyline triggers the breach forecast itself */
   state.sim={on:true, tick:0, nextNudge:2, poolIx:0, count:0, nudgeSeq:0};
   state.nudges=[];      /* history, newest first */
   state.visible=[];     /* ids currently floating */
   state.fcSel='tat';
   state.whatif={tech:0, cult:0, budget:0, hv:0};
 
-  function gauss(){ var u=1-Math.random(), v=Math.random(); return Math.max(-2.5,Math.min(2.5,Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)))*0.6; }
+  function gauss(){ var u=1-rnd(), v=rnd(); return Math.max(-2.5,Math.min(2.5,Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)))*0.6; }
   function kfmt(key){ var k=KPI[key]; return k.v.toFixed(k.dp); }
   function fmtV(key,v){ var k=KPI[key]; return (Number.isInteger(v)?String(v):v.toFixed(k.dp))+(k.unit==='%'?'%':k.unit?' '+k.unit:''); }
   function fmtDur(min){ min=Math.max(5,Math.round(min/5)*5); var h=Math.floor(min/60), m=min%60; return LANG==='ar'? (h?h+' س ':'')+(m?m+' د':'') : (h?h+'h ':'')+(m?m+'m':'').trim(); }
@@ -2926,7 +2954,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     paintLive();
     proactiveScan();
     runFollowups();
-    if(state.sim.tick>=state.sim.nextNudge){ state.sim.count++; if(!(state.sim.count%2===0 && autoNudge())) scriptedNudge(); state.sim.nextNudge=state.sim.tick+5+Math.floor(Math.random()*3); }
+    if(!DEMO && state.sim.tick>=state.sim.nextNudge){ state.sim.count++; if(!(state.sim.count%2===0 && autoNudge())) scriptedNudge(); state.sim.nextNudge=state.sim.tick+5+Math.floor(rnd()*3); }
   }
   function paintLive(){
     Array.prototype.forEach.call(document.querySelectorAll('[data-kpi]'),function(el){
@@ -2950,6 +2978,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
 
   /* ---------- proactive agents ---------- */
   function proactiveScan(){
+    if(DEMO) return;   /* the guided demo raises its own alerts */
     ['tat','hv','sla','wait','csat'].forEach(function(key){
       var k=KPI[key], f=fc(key), now=state.sim.tick;
       if(f.breached){
@@ -3055,11 +3084,18 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     for(var tries=0;tries<NUDGE_POOL.length;tries++){
       var src=NUDGE_POOL[state.sim.poolIx%NUDGE_POOL.length]; state.sim.poolIx++;
       if(src.decision && hasDecision(src.decision)) continue;
-      var n=Object.assign({kind:'Proactive'},src);
-      n.acts=[Object.assign({primary:1, mut:!!(src.act.ca||src.act.decision)},src.act,{a:'script'}),{label:'Why?', a:'ask'}];
-      if(state.degraded && src.agent==='A4'){ n.conf=Math.max(0.55,n.conf-0.15); n.body+=' GPS source is stale, so confidence is reduced.'; }
-      raiseNudge(n); return;
+      nudgeFromPool(src); return;
     }
+  }
+  function nudgeFromPool(src){
+    var n=Object.assign({kind:'Proactive'},src);
+    n.acts=[Object.assign({primary:1, mut:!!(src.act.ca||src.act.decision)},src.act,{a:'script'}),{label:'Why?', a:'ask'}];
+    if(state.degraded && src.agent==='A4'){ n.conf=Math.max(0.55,n.conf-0.15); n.body+=' GPS source is stale, so confidence is reduced.'; }
+    raiseNudge(n);
+  }
+  function poolNudge(re){
+    var src=NUDGE_POOL.filter(function(x){ return re.test(x.title); })[0];
+    if(src && !(src.decision && hasDecision(src.decision))) nudgeFromPool(src);
   }
   function raiseNudge(n){
     n.id='N'+(++state.sim.nudgeSeq); n.t=nowTime().slice(0,5); n.status=n.status0||'new'; n.read=false;
@@ -3224,6 +3260,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     state.whatif={tech:0,cult:0,budget:0,hv:0};
     toast('Plan '+d.id+' added to the decision queue for approval.','ok');
     softRender();
+    return d;
   }
 
   /* =========================================================
@@ -3418,9 +3455,9 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
   function cpScroll(){ var l=$('cpLog'); l.scrollTop=l.scrollHeight; }
   function addUser(q){ var d=document.createElement('div'); d.className='msg user'; d.textContent=q; $('cpLog').appendChild(d); cpScroll(); }
   function actBtn(a){
-    var cls='btn xs'+(a.primary?' primary':''), dis=state.emergencyStop&&(a.decision||a.preempt||a.mut);
+    var cls='btn xs'+(a.primary?' primary':a.ghost?' ghost':''), dis=state.emergencyStop&&(a.decision||a.preempt||a.mut);
     var attr = a.nudge?'data-nudge="'+a.nudge+'" data-ix="0"' : a.nav?'data-nav="'+a.nav+'"' : a.decision?'data-decision="approve" data-id="'+a.decision+'"' : a.ticket?'data-ticket="'+a.ticket+'"' : a.preempt?'data-preempt="'+a.preempt+'"' :
-      a.whatif?'data-wi-set="'+esc(JSON.stringify(a.whatif))+'"' : a.ask?'data-cp-ask="'+esc(a.ask)+'"' : a.act?'data-act="'+a.act+'"' : '';
+      a.whatif?'data-wi-set="'+esc(JSON.stringify(a.whatif))+'"' : a.ask?'data-cp-ask="'+esc(a.ask)+'"' : a.act?'data-act="'+a.act+'"' : a.notif?'data-open-notif' : a.demo?'data-demo' : '';
     return '<button class="'+cls+'" '+attr+(dis?' disabled title="Emergency stop engaged"':'')+'>'+esc(a.label)+'</button>';
   }
   function stream(ans){
@@ -3459,7 +3496,8 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
   }
   function ask(q,preset){
     q=String(q||'').trim(); if(!q) return;
-    if(cp.busy){ toast('Copilot is still answering — one moment.',''); return; }
+    if(cp.busy){ cp.pending.unshift({ask:q, preset:preset}); return; }
+    cp.asked=(cp.asked||0)+1;
     addUser(q);
     var ans=preset||answer(q);
     log('Copilot query ('+ans.agent+'): '+q.slice(0,70));
@@ -3579,12 +3617,12 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
       body:'Moves 14 routine samples behind incoming STAT work. No result or clinical data is touched.', fx:[{k:'tat',d:0.08,n:14}],
       why:{text:'Queue re-prioritisation is pre-approved under workflow **W-2** (L2). It is purely operational — no clinical interpretation or result release.', ev:['STAT +34%','Chem 88%','workflow W-2']}}
   ];
-  function autoNudge(){
-    if(!state.sim.on || state.visible.length>=2) return false;
+  function autoNudge(force){
+    if(!force && (!state.sim.on || state.visible.length>=2)) return false;
     var list=AUTO_POOL.filter(function(a){ return !a.cond || a.cond(); });
-    if(!list.length) return false;
+    if(!force && !list.length) return false;
     state.sim.autoIx=(state.sim.autoIx||0)+1;
-    var src=list[state.sim.autoIx%list.length];
+    var src=force||list[state.sim.autoIx%list.length];
     var n={agent:src.agent, level:'info', title:src.title, body:src.body, conf:src.conf, why:src.why, policy:src.policy, lvl:src.lvl, fx:src.fx};
     if(state.autonomy && !state.emergencyStop){
       n.kind='Auto-executing · L'+src.lvl; n.status0='pending'; n.left=AUTO_SECS;
@@ -3678,20 +3716,46 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
   function updateCpBadge(){ var b=$('cpDot'), c=cp.pending.length; b.hidden=!c; b.textContent=c; $('cpBtn').setAttribute('title', c?'Wareed AI has '+c+' new insight'+(c>1?'s':''):'Ask Wareed AI'); }
   function flushPending(){
     if(cp.busy || !cp.pending.length || !$('copilot').classList.contains('show')) return;
-    stream(cp.pending.shift()); updateCpBadge();
+    var it=cp.pending.shift(); updateCpBadge();
+    if(it.ask!==undefined) ask(it.ask,it.preset); else stream(it);
   }
   var VIEW_ANS={branch:ansBranch, lab:ansLab, home:ansHome, cx:ansCX, mkt:ansMkt, actions:ansSla, health:ansHealth, vision:ansVision, orchestrator:ansPriorities};
   function onViewChange(v){
-    var fn=VIEW_ANS[v]; if(!fn) return;
-    var a=fn(''), nav=NAV.filter(function(x){ return x.view===v; })[0];
+    var nav=NAV.filter(function(x){ return x.view===v; })[0], title=nav?nav.title:v, a;
+    if(VIEW_ANS[v]){
+      a=VIEW_ANS[v]('');
+      a.text='You opened **'+title+'**. Here is what '+a.agent+' is seeing right now:\n'+a.text;
+    } else {
+      var sp=insightSpec(v); if(!sp) return;
+      a=A({agent:sp.agent, level:2, steps:['Routed to '+sp.agent+' '+agentName(sp.agent),'Read live session evidence'], text:'You opened **'+title+'**. '+sp.text, ev:sp.ev||['audit trail','live state'], acts:sp.acts.slice(), conf:sp.conf});
+    }
     a.viewKey=v;
-    a.text='You opened **'+(nav?nav.title:v)+'**. Here is what '+a.agent+' is seeing right now:\n'+a.text;
     a.acts=a.acts.filter(function(x){ return x.nav!==v; });
     cpProactive(a,'Proactive');
   }
 
-  /* ---------- live agent insight at the top of every domain view ---------- */
+  /* ---------- live agent insight at the top of every view ---------- */
+  function plural(n,w){ return n+' '+w+(n===1?'':'s'); }
+  function sessionStats(){
+    var s={alerts:state.nudges.length, auto:0, cancelled:0, undone:0, held:0, questions:cp.asked||0, handled:state.handled};
+    state.nudges.forEach(function(n){
+      if(n.policy && (n.status==='executed'||n.status==='undone')) s.auto++;
+      if(n.status==='cancelled') s.cancelled++;
+      if(n.status==='undone') s.undone++;
+      if(n.status==='held') s.held++;
+    });
+    var fresh=state.tickets.filter(function(t){ return !TICKETS.some(function(o){ return o.id===t.id; }); });
+    s.created=fresh.length;
+    s.preempt=fresh.filter(function(t){ return /^(Pre-emptive|Auto-opened)/.test(t.title); }).length;
+    return s;
+  }
   var VIEW_INSIGHT={
+    brief:{agent:'A1', custom:function(){
+      var s=sessionStats(), r=riskiest(), open=state.decisions.filter(function(d){ return d.status==='open'; }).length;
+      return {agent:'A1', level:r.length?r[0].f.level:'stable', conf:0.9,
+        text:'Since the 06:45 brief, agents raised **'+plural(s.alerts,'proactive alert')+'**, ran **'+plural(s.auto,'pre-approved action')+'** and opened **'+plural(s.created,'corrective action')+'**. **'+plural(open,'decision')+'** still need you. '+(r.length?'Top predicted risk: '+fcSentence(r[0].k)+'.':'No KPI is forecast to breach in the next 2 hours.'),
+        acts:[r.length?{label:'Pre-empt '+KPI[r[0].k].name, preempt:r[0].k, primary:1}:null, {label:'What changed?', ask:'What changed since the 06:45 brief?', ghost:1}].filter(Boolean)};
+    }},
     branch:{key:'wait', agent:'A2', dec:['DQ-107','DQ-104'], whatif:{tech:2}, q:'Why is Abha declining?'},
     lab:{key:'tat', agent:'A3', dec:['DQ-105','DQ-108'], whatif:{cult:18}, q:'Will lab TAT breach today?'},
     home:{key:'hv', agent:'A4', whatif:{hv:3}, q:'Why is Jeddah West late?'},
@@ -3700,28 +3764,67 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     orchestrator:{agent:'A0', q:'What needs my attention right now?'},
     actions:{key:'sla', agent:'S2', q:'Which SLAs are at risk?'},
     vision:{key:'wait', agent:'S3', lead:'Queue-congestion events at Tahlia and Olaya are today\'s strongest early signal of rising branch wait times.', q:'What are the cameras detecting?'},
-    health:{key:'dq', agent:'A12', q:'Are any data sources stale?'}
+    govern:{agent:'A0', custom:function(){
+      var s=sessionStats();
+      return {agent:'A0', level:state.emergencyStop?'risk':'stable', tag:state.emergencyStop?['crit','Emergency stop']:['ok','Within policy'], conf:0.97,
+        text:'Policy engine this session: **'+plural(s.handled,'human approval')+'**, **'+plural(s.auto,'L1–L2 auto-action')+'** ('+s.cancelled+' cancelled, '+s.undone+' undone, '+s.held+' held). **0** actions above L2 ran without approval. Auto-execution is **'+(state.autonomy?'on':'off')+'**'+(state.emergencyStop?' and the **emergency stop is engaged**':'')+'.',
+        acts:[{label:'Open notifications', notif:1, primary:1},{label:'Test a guardrail', ask:'Can you interpret this patient\'s result?', ghost:1}]};
+    }},
+    architecture:{agent:'A12', custom:function(){
+      var s=sessionStats(), calls=s.questions*6+s.alerts*4+state.sim.tick*11+120;
+      return {agent:'A12', level:state.degraded?'watch':'stable', tag:state.degraded?['warn','Degraded']:['ok','Sovereign'], conf:0.95,
+        text:'All **'+calls.toLocaleString('en-US')+'** agent and model calls this session ran inside the **Saudi sovereign boundary**, with 0 cross-border egress. Model-gateway p95 is **'+Math.round(420+(KPI.a2o.v-4)*60)+' ms** and the data-quality score is '+fmtV('dq',KPI.dq.v)+'.'+(state.degraded?' Two sources are stale, so dependent agents are held at L2.':''),
+        acts:[{label:'Open integration health', nav:'health', primary:1},{label:'Ask about data freshness', ask:'Are any data sources stale?', ghost:1}]};
+    }},
+    health:{key:'dq', agent:'A12', q:'Are any data sources stale?'},
+    blueprint:{agent:'A0', custom:function(){
+      var s=sessionStats();
+      return {agent:'A0', level:'stable', tag:['teal','Gate evidence'], conf:0.9,
+        text:'Evidence for the Phase 2 gate is building live: **'+plural(s.handled,'decision')+'** dispositioned, **'+plural(s.preempt+s.auto,'pre-emptive or autonomous action')+'**, **'+plural(s.alerts,'proactive alert')+'** and **'+plural(s.questions,'copilot answer')+'**, each with trace, confidence and an accountable owner.',
+        acts:[{label:'Open delivery & risk', nav:'delivery', primary:1},{label:'What changed today?', ask:'What changed since the 06:45 brief?', ghost:1}]};
+    }},
+    delivery:{agent:'A0', custom:function(){
+      var s=sessionStats();
+      return {agent:'A0', level:state.degraded?'watch':'stable', tag:state.degraded?['warn','Watch']:['ok','On track'], conf:0.9,
+        text:'Live risk-register signals: **R3 alert fatigue**: duplicate alerts down 31% (target ≥ 30%). **R4 unsupported confidence**: every AI answer shows confidence and evidence. **R5 unauthorized action**: 0 actions above L2 without approval; '+plural(s.cancelled,'cancel')+' and '+plural(s.undone,'undo')+' recorded. **R9 API instability**: '+(state.degraded?'2 sources stale, degraded mode active':'all sources fresh')+'.',
+        acts:[{label:'Open notifications', notif:1, primary:1},{label:'Open governance', nav:'govern'}]};
+    }},
+    alignment:{agent:'A1', custom:function(){
+      var s=sessionStats();
+      var shown=[['Predictive forecasting',true],['Proactive agent alerts',s.alerts>0],['Human-on-the-loop autonomy',s.auto+s.cancelled>0],['Conversational copilot',s.questions>0],['What-if simulation',state.decisions.some(function(d){ return /^What-if plan/.test(d.title); })]];
+      var n=shown.filter(function(x){ return x[1]; }).length;
+      return {agent:'A1', level:n===5?'good':'watch', tag:n===5?['ok','All shown']:['warn',n+' of 5 shown'], conf:0.92,
+        text:'This session has demonstrated **'+n+' of 5** agentic capabilities live on screen: '+shown.map(function(x){ return (x[1]?'✓ ':'○ ')+x[0]; }).join(' · ')+'. The audit trail holds the evidence behind the written response.',
+        acts:[{label:DEMO?'Restart guided demo':'Run the guided demo', demo:1, primary:!DEMO},{label:'Print / export PDF', act:'print'}]};
+    }}
   };
   var LEVEL_TAG={risk:['crit','Risk'], watch:['warn','Watch'], good:['ok','Improving'], stable:['teal','Stable']};
-  function insightCard(v){
-    var c=VIEW_INSIGHT[v]; if(!c) return '';
-    var key=c.key||((riskiest()[0]||{k:'tat'}).k), f=fc(key), p=PREEMPT[key], stop=state.emergencyStop?' disabled title="Emergency stop engaged"':'';
+  function insightSpec(v){
+    var c=VIEW_INSIGHT[v]; if(!c) return null;
+    if(c.custom) return c.custom();
+    var key=c.key||((riskiest()[0]||{k:'tat'}).k), f=fc(key), p=PREEMPT[key];
     var dec=(c.dec||[]).map(openDec).filter(Boolean)[0];
-    var lead=c.lead?esc(c.lead)+' ':'';
-    if(v==='health' && state.degraded) lead='<b>HR/Attendance and CCTV/VMS are stale.</b> Dependent outputs are held at L2 until the sources recover. ';
-    var rec, btns='';
-    if(dec){ rec='Decision <b>'+esc(dec.id)+'</b> is waiting for you: '+esc(dec.rec); btns+='<button class="btn primary xs" data-decision="approve" data-id="'+dec.id+'"'+stop+'>'+I.check+' Approve '+esc(dec.id)+'</button>'; }
-    else if(f.level==='risk'||f.level==='watch'){ rec='Pre-empt now: <b>'+esc(p.action)+'</b>.'; btns+='<button class="btn primary xs" data-preempt="'+key+'"'+stop+'>'+I.check+' Pre-empt</button>'; }
-    else rec='No action needed — '+esc(c.agent)+' will alert you if the trajectory changes.';
-    if(c.whatif) btns+='<button class="btn xs" data-wi-set="'+esc(JSON.stringify(c.whatif))+'">Simulate first</button>';
-    btns+='<button class="btn ghost xs" data-cp-ask="'+esc(c.q)+'">'+I.spark+' Ask why</button>';
-    var t=LEVEL_TAG[f.level];
-    return '<div class="vinsight '+f.level+' mb-4" id="viewInsight" role="region" aria-label="Proactive agent insight"><div class="vi-h"><span class="vi-ic" aria-hidden="true">'+I.spark+'</span><span class="fw-6">'+esc(c.agent)+' · Proactive insight</span><span class="tag '+t[0]+'">'+t[1]+'</span><span class="grow"></span><span class="mono muted fs-xs" data-no-i18n>live · conf '+f.conf.toFixed(2)+'</span></div>'+
-      '<div class="vi-b" data-no-i18n>'+lead+md(fcSentence(key))+'. '+rec+'</div><div class="od-cluster mt-3">'+btns+'</div></div>';
+    var lead=c.lead?c.lead+' ':'';
+    if(v==='health' && state.degraded) lead='**HR/Attendance and CCTV/VMS are stale.** Dependent outputs are held at L2 until the sources recover. ';
+    var rec, acts=[];
+    if(dec){ rec='Decision **'+dec.id+'** is waiting for you: '+dec.rec; acts.push({label:'Approve '+dec.id, decision:dec.id, primary:1}); }
+    else if(f.level==='risk'||f.level==='watch'){ rec='Pre-empt now: **'+p.action+'**.'; acts.push({label:'Pre-empt', preempt:key, primary:1}); }
+    else rec='No action needed — '+c.agent+' will alert you if the trajectory changes.';
+    if(c.whatif) acts.push({label:'Simulate first', whatif:c.whatif});
+    acts.push({label:'Ask why', ask:c.q, ghost:1});
+    return {agent:c.agent, level:f.level, conf:f.conf, text:lead+fcSentence(key)+'. '+rec, acts:acts, ev:p.ev};
+  }
+  function insightCard(v){
+    var sp=insightSpec(v); if(!sp) return '';
+    var t=sp.tag||LEVEL_TAG[sp.level];
+    return '<div class="vinsight '+sp.level+' mb-4" id="viewInsight" role="region" aria-label="Proactive agent insight"><div class="vi-h"><span class="vi-ic" aria-hidden="true">'+I.spark+'</span><span class="fw-6">'+esc(sp.agent)+' · Proactive insight</span><span class="tag '+t[0]+'">'+esc(t[1])+'</span><span class="grow"></span><span class="mono muted fs-xs" data-no-i18n>live · conf '+sp.conf.toFixed(2)+'</span></div>'+
+      '<div class="vi-b" data-no-i18n>'+md(sp.text)+'</div><div class="od-cluster mt-3">'+sp.acts.map(actBtn).join('')+'</div></div>';
   }
   function mountViewInsight(){
-    var h=$('view').querySelector('.agenthead');
-    if(h && VIEW_INSIGHT[state.view]) h.insertAdjacentHTML('afterend',insightCard(state.view));
+    if(!VIEW_INSIGHT[state.view]) return;
+    var v=$('view'), h=v.querySelector('.agenthead');
+    if(h) h.insertAdjacentHTML('afterend',insightCard(state.view));
+    else { var s=v.querySelector('.sectiontitle'); if(s) s.insertAdjacentHTML('beforebegin',insightCard(state.view)); }
   }
   function repaintViewInsight(){
     var vi=$('viewInsight'); if(!vi || vi.contains(document.activeElement)) return;
@@ -3791,6 +3894,101 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     toast(state.autonomy?'Auto-execution on — L1–L2 actions run after a 10-second cancel window.':'Auto-execution off — every agent action now needs approval.', state.autonomy?'ok':'warn');
   });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !$('notifPanel').hidden){ closeNotif(); $('bellBtn').focus(); } });
+
+  /* =========================================================
+     Guided demo (presenter mode). ?demo=1 seeds the simulation,
+     silences random events and walks a repeatable storyline that
+     shows predictive and proactive AI on every page.
+     ========================================================= */
+  function demoScroll(el){
+    if(!el){ var c=document.querySelector('.content'); if(c) c.scrollTop=0; return; }
+    el.scrollIntoView({block:'center', behavior:REDUCED?'auto':'smooth'});
+  }
+  function demoView(v){ closeNotif(); closeDrawer(); closeModal(); go(v); demoScroll(); }
+  function tour(v,say,extra){
+    var nav=NAV.filter(function(n){ return n.view===v; })[0];
+    return {title:(nav?nav.label:v)+' — proactive', say:say, run:function(){ closeCopilot(); demoView(v); if(extra) setTimeout(extra,700); }};
+  }
+  var DEMO_STEPS=[
+    {title:'Live enterprise view', say:'Everything on this screen is live. Each KPI streams every 5 seconds and carries a 2-hour AI forecast beneath it. Watch Lab TAT drifting down.',
+      run:function(){ closeCopilot(); demoView('brief'); }},
+    {title:'Predictive alert', say:'A3 forecasts the exact time Lab TAT will breach its alert line, before it happens. The purple line and band are the forecast and its confidence range.',
+      run:function(){
+        closeCopilot(); var k=KPI.tat;
+        if(!k.boosts.length){ k.v=Math.min(k.v,85.6); k.trend=-0.12; }
+        state.fcSel='tat'; demoView('brief');
+        var f=fc('tat'); if(f.crossMin!=null) raiseNudge(predictiveNudge('tat',f));
+        setTimeout(function(){ demoScroll($('fcChart')); },300);
+      }},
+    {title:'Pre-empt with one click', say:'One click opens a governed pre-emptive action. The forecast bends back toward target straight away, because the model includes the effect of approved actions.',
+      run:function(){ closeCopilot(); state.fcSel='tat'; demoView('brief'); preempt('tat'); setTimeout(function(){ demoScroll($('fcChart')); },300); }},
+    {title:'Autonomy with a safety net', say:'Low-risk actions pre-approved at L1–L2 run on their own after a 10-second cancel window, with 30 seconds to undo. Anything above L2 still needs a human.',
+      run:function(){ closeCopilot(); state.autonomy=true; autoNudge(AUTO_POOL[0]); }},
+    {title:'Ask the copilot', say:'The copilot works on the same live state: it routes to the right agent, shows its reasoning, cites evidence and offers one-click actions.',
+      run:function(){ openCopilot(); ask('What needs my attention right now?'); }},
+    {title:'Guardrails', say:'Clinical interpretation, pricing and sensitive customer messages are non-delegable. The policy engine blocks them and explains why, every time.',
+      run:function(){ openCopilot(); ask('Can you interpret this patient\'s result?'); }},
+    {title:'Simulate before deciding', say:'Before approving, the CEO can simulate a plan: two technicians to Abha, 18 cultures to the backup line, SAR 15k moved to HBA1c. Outcomes, trade-offs and confidence update instantly.',
+      run:function(){ closeCopilot(); state.whatif={tech:2,cult:18,budget:15000,hv:0}; demoView('brief'); setTimeout(function(){ demoScroll($('whatifCard')); },300); }},
+    {title:'Approve, and the AI reports back', say:'The plan enters the decision queue at L3. Once approved, A0 routes each change to its owner, and the copilot reports on the forecast a few seconds later.',
+      run:function(){
+        demoView('brief');
+        var w=state.whatif; if(!(w.tech||w.cult||w.budget||w.hv)) state.whatif={tech:2,cult:18,budget:15000,hv:0};
+        var d=submitWhatif(), b=document.querySelector('[data-decision="approve"][data-id="'+d.id+'"]');
+        if(b) b.click();
+        openCopilot();
+      }},
+    tour('branch','On every page the agent opens with a live insight and one next step. Here A2 has spotted the Olaya evening peak hours ahead and drafted a decision.', function(){ poolNudge(/Olaya evening peak/); }),
+    tour('lab','A3 watches the lab continuously and catches a QC drift pattern on PCR-2 about 50 minutes before a likely QC failure.', function(){ poolNudge(/PCR-2 QC drift/); }),
+    tour('home','A4 reacts to live traffic, proposing route re-sequencing before visits run late.', function(){ poolNudge(/Traffic incident/); }),
+    tour('cx','A5 sees complaint velocity triple at Al Rawdah and proposes service recovery before a cluster forms.', function(){ poolNudge(/Complaint velocity/); }),
+    tour('mkt','A6 finds budget headroom on a high-ROI campaign and links it to lab reagent stock, a cross-domain effect.', function(){ poolNudge(/HBA1c Chronic Care has headroom/); }),
+    tour('orchestrator','A0 correlates signals from three agents into one exception, so owners get one alert instead of three.', function(){ poolNudge(/Correlated: A2, A5 and S3/); }),
+    tour('actions','S2 escalates actions entering their final hour automatically: a pre-approved L2 action with a cancel window.', function(){ autoNudge(AUTO_POOL[1]); }),
+    tour('vision','S3 turns camera analytics into events (metadata only, no faces or identities) and forecasts the wait-time impact.', function(){ poolNudge(/Queue congestion at Tahlia/); }),
+    tour('govern','The control plane tracks every approval, auto-action, cancel and undo live. Nothing above L2 runs without a human.'),
+    tour('architecture','A12 confirms that every agent and model call stays inside the Saudi sovereign boundary.'),
+    tour('health','A12 predicts an API timeout before it happens and runs the standard retry and failover runbook on its own.', function(){ autoNudge(AUTO_POOL[2]); }),
+    tour('blueprint','Evidence for the phase gates builds up live: decisions, actions, alerts and copilot answers, each with a trace.'),
+    tour('delivery','The risk register is monitored live: alert fatigue, unsupported confidence, unauthorized action and API instability.'),
+    tour('alignment','A1 tracks which agentic capabilities this session has shown on screen: the proof behind the written response.'),
+    {title:'Control & audit', say:'Every alert, auto-action, cancel and undo lands in the notification center and the audit trail. Auto-execution can be switched off, and the emergency stop suspends all L3–L5 actions instantly.',
+      run:function(){ closeCopilot(); demoView('brief'); openNotif(); }}
+  ];
+  var demoIx=0;
+  function renderPresenter(){
+    var s=DEMO_STEPS[demoIx], n=DEMO_STEPS.length, last=demoIx===n-1;
+    $('presenter').innerHTML='<div class="pr-h"><span class="tag purple">Guided demo</span><span class="mono fs-xs pr-m" data-no-i18n>Step '+(demoIx+1)+' / '+n+'</span><span class="grow"></span><button class="iconbtn" type="button" data-demo-exit aria-label="Exit demo">'+I.x+'</button></div>'+
+      '<div class="pr-t">'+esc(s.title)+'</div><p class="pr-s">'+esc(s.say)+'</p>'+
+      '<div class="pr-a"><select data-demo-jump aria-label="Jump to step">'+DEMO_STEPS.map(function(x,i){ return '<option value="'+i+'"'+(i===demoIx?' selected':'')+'>'+(i+1)+'. '+esc(x.title)+'</option>'; }).join('')+'</select>'+
+      '<button class="btn sm" type="button" data-demo-prev'+(demoIx?'':' disabled')+'>Back</button>'+
+      (last?'<button class="btn primary sm" type="button" data-demo>Restart</button>':'<button class="btn primary sm" type="button" data-demo-next>Next '+I.arrow+'</button>')+'</div>'+
+      '<div class="pr-p" aria-hidden="true"><span style="width:'+Math.round((demoIx+1)/n*100)+'%"></span></div>';
+  }
+  function demoGo(i){
+    demoIx=Math.max(0,Math.min(DEMO_STEPS.length-1,i));
+    state.visible.slice().forEach(function(id){ dismissNudge(id,true); });   /* one step, one story; history stays in the bell */
+    renderPresenter();
+    log('Guided demo step '+(demoIx+1)+' — '+DEMO_STEPS[demoIx].title);
+    DEMO_STEPS[demoIx].run();
+    var nb=$('presenter').querySelector('[data-demo-next],[data-demo]'); if(nb) nb.focus({preventScroll:true});
+  }
+  document.addEventListener('click',function(ev){
+    var t=ev.target;
+    if(t.closest('[data-demo]')){ location.href=location.pathname+'?demo=1&run='+Date.now()+'#brief'; return; }
+    if(t.closest('[data-demo-exit]')){ location.href=location.pathname+'#brief'; return; }
+    if(t.closest('[data-demo-next]')){ demoGo(demoIx+1); return; }
+    if(t.closest('[data-demo-prev]')){ demoGo(demoIx-1); return; }
+    if(t.closest('[data-open-notif]')){ openNotif(); return; }
+  });
+  document.addEventListener('change',function(ev){ var j=ev.target.closest('[data-demo-jump]'); if(j) demoGo(+j.value); });
+  document.addEventListener('keydown',function(e){
+    if(!DEMO || e.metaKey || e.ctrlKey || e.altKey) return;
+    var tg=e.target.tagName; if(tg==='INPUT'||tg==='SELECT'||tg==='TEXTAREA'||$('modalRoot').innerHTML) return;
+    if(e.key==='ArrowRight' && demoIx<DEMO_STEPS.length-1){ e.preventDefault(); demoGo(demoIx+1); }
+    else if(e.key==='ArrowLeft' && demoIx>0){ e.preventDefault(); demoGo(demoIx-1); }
+  });
+  if(DEMO){ $('presenter').hidden=false; document.body.classList.add('demo-on'); setTimeout(function(){ demoGo(0); },0); }
 
   var VIEWS={brief:viewBrief,branch:viewBranch,lab:viewLab,home:viewHome,cx:viewCX,mkt:viewMkt,orchestrator:viewOrchestrator,actions:viewActions,govern:viewGovern,vision:viewVision,health:viewHealth,blueprint:viewBlueprint,architecture:viewArchitecture,delivery:viewDelivery,alignment:viewAlignment};
 
