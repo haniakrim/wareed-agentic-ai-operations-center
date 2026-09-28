@@ -1,0 +1,11 @@
+{
+  "name": "wareed-agentic-ops-prototype",
+  "private": true,
+  "description": "Wareed Sovereign Agentic AI Operations Center — clickable prototype (single self-contained index.html)",
+  "scripts": {
+    "test": "node tests/simulation.test.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
+}
