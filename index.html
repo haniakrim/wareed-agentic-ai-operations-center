@@ -557,6 +557,137 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
 .langsw button .ar{ font-family:'IBM Plex Sans Arabic',var(--font-body); }
 @media (hover:hover){ .langsw button:hover, .seg button:hover{ color:var(--ink); } }
 @media (max-width:980px){ [dir="rtl"] .rail{ transform:translateX(104%); } [dir="rtl"] .rail.open{ transform:none; } }
+/* ---------- Live simulation: forecasts, copilot, proactive nudges ---------- */
+.stat .num.tick{ animation:numtick .6s var(--ease); }
+@keyframes numtick{ 0%{ color:var(--teal-600); } 100%{ color:inherit; } }
+.stat .fc{ display:flex; align-items:center; gap:var(--s1); font-size:var(--fs-xs); font-weight:600; line-height:1.35; color:var(--muted); }
+.stat .fc svg{ width:13px; height:13px; flex:none; }
+.fc.risk{ color:var(--red); } .fc.watch{ color:var(--amber); } .fc.good{ color:var(--green); }
+.simbtn .dot{ width:8px; height:8px; border-radius:50%; background:var(--green); flex:none; animation:ping 2.4s infinite; }
+.simbtn.paused .dot{ background:var(--muted-2); animation:none; }
+.cpbtn{ background:var(--navy-800); border-color:var(--navy-800); color:var(--chrome-bright); }
+.cpbtn svg{ color:var(--brand-teal); }
+@media (hover:hover){ .cpbtn:hover{ background:var(--navy-700) !important; border-color:var(--navy-700) !important; } }
+.fchart{ width:100%; height:auto; display:block; }
+.fchart text{ font-family:var(--font-mono); font-size:11px; fill:var(--muted); }
+.fcsum{ display:flex; gap:var(--s3); align-items:flex-start; margin-top:var(--s3); padding-top:var(--s3); border-top:1px solid var(--line); }
+.fcsum .btn, .msg.ai .acts .btn, .nudge .na .btn{ white-space:normal; text-align:start; height:auto; padding-block:6px; max-width:100%; }
+.fcsum .od-fill{ min-width:0;  font-size:var(--fs-md); line-height:1.55; color:var(--ink-2); }
+.seg.wrapseg{ flex-wrap:wrap; }
+.lever{ padding:var(--s2) 0 var(--s3); border-bottom:1px solid var(--line); }
+.lever:last-of-type{ border-bottom:0; }
+.lever .lh{ display:flex; justify-content:space-between; gap:var(--s3); font-size:var(--fs-sm); font-weight:600; color:var(--ink-2); }
+.lever .lh .mono{ color:var(--teal-700); }
+.lever .lsub{ font-size:var(--fs-xs); color:var(--muted); margin-top:2px; }
+.wiout{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--s2); margin-top:var(--s3); }
+.wiout .tile{ padding:var(--s3); }
+.wiout .tile .tv{ font-size:var(--fs-lg); }
+.wiout .tile .td.up{ color:var(--green); font-weight:600; } .wiout .tile .td.down{ color:var(--red); font-weight:600; }
+@media (max-width:760px){ .wiout{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+.tradeoff{ font-size:var(--fs-sm); color:var(--amber-ink); background:var(--amber-bg); border:1px solid var(--amber-line); border-radius:var(--r-sm); padding:var(--s2) var(--s3); margin-top:var(--s3); line-height:1.5; }
+.insight{ display:flex; gap:var(--s3); padding:var(--s3) 0; border-bottom:1px solid var(--line); align-items:flex-start; }
+.insight:last-child{ border-bottom:0; }
+.insight .ib{ flex:1; min-width:0; }
+.insight .it{ font-weight:600; font-size:var(--fs-md); line-height:1.4; }
+.insight .im{ font-size:var(--fs-xs); color:var(--muted); margin-top:2px; }
+.confbar{ display:inline-block; height:6px; border-radius:3px; background:var(--surface-3); overflow:hidden; width:72px; vertical-align:middle; }
+.confbar .cf{ display:block; height:100%; border-radius:3px; }
+
+.nudgewrap{ position:fixed; top:76px; inset-inline-end:var(--s5); z-index:60; display:flex; flex-direction:column; gap:var(--s3); width:min(380px,calc(100vw - 2 * var(--s5))); pointer-events:none; }
+.nudge{ pointer-events:auto; background:var(--surface); border:1px solid var(--line); border-inline-start:4px solid var(--teal-500); border-radius:var(--r); box-shadow:var(--sh-3); padding:var(--s3) var(--s4); }
+.nudge.enter{ animation:nudgein .35s var(--ease); }
+.nudge.risk{ border-inline-start-color:var(--red); } .nudge.watch{ border-inline-start-color:#d99a2b; }
+@keyframes nudgein{ from{ opacity:0; transform:translateY(-8px); } to{ opacity:1; transform:none; } }
+.nudge .nh{ display:flex; align-items:center; gap:var(--s2); font-size:var(--fs-xs); color:var(--muted); font-weight:600; }
+.nudge .nh .grow{ flex:1; }
+.nudge .nt{ font-weight:600; font-size:var(--fs-md); line-height:1.4; margin-top:var(--s2); }
+.nudge .nb{ font-size:var(--fs-sm); color:var(--ink-2); line-height:1.5; margin-top:var(--s1); }
+.nudge .na{ display:flex; gap:var(--s2); flex-wrap:wrap; margin-top:var(--s3); }
+.nudge .iconbtn{ width:28px; height:28px; border:0; }
+
+.copilot{ position:fixed; top:0; inset-inline-end:0; height:100%; width:min(440px,100vw); background:var(--surface); z-index:85; box-shadow:var(--sh-3); border-inline-start:1px solid var(--line); display:flex; flex-direction:column; transform:translateX(102%); transition:transform .28s var(--ease); }
+.copilot.show{ transform:none; }
+[dir="rtl"] .copilot{ transform:translateX(-102%); } [dir="rtl"] .copilot.show{ transform:none; }
+.cp-h{ display:flex; gap:var(--s3); align-items:flex-start; padding:var(--s4) var(--s5); background:var(--navy-800); color:var(--chrome-bright); }
+.cp-h .ai{ width:36px; height:36px; border-radius:10px; background:rgba(95,194,186,.16); display:grid; place-items:center; color:var(--brand-teal); flex:none; }
+.cp-h .ai svg{ width:20px; height:20px; }
+.cp-h h3{ font-family:var(--font-display); font-size:var(--fs-base); font-weight:600; }
+.cp-h .sub{ font-size:var(--fs-xs); color:var(--chrome-muted); margin-top:2px; line-height:1.4; }
+.cp-h .iconbtn{ background:transparent; border-color:rgba(255,255,255,.18); color:var(--chrome-bright); margin-inline-start:auto; }
+.cp-log{ flex:1; overflow-y:auto; padding:var(--s4) var(--s5); display:flex; flex-direction:column; gap:var(--s4); background:var(--surface-2); }
+.msg{ max-width:100%; }
+.msg.user{ align-self:flex-end; background:var(--teal-700); color:#fff; padding:var(--s2) var(--s3); border-radius:12px 12px 2px 12px; font-size:var(--fs-md); line-height:1.5; max-width:86%; }
+[dir="rtl"] .msg.user{ border-radius:12px 12px 12px 2px; }
+.msg.ai{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:var(--s3) var(--s4); box-shadow:var(--sh-1); }
+.msg.ai .mhd{ display:flex; align-items:center; gap:var(--s2); font-size:var(--fs-xs); color:var(--muted); font-weight:600; margin-bottom:var(--s2); }
+.msg.ai .txt{ font-size:var(--fs-md); line-height:1.6; color:var(--ink-2); overflow-wrap:anywhere; }
+.msg.ai .txt ul{ margin:var(--s1) 0; padding-inline-start:var(--s5); }
+.msg.ai .txt li{ margin:2px 0; }
+.msg.ai .txt b{ color:var(--ink); }
+.thinking{ list-style:none; margin:0 0 var(--s2); padding:var(--s2) var(--s3); background:var(--surface-2); border:1px dashed var(--line-strong); border-radius:var(--r-sm); font-size:var(--fs-xs); font-family:var(--font-mono); color:var(--muted); }
+.thinking li{ display:flex; gap:var(--s2); align-items:center; padding:2px 0; }
+.thinking li .st{ width:12px; height:12px; flex:none; display:grid; place-items:center; }
+.thinking li.run .st::before{ content:''; width:10px; height:10px; border-radius:50%; border:2px solid var(--teal-500); border-top-color:transparent; animation:spin .8s linear infinite; }
+.thinking li.ok .st{ color:var(--green); }
+.thinking li.block .st, .thinking li.block{ color:var(--red); }
+@keyframes spin{ to{ transform:rotate(360deg); } }
+.caret{ display:inline-block; width:7px; height:1em; background:var(--teal-600); vertical-align:text-bottom; margin-inline-start:2px; animation:blink 1s steps(2) infinite; }
+@keyframes blink{ 50%{ opacity:0; } }
+.msg.ai .mft{ display:flex; flex-wrap:wrap; gap:var(--s2); align-items:center; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--line); font-size:var(--fs-xs); color:var(--muted); }
+.msg.ai .acts{ display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+.cp-sug{ display:flex; gap:var(--s2); flex-wrap:wrap; padding:var(--s3) var(--s5) 0; border-top:1px solid var(--line); background:var(--surface); }
+.chip{ border:1px solid var(--teal-line); background:var(--teal-050); color:var(--teal-800); border-radius:var(--r-pill); font-size:var(--fs-xs); font-weight:600; padding:6px var(--s3); cursor:pointer; font-family:var(--font-body); text-align:start; }
+@media (hover:hover){ .chip:hover{ background:var(--teal-line); } }
+.cp-f{ display:flex; gap:var(--s2); padding:var(--s3) var(--s5) var(--s4); background:var(--surface); }
+.cp-f input{ flex:1; min-width:0; min-height:40px; border:1px solid var(--line-strong); border-radius:var(--r-sm); padding:0 var(--s3); font:inherit; font-size:var(--fs-md); color:var(--ink); background:var(--surface); }
+.cp-f input:focus-visible{ outline:2px solid var(--teal-600); outline-offset:1px; }
+.cp-note{ font-size:11px; color:var(--muted-2); padding:0 var(--s5) var(--s3); background:var(--surface); }
+@media (max-width:640px){
+  .nudgewrap{ top:auto; bottom:var(--s3); inset-inline:var(--s3); width:auto; }
+  .simbtn .lbl, .cpbtn .lbl{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  .simbtn, .cpbtn{ padding:0 var(--s3); }
+  .topbar .avatar{ display:none; }
+  .nudgewrap .nudge:nth-child(n+2){ display:none; }
+}
+@media (max-width:480px){ #freshPill{ display:none; } }
+@media (max-width:1200px){ .topbar .clock{ display:none; } }
+@media (max-width:1100px){ .simbtn .lbl{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; } }
+@media print{ .copilot, .nudgewrap, .notif{ display:none !important; } }
+.cpbtn{ position:relative; }
+.cpdot, .bdg{ position:absolute; top:-6px; inset-inline-end:-6px; min-width:18px; height:18px; padding:0 5px; border-radius:9px; background:var(--brand-coral); color:#fff; font-size:11px; font-weight:700; line-height:18px; text-align:center; box-shadow:0 0 0 2px var(--surface); }
+.cpdot[hidden], .bdg[hidden]{ display:none; }
+.bellbtn{ position:relative; }
+.notif{ position:fixed; top:72px; inset-inline-end:var(--s5); z-index:75; width:min(420px,calc(100vw - 2 * var(--s5))); max-height:min(640px,calc(100dvh - 96px)); display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); box-shadow:var(--sh-3); }
+.notif[hidden]{ display:none; }
+.nt-h{ display:flex; align-items:center; gap:var(--s3); padding:var(--s3) var(--s4); border-bottom:1px solid var(--line); }
+.nt-h h3{ font-family:var(--font-display); font-size:var(--fs-base); font-weight:600; flex:1; }
+.nt-h .iconbtn{ width:32px; height:32px; border:0; }
+.autorow{ display:flex; gap:var(--s3); align-items:flex-start; padding:var(--s3) var(--s4); background:var(--teal-050); border-bottom:1px solid var(--teal-line); font-size:var(--fs-sm); line-height:1.45; cursor:pointer; }
+.autorow input{ width:18px; height:18px; margin-top:2px; accent-color:var(--teal-700); flex:none; }
+.autorow .muted{ font-size:var(--fs-xs); }
+.notif .seg{ margin:var(--s3) var(--s4) 0; align-self:flex-start; }
+.nt-list{ overflow-y:auto; padding:var(--s1) var(--s4) var(--s3); flex:1; }
+.nrow{ display:flex; gap:var(--s3); padding:var(--s3) 0; border-bottom:1px solid var(--line); align-items:flex-start; }
+.nrow:last-child{ border-bottom:0; }
+.nrow .ib{ flex:1; min-width:0; }
+.nrow .it{ font-weight:600; font-size:var(--fs-md); line-height:1.4; }
+.nrow .im{ font-size:var(--fs-xs); color:var(--muted); margin-top:2px; }
+.nrow.unread .it::before{ content:''; display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--brand-coral); margin-inline-end:6px; vertical-align:1px; }
+.cdbar{ height:4px; border-radius:2px; background:var(--surface-3); margin-top:var(--s3); overflow:hidden; }
+.cdbar span{ display:block; height:100%; background:var(--purple); transition:width 1s linear; }
+.nudge.auto{ border-inline-start-color:var(--purple); }
+.vinsight{ border:1px solid var(--teal-line); border-inline-start:4px solid var(--teal-500); background:linear-gradient(90deg,var(--teal-050),var(--surface) 60%); border-radius:var(--r-lg); padding:var(--s4) var(--s5); box-shadow:var(--sh-1); }
+.vinsight.risk{ border-color:var(--red-line); border-inline-start-color:var(--red); background:linear-gradient(90deg,var(--red-bg),var(--surface) 60%); }
+.vinsight.watch{ border-color:var(--amber-line); border-inline-start-color:#d99a2b; background:linear-gradient(90deg,var(--amber-bg),var(--surface) 60%); }
+.vi-h{ display:flex; align-items:center; gap:var(--s2); flex-wrap:wrap; font-size:var(--fs-sm); }
+.vi-ic{ width:26px; height:26px; border-radius:8px; display:grid; place-items:center; background:var(--navy-800); color:var(--brand-teal); flex:none; }
+.vi-ic svg{ width:15px; height:15px; }
+.vi-b{ font-size:var(--fs-md); line-height:1.6; color:var(--ink-2); margin-top:var(--s2); }
+.vi-b b{ color:var(--ink); }
+.msg.ai.pro{ border-inline-start:3px solid var(--purple); }
+@media (max-width:640px){ .notif{ inset-inline:var(--s3); width:auto; top:64px; } }
+
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
 }
@@ -622,12 +753,19 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
         </div>
         <span class="pill live" id="freshPill" title="Data freshness"><span class="dot"></span><span id="freshText" data-no-i18n>Live · 42s ago</span></span>
         <span class="clock mono" id="clock" data-no-i18n>—</span>
+        <button class="btn sm simbtn" id="simBtn" type="button" aria-pressed="true" title="Pause or resume the live simulation"><span class="dot" aria-hidden="true"></span><span class="lbl" id="simLbl">Simulation live</span></button>
+        <button class="btn sm cpbtn" id="cpBtn" type="button" aria-expanded="false" aria-controls="copilot" title="Ask Wareed AI">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"/></svg>
+          <span class="lbl">Ask AI</span>
+          <span class="cpdot" id="cpDot" hidden>0</span>
+        </button>
         <button class="btn danger sm" id="estopBtn" title="Emergency stop">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3a9 9 0 100 18 9 9 0 000-18z"/><path d="M9 9h6v6H9z"/></svg>
           <span class="lbl">Emergency stop</span>
         </button>
-        <button class="iconbtn" id="searchBtn" aria-label="Search">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg>
+        <button class="iconbtn bellbtn" id="bellBtn" type="button" aria-label="Notifications" aria-expanded="false" aria-controls="notifPanel" title="Agent notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 16V11a6 6 0 0112 0v5l1.5 2h-15L6 16z"/><path d="M10 20a2 2 0 004 0"/></svg>
+          <span class="bdg" id="bellCount" hidden>0</span>
         </button>
         <div class="avatar" title="CEO office">CEO</div>
       </div>
@@ -642,6 +780,27 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
 <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" hidden></aside>
 <div id="modalRoot"></div>
 <div class="toastwrap" id="toasts" aria-live="polite"></div>
+<div class="nudgewrap" id="nudges" aria-live="polite" aria-label="Proactive agent insights"></div>
+<div class="notif" id="notifPanel" role="dialog" aria-labelledby="notifTitle" hidden>
+  <div class="nt-h"><h3 id="notifTitle">Agent notifications</h3><button class="iconbtn" id="notifClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <label class="autorow"><input type="checkbox" id="autonomyChk" checked><span><b>Auto-execute pre-approved actions</b><br><span class="muted">L1–L2 only · 10-second cancel window · 30-second undo</span></span></label>
+  <div class="seg" role="tablist" aria-label="Filter notifications"><button type="button" role="tab" data-nf="all" class="active" aria-selected="true">All</button><button type="button" role="tab" data-nf="action" aria-selected="false">Needs action</button><button type="button" role="tab" data-nf="auto" aria-selected="false">Autonomous</button></div>
+  <div class="nt-list" id="notifList"></div>
+</div>
+<aside class="copilot" id="copilot" role="complementary" aria-labelledby="cpTitle" hidden>
+  <div class="cp-h">
+    <span class="ai" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"/></svg></span>
+    <div><h3 id="cpTitle">Wareed AI Copilot</h3><div class="sub">A0-orchestrated · simulated responses on synthetic data</div></div>
+    <button class="iconbtn" id="cpClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="cp-log" id="cpLog" aria-live="polite" data-no-i18n></div>
+  <div class="cp-sug" id="cpSug" data-no-i18n></div>
+  <form class="cp-f" id="cpForm" autocomplete="off">
+    <input id="cpInput" type="text" placeholder="Ask about TAT, branches, forecasts, what-if…" aria-label="Ask Wareed AI" maxlength="300">
+    <button class="btn primary sm" type="submit" id="cpSend">Send</button>
+  </form>
+  <div class="cp-note">Illustrative agent responses — no live model or Wareed data is connected.</div>
+</aside>
 
 <script>
 (function(){
@@ -1645,7 +1804,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
   function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
   function money(n){ return n>=1000 ? (n/1000).toFixed(n%1000?1:0)+'k' : String(n); }
   function sar(n){ return 'SAR '+n.toLocaleString('en-US'); }
-  function sevTag(s){ var m={critical:['crit','Critical'],warning:['warn','Warning'],info:['info','Info'],ok:['ok','Normal']}; var v=m[s]||m.info; return '<span class="tag '+v[0]+'"><span class="td"></span>'+v[1]+'</span>'; }
+  function sevTag(s){ var m={critical:['crit','Critical'],crit:['crit','Critical'],warning:['warn','Warning'],warn:['warn','Warning'],info:['info','Info'],ok:['ok','Normal']}; var v=m[s]||m.info; return '<span class="tag '+v[0]+'"><span class="td"></span>'+v[1]+'</span>'; }
   function lvlTag(l){ return '<span class="lvl l'+l+'" title="'+(LANG==='ar'?'مستوى الصلاحية ':'Authority level ')+l+'">L'+l+'</span>'; }
   function nowTime(){ var d=new Date(); return d.toTimeString().slice(0,8); }
   function log(action){ state.audit.unshift({t:nowTime(), a:action, w:'u:ceo.office'}); if(state.audit.length>40) state.audit.pop(); }
@@ -1739,9 +1898,11 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
      Views
      ========================================================= */
   function stat(label,num,unit,delta,deltaDir,foot,fresh){
+    var k=KPI_BY_LABEL[label];
     return '<div class="stat"><div class="slabel">'+esc(label)+'</div>'+
-      '<div class="sv"><span class="num">'+esc(num)+'</span><span class="unit">'+esc(unit||'')+'</span></div>'+
+      '<div class="sv"><span class="num"'+(k?' data-kpi="'+k+'" data-no-i18n':'')+'>'+esc(k?kfmt(k):num)+'</span><span class="unit">'+esc(unit||'')+'</span></div>'+
       (delta?'<span class="delta '+(deltaDir||'flat')+'">'+(deltaDir==='up'?I.arrow:deltaDir==='down'?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" class="ic-14"><path d="M5 12h13M13 18l6-6-6-6"/></svg>':I.arrow)+' '+esc(delta)+'</span>':'')+
+      (k?fcLine(k):'')+
       (foot?'<div class="foot"><span>'+foot+'</span>'+(fresh||'')+'</div>':'')+
       '</div>';
   }
@@ -1817,6 +1978,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
       '</div></div>'+
     '</div>';
     body+='</div>';
+    body+=predictiveSection();
     return body;
   }
 
@@ -2593,6 +2755,1043 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     openDrawer(html);
   }
 
+  /* =========================================================
+     Live simulation — streaming KPIs, 2-hour forecasts, proactive
+     agents, what-if simulator and the AI copilot. Everything here
+     is synthetic and runs in the browser; no model is called.
+     ========================================================= */
+  var TICK_MS=5000, SIM_MIN=5, HORIZON=24;   /* one tick = 5 simulated minutes; 24 ticks = 2h */
+  var REDUCED=!!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  function T(en,ar){ return LANG==='ar'&&ar ? ar : en; }
+  function $(id){ return document.getElementById(id); }
+
+  var KPI={
+    rev:  {name:'Revenue today', labels:['Revenue today'], v:412, tgt:430, crit:400, hi:true, dp:0, min:380, max:470, trend:0.22, noise:0.9, unit:'k SAR'},
+    tat:  {name:'Lab TAT on-time', labels:['Lab TAT on-time','TAT on-time'], v:86, tgt:92, crit:84, hi:true, dp:1, min:74, max:97, trend:-0.11, noise:0.3, unit:'%'},
+    hv:   {name:'Home visit on-time', labels:['Home visit on-time','On-time arrival'], v:80, tgt:90, crit:77, hi:true, dp:1, min:66, max:96, trend:-0.1, noise:0.35, unit:'%'},
+    csat: {name:'Customer satisfaction', labels:['Customer satisfaction','CSAT (30-day)'], v:72, tgt:80, crit:70, hi:true, dp:1, min:62, max:88, trend:-0.03, noise:0.12, unit:''},
+    sla:  {name:'SLA compliance', labels:['SLA compliance'], v:91, tgt:95, crit:89, hi:true, dp:1, min:80, max:99, trend:-0.045, noise:0.18, unit:'%'},
+    wait: {name:'Avg. waiting time', labels:['Avg. waiting time'], v:20, tgt:14, crit:24, hi:false, dp:1, min:9, max:36, trend:0.07, noise:0.25, unit:'min'},
+    delay:{name:'Avg. home-visit delay', labels:['Avg. delay'], v:18, tgt:10, crit:24, hi:false, dp:1, min:6, max:34, trend:0.05, noise:0.3, unit:'min'},
+    util: {name:'Capacity utilization', labels:['Capacity utilization'], v:71, tgt:85, crit:66, hi:true, dp:1, min:55, max:95, trend:-0.02, noise:0.25, unit:'%'},
+    a2o:  {name:'Alert-to-owner time', labels:['Alert-to-owner time'], v:4.2, tgt:5, crit:6, hi:false, dp:1, min:2, max:9, trend:0.004, noise:0.07, unit:'min'},
+    resol:{name:'Resolution time', labels:['Resolution time'], v:9.4, tgt:8, crit:11, hi:false, dp:1, min:5, max:14, trend:0.015, noise:0.06, unit:'h'},
+    dq:   {name:'Data-quality score', labels:['Data-quality score'], v:94, tgt:95, crit:90, hi:true, dp:1, min:84, max:99, trend:0, noise:0.12, unit:'%'}
+  };
+  var KPI_BY_LABEL={};
+  var DEGRADE_DEP={hv:1, delay:1, util:1, wait:1, dq:1};
+  Object.keys(KPI).forEach(function(key){
+    var k=KPI[key];
+    k.labels.forEach(function(l){ KPI_BY_LABEL[l]=key; });
+    k.boosts=[]; k.hist=[];
+    for(var i=23;i>=0;i--) k.hist.push(k.v-k.trend*i+k.noise*1.1*Math.sin(i*1.7+k.v));
+    k.hist[23]=k.v;
+  });
+
+  state.sim={on:true, tick:0, nextNudge:2, poolIx:0, count:0, nudgeSeq:0};
+  state.nudges=[];      /* history, newest first */
+  state.visible=[];     /* ids currently floating */
+  state.fcSel='tat';
+  state.whatif={tech:0, cult:0, budget:0, hv:0};
+
+  function gauss(){ var u=1-Math.random(), v=Math.random(); return Math.max(-2.5,Math.min(2.5,Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)))*0.6; }
+  function kfmt(key){ var k=KPI[key]; return k.v.toFixed(k.dp); }
+  function fmtV(key,v){ var k=KPI[key]; return (Number.isInteger(v)?String(v):v.toFixed(k.dp))+(k.unit==='%'?'%':k.unit?' '+k.unit:''); }
+  function fmtDur(min){ min=Math.max(5,Math.round(min/5)*5); var h=Math.floor(min/60), m=min%60; return LANG==='ar'? (h?h+' س ':'')+(m?m+' د':'') : (h?h+'h ':'')+(m?m+'m':'').trim(); }
+  function clockAt(min){ var d=new Date(Date.now()+min*60000); return d.toTimeString().slice(0,5); }
+  function worse(k,a,b){ return k.hi? a<b : a>b; }
+
+  /* ---------- forecast model: short-window regression blended with the
+     expected effect of actions already approved (decaying boosts) ---------- */
+  function fc(key){
+    var k=KPI[key], n=Math.min(12,k.hist.length), ys=k.hist.slice(-n), sx=0,sy=0,sxy=0,sxx=0,i;
+    for(i=0;i<n;i++){ sx+=i; sy+=ys[i]; sxy+=i*ys[i]; sxx+=i*i; }
+    var den=n*sxx-sx*sx, reg=den?(n*sxy-sx*sy)/den:0, icpt=(sy-reg*sx)/n, ss=0;
+    for(i=0;i<n;i++){ var e=ys[i]-(icpt+reg*i); ss+=e*e; }
+    var s=Math.sqrt(ss/Math.max(1,n-2)), slope=0.4*reg+0.6*k.trend;
+    var proj=[k.v], band=[0], crossTick=null, tgtTick=null;
+    for(var t=1;t<=HORIZON;t++){
+      var add=0; k.boosts.forEach(function(b){ add+=b.d*Math.min(b.n,t); });
+      var p=Math.max(k.min,Math.min(k.max,k.v+slope*t+add));
+      proj.push(p); band.push(s*0.9*Math.sqrt(t)+Math.abs(slope)*0.08*t);
+      if(crossTick==null && worse(k,p,k.crit)) crossTick=t;
+      if(tgtTick==null && !worse(k,p,k.tgt)) tgtTick=t;
+    }
+    var breached=worse(k,k.v,k.crit), atTgt=!worse(k,k.v,k.tgt), p2=proj[HORIZON];
+    if(breached) crossTick=null;
+    if(atTgt) tgtTick=null;
+    var improving = k.hi? p2>k.v+0.4*k.noise : p2<k.v-0.4*k.noise;
+    var level = breached||(crossTick!=null&&crossTick<=12)?'risk' : crossTick!=null?'watch' : improving?'good':'stable';
+    var rel=s/(k.max-k.min);
+    var conf=Math.max(0.55,Math.min(0.96,0.95-rel*8-(state.degraded&&DEGRADE_DEP[key]?0.15:0)));
+    return {v:k.v, p2:p2, proj:proj, band:band, breached:breached, crossTick:crossTick, crossMin:crossTick==null?null:crossTick*SIM_MIN, tgtTick:tgtTick, atTgt:atTgt, level:level, conf:conf, improving:improving};
+  }
+
+  var FC_ICON={risk:I.warn, watch:I.clock, good:I.check, stable:I.pulse};
+  function fcText(key,f){
+    var k=KPI[key];
+    if(f.breached) return T('Past '+fmtV(key,k.crit)+' alert line — agent responding','تجاوز حد التنبيه '+fmtV(key,k.crit)+' — الوكيل يستجيب');
+    if(f.crossMin!=null) return T('AI forecast: breaches '+fmtV(key,k.crit)+' in ~'+fmtDur(f.crossMin),'توقع: تجاوز '+fmtV(key,k.crit)+' خلال '+fmtDur(f.crossMin));
+    if(f.tgtTick!=null) return T('AI forecast: reaches target in ~'+fmtDur(f.tgtTick*SIM_MIN),'توقع: بلوغ المستهدف خلال '+fmtDur(f.tgtTick*SIM_MIN));
+    if(f.improving) return T('AI forecast: improving → '+fmtV(key,f.p2)+' in 2h','توقع: تحسن ← '+fmtV(key,f.p2)+' خلال ساعتين');
+    return T('AI forecast 2h: '+fmtV(key,f.p2)+' · conf '+f.conf.toFixed(2),'توقع ساعتين: '+fmtV(key,f.p2)+' · ثقة '+f.conf.toFixed(2));
+  }
+  function fcLine(key){
+    var f=fc(key), cls=f.level==='stable'?'':f.level;
+    return '<div class="fc '+cls+'" data-fc="'+key+'" data-no-i18n>'+FC_ICON[f.level]+'<span>'+esc(fcText(key,f))+'</span></div>';
+  }
+
+  function forecastChart(key){
+    var k=KPI[key], f=fc(key), W=640, H=210, pl=46, pr=14, pt=14, pb=28;
+    var hist=k.hist.slice(-24), n=hist.length, N=n-1+HORIZON;
+    var lo=f.proj.map(function(p,i){ return p-f.band[i]; }), hi=f.proj.map(function(p,i){ return p+f.band[i]; });
+    var all=hist.concat(lo,hi,[k.tgt,k.crit]);
+    var ymin=Math.min.apply(null,all), ymax=Math.max.apply(null,all), pad=(ymax-ymin)*0.1||1; ymin-=pad; ymax+=pad;
+    function X(i){ return (pl+(W-pl-pr)*i/N).toFixed(1); }
+    function Y(v){ return (pt+(H-pt-pb)*(1-(v-ymin)/(ymax-ymin))).toFixed(1); }
+    function path(arr,off){ return arr.map(function(v,i){ return (i?'L':'M')+X(i+off)+' '+Y(v); }).join(' '); }
+    var s='<svg class="fchart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(k.name)+' — 2 hour forecast">';
+    for(var g=0;g<=3;g++){ var gv=ymin+(ymax-ymin)*g/3; s+='<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+Y(gv)+'" y2="'+Y(gv)+'" style="stroke:var(--line)"/><text x="'+(pl-6)+'" y="'+(+Y(gv)+4)+'" text-anchor="end">'+gv.toFixed(k.dp?1:0)+'</text>'; }
+    var bandPath='M'+hi.map(function(v,i){ return X(n-1+i)+' '+Y(v); }).join(' L')+' L'+lo.map(function(v,i){ return X(n-1+i)+' '+Y(v); }).reverse().join(' L')+' Z';
+    s+='<path d="'+bandPath+'" style="fill:var(--purple);fill-opacity:.1"/>';
+    s+='<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+Y(k.tgt)+'" y2="'+Y(k.tgt)+'" style="stroke:var(--green);stroke-dasharray:6 4"/><text x="'+(pl+6)+'" y="'+(+Y(k.tgt)-5)+'" style="fill:var(--green)">'+esc(T('Target ','المستهدف ')+fmtV(key,k.tgt))+'</text>';
+    s+='<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+Y(k.crit)+'" y2="'+Y(k.crit)+'" style="stroke:var(--red);stroke-dasharray:2 4"/><text x="'+(pl+6)+'" y="'+(+Y(k.crit)+14)+'" style="fill:var(--red)">'+esc(T('Alert ','تنبيه ')+fmtV(key,k.crit))+'</text>';
+    s+='<line x1="'+X(n-1)+'" x2="'+X(n-1)+'" y1="'+pt+'" y2="'+(H-pb)+'" style="stroke:var(--line-strong);stroke-dasharray:3 3"/>';
+    s+='<path d="'+path(hist,0)+'" style="fill:none;stroke:var(--teal-700);stroke-width:2.2;stroke-linejoin:round"/>';
+    s+='<path d="'+path(f.proj,n-1)+'" style="fill:none;stroke:var(--purple);stroke-width:2.2;stroke-dasharray:7 5"/>';
+    s+='<circle cx="'+X(n-1)+'" cy="'+Y(k.v)+'" r="4.5" style="fill:var(--teal-700);stroke:#fff;stroke-width:2"/>';
+    if(f.crossTick!=null){ s+='<circle cx="'+X(n-1+f.crossTick)+'" cy="'+Y(k.crit)+'" r="6" style="fill:var(--red);fill-opacity:.2;stroke:var(--red);stroke-width:2"/><text x="'+X(n-1+f.crossTick)+'" y="'+(+Y(k.crit)-10)+'" text-anchor="middle" style="fill:var(--red);font-weight:600">'+clockAt(f.crossMin)+'</text>'; }
+    [[0,'−2h'],[n-1-12,'−1h'],[n-1,T('Now','الآن')],[n-1+12,'+1h'],[N,'+2h']].forEach(function(x){ s+='<text x="'+X(x[0])+'" y="'+(H-8)+'" text-anchor="middle">'+esc(x[1])+'</text>'; });
+    return s+'</svg>';
+  }
+
+  /* ---------- actions that move the simulation ---------- */
+  function applyEffects(fx){
+    if(!fx || state.emergencyStop) return;
+    fx.forEach(function(e){
+      var k=KPI[e.k]; if(!k) return;
+      k.boosts.push({d:e.d, n:e.n});
+      if(e.fix) k.trend = k.hi? Math.max(k.trend,0) : Math.min(k.trend,0);
+    });
+  }
+  var DEC_FX={
+    'DQ-104':[{k:'wait',d:-0.25,n:22,fix:1},{k:'rev',d:0.3,n:20},{k:'csat',d:0.04,n:20}],
+    'DQ-105':[{k:'tat',d:0.35,n:22,fix:1},{k:'sla',d:0.05,n:20}],
+    'DQ-106':[{k:'rev',d:0.12,n:24}]
+  };
+  function decisionFx(d){ return d.fx || DEC_FX[d.id]; }
+  var SRC_FX={A2:[{k:'wait',d:-0.1,n:12}], A3:[{k:'tat',d:0.12,n:12}], A4:[{k:'hv',d:0.12,n:12}], A5:[{k:'csat',d:0.03,n:12}], S2:[{k:'sla',d:0.08,n:12}], A12:[{k:'dq',d:0.1,n:12}], S3:[{k:'wait',d:-0.05,n:12}], A6:[{k:'rev',d:0.08,n:12}]};
+  function ticketFx(t){ return SRC_FX[String(t.src).split(' ')[0]]; }
+
+  var PREEMPT={
+    tat:{agent:'A3', src:'A3 Lab & TAT', owner:'Lab Duty Manager', action:'Reroute 18 pending cultures to the backup line', fx:[{k:'tat',d:0.32,n:22,fix:1}],
+      why:'Microbiology holds **61 pending samples** with the inoculator in maintenance, and on-time rate has fallen steadily over the last hour. The backup line has ~30% spare capacity.', ev:['LIS queue','AN-3 maintenance','Micro pending 61','backup line 62%']},
+    hv:{agent:'A4', src:'A4 Home Visit', owner:'Field Ops · Jeddah West', action:'Shift 3 idle North Riyadh technicians to Jeddah West slots', fx:[{k:'hv',d:0.3,n:22,fix:1},{k:'delay',d:-0.25,n:22,fix:1},{k:'util',d:0.2,n:20}],
+      why:'Jeddah West runs at **96% zone load** while North Riyadh is idle; live GPS ETAs show 6 visits drifting late. HV-231 is at 64% on-time.', ev:['GPS ETA','zone load 96%','HV-231 64%','N. Riyadh idle']},
+    sla:{agent:'S2', src:'S2 Alert Service', owner:'Orchestrator', action:'Auto-escalate corrective actions due within the hour', fx:[{k:'sla',d:0.16,n:24,fix:1},{k:'a2o',d:-0.05,n:20}],
+      why:'Two critical actions are inside their final hour and one has already breached; each breach costs roughly half a compliance point.', ev:['CA-2040','CA-2038','CA-2041 breach']},
+    wait:{agent:'A2', src:'A2 Branch Ops', owner:'Cluster · Riyadh', action:'Deploy 2 floater staff to Olaya and Al Sad (Abha)', fx:[{k:'wait',d:-0.28,n:22,fix:1},{k:'rev',d:0.25,n:20},{k:'csat',d:0.04,n:24}],
+      why:'Olaya (6/8 staff) and Al Sad (4/6) carry the largest staffing gaps; across branches waiting time tracks staffing gap closely (r≈0.8).', ev:['HR roster','Olaya wait 24m','Al Sad staff 4/6']},
+    csat:{agent:'A5', src:'A5 CX & Call Center', owner:'CX Lead', action:'Start service-recovery callbacks with the approved template', fx:[{k:'csat',d:0.07,n:26,fix:1},{k:'resol',d:-0.04,n:20}],
+      why:'48 waiting-time complaints this week, up 12; callbacks within 24h have historically recovered ~2 CSAT points.', ev:['CRM cases','theme: waiting time','template T-07']},
+    rev:{agent:'A2', src:'A2 Branch Ops', owner:'Regional Director · South', action:'Open Abha service-recovery task and hold price changes', fx:[{k:'rev',d:0.35,n:22,fix:1}],
+      why:'Al Sad (Abha) is 19% under target with falling footfall and 6 complaints sharing a staffing root cause.', ev:['BR-ABH-01','rev 81%','cmp 6']}
+  };
+  ['delay','util','a2o','resol','dq'].forEach(function(k){ var map={delay:'hv',util:'hv',a2o:'sla',resol:'csat',dq:'sla'}; PREEMPT[k]=PREEMPT[map[k]]; });
+
+  function preempt(key){
+    var p=PREEMPT[key]; if(!p) return;
+    if(state.emergencyStop){ toast('Emergency stop engaged — pre-emptive actions suspended.','err'); return; }
+    var t=createTicket({title:'Pre-emptive — '+p.action, src:p.src, sev:'warning', owner:p.owner, sla:'SLA 2h', dueMin:120, evidence:3});
+    followUp('pre-emptive action '+t.id,p.fx);
+    applyEffects(p.fx);
+    log(p.agent+' pre-emptive action '+t.id+' approved from forecast — '+p.action);
+    toast('Pre-emptive action '+t.id+' opened — forecast updated.','ok');
+    state.nudges.forEach(function(n){ if(n.key===key && n.status==='new') n.status='acted'; });
+    paintLive(); softRender();
+  }
+
+  /* ---------- simulation tick ---------- */
+  function stepKpi(key){
+    var k=KPI[key], b=0;
+    k.boosts=k.boosts.filter(function(x){ b+=x.d; x.n--; return x.n>0; });
+    var noise=k.noise*(state.degraded&&DEGRADE_DEP[key]?2.4:1);
+    var drift=k.trend+(state.degraded&&key==='dq'?-0.08:0)+(state.degraded&&key==='hv'?-0.05:0);
+    k.v=Math.max(k.min,Math.min(k.max,k.v+drift+b+noise*gauss()));
+    k.hist.push(k.v); if(k.hist.length>48) k.hist.shift();
+  }
+  function simTick(){
+    state.sim.tick++;
+    Object.keys(KPI).forEach(stepKpi);
+    paintLive();
+    proactiveScan();
+    runFollowups();
+    if(state.sim.tick>=state.sim.nextNudge){ state.sim.count++; if(!(state.sim.count%2===0 && autoNudge())) scriptedNudge(); state.sim.nextNudge=state.sim.tick+5+Math.floor(Math.random()*3); }
+  }
+  function paintLive(){
+    Array.prototype.forEach.call(document.querySelectorAll('[data-kpi]'),function(el){
+      var t=kfmt(el.getAttribute('data-kpi'));
+      if(el.textContent!==t){ el.textContent=t; el.classList.remove('tick'); void el.offsetWidth; el.classList.add('tick'); }
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-fc]'),function(el){ el.outerHTML=fcLine(el.getAttribute('data-fc')); });
+    var ch=$('fcChart'); if(ch) ch.innerHTML=forecastChart(state.fcSel);
+    var sm=$('fcSum'); if(sm){ sm.innerHTML=fcSummary(state.fcSel); localize(sm); }
+    var ins=$('insightList'); if(ins){ ins.innerHTML=insightRows(); localize(ins); }
+    repaintViewInsight();
+  }
+  /* re-render without jumping scroll or stealing a slider mid-drag */
+  function softRender(){
+    var a=document.activeElement, v=$('view');
+    if(a && v.contains(a) && a.tagName==='INPUT'){ renderNav(); return; }
+    var m=document.querySelector('.content'), st=m?m.scrollTop:0;
+    render();
+    if(m) m.scrollTop=st;
+  }
+
+  /* ---------- proactive agents ---------- */
+  function proactiveScan(){
+    ['tat','hv','sla','wait','csat'].forEach(function(key){
+      var k=KPI[key], f=fc(key), now=state.sim.tick;
+      if(f.breached){
+        if(!k.autoAt || now-k.autoAt>36){ k.autoAt=now; autoRespond(key); }
+      } else if(f.crossMin!=null && f.crossMin<=90 && !k.boosts.length && (!k.nudgedAt || now-k.nudgedAt>30)){
+        k.nudgedAt=now; raiseNudge(predictiveNudge(key,f));
+      }
+    });
+  }
+  function predictiveNudge(key,f){
+    var k=KPI[key], p=PREEMPT[key];
+    return {key:key, agent:p.agent, kind:'Predictive', level:f.crossTick<=12?'risk':'watch',
+      title:k.name+' forecast to breach its '+fmtV(key,k.crit)+' alert line in ~'+fmtDur(f.crossMin),
+      body:'Projected '+fmtV(key,f.p2)+' by '+clockAt(HORIZON*SIM_MIN)+' (confidence '+f.conf.toFixed(2)+'). Pre-emptive option: '+p.action+'.',
+      conf:f.conf, acts:[{label:'Pre-empt now', a:'preempt:'+key, primary:1, mut:1},{label:'Why?', a:'ask'}]};
+  }
+  function autoRespond(key){
+    var k=KPI[key], p=PREEMPT[key];
+    if(state.emergencyStop){
+      raiseNudge({key:key, agent:p.agent, kind:'Proactive', level:'risk', title:k.name+' crossed its alert line', body:'Autonomous task creation is suspended by the emergency stop. Human action is required.', conf:0.95, acts:[{label:'Why?', a:'ask'}]});
+      return;
+    }
+    var t=createTicket({title:'Auto-opened — '+k.name+' past alert line ('+kfmt(key)+(k.unit==='%'?'%':' '+k.unit)+')', src:p.src, sev:'critical', owner:p.owner, sla:'SLA 1h', dueMin:60, evidence:3});
+    applyEffects(p.fx.map(function(e){ return {k:e.k, d:e.d*0.4, n:e.n}; }));
+    k.trend*=0.5;   /* the agent's task contains the decline; the full fix still needs a human */
+    raiseNudge({key:key, agent:p.agent, kind:'Autonomous · L3', level:'risk', title:p.agent+' opened '+t.id+': '+k.name+' crossed its alert line',
+      body:'Within policy, agents may open and assign tasks. The full fix ("'+p.action+'") still needs your approval.', conf:0.93,
+      acts:[{label:'Approve full fix', a:'preempt:'+key, primary:1, mut:1},{label:'Open '+t.id, a:'ticket:'+t.id},{label:'Why?', a:'ask'}]});
+    softRender();
+  }
+
+  var DEC_POOL={
+    'DQ-107':{id:'DQ-107', sev:'crit', domain:'Branch Operations', agent:'A2', level:3,
+      title:'Olaya evening peak: waiting time forecast to reach 31 min between 16:00 and 18:00',
+      change:'Footfall forecast +22% against a roster of 6 of 8 staff.', impact:'~40 walk-aways and SAR 11k revenue at risk; complaint cluster likely.',
+      rec:'Approve 2 floater staff from Al Malaz for 16:00–19:00; A2 re-checks wait every 5 min.', owner:'Cluster · Riyadh', due:'Today 15:00',
+      evidence:['footfall fcst +22%','roster 6/8','wait fcst 31m'], fx:[{k:'wait',d:-0.3,n:24,fix:1},{k:'rev',d:0.2,n:20}]},
+    'DQ-108':{id:'DQ-108', sev:'warn', domain:'Laboratory & TAT', agent:'A3', level:3,
+      title:'HbA1c reagent stock forecast to run out in 2.5 days at current demand',
+      change:'HbA1c volume +31% (campaign-driven); 412 tests of stock left.', impact:'Campaign success would trigger a stock-out and a Chemistry TAT breach on Thursday.',
+      rec:'Raise an emergency purchase request for 3 kits (Procurement approval) and pace the campaign by 15% until delivery.', owner:'Lab Supply Lead', due:'Tomorrow 10:00',
+      evidence:['stock 412 tests','demand +31%','lead time 3d'], fx:[{k:'tat',d:0.05,n:20}]},
+    'DQ-109':{id:'DQ-109', sev:'info', domain:'Customer Experience', agent:'A5', level:2,
+      title:'Report-delivery delay forecast to become a top-3 complaint theme by Thursday',
+      change:'22 cases, rising 9% a day; linked to Molecular TAT at 82%.', impact:'CSAT forecast −1.5 pts over 7 days if unaddressed.',
+      rec:'Send proactive delay notices (approved template) for Molecular orders older than 48h.', owner:'CX Lead', due:'Today 17:00',
+      evidence:['22 cases','Molecular 82%','+9%/day'], fx:[{k:'csat',d:0.05,n:24,fix:1}]}
+  };
+  function hasDecision(id){ return state.decisions.some(function(d){ return d.id===id; }); }
+
+  var NUDGE_POOL=[
+    {agent:'A3', level:'watch', title:'PCR-2 QC drift: three consecutive controls trending high',
+      body:'A Westgard 2-2s pattern is forming on Molecular PCR-2. QC failure forecast in ~50 min, which would pause 31 pending samples.', conf:0.86,
+      act:{label:'Schedule recalibration', ca:{title:'Pre-emptive recalibration — Molecular PCR-2 QC drift', src:'A3 Lab & TAT', sev:'warning', owner:'QC Officer', sla:'SLA 2h', dueMin:120, evidence:3}, fx:[{k:'tat',d:0.06,n:16}]},
+      why:{text:'Three consecutive level-2 controls on **PCR-2** moved +1.6, +1.9 and +2.1 SD. That monotonic drift matches the pre-failure signature seen in 7 of the last 9 PCR QC failures.\n- Recalibrating now costs ~20 min of analyzer time\n- A QC failure later would hold **31 pending samples** for ~2h\n- Operational QC only — no result is interpreted or released', ev:['QC L2 +2.1 SD','Westgard 2-2s','pending 31','PCR-2']}},
+    {agent:'A2', level:'risk', decision:'DQ-107', title:'Olaya evening peak forecast — wait time to reach 31 min',
+      body:'Footfall model predicts +22% between 16:00 and 18:00 against 6 of 8 staff. A decision has been drafted for your queue.', conf:0.84,
+      act:{label:'Add to decision queue', decision:'DQ-107'},
+      why:{text:'The footfall model uses the last 8 weeks of same-weekday arrivals, today\'s bookings and the post-work peak pattern. With **6 of 8** staff rostered, the queue model predicts **31 min** average wait at 17:00.\n- Al Malaz is fully staffed (9/9) and 11 minutes away\n- Staffing changes are human-approved (L3)', ev:['footfall fcst +22%','roster 6/8','queue model','Al Malaz 9/9']}},
+    {agent:'A6', level:'info', title:'HBA1c Chronic Care has headroom for ~SAR 15k more at ROI above 3.2x',
+      body:'Conversion is 7.2% today (+18% vs 7-day mean). Ramadan Pre-Op returns 0.4x on SAR 35k spend.', conf:0.81,
+      act:{label:'Test in what-if', whatif:{budget:15000}},
+      why:{text:'HBA1c Chronic Care converts at **7.2%** today at ROI **3.5x**. The marginal-return curve stays above 3.0x up to ~SAR 15–20k of additional spend, while Ramadan Pre-Op returns **0.4x**.\n- Reallocation is a recommendation only — Finance approves budget moves\n- A6 cannot launch or change campaigns autonomously', ev:['CMP-4 conv 7.2%','ROI 3.5x','CMP-3 ROI 0.4x']}},
+    {agent:'A5', level:'watch', title:'Complaint velocity at Al Rawdah tripled in 30 minutes',
+      body:'All new cases are tagged waiting time. At this rate a 5-case cluster forms before 12:00.', conf:0.83,
+      act:{label:'Open service recovery', ca:{title:'Complaint surge — Al Rawdah waiting time', src:'A5 CX & Call Center', sev:'warning', owner:'Branch Quality Lead', sla:'SLA 4h', dueMin:240, evidence:3}, fx:[{k:'csat',d:0.03,n:16}]},
+      why:{text:'Complaint inflow at **Al Rawdah (Jeddah)** rose from 1 an hour to 3 in the last 30 minutes, all tagged waiting time. The branch runs 6 of 8 staff with a 31-minute wait, the highest in the network.\n- At this velocity clusters of 5+ complaints have formed within 2h in 80% of past cases\n- Early service recovery cuts repeat complaints by ~40%', ev:['CRM +3/30m','BR-JED-02','wait 31m','staff 6/8']}},
+    {agent:'A1', level:'info', title:'Since the 06:45 brief: 2 new risks emerged and 1 resolved',
+      body:'I can give you a 30-second update on what changed and what needs you next.', conf:0.9,
+      act:{label:'Summarize for me', ask:'What changed since the 06:45 brief?'}},
+    {agent:'A4', level:'watch', title:'Traffic incident on King Abdullah Rd — 6 Jeddah West visits forecast late',
+      body:'Live GPS ETAs shifted +15 to +25 min. Re-sequencing 4 routes keeps 5 of 6 visits on time.', conf:0.8,
+      act:{label:'Re-sequence routes', ca:{title:'Route re-sequencing — Jeddah West traffic incident', src:'A4 Home Visit', sev:'warning', owner:'Field Ops · Jeddah West', sla:'SLA 1h', dueMin:60, evidence:2}, fx:[{k:'hv',d:0.2,n:16},{k:'delay',d:-0.2,n:16}]},
+      why:{text:'GPS and traffic feeds show a lane closure on **King Abdullah Rd**. Six Jeddah West visits share that corridor in the next 90 minutes.\n- Re-sequencing 4 routes avoids the corridor for 5 of the 6 visits\n- Route recommendations are automated; dispatch changes follow approved rules', ev:['GPS ETA +18m','traffic feed','6 visits','4 routes']}},
+    {agent:'A3', level:'watch', decision:'DQ-108', title:'HbA1c reagent stock forecast to run out in 2.5 days',
+      body:'Campaign-driven demand is up 31%. A purchase decision has been drafted for your queue.', conf:0.88,
+      act:{label:'Add to decision queue', decision:'DQ-108'},
+      why:{text:'Current stock covers **412 tests**. HbA1c demand is up **31%** since the chronic-care campaign accelerated, so consumption reaches stock in ~2.5 days, while supplier lead time is 3 days.\n- This links A6 (marketing) and A3 (lab) — a cross-domain effect A0 surfaced', ev:['stock 412','demand +31%','lead time 3d','CMP-4']}},
+    {agent:'A12', level:'watch', title:'CRM API p95 latency rising: 310 → 640 ms',
+      body:'Timeout breach forecast in ~35 min; A5 customer signals would be marked degraded.', conf:0.79,
+      act:{label:'Open failover check', ca:{title:'CRM API latency — pre-emptive failover check', src:'A12 IT & Integration', sev:'warning', owner:'IT Integration Lead', sla:'SLA 1h', dueMin:60, evidence:2}, fx:[{k:'dq',d:0.06,n:14}]},
+      why:{text:'CRM p95 latency doubled over 40 minutes with a linear trend. At this slope the 1,500 ms timeout is crossed in ~35 minutes.\n- Dependent agent: A5 would be flagged **degraded** and held at L2\n- Automated retry is already queued; failover needs IT approval', ev:['CRM p95 640ms','timeout 1500ms','A5 dependency']}},
+    {agent:'A0', level:'info', title:'Correlated: A2, A5 and S3 all point at Al Nasim reception coverage',
+      body:'Merged into one exception on CA-2038 to avoid three separate alerts.', conf:0.91,
+      act:{label:'Open CA-2038', ticket:'CA-2038'},
+      why:{text:'Three agents raised related signals within 20 minutes: **A2** (wait +9 min), **A5** (4 complaints) and **S3** (unattended desk, confidence 0.92). A0 correlated them to one cause and suppressed the duplicates.\n- This is how duplicate alerts fell 31% in the pilot', ev:['A2 wait +9m','A5 cmp 4','S3 VE-327','CA-2038']}},
+    {agent:'S3', level:'watch', title:'Queue congestion at Tahlia for 12 minutes (confidence 0.91)',
+      body:'Queue model forecasts wait +9 min within 30 minutes if no counter is opened.', conf:0.91,
+      act:{label:'Open counter action', ca:{title:'Vision — queue congestion at Tahlia, open second counter', src:'S3 AI Vision', sev:'warning', owner:'Branch Operations', sla:'SLA 30m', dueMin:30, evidence:2}, fx:[{k:'wait',d:-0.05,n:12}]},
+      why:{text:'CAM-TH-07 reports sustained queue length above threshold for 12 minutes. Event metadata only — **no faces or identities** are processed.', ev:['CAM-TH-07','conf 0.91','12 min']}},
+    {agent:'A5', level:'info', decision:'DQ-109', title:'Report-delivery delay forecast to reach the top-3 complaint themes',
+      body:'Rising 9% a day and linked to Molecular TAT. A decision has been drafted.', conf:0.82,
+      act:{label:'Add to decision queue', decision:'DQ-109'},
+      why:{text:'22 report-delay cases are rising **9% a day**; 70% involve Molecular orders, where TAT is 82%. Forward projection puts the theme in the top 3 by Thursday.', ev:['22 cases','Molecular 82%','+9%/day']}},
+    {agent:'A3', level:'watch', title:'STAT volume from ER partners up 34% — Chemistry at 88% capacity',
+      body:'Hematology has headroom; Chemistry queue forecast to form in ~40 min.', conf:0.85,
+      act:{label:'Pre-balance workload', ca:{title:'STAT surge — pre-balance Chemistry workload', src:'A3 Lab & TAT', sev:'warning', owner:'Lab Duty Manager', sla:'SLA 1h', dueMin:60, evidence:2}, fx:[{k:'tat',d:0.05,n:14}]},
+      why:{text:'Inbound STAT orders are up **34%** over the last hour. Chemistry Line B is at 88% utilization and STAT is protected first, so routine work queues behind it.', ev:['STAT +34%','Chem 88%','Line B']}}
+  ];
+
+  function scriptedNudge(){
+    if(!state.sim.on || state.visible.length>=2) return;
+    for(var tries=0;tries<NUDGE_POOL.length;tries++){
+      var src=NUDGE_POOL[state.sim.poolIx%NUDGE_POOL.length]; state.sim.poolIx++;
+      if(src.decision && hasDecision(src.decision)) continue;
+      var n=Object.assign({kind:'Proactive'},src);
+      n.acts=[Object.assign({primary:1, mut:!!(src.act.ca||src.act.decision)},src.act,{a:'script'}),{label:'Why?', a:'ask'}];
+      if(state.degraded && src.agent==='A4'){ n.conf=Math.max(0.55,n.conf-0.15); n.body+=' GPS source is stale, so confidence is reduced.'; }
+      raiseNudge(n); return;
+    }
+  }
+  function raiseNudge(n){
+    n.id='N'+(++state.sim.nudgeSeq); n.t=nowTime().slice(0,5); n.status=n.status0||'new'; n.read=false;
+    state.nudges.unshift(n); if(state.nudges.length>30) state.nudges.pop();
+    pushActivity(n.agent, n.level==='risk'?'warn':'rec', (n.kind==='Predictive'?'Forecast: ':'')+n.title);
+    state.visible.unshift(n.id); if(state.visible.length>2) state.visible.pop();
+    refreshNudgeUIs();
+    if(n.status==='new') setTimeout(function hide(){
+      var w=$('nudges'); if(w && w.matches(':hover')){ setTimeout(hide,3000); return; }
+      dismissNudge(n.id,true);
+    }, 16000);
+  }
+  function renderNudges(){
+    var w=$('nudges');
+    w.innerHTML=state.visible.map(function(id){
+      var n=nudgeById(id); if(!n) return '';
+      var fresh=!n.shown; n.shown=true;
+      return '<div class="nudge '+n.level+(n.policy?' auto':'')+(fresh?' enter':'')+'" role="status"><div class="nh"><span class="tag '+(n.level==='risk'?'crit':n.level==='watch'?'warn':'teal')+'">'+esc(n.agent)+'</span><span>'+esc(n.kind)+(n.status==='pending'?' · <span data-count="'+n.id+'">'+n.left+'s</span>':'')+'</span><span class="grow"></span><span class="mono">'+esc(n.t)+'</span><button class="iconbtn" data-nudge-x="'+n.id+'" aria-label="Dismiss">'+I.x+'</button></div>'+
+        '<div class="nt">'+esc(n.title)+'</div><div class="nb">'+esc(n.body)+'</div>'+(n.status==='pending'?'<div class="cdbar"><span data-bar="'+n.id+'" style="width:'+Math.round(n.left/AUTO_SECS*100)+'%"></span></div>':'')+
+        '<div class="na">'+nudgeButtons(n,'xs')+'<span class="mono muted fs-xs ms-auto">conf '+n.conf.toFixed(2)+'</span></div></div>';
+    }).join('');
+    localize(w);
+  }
+  function nudgeButtons(n,size){
+    return n.acts.map(function(a,i){
+      var dis = a.mut && state.emergencyStop;
+      return '<button class="btn '+size+(a.primary?' primary':'')+'" data-nudge="'+n.id+'" data-ix="'+i+'"'+(dis?' disabled title="Emergency stop engaged"':'')+'>'+esc(a.label)+'</button>';
+    }).join('');
+  }
+  function nudgeById(id){ return state.nudges.filter(function(x){ return x.id===id; })[0]; }
+  function dismissNudge(id,auto){
+    state.visible=state.visible.filter(function(x){ return x!==id; });
+    var n=nudgeById(id); if(n && !auto && n.status==='new') n.status='dismissed';
+    refreshNudgeUIs();
+  }
+  function runNudgeAct(n,a){
+    if(runProactiveAct(n,a)) return;
+    if(a.a==='ask'){ openCopilot(); ask('Why did '+n.agent+' flag this: "'+n.title+'"?', explainNudge(n)); return; }
+    if(a.a.indexOf('preempt:')===0){ preempt(a.a.slice(8)); n.status='acted'; dismissNudge(n.id); return; }
+    if(a.a.indexOf('ticket:')===0){ ticketDrawer(a.a.slice(7)); return; }
+    /* scripted act */
+    if(a.ca){
+      if(state.emergencyStop){ toast('Emergency stop engaged — agent actions suspended.','err'); return; }
+      var t=createTicket(a.ca); followUp(t.id,a.fx); applyEffects(a.fx); toast('Corrective action '+t.id+' created from '+n.agent+' insight.','ok'); softRender(); ticketDrawer(t.id);
+    } else if(a.decision){
+      if(!hasDecision(a.decision)){ var d=Object.assign({status:'open'},DEC_POOL[a.decision]); state.decisions.unshift(d); log(n.agent+' drafted decision '+d.id+' — added to CEO queue at L'+d.level); pushActivity('A0','route','Routed new decision '+d.id+' to CEO queue'); }
+      toast('Decision '+a.decision+' added to your queue.','ok'); softRender();
+    } else if(a.whatif){
+      Object.assign(state.whatif,a.whatif); go('brief'); setTimeout(function(){ var c=$('whatifCard'); if(c) c.scrollIntoView({behavior:REDUCED?'auto':'smooth', block:'center'}); },60);
+    } else if(a.ticket){ ticketDrawer(a.ticket); }
+    else if(a.ask){ openCopilot(); ask(a.ask); }
+    n.status='acted'; dismissNudge(n.id);
+    var ins=$('insightList'); if(ins){ ins.innerHTML=insightRows(); localize(ins); }
+  }
+  function insightRows(){
+    if(!state.nudges.length) return '<p class="muted empty">Agents are watching. Insights appear here as soon as they are raised.</p>';
+    return state.nudges.slice(0,6).map(function(n){
+      var sx=STATUS_TAG[n.status], st=sx?'<span class="tag '+sx[0]+'">'+sx[1]+'</span>':'';
+      return '<div class="insight"><span class="tag '+(n.level==='risk'?'crit':n.level==='watch'?'warn':'teal')+'">'+esc(n.agent)+'</span><div class="ib"><div class="it">'+esc(n.title)+'</div><div class="im"><span data-no-i18n>'+esc(n.t)+' · '+esc(n.kind)+' · conf '+n.conf.toFixed(2)+'</span> '+st+'</div></div>'+
+        '<div class="od-cluster">'+((n.status==='new'||n.status==='pending')&&n.acts.length>1?nudgeButtons({id:n.id,acts:n.acts.slice(0,1)},'xs'):'')+'<button class="btn ghost xs" data-nudge="'+n.id+'" data-ix="'+(n.acts.length-1)+'">Why?</button></div></div>';
+    }).join('');
+  }
+
+  /* ---------- Brief: predictive intelligence section ---------- */
+  var FC_KEYS=['tat','hv','wait','sla','csat','rev'];
+  function predictiveSection(){
+    var sel=state.fcSel, s='';
+    s+='<div class="sectiontitle"><h2>Predictive intelligence</h2><span class="hint">Forecasts re-run every 5 s on streaming signals · 1 tick = 5 simulated minutes · 2-hour horizon</span></div>';
+    s+='<div class="grid2">';
+    s+='<div class="card"><div class="card-h"><h3>2-hour forecast</h3><span class="sub">Trend regression + approved-action effect model</span></div><div class="card-b">'+
+      '<div class="seg wrapseg" role="tablist" aria-label="Forecast metric">'+FC_KEYS.map(function(k){ return '<button type="button" role="tab" aria-selected="'+(k===sel)+'" class="'+(k===sel?'active':'')+'" data-fc-sel="'+k+'">'+esc(KPI[k].name)+'</button>'; }).join('')+'</div>'+
+      '<div id="fcChart" class="mt-3">'+forecastChart(sel)+'</div>'+
+      '<div id="fcSum">'+fcSummary(sel)+'</div>'+
+    '</div></div>';
+    s+=whatifCard();
+    s+='</div>';
+    s+='<div class="card mt-4"><div class="card-h"><h3>Proactive insights</h3><span class="sub">Raised by agents without being asked</span><div class="hact"><span class="pill">'+I.pulse+' '+(state.sim.on?'Watching':'Paused')+'</span></div></div><div class="card-b tight" id="insightList">'+insightRows()+'</div></div>';
+    return s;
+  }
+  function fcSummary(key){
+    var k=KPI[key], f=fc(key), p=PREEMPT[key];
+    var tag=f.level==='risk'?'<span class="tag crit">Risk</span>':f.level==='watch'?'<span class="tag warn">Watch</span>':f.level==='good'?'<span class="tag ok">Improving</span>':'<span class="tag neutral">Stable</span>';
+    var txt='<b>'+esc(k.name)+'</b> is <b>'+esc(fmtV(key,k.v))+'</b> now and forecast at <b>'+esc(fmtV(key,f.p2))+'</b> by '+clockAt(HORIZON*SIM_MIN)+' (±'+esc(f.band[HORIZON].toFixed(1))+'). ';
+    if(f.breached) txt+='It is already past the alert line; '+esc(p.agent)+' is responding. ';
+    else if(f.crossMin!=null) txt+='Breach of the '+esc(fmtV(key,k.crit))+' alert line predicted at <b>'+clockAt(f.crossMin)+'</b>. ';
+    else if(f.tgtTick!=null) txt+='Target reached at ~'+clockAt(f.tgtTick*SIM_MIN)+'. ';
+    if(k.boosts.length) txt+='Includes the effect of '+k.boosts.length+' approved action'+(k.boosts.length>1?'s':'')+'. ';
+    var act = (f.level==='risk'||f.level==='watch') ? '<button class="btn primary sm" data-preempt="'+key+'"'+(state.emergencyStop?' disabled':'')+'>'+I.check+' Pre-empt: '+esc(p.action)+'</button>' : '';
+    return '<div class="fcsum"><div>'+tag+'</div><div class="od-fill"><span data-no-i18n>'+txt+'</span><div class="mt-2 fs-xs muted" data-no-i18n>Confidence '+f.conf.toFixed(2)+' <span class="confbar"><span class="cf" style="width:'+Math.round(f.conf*100)+'%;background:var(--teal-500)"></span></span></div>'+(act?'<div class="mt-3">'+act+'</div>':'')+'</div></div>';
+  }
+
+  /* ---------- what-if simulator ---------- */
+  var ABHA=BRANCHES.filter(function(b){ return b.id==='BR-ABH-01'; })[0];
+  function whatifModel(w){
+    var r={};
+    r.wait=Math.max(12,ABHA.wait-w.tech*3.4);
+    r.revRec=Math.min(ABHA.tgt-ABHA.rev,w.tech*5600);
+    r.donor=w.tech*1.4;
+    r.micro=Math.min(94,71+w.cult*0.55);
+    r.backup=62+w.cult*0.9;
+    r.inc=Math.round(w.budget*(3.5*Math.pow(0.97,w.budget/5000)-0.4));
+    r.hv=Math.min(92,KPI.hv.v+w.hv*1.25);
+    r.jw=Math.min(92,64+w.hv*4.6);
+    r.risk=Math.round(Math.max(8,68-w.tech*5-w.cult*0.35-w.hv*3-w.budget/5000*1.2+(r.backup>90?8:0)+(r.donor>4?5:0)));
+    r.conf=Math.max(0.55,0.9-(w.tech>3?0.06:0)-(r.backup>90?0.1:0)-(w.budget>25000?0.08:0)-(state.degraded?0.1:0));
+    r.trade=[];
+    if(r.donor>4) r.trade.push('Donor branches lose '+r.donor.toFixed(1)+' min of wait-time headroom.');
+    if(r.backup>90) r.trade.push('Backup line above 90% load ('+Math.round(r.backup)+'%) — little room for STAT surges.');
+    if(w.budget>25000) r.trade.push('Beyond ~SAR 25k, HBA1c returns flatten and reagent stock-out risk rises (links to A3).');
+    if(w.hv>4) r.trade.push('North Riyadh loses same-day slack; late bookings there may wait until tomorrow.');
+    return r;
+  }
+  function wiFmt(key,v){ return key==='budget'?'SAR '+Number(v).toLocaleString('en-US'):String(v); }
+  function lever(key,label,max,step,sub){
+    var v=state.whatif[key];
+    return '<div class="lever"><div class="lh"><label for="wi-'+key+'">'+esc(label)+'</label><span class="mono" id="wiv-'+key+'" data-no-i18n>'+wiFmt(key,v)+'</span></div><div class="lsub">'+esc(sub)+'</div>'+
+      '<input type="range" id="wi-'+key+'" data-whatif="'+key+'" min="0" max="'+max+'" step="'+step+'" value="'+v+'"></div>';
+  }
+  function whatifCard(){
+    return '<div class="card" id="whatifCard"><div class="card-h"><h3>What-if simulator</h3><span class="sub">Predict the impact before you approve</span></div><div class="card-b">'+
+      lever('tech','Technicians reassigned to Al Sad (Abha)',4,1,'From fully staffed Al Malaz / Khobar North')+
+      lever('cult','Cultures rerouted to backup line',40,2,'Microbiology pending queue: 61')+
+      lever('budget','Budget shift: Ramadan Pre-Op → HBA1c',35000,1000,'SAR · Finance approval required')+
+      lever('hv','Home-visit technicians: North Riyadh → Jeddah West',6,1,'North Riyadh currently idle')+
+      '<div id="wiOut">'+whatifOut()+'</div></div></div>';
+  }
+  function wtile(label,val,delta,good){
+    return '<div class="tile"><div class="tt">'+esc(label)+'</div><div class="tv" data-no-i18n>'+esc(val)+'</div><div class="td '+(delta?(good?'up':'down'):'')+'" data-no-i18n>'+esc(delta||'no change')+'</div></div>';
+  }
+  function whatifOut(){
+    var w=state.whatif, r=whatifModel(w), any=w.tech||w.cult||w.budget||w.hv;
+    var s='<div class="wiout">'+
+      wtile('Al Sad wait',r.wait.toFixed(0)+' min',w.tech?'−'+(ABHA.wait-r.wait).toFixed(0)+' min':'',true)+
+      wtile('Abha revenue recovered',money(r.revRec)+' /wk',w.tech?'+'+Math.round(r.revRec/(ABHA.tgt-ABHA.rev)*100)+'% of gap':'',true)+
+      wtile('Micro TAT on-time',r.micro.toFixed(0)+'%',w.cult?'+'+(r.micro-71).toFixed(0)+' pts':'',true)+
+      wtile('Campaign incremental revenue',money(Math.max(0,r.inc)),w.budget?'+SAR '+money(r.inc):'',true)+
+      wtile('Jeddah West on-time',r.jw.toFixed(0)+'%',w.hv?'+'+(r.jw-64).toFixed(0)+' pts':'',true)+
+      wtile('Enterprise risk score',String(r.risk),any?'−'+(68-r.risk)+' vs now':'',true)+
+    '</div>';
+    s+=r.trade.map(function(t){ return '<div class="tradeoff">'+I.warn.replace('<svg','<svg class="ic-14" style="width:14px;height:14px;vertical-align:-2px"')+' '+esc(t)+'</div>'; }).join('');
+    s+='<div class="od-cluster mt-3"><span class="fs-xs muted" data-no-i18n>Model confidence '+r.conf.toFixed(2)+' <span class="confbar"><span class="cf" style="width:'+Math.round(r.conf*100)+'%;background:var(--teal-500)"></span></span></span><span class="grow"></span>'+
+      '<button class="btn ghost sm" data-wi-reset'+(any?'':' disabled')+'>Reset</button>'+
+      '<button class="btn primary sm" data-wi-submit'+(any&&!state.emergencyStop?'':' disabled')+'>'+I.check+' Submit plan for approval</button></div>';
+    return s;
+  }
+  function nextDecisionId(){ var mx=109; state.decisions.forEach(function(d){ var x=parseInt(String(d.id).replace('DQ-',''),10); if(x>mx) mx=x; }); return 'DQ-'+(mx+1); }
+  function submitWhatif(){
+    var w=state.whatif, r=whatifModel(w), parts=[], fx=[];
+    if(w.tech){ parts.push(w.tech+' technician'+(w.tech>1?'s':'')+' → Abha'); fx.push({k:'wait',d:-0.08*w.tech,n:24,fix:w.tech>=2},{k:'rev',d:0.08*w.tech,n:22},{k:'csat',d:0.01*w.tech,n:22}); }
+    if(w.cult){ parts.push(w.cult+' cultures → backup line'); fx.push({k:'tat',d:0.012*w.cult,n:22,fix:w.cult>=12}); }
+    if(w.budget){ parts.push('SAR '+money(w.budget)+' → HBA1c'); fx.push({k:'rev',d:w.budget/100000,n:24}); }
+    if(w.hv){ parts.push(w.hv+' HV technician'+(w.hv>1?'s':'')+' → Jeddah West'); fx.push({k:'hv',d:0.05*w.hv,n:22,fix:w.hv>=2},{k:'delay',d:-0.05*w.hv,n:22}); }
+    var d={id:nextDecisionId(), sev:'warn', domain:'Cross-domain plan', agent:'A0', level:3, status:'open',
+      title:'What-if plan: '+parts.join(' · '),
+      change:'Plan simulated by the CEO office with model confidence '+r.conf.toFixed(2)+'.',
+      impact:'Predicted: Al Sad wait '+r.wait.toFixed(0)+' min, Micro TAT '+r.micro.toFixed(0)+'%, Jeddah West on-time '+r.jw.toFixed(0)+'%, enterprise risk '+r.risk+'/100.',
+      rec:'Approve to route each change to its accountable owner; A0 monitors outcomes against this forecast.'+(r.trade.length?' Trade-offs: '+r.trade.join(' '):''),
+      owner:'CEO office', due:'Today', evidence:['what-if model','conf '+r.conf.toFixed(2),'risk '+r.risk], fx:fx};
+    state.decisions.unshift(d);
+    log('What-if plan '+d.id+' submitted for approval — '+parts.join(', '));
+    pushActivity('A0','route','What-if plan '+d.id+' added to decision queue');
+    state.whatif={tech:0,cult:0,budget:0,hv:0};
+    toast('Plan '+d.id+' added to the decision queue for approval.','ok');
+    softRender();
+  }
+
+  /* =========================================================
+     AI copilot — simulated, grounded in the live state
+     ========================================================= */
+  var cp={busy:false, timer:null, hideTimer:null};
+  function agentName(id){ var a=AGENTS.filter(function(x){ return x.id===id; })[0]; return a?a.name:''; }
+  function openDec(id){ return state.decisions.filter(function(d){ return d.id===id && d.status==='open'; })[0]; }
+  function openTickets(){ return state.tickets.filter(function(t){ return t.slaState!=='closed'; }); }
+  function fcSentence(key){
+    var k=KPI[key], f=fc(key), s='**'+k.name+'** '+fmtV(key,k.v)+' → '+fmtV(key,f.p2)+' in 2h (conf '+f.conf.toFixed(2)+')';
+    if(f.breached) s+=' — already past the '+fmtV(key,k.crit)+' alert line';
+    else if(f.crossMin!=null) s+=' — breach of '+fmtV(key,k.crit)+' predicted ~'+clockAt(f.crossMin);
+    else if(f.tgtTick!=null) s+=' — back on target ~'+clockAt(f.tgtTick*SIM_MIN);
+    return s;
+  }
+  function riskiest(){
+    return FC_KEYS.map(function(k){ return {k:k, f:fc(k)}; })
+      .filter(function(x){ return x.f.breached||x.f.crossMin!=null; })
+      .sort(function(a,b){ return (a.f.breached?-1:a.f.crossMin)-(b.f.breached?-1:b.f.crossMin); });
+  }
+  function preemptAct(key){ return {label:'Pre-empt '+KPI[key].name, preempt:key, primary:1}; }
+  function decAct(id){ return openDec(id)?{label:'Approve '+id, decision:id, primary:1}:null; }
+
+  var INTENTS=[
+    {re:/diagnos|clinical|interpret.*result|result.*(mean|normal|abnormal)|medical advice|prescri|release.*result|تشخيص|سريري/i, fn:ansClinical},
+    {re:/(change|cut|raise|lower|set).{0,24}price|discount|launch.{0,20}campaign|send.{0,12}(sms|message|whatsapp)|message.{0,10}customers|fire |terminate/i, fn:ansNonDelegable},
+    {re:/what[\s-]?if|if we|simulat|scenario|move \d|reassign \d|shift \d/i, fn:ansWhatif},
+    {re:/changed|since the|since 06|update me/i, fn:ansChanged},
+    {re:/brief|summar|overview|morning|30.second/i, fn:ansBrief},
+    {re:/forecast|predict|next (2|two) hours|outlook|will .*(breach|miss|hit)|going to|projection|توقع/i, fn:ansForecast},
+    {re:/camera|vision|cctv|ppe|queue congestion/i, fn:ansVision},
+    {re:/\blab\b|tat|micro|sample|analy[sz]er|\bqc\b|culture|reagent|مختبر/i, fn:ansLab},
+    {re:/home|visit|technician|route|field|jeddah west|gps/i, fn:ansHome},
+    {re:/branch|abha|olaya|al sad|wait|footfall|revenue|staff|فرع/i, fn:ansBranch},
+    {re:/complain|csat|customer|call cent|satisf|experience/i, fn:ansCX},
+    {re:/campaign|marketing|roi|budget|growth|hba1c|ramadan/i, fn:ansMkt},
+    {re:/sla|ticket|corrective|overdue|escalat|breach/i, fn:ansSla},
+    {re:/source|integration|stale|data quality|health|degrad|api|latency/i, fn:ansHealth},
+    {re:/priorit|attention|focus|should i|urgent|\btop\b|risk|decide|decision/i, fn:ansPriorities},
+    {re:/^(hi|hello|hey|salam|good (morning|afternoon)|مرحبا|السلام)/i, fn:ansHello}
+  ];
+  function answer(q){
+    for(var i=0;i<INTENTS.length;i++){ if(INTENTS[i].re.test(q)) return INTENTS[i].fn(q); }
+    return ansFallback(q);
+  }
+  function A(o){ o.acts=(o.acts||[]).filter(Boolean); o.level=o.level||2; o.conf=o.conf||0.86; o.sources=o.sources||(o.ev?o.ev.length:3); return o; }
+
+  function ansHello(){ return A({agent:'A0', steps:['Identity verified · CEO office','Loaded live context'], text:greetingText(), ev:['9 sources','12 agents'], acts:[{label:'What needs my attention?', ask:'What needs my attention right now?', primary:1}]}); }
+  function greetingText(){
+    var open=state.decisions.filter(function(d){ return d.status==='open'; }).length, r=riskiest();
+    return 'Good day. I\'m watching **9 sources** across **12 agents**. Right now **'+open+' decision'+(open===1?'':'s')+'** await you'+(r.length?', and I predict **'+KPI[r[0].k].name+'** '+(r[0].f.breached?'is already past its alert line':'will breach its alert line around '+clockAt(r[0].f.crossMin)):'')+'.\nAsk me anything about operations, forecasts or trade-offs — or pick a suggestion below.';
+  }
+  function ansPriorities(){
+    var open=state.decisions.filter(function(d){ return d.status==='open'; }).sort(function(a,b){ return (a.sev==='crit'?0:a.sev==='warn'?1:2)-(b.sev==='crit'?0:b.sev==='warn'?1:2); });
+    var r=riskiest(), br=state.tickets.filter(function(t){ return t.slaState==='breach'; });
+    var txt='Here is what needs you, ranked by severity, urgency and business impact:\n';
+    open.slice(0,3).forEach(function(d,i){ txt+='- **'+(i+1)+'. '+d.id+'** ('+d.agent+', L'+d.level+') — '+d.title+'. Due '+d.due+'.\n'; });
+    if(!open.length) txt+='- No decisions are pending — the queue is clear.\n';
+    if(r.length) txt+='- **Predicted:** '+fcSentence(r[0].k)+'.\n';
+    if(br.length) txt+='- **'+br.length+' SLA breach'+(br.length>1?'es':'')+'** already auto-escalated ('+br.map(function(t){return t.id;}).join(', ')+').\n';
+    txt+='My recommendation: act on **'+(open[0]?open[0].id:(r[0]?KPI[r[0].k].name:'the forecast'))+'** first — it has the highest combined impact.';
+    return A({agent:'A0', level:4, steps:['Routed to A0 Orchestrator','Ranked '+(open.length+openTickets().length)+' open items by severity × urgency × impact','Ran 2-hour forecasts on 6 KPIs','Policy check: recommend only (L4 routing)'],
+      text:txt, ev:open.slice(0,3).map(function(d){return d.id;}).concat(r.length?[KPI[r[0].k].name+' fcst']:[]), acts:[open[0]?decAct(open[0].id):null, r.length?preemptAct(r[0].k):null, {label:'Open orchestrator', nav:'orchestrator'}], conf:0.9});
+  }
+  function ansBrief(){
+    var open=state.decisions.filter(function(d){ return d.status==='open'; }), r=riskiest();
+    var txt='**Daily CEO brief — '+nowTime().slice(0,5)+'**\n';
+    txt+='- **Revenue** '+fmtV('rev',KPI.rev.v)+' vs 430k plan; '+fcSentence('rev').replace(/^\*\*[^*]+\*\* /,'forecast ')+'.\n';
+    txt+='- **Lab** — '+fcSentence('tat')+'. Microbiology is the bottleneck (61 pending).\n';
+    txt+='- **Branches** — Al Sad (Abha) at 81% of target; Olaya wait 24 min on 6 of 8 staff.\n';
+    txt+='- **Home visit** — '+fcSentence('hv')+'.\n';
+    txt+='- **Customers** — CSAT '+fmtV('csat',KPI.csat.v)+'; waiting time is the top complaint theme (48).\n';
+    txt+='**'+open.length+' decision'+(open.length===1?'':'s')+'** need you today'+(r.length?'; the most urgent predicted risk is **'+KPI[r[0].k].name+'**':'')+'.';
+    log('Daily CEO brief regenerated by A1');
+    return A({agent:'A1', steps:['Routed to A1 Executive Intelligence','Collected signals from A2, A3, A4, A5, A6','Ran forecasts on 6 KPIs','Deduplicated with S2 (9 merges)','Composed brief · no clinical data referenced'],
+      text:txt, ev:['LIS','ERP','CRM','GPS','HR roster'], acts:[{label:'What needs my attention?', ask:'What needs my attention right now?', primary:1},{label:'Show forecasts', ask:'Forecast the next 2 hours'}], conf:0.9});
+  }
+  function ansChanged(){
+    var created=state.tickets.filter(function(t){ return !TICKETS.some(function(o){ return o.id===t.id; }); });
+    var acted=state.nudges.filter(function(n){ return n.status==='acted'; }).length;
+    var moved=FC_KEYS.map(function(k){ var x=KPI[k], d=x.v-x.hist[Math.max(0,x.hist.length-13)]; return {k:k,d:d,good:x.hi?d>0:d<0}; }).filter(function(m){ return Math.abs(m.d)>=(KPI[m.k].dp?0.3:1); });
+    var txt='Since the 06:45 brief:\n';
+    txt+='- **'+state.handled+'** decision'+(state.handled===1?'':'s')+' dispositioned by you, **'+created.length+'** new corrective action'+(created.length===1?'':'s')+' opened, **'+state.nudges.length+'** proactive insight'+(state.nudges.length===1?'':'s')+' raised ('+acted+' actioned).\n';
+    moved.forEach(function(m){ txt+='- **'+KPI[m.k].name+'** '+(m.d>0?'up':'down')+' '+Math.abs(m.d).toFixed(KPI[m.k].dp)+' in the last hour — '+(m.good?'improving':'worsening')+'.\n'; });
+    if(!moved.length) txt+='- KPIs have been broadly stable over the last hour.\n';
+    var r=riskiest(); if(r.length) txt+='Next risk to watch: '+fcSentence(r[0].k)+'.';
+    return A({agent:'A1', steps:['Routed to A1 Executive Intelligence','Diffed state against 06:45 snapshot','Read audit trail ('+state.audit.length+' entries)'], text:txt, ev:['audit trail','activity feed','KPI history'], acts:[r.length?preemptAct(r[0].k):null,{label:'Open brief', nav:'brief'}]});
+  }
+  function kpiFromQ(q){
+    if(/lab|tat|micro/i.test(q)) return 'tat';
+    if(/home|visit/i.test(q)) return 'hv';
+    if(/wait/i.test(q)) return 'wait';
+    if(/sla/i.test(q)) return 'sla';
+    if(/csat|satisf|customer/i.test(q)) return 'csat';
+    if(/revenue|sales/i.test(q)) return 'rev';
+    return null;
+  }
+  function ansForecast(q){
+    var key=kpiFromQ(q);
+    if(key){
+      var f=fc(key), k=KPI[key], p=PREEMPT[key];
+      var txt=fcSentence(key)+'.\n- Method: regression on the last hour of 5-minute signals, blended with the expected effect of '+(k.boosts.length?k.boosts.length+' approved action'+(k.boosts.length>1?'s':''):'no approved actions yet')+'.\n- 80% band at 2h: ±'+f.band[HORIZON].toFixed(1)+'.\n- Driver: '+p.why+'\n';
+      txt+=(f.level==='risk'||f.level==='watch')?'Recommended pre-emptive action: **'+p.action+'** (L3, requires your approval).':'No pre-emptive action is needed right now; I will alert you if the trajectory changes.';
+      state.fcSel=FC_KEYS.indexOf(key)>=0?key:state.fcSel;
+      return A({agent:p.agent, level:3, steps:['Routed to '+p.agent+' '+agentName(p.agent),'Pulled 12 points of 5-min history','Fitted trend + action-effect model','Computed 80% confidence band'], text:txt, ev:p.ev, acts:[(f.level==='risk'||f.level==='watch')?preemptAct(key):null,{label:'Show chart', nav:'brief'}], conf:f.conf});
+    }
+    var txt2='2-hour outlook across the enterprise:\n'+FC_KEYS.map(function(k){ return '- '+fcSentence(k); }).join('\n');
+    var r=riskiest();
+    txt2+='\n'+(r.length?'Highest-risk trajectory: **'+KPI[r[0].k].name+'**. Pre-empting now is cheaper than recovering after the breach.':'No KPI is forecast to breach its alert line in the next 2 hours.');
+    return A({agent:'A0', level:3, steps:['Fan-out to A2, A3, A4, A5, S2','Ran 6 forecast models','Ranked by time-to-breach'], text:txt2, ev:FC_KEYS.map(function(k){ return KPI[k].name; }).slice(0,4), acts:[r.length?preemptAct(r[0].k):null,{label:'Open forecast chart', nav:'brief'}], conf:0.84});
+  }
+  function ansLab(){
+    var micro=LAB_DEPTS.filter(function(d){ return d.name==='Microbiology'; })[0];
+    var txt='Laboratory is the most time-critical area today.\n- '+fcSentence('tat')+'.\n- **Microbiology** '+micro.tat+'% on time with **'+micro.pend+' pending** and '+micro.delay+' delayed — the Micro Inoculator is in maintenance.\n- Molecular PCR-2 has a QC warning; Chemistry is running at 88%.\n';
+    txt+='Recommendation: '+(openDec('DQ-105')?'approve **DQ-105** (approved weekend maintenance slot + reroute 18 cultures).':'reroute pending cultures to the backup line; DQ-105 is already dispositioned.')+'\n_Operational only — A3 does not interpret or release clinical results._';
+    return A({agent:'A3', level:3, steps:['Routed to A3 Main Laboratory & TAT','Read LIS queue and analyzer status','Checked QC log (no clinical data referenced)','Forecast TAT on-time for 2h','Policy check: L3 — recommend and open tasks'], text:txt.replace(/_([^_]+)_/g,'$1'), ev:['LIS','Micro pend '+micro.pend,'AN-3 maint','QC log'], acts:[decAct('DQ-105')||preemptAct('tat'),{label:'Open lab view', nav:'lab'}], conf:fc('tat').conf});
+  }
+  function ansBranch(){
+    var txt='Branch network: '+fcSentence('wait')+'.\n- **Al Sad (Abha)** — revenue SAR '+money(ABHA.rev)+' vs '+money(ABHA.tgt)+' target (81%), staff '+ABHA.staff+'/'+ABHA.need+', wait '+ABHA.wait+' min, '+ABHA.cmp+' complaints. Footfall, wait and complaints share one staffing root cause.\n- **Olaya** — 6 of 8 staff, 24-min wait; CA-2041 has breached SLA.\n- **Al Rawdah** — 31-min wait, highest in the network.\n';
+    txt+='Recommendation: '+(openDec('DQ-104')?'approve **DQ-104** — reassign 2 technicians to Abha for 5 days and hold pricing changes.':'deploy floater staff to Olaya ahead of the evening peak.')+' You can test the staffing trade-off in the what-if simulator first.';
+    return A({agent:'A2', level:3, steps:['Routed to A2 Branch Operations','Joined ERP revenue, HR roster, queue and CRM signals','Correlated 4 signals per branch','Policy check: staffing changes need approval'], text:txt, ev:['BR-ABH-01','BR-RUH-01','HR roster','queue model'], acts:[decAct('DQ-104')||preemptAct('wait'),{label:'Try 2 technicians in what-if', whatif:{tech:2}},{label:'Open branches', nav:'branch'}], conf:0.87});
+  }
+  function ansHome(){
+    var txt='Home visit: '+fcSentence('hv')+'.\n- **Jeddah West** is at 96% zone load; HV-231 (S. Al-Dosari) is at 64% on-time.\n- **North Riyadh** has idle capacity (HV-118 at 82% productivity).\n'+(state.degraded?'- GPS/HR sources are **stale**, so dispatch is held at L2 and confidence is reduced.\n':'')+'Recommendation: **'+PREEMPT.hv.action+'**. Route recommendations are automated; dispatch changes follow approved rules.';
+    return A({agent:'A4', level:state.degraded?2:3, steps:['Routed to A4 Home Visit Operations','Read GPS ETAs for 74 technicians','Computed zone load','Policy check: dispatch rule set R-4'], text:txt, ev:PREEMPT.hv.ev, acts:[preemptAct('hv'),{label:'Try 3 technicians in what-if', whatif:{hv:3}},{label:'Open home visit', nav:'home'}], conf:fc('hv').conf});
+  }
+  function ansCX(){
+    var txt='Customer experience: '+fcSentence('csat')+'.\nTop complaint themes this week:\n'+CX_THEMES.slice(0,3).map(function(t){ return '- **'+t.theme+'** — '+t.n+' cases ('+(t.trend>0?'+':'')+t.trend+'), owner '+t.owner; }).join('\n')+'\nWaiting time links back to branch staffing (A2). Recommendation: **'+PREEMPT.csat.action+'** — customer messages only use approved templates and human authorization.';
+    return A({agent:'A5', level:3, steps:['Routed to A5 Customer Experience','Clustered 58 open complaints','Linked themes to branch and lab signals','Policy check: sensitive comms need approval'], text:txt, ev:['CRM','58 complaints','6 themes'], acts:[preemptAct('csat'),{label:'Open customer experience', nav:'cx'}], conf:0.85});
+  }
+  function ansMkt(){
+    var ram=CAMPAIGNS.filter(function(c){ return c.rec==='stop'; })[0], hb=CAMPAIGNS.filter(function(c){ return /HBA1c/.test(c.name); })[0];
+    var inc=whatifModel({tech:0,cult:0,budget:18000,hv:0}).inc;
+    var txt='Marketing: 5 active campaigns, blended ROI 3.3x.\n- **'+ram.name+'** — ROI '+ram.roi+'x on SAR '+money(ram.spend)+', conversion '+ram.conv+'%. Recommend **Stop**.\n- **'+hb.name+'** — ROI '+hb.roi+'x, conversion '+hb.conv+'% and rising.\n- Shifting SAR 18k is predicted to add **SAR '+money(inc)+'** incremental revenue (diminishing returns applied).\nWatch-out: HbA1c demand is already +31%, which pressures reagent stock (A3). Budget moves need Finance approval — A6 will not change spend itself.';
+    return A({agent:'A6', level:2, steps:['Routed to A6 Marketing & Growth','Attributed revenue across 5 campaigns','Fitted marginal-return curve','Cross-checked A3 reagent stock','Policy check: non-delegable budget decision'], text:txt, ev:['CMP-3 ROI 0.4x','CMP-4 ROI 3.5x','attribution model'], acts:[decAct('DQ-106'),{label:'Simulate SAR 18k shift', whatif:{budget:18000}},{label:'Open marketing', nav:'mkt'}], conf:0.82});
+  }
+  function ansSla(){
+    var ot=openTickets(), br=ot.filter(function(t){ return t.slaState==='breach'; }), due=ot.filter(function(t){ return t.dueAt!=null && t.dueAt-Date.now()<3600000 && t.slaState!=='breach'; });
+    var txt='Corrective actions: **'+ot.length+' open**, **'+br.length+'** breached, **'+due.length+'** due within the hour.\n'+br.concat(due).slice(0,4).map(function(t){ return '- **'+t.id+'** '+t.title+' — '+t.owner+' · '+slaText(t); }).join('\n')+'\n'+fcSentence('sla')+'. S2 escalates breaches automatically; closure requires evidence validation.';
+    var top=br[0]||due[0];
+    return A({agent:'S2', level:4, steps:['Routed to S2 Alert & Corrective Action','Evaluated SLA timers on '+ot.length+' tickets','Checked escalation matrix'], text:txt, ev:br.concat(due).slice(0,3).map(function(t){ return t.id; }), acts:[top?{label:'Open '+top.id, ticket:top.id, primary:1}:null, preemptAct('sla'), {label:'Open corrective actions', nav:'actions'}], conf:0.93});
+  }
+  function ansHealth(){
+    var txt=(state.degraded?'**Degraded:** HR/Attendance (26 min) and CCTV/VMS are stale. Dependent outputs (A2 staffing, A4 dispatch, S3 events) are flagged degraded and will not drive automated assignment.\n':'All 9 sources are within freshness policy.\n')+'- Data-quality score '+fmtV('dq',KPI.dq.v)+' on critical fields.\n- Integration uptime 99.6% (30-day), mean time to recover 6.4 min.\n- Watch: CRM p95 latency has been rising.\nYou can run the recovery drill to see degradation and automated retry end to end.';
+    return A({agent:'A12', level:5, steps:['Routed to A12 Integration & Data Health','Polled freshness on 9 sources','Scored data quality'], text:txt, ev:['S1 freshness','9 sources','DQ score'], acts:[{label:'Run recovery drill', act:'poc', primary:1},{label:'Open integration health', nav:'health'}], conf:0.95});
+  }
+  function ansVision(){
+    return A({agent:'S3', level:2, steps:['Routed to S3 AI Vision Event Service','Filtered events by confidence ≥ '+state.visionThreshold.toFixed(2),'Privacy check: metadata only'], text:'Vision events are privacy-aware and event-driven: **no faces, identities or raw video** reach the agents.\n- Top open events: no receptionist at Olaya desk (0.94), queue congestion at Tahlia (0.88), unattended desk at Quba (0.92).\n- Precision 94%, false-positive rate 6% (target ≤ 8%).\nEvents become corrective actions only after the confidence gate and owner routing.', ev:['CAM-OL-03','CAM-TH-07','CAM-QB-01'], acts:[{label:'Open vision events', nav:'vision', primary:1}], conf:0.88});
+  }
+  function ansWhatif(q){
+    var w={tech:0,cult:0,budget:0,hv:0}, num=(q.match(/\d[\d,]*/)||[])[0], n=num?parseInt(num.replace(/,/g,''),10):0;
+    if(/abha|al sad|branch/i.test(q)) w.tech=Math.min(4,n||2);
+    else if(/cultur|backup|lab|micro/i.test(q)) w.cult=Math.min(40,n||18);
+    else if(/budget|campaign|sar|hba1c/i.test(q)) w.budget=Math.min(35000,(n&&n<100?n*1000:n)||15000);
+    else if(/home|jeddah|technician|visit/i.test(q)) w.hv=Math.min(6,n||3);
+    else w={tech:2,cult:18,budget:15000,hv:3};
+    var r=whatifModel(w);
+    var txt='Simulated scenario ('+Object.keys(w).filter(function(k){ return w[k]; }).map(function(k){ return k==='tech'?w.tech+' technicians → Abha':k==='cult'?w.cult+' cultures → backup':k==='budget'?'SAR '+money(w.budget)+' → HBA1c':w.hv+' HV techs → Jeddah West'; }).join(', ')+'):\n';
+    if(w.tech) txt+='- Al Sad wait **'+ABHA.wait+' → '+r.wait.toFixed(0)+' min**, revenue recovered **SAR '+money(r.revRec)+'/week**.\n';
+    if(w.cult) txt+='- Microbiology on-time **71% → '+r.micro.toFixed(0)+'%**; backup line load '+Math.round(r.backup)+'%.\n';
+    if(w.budget) txt+='- Incremental campaign revenue **SAR '+money(r.inc)+'**.\n';
+    if(w.hv) txt+='- Jeddah West on-time **64% → '+r.jw.toFixed(0)+'%**.\n';
+    txt+='- Enterprise risk score **68 → '+r.risk+'** (model confidence '+r.conf.toFixed(2)+').\n';
+    if(r.trade.length) txt+='Trade-offs: '+r.trade.join(' ');
+    return A({agent:'A0', level:3, steps:['Parsed scenario levers','Ran what-if model across A2, A3, A4, A6','Checked cross-domain side effects'], text:txt, ev:['what-if model','BR-ABH-01','Micro queue'], acts:[{label:'Open in simulator', whatif:w, primary:1}], conf:r.conf});
+  }
+  function ansClinical(){
+    return A({agent:'A0', level:0, steps:['Routed to A0 policy engine',{t:'Policy: clinical interpretation is non-delegable — blocked',block:1}], text:'I can\'t help with that. Clinical diagnosis, result interpretation and result release are **outside every agent\'s authority** — they stay with licensed clinicians under Wareed\'s clinical governance.\nWhat I can do: report **operational** status — TAT, sample queues, analyzer and QC state — without referencing clinical data.', ev:['policy P-01','non-delegable'], acts:[{label:'Show lab operations', ask:'How is the lab doing?', primary:1}], conf:0.99, sources:1});
+  }
+  function ansNonDelegable(){
+    return A({agent:'A0', level:2, steps:['Routed to A0 policy engine',{t:'Policy: pricing / campaign / customer messaging require human authority',block:1}], text:'Agents can **prepare** that recommendation with evidence, but they can\'t execute it. Pricing, campaign launches, sensitive customer communication and HR actions are **non-delegable** — they need an authorized human approval and use approved templates.\nI can draft the recommendation for your decision queue or simulate its impact first.', ev:['authority matrix','policy P-04'], acts:[{label:'Open governance', nav:'govern', primary:1},{label:'Simulate impact', ask:'What if we shift SAR 15k to HBA1c?'}], conf:0.98, sources:1});
+  }
+  function ansFallback(){
+    return A({agent:'A0', steps:['Routed to A0 Orchestrator','No specific domain matched — summarizing'], text:'I didn\'t map that to a specific domain, so here is the live picture:\n- '+fcSentence('tat')+'\n- '+fcSentence('wait')+'\n- '+fcSentence('hv')+'\nTry asking about the lab, branches, home visits, customers, campaigns, SLAs, data health — or a what-if such as "what if we move 2 technicians to Abha?".', ev:['live KPIs'], acts:[{label:'What needs my attention?', ask:'What needs my attention right now?', primary:1}], conf:0.7});
+  }
+  function explainNudge(n){
+    if(n.key){ var a=ansForecast(KPI[n.key].name+' forecast'); return a; }
+    var w=n.why||{text:n.body, ev:[]};
+    return A({agent:n.agent, level:3, steps:['Routed to '+n.agent+' '+agentName(n.agent),'Retrieved '+(w.ev.length||2)+' evidence items','Replayed detection logic','Policy check: recommend / open task only'], text:w.text, ev:w.ev, acts:n.status==='new'?[{label:n.acts[0].label, nudge:n.id, primary:1, mut:n.acts[0].mut}]:[], conf:n.conf});
+  }
+
+  function md(s){
+    var h=esc(s).replace(/\*\*([^*]+?)\*\*/g,'<b>$1</b>').replace(/\*\*/g,'');
+    var out='', inList=false;
+    h.split('\n').forEach(function(line){
+      if(/^- /.test(line)){ if(!inList){ out+='<ul>'; inList=true; } out+='<li>'+line.slice(2)+'</li>'; }
+      else { if(inList){ out+='</ul>'; inList=false; } if(line) out+=(out&&!/<\/ul>$/.test(out)?'<br>':'')+line; }
+    });
+    return out+(inList?'</ul>':'');
+  }
+  function cpScroll(){ var l=$('cpLog'); l.scrollTop=l.scrollHeight; }
+  function addUser(q){ var d=document.createElement('div'); d.className='msg user'; d.textContent=q; $('cpLog').appendChild(d); cpScroll(); }
+  function actBtn(a){
+    var cls='btn xs'+(a.primary?' primary':''), dis=state.emergencyStop&&(a.decision||a.preempt||a.mut);
+    var attr = a.nudge?'data-nudge="'+a.nudge+'" data-ix="0"' : a.nav?'data-nav="'+a.nav+'"' : a.decision?'data-decision="approve" data-id="'+a.decision+'"' : a.ticket?'data-ticket="'+a.ticket+'"' : a.preempt?'data-preempt="'+a.preempt+'"' :
+      a.whatif?'data-wi-set="'+esc(JSON.stringify(a.whatif))+'"' : a.ask?'data-cp-ask="'+esc(a.ask)+'"' : a.act?'data-act="'+a.act+'"' : '';
+    return '<button class="'+cls+'" '+attr+(dis?' disabled title="Emergency stop engaged"':'')+'>'+esc(a.label)+'</button>';
+  }
+  function stream(ans){
+    cp.busy=true; $('cpSend').disabled=true;
+    var node=document.createElement('div'); node.className='msg ai'+(ans.proactive?' pro':'');
+    node.innerHTML='<div class="mhd">'+(ans.proactive?'<span class="tag purple">'+esc(ans.proactive)+'</span>':'')+'<span class="tag teal">'+esc(ans.agent)+'</span><span>'+esc(agentName(ans.agent))+'</span></div><ul class="thinking" aria-label="Agent reasoning steps"></ul><div class="txt"></div>';
+    $('cpLog').appendChild(node); cpScroll();
+    var ul=node.querySelector('.thinking'), txt=node.querySelector('.txt'), i=0, prev=null;
+    function step(){
+      if(prev){ var bl=prev.getAttribute('data-block'); prev.className=bl?'block':'ok'; prev.firstChild.textContent=bl?'✕':'✓'; }
+      if(i<ans.steps.length){
+        var s=ans.steps[i++], li=document.createElement('li'), label=typeof s==='string'?s:s.t;
+        li.className='run'; if(s.block) li.setAttribute('data-block','1');
+        li.innerHTML='<span class="st"></span><span></span>'; li.lastChild.textContent=label;
+        ul.appendChild(li); prev=li; cpScroll();
+        cp.timer=setTimeout(step, REDUCED?0:340+Math.random()*280);
+      } else type();
+    }
+    var words=ans.text.split(/(\s+)/), j=0;
+    function type(){
+      j=Math.min(words.length, j+(REDUCED?words.length:3));
+      txt.innerHTML=md(words.slice(0,j).join(''))+(j<words.length?'<span class="caret"></span>':'');
+      cpScroll();
+      if(j<words.length) cp.timer=setTimeout(type,24); else finish();
+    }
+    function finish(){
+      var f='';
+      if(ans.acts.length) f+='<div class="acts">'+ans.acts.map(actBtn).join('')+'</div>';
+      f+='<div class="mft"><span>Confidence '+ans.conf.toFixed(2)+'</span><span class="confbar"><span class="cf" style="width:'+Math.round(ans.conf*100)+'%;background:var(--teal-500)"></span></span><span>· '+(ans.level?'L'+ans.level+' authority':'blocked by policy')+' · '+ans.sources+' source'+(ans.sources===1?'':'s')+' · trace '+Math.random().toString(16).slice(2,8)+'</span></div>';
+      if(ans.ev && ans.ev.length) f='<div class="evidence">'+ans.ev.map(function(e){ return '<span class="ev">'+esc(e)+'</span>'; }).join('')+'</div>'+f;
+      txt.insertAdjacentHTML('afterend',f);
+      cp.busy=false; $('cpSend').disabled=false; cpScroll();
+      setTimeout(flushPending,700);
+    }
+    step();
+  }
+  function ask(q,preset){
+    q=String(q||'').trim(); if(!q) return;
+    if(cp.busy){ toast('Copilot is still answering — one moment.',''); return; }
+    addUser(q);
+    var ans=preset||answer(q);
+    log('Copilot query ('+ans.agent+'): '+q.slice(0,70));
+    stream(ans);
+    renderSug();
+  }
+  var SUGGEST={
+    brief:['What needs my attention right now?','Forecast the next 2 hours','What changed since the 06:45 brief?'],
+    lab:['How is the lab doing?','Will lab TAT breach today?','What if we reroute 20 cultures?'],
+    branch:['Why is Abha declining?','What if we move 2 technicians to Abha?','Forecast waiting time'],
+    home:['Why is Jeddah West late?','What if we shift 3 technicians to Jeddah West?','Forecast home visit on-time'],
+    cx:['What are customers complaining about?','Forecast CSAT','Send an SMS to all waiting customers'],
+    mkt:['Which campaign should we stop?','What if we shift SAR 15k to HBA1c?','Cut the price of the checkup bundle'],
+    actions:['Which SLAs are at risk?','Forecast SLA compliance','What needs my attention right now?'],
+    orchestrator:['What needs my attention right now?','Forecast the next 2 hours','Which SLAs are at risk?'],
+    health:['Are any data sources stale?','What happens if HR data goes stale?','Forecast the next 2 hours'],
+    vision:['What are the cameras detecting?','Is any facial recognition used?','What needs my attention right now?']
+  };
+  function renderSug(){
+    var list=SUGGEST[state.view]||['What needs my attention right now?','Forecast the next 2 hours','Can you interpret this patient\'s result?'];
+    $('cpSug').innerHTML=list.map(function(s){ return '<button type="button" class="chip" data-cp-ask="'+esc(s)+'">'+esc(s)+'</button>'; }).join('');
+  }
+  function openCopilot(){
+    var p=$('copilot');
+    if(cp.hideTimer){ clearTimeout(cp.hideTimer); cp.hideTimer=null; }
+    p.hidden=false; requestAnimationFrame(function(){ p.classList.add('show'); });
+    $('cpBtn').setAttribute('aria-expanded','true');
+    renderSug();
+    if(!$('cpLog').children.length) stream(ansHello()); else flushPending();
+    setTimeout(function(){ if(!cp.busy) $('cpInput').focus(); },60);
+  }
+  function closeCopilot(){
+    var p=$('copilot'); p.classList.remove('show');
+    $('cpBtn').setAttribute('aria-expanded','false');
+    cp.hideTimer=setTimeout(function(){ p.hidden=true; },280);
+  }
+
+  Object.assign(AR,{
+    'Simulation live':'المحاكاة مباشرة', 'Simulation paused':'المحاكاة متوقفة', 'Ask AI':'اسأل الذكاء الاصطناعي',
+    'Wareed AI Copilot':'مساعد وريد الذكي', 'Send':'إرسال', 'Predictive intelligence':'الذكاء التنبؤي', '2-hour forecast':'توقع ساعتين',
+    'What-if simulator':'محاكي السيناريوهات', 'Proactive insights':'رؤى استباقية', 'Raised by agents without being asked':'يطرحها الوكلاء دون طلب',
+    'Predict the impact before you approve':'توقّع الأثر قبل الاعتماد', 'Submit plan for approval':'إرسال الخطة للاعتماد', 'Reset':'إعادة ضبط',
+    'Watching':'مراقبة', 'Paused':'متوقف', 'Why?':'لماذا؟', 'Actioned':'تم الإجراء', 'Dismissed':'تم التجاهل', 'Dismiss':'تجاهل',
+    'Risk':'خطر', 'Watch':'مراقبة', 'Improving':'تحسّن', 'Stable':'مستقر'
+  });
+
+  document.addEventListener('click',function(ev){
+    var el=ev.target.closest('[data-nudge],[data-nudge-x],[data-fc-sel],[data-preempt],[data-wi-submit],[data-wi-reset],[data-wi-set],[data-cp-ask],#cpLog [data-decision],#cpLog [data-nav]');
+    if(!el) return;
+    if(el.hasAttribute('data-nudge-x')){ dismissNudge(el.getAttribute('data-nudge-x')); return; }
+    if(el.hasAttribute('data-nudge')){ var n=nudgeById(el.getAttribute('data-nudge')); if(n){ var a=n.acts[+el.getAttribute('data-ix')]; if(a) runNudgeAct(n,a); } return; }
+    if(el.hasAttribute('data-fc-sel')){ state.fcSel=el.getAttribute('data-fc-sel'); Array.prototype.forEach.call(document.querySelectorAll('[data-fc-sel]'),function(b){ var on=b===el; b.classList.toggle('active',on); b.setAttribute('aria-selected',String(on)); }); paintLive(); return; }
+    if(el.hasAttribute('data-preempt')){ preempt(el.getAttribute('data-preempt')); if(el.closest('#cpLog')) el.disabled=true; return; }
+    if(el.hasAttribute('data-wi-submit')){ submitWhatif(); return; }
+    if(el.hasAttribute('data-wi-reset')){ state.whatif={tech:0,cult:0,budget:0,hv:0}; softRender(); return; }
+    if(el.hasAttribute('data-wi-set')){
+      try{ state.whatif=Object.assign({tech:0,cult:0,budget:0,hv:0},JSON.parse(el.getAttribute('data-wi-set'))); }catch(e){}
+      if(window.innerWidth<760) closeCopilot();
+      go('brief'); setTimeout(function(){ var c=$('whatifCard'); if(c) c.scrollIntoView({behavior:REDUCED?'auto':'smooth', block:'center'}); },60); return;
+    }
+    if(el.hasAttribute('data-cp-ask')){ openCopilot(); ask(el.getAttribute('data-cp-ask')); return; }
+    /* copilot actions routed through the main handler — tidy up after it */
+    if(el.hasAttribute('data-decision')){ el.disabled=true; return; }
+    if(el.hasAttribute('data-nav') && window.innerWidth<760) closeCopilot();
+  });
+  document.addEventListener('input',function(ev){
+    var r=ev.target.closest('[data-whatif]'); if(!r) return;
+    var key=r.getAttribute('data-whatif'); state.whatif[key]=+r.value;
+    var lab=$('wiv-'+key); if(lab) lab.textContent=wiFmt(key,+r.value);
+    var out=$('wiOut'); if(out){ out.innerHTML=whatifOut(); localize(out); }
+  });
+  $('cpForm').addEventListener('submit',function(e){ e.preventDefault(); var i=$('cpInput'); var q=i.value; i.value=''; ask(q); });
+  $('cpBtn').addEventListener('click',function(){ if($('copilot').classList.contains('show')) closeCopilot(); else openCopilot(); });
+  $('cpClose').addEventListener('click',function(){ closeCopilot(); $('cpBtn').focus(); });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape' && $('copilot').classList.contains('show') && $('drawer').hidden && !$('modalRoot').innerHTML){ closeCopilot(); $('cpBtn').focus(); }
+  });
+  function paintSimBtn(){
+    var b=$('simBtn'); b.classList.toggle('paused',!state.sim.on); b.setAttribute('aria-pressed',String(state.sim.on));
+    $('simLbl').textContent=state.sim.on?'Simulation live':'Simulation paused'; localize(b);
+  }
+  $('simBtn').addEventListener('click',function(){
+    state.sim.on=!state.sim.on; paintSimBtn();
+    log('Live simulation '+(state.sim.on?'resumed':'paused'));
+    toast(state.sim.on?'Live simulation resumed.':'Live simulation paused — values frozen.', state.sim.on?'ok':'');
+  });
+  setInterval(function(){ if(state.sim.on && !document.hidden) simTick(); }, TICK_MS);
+
+  /* =========================================================
+     Proactive layer — human-on-the-loop auto-execution, a copilot
+     that speaks first, a live agent insight on every view, and a
+     notification center holding every agent alert.
+     ========================================================= */
+  state.autonomy=true;
+  state.followups=[];
+  state.notifFilter='all';
+  cp.pending=[];
+  var AUTO_SECS=10, UNDO_MS=30000, lastView=null;
+
+  /* Pre-approved L1–L2 actions: agents run these themselves after a
+     cancel window. Anything L3+ still goes through the approval queue. */
+  var AUTO_POOL=[
+    {agent:'A4', lvl:2, policy:'route rule R-4', title:'Re-sequencing 4 Jeddah West routes around a road closure', conf:0.88,
+      body:'Keeps 5 of 6 at-risk visits on time. No customer is re-booked; ETAs update automatically.', fx:[{k:'hv',d:0.18,n:16},{k:'delay',d:-0.18,n:16}],
+      cond:function(){ return !state.degraded; },
+      why:{text:'Live traffic shows a lane closure on **King Abdullah Rd**. Six Jeddah West visits use that corridor in the next 90 minutes.\n- Route re-sequencing is pre-approved under rule **R-4** (L2) — no dispatch, staffing or customer change\n- You can cancel during the 10-second window or undo for 30 seconds afterwards', ev:['GPS ETA +18m','traffic feed','rule R-4']}},
+    {agent:'S2', lvl:2, policy:'escalation matrix E-2', title:'Escalating corrective actions entering their final hour', conf:0.93,
+      body:'Owners of actions due within 60 minutes are escalated one tier, per the approved severity matrix.', fx:[{k:'sla',d:0.12,n:18},{k:'a2o',d:-0.04,n:14}],
+      why:{text:'Actions inside their last hour breach at ~3× the rate of others. Escalating one tier is pre-approved under matrix **E-2** (L2).\n- No ticket is closed or reassigned outside policy', ev:['SLA timers','matrix E-2']}},
+    {agent:'A12', lvl:1, policy:'integration runbook IR-3', title:'Retrying CRM sync and switching reads to the healthy replica', conf:0.9,
+      body:'CRM p95 latency is 640 ms; the read replica is healthy. Writes are untouched.', fx:[{k:'dq',d:0.08,n:14}],
+      why:{text:'Retry and read-replica failover are standard runbook steps (**IR-3**, L1). They keep A5 customer signals fresh without touching customer records.', ev:['CRM p95 640ms','replica healthy','runbook IR-3']}},
+    {agent:'A0', lvl:1, policy:'dedup rule D-1', title:'Merging 3 duplicate waiting-time alerts into one exception', conf:0.95,
+      body:'Same branch, same 30-minute window, same cause. Owners get one alert instead of three.', fx:[{k:'a2o',d:-0.05,n:14}],
+      why:{text:'Deduplication under rule **D-1** (L1) cuts alert fatigue — duplicates fell 31% in the pilot. The merged alerts stay in the audit trail.', ev:['3 alerts','rule D-1','30-min window']}},
+    {agent:'A3', lvl:2, policy:'lab workflow W-2', title:'Re-prioritising the Chemistry queue to protect STAT samples', conf:0.89,
+      body:'Moves 14 routine samples behind incoming STAT work. No result or clinical data is touched.', fx:[{k:'tat',d:0.08,n:14}],
+      why:{text:'Queue re-prioritisation is pre-approved under workflow **W-2** (L2). It is purely operational — no clinical interpretation or result release.', ev:['STAT +34%','Chem 88%','workflow W-2']}}
+  ];
+  function autoNudge(){
+    if(!state.sim.on || state.visible.length>=2) return false;
+    var list=AUTO_POOL.filter(function(a){ return !a.cond || a.cond(); });
+    if(!list.length) return false;
+    state.sim.autoIx=(state.sim.autoIx||0)+1;
+    var src=list[state.sim.autoIx%list.length];
+    var n={agent:src.agent, level:'info', title:src.title, body:src.body, conf:src.conf, why:src.why, policy:src.policy, lvl:src.lvl, fx:src.fx};
+    if(state.autonomy && !state.emergencyStop){
+      n.kind='Auto-executing · L'+src.lvl; n.status0='pending'; n.left=AUTO_SECS;
+      n.acts=[{label:'Cancel', a:'cancel'},{label:'Why?', a:'ask'}];
+    } else {
+      n.kind='Suggested · L'+src.lvl;
+      n.body+=state.emergencyStop?' Held: the emergency stop is engaged.':' Auto-execution is off, so this needs your approval.';
+      n.acts=[{label:'Approve & run', a:'runauto', primary:1, mut:1},{label:'Why?', a:'ask'}];
+    }
+    raiseNudge(n);
+    return true;
+  }
+  function execAuto(n,approved){
+    followUp(n.agent+' '+(approved?'approved':'auto')+'-action', n.fx);
+    applyEffects(n.fx);
+    n.status='executed'; n.kind=(approved?'Executed (approved)':'Auto-executed')+' · L'+n.lvl; n.undoUntil=Date.now()+UNDO_MS;
+    n.acts=[{label:'Undo', a:'undo'},{label:'Why?', a:'ask'}];
+    log(n.agent+(approved?' executed after CEO approval':' auto-executed under '+n.policy)+' (L'+n.lvl+') — '+n.title);
+    pushActivity(n.agent,'ok',(approved?'Executed: ':'Auto-executed: ')+n.title);
+    toast(n.agent+' '+(approved?'executed':'auto-executed')+': '+n.title+'.','ok');
+    setTimeout(function(){ dismissNudge(n.id,true); },12000);
+    refreshNudgeUIs(); paintLive();
+  }
+  setInterval(function(){
+    var changed=false;
+    state.nudges.forEach(function(n){
+      if(n.status!=='pending' || !state.sim.on) return;
+      if(state.emergencyStop){
+        n.status='held'; n.kind='Held · emergency stop'; n.acts=[{label:'Why?', a:'ask'}];
+        log(n.agent+' auto-action held by emergency stop — '+n.title); changed=true; return;
+      }
+      n.left--;
+      if(n.left<=0){ execAuto(n); return; }
+      Array.prototype.forEach.call(document.querySelectorAll('[data-count="'+n.id+'"]'),function(e){ e.textContent=n.left+'s'; });
+      Array.prototype.forEach.call(document.querySelectorAll('[data-bar="'+n.id+'"]'),function(e){ e.style.width=Math.round(n.left/AUTO_SECS*100)+'%'; });
+    });
+    if(changed) refreshNudgeUIs();
+  },1000);
+
+  /* extra nudge verbs: cancel / undo / manual run of an auto action */
+  function runProactiveAct(n,a){
+    if(a.a==='cancel'){
+      if(n.status!=='pending') return true;
+      n.status='cancelled'; n.kind='Cancelled by CEO office';
+      log('CEO cancelled '+n.agent+' auto-action — '+n.title); pushActivity(n.agent,'dedup','Auto-action cancelled by CEO office: '+n.title);
+      toast('Cancelled — '+n.agent+' will not run this action.',''); dismissNudge(n.id); return true;
+    }
+    if(a.a==='undo'){
+      if(Date.now()>n.undoUntil){ toast('The 30-second undo window has closed — open a corrective action instead.','warn'); return true; }
+      applyEffects(n.fx.map(function(e){ return {k:e.k, d:-e.d, n:e.n}; }));
+      n.status='undone'; n.kind='Undone by CEO office'; n.acts=[{label:'Why?', a:'ask'}];
+      log('CEO undid '+n.agent+' auto-action — '+n.title); pushActivity(n.agent,'warn','Auto-action undone: '+n.title);
+      toast('Undone — the action has been rolled back.','warn'); dismissNudge(n.id); paintLive(); return true;
+    }
+    if(a.a==='runauto'){
+      if(state.emergencyStop){ toast('Emergency stop engaged — agent actions suspended.','err'); return true; }
+      execAuto(n,true); return true;
+    }
+    return false;
+  }
+
+  /* ---------- follow-ups: the copilot reports back after actions ---------- */
+  function followUp(label,fx){
+    if(!fx || !fx.length || state.emergencyStop) return;
+    var keys=[]; fx.forEach(function(e){ if(keys.indexOf(e.k)<0) keys.push(e.k); });
+    keys=keys.slice(0,2);
+    state.followups.push({at:state.sim.tick+2, label:label, keys:keys, before:keys.map(function(k){ return fc(k).p2; })});
+  }
+  function runFollowups(){
+    state.followups=state.followups.filter(function(f){
+      if(state.sim.tick<f.at) return true;
+      var txt='Follow-up on **'+f.label+'** — the forecast after the action:\n';
+      f.keys.forEach(function(k,i){
+        var x=fc(k), b=f.before[i], better=KPI[k].hi? x.p2>b : x.p2<b;
+        txt+='- '+fcSentence(k)+'. The 2h projection '+(better?'improved':'moved')+' from '+fmtV(k,b)+' to **'+fmtV(k,x.p2)+'**.\n';
+      });
+      txt+='I will keep comparing outcomes with this forecast and flag any drift.';
+      cpProactive(A({agent:'A0', level:3, steps:['Re-ran forecasts after the action','Compared with the pre-action projection'], text:txt, ev:f.keys.map(function(k){ return KPI[k].name; }), acts:[{label:'Open forecast chart', nav:'brief'}], conf:0.88}),'Follow-up');
+      return false;
+    });
+  }
+
+  /* ---------- copilot speaks first ---------- */
+  function cpProactive(ans,tag){
+    ans.proactive=tag||'Proactive';
+    if($('copilot').classList.contains('show') && !cp.busy){ stream(ans); return; }
+    if(ans.viewKey) cp.pending=cp.pending.filter(function(p){ return !p.viewKey; });
+    cp.pending.push(ans); if(cp.pending.length>4) cp.pending.shift();
+    updateCpBadge();
+  }
+  function updateCpBadge(){ var b=$('cpDot'), c=cp.pending.length; b.hidden=!c; b.textContent=c; $('cpBtn').setAttribute('title', c?'Wareed AI has '+c+' new insight'+(c>1?'s':''):'Ask Wareed AI'); }
+  function flushPending(){
+    if(cp.busy || !cp.pending.length || !$('copilot').classList.contains('show')) return;
+    stream(cp.pending.shift()); updateCpBadge();
+  }
+  var VIEW_ANS={branch:ansBranch, lab:ansLab, home:ansHome, cx:ansCX, mkt:ansMkt, actions:ansSla, health:ansHealth, vision:ansVision, orchestrator:ansPriorities};
+  function onViewChange(v){
+    var fn=VIEW_ANS[v]; if(!fn) return;
+    var a=fn(''), nav=NAV.filter(function(x){ return x.view===v; })[0];
+    a.viewKey=v;
+    a.text='You opened **'+(nav?nav.title:v)+'**. Here is what '+a.agent+' is seeing right now:\n'+a.text;
+    a.acts=a.acts.filter(function(x){ return x.nav!==v; });
+    cpProactive(a,'Proactive');
+  }
+
+  /* ---------- live agent insight at the top of every domain view ---------- */
+  var VIEW_INSIGHT={
+    branch:{key:'wait', agent:'A2', dec:['DQ-107','DQ-104'], whatif:{tech:2}, q:'Why is Abha declining?'},
+    lab:{key:'tat', agent:'A3', dec:['DQ-105','DQ-108'], whatif:{cult:18}, q:'Will lab TAT breach today?'},
+    home:{key:'hv', agent:'A4', whatif:{hv:3}, q:'Why is Jeddah West late?'},
+    cx:{key:'csat', agent:'A5', dec:['DQ-109'], q:'What are customers complaining about?'},
+    mkt:{key:'rev', agent:'A6', dec:['DQ-106'], whatif:{budget:15000}, lead:'HBA1c Chronic Care has headroom for ~SAR 15k more spend at ROI above 3.2x, while Ramadan Pre-Op returns 0.4x.', q:'Which campaign should we stop?'},
+    orchestrator:{agent:'A0', q:'What needs my attention right now?'},
+    actions:{key:'sla', agent:'S2', q:'Which SLAs are at risk?'},
+    vision:{key:'wait', agent:'S3', lead:'Queue-congestion events at Tahlia and Olaya are today\'s strongest early signal of rising branch wait times.', q:'What are the cameras detecting?'},
+    health:{key:'dq', agent:'A12', q:'Are any data sources stale?'}
+  };
+  var LEVEL_TAG={risk:['crit','Risk'], watch:['warn','Watch'], good:['ok','Improving'], stable:['teal','Stable']};
+  function insightCard(v){
+    var c=VIEW_INSIGHT[v]; if(!c) return '';
+    var key=c.key||((riskiest()[0]||{k:'tat'}).k), f=fc(key), p=PREEMPT[key], stop=state.emergencyStop?' disabled title="Emergency stop engaged"':'';
+    var dec=(c.dec||[]).map(openDec).filter(Boolean)[0];
+    var lead=c.lead?esc(c.lead)+' ':'';
+    if(v==='health' && state.degraded) lead='<b>HR/Attendance and CCTV/VMS are stale.</b> Dependent outputs are held at L2 until the sources recover. ';
+    var rec, btns='';
+    if(dec){ rec='Decision <b>'+esc(dec.id)+'</b> is waiting for you: '+esc(dec.rec); btns+='<button class="btn primary xs" data-decision="approve" data-id="'+dec.id+'"'+stop+'>'+I.check+' Approve '+esc(dec.id)+'</button>'; }
+    else if(f.level==='risk'||f.level==='watch'){ rec='Pre-empt now: <b>'+esc(p.action)+'</b>.'; btns+='<button class="btn primary xs" data-preempt="'+key+'"'+stop+'>'+I.check+' Pre-empt</button>'; }
+    else rec='No action needed — '+esc(c.agent)+' will alert you if the trajectory changes.';
+    if(c.whatif) btns+='<button class="btn xs" data-wi-set="'+esc(JSON.stringify(c.whatif))+'">Simulate first</button>';
+    btns+='<button class="btn ghost xs" data-cp-ask="'+esc(c.q)+'">'+I.spark+' Ask why</button>';
+    var t=LEVEL_TAG[f.level];
+    return '<div class="vinsight '+f.level+' mb-4" id="viewInsight" role="region" aria-label="Proactive agent insight"><div class="vi-h"><span class="vi-ic" aria-hidden="true">'+I.spark+'</span><span class="fw-6">'+esc(c.agent)+' · Proactive insight</span><span class="tag '+t[0]+'">'+t[1]+'</span><span class="grow"></span><span class="mono muted fs-xs" data-no-i18n>live · conf '+f.conf.toFixed(2)+'</span></div>'+
+      '<div class="vi-b" data-no-i18n>'+lead+md(fcSentence(key))+'. '+rec+'</div><div class="od-cluster mt-3">'+btns+'</div></div>';
+  }
+  function mountViewInsight(){
+    var h=$('view').querySelector('.agenthead');
+    if(h && VIEW_INSIGHT[state.view]) h.insertAdjacentHTML('afterend',insightCard(state.view));
+  }
+  function repaintViewInsight(){
+    var vi=$('viewInsight'); if(!vi || vi.contains(document.activeElement)) return;
+    vi.outerHTML=insightCard(state.view); var nv=$('viewInsight'); if(nv) localize(nv);
+  }
+
+  /* ---------- notification center ---------- */
+  var STATUS_TAG={acted:['ok','Actioned'], dismissed:['neutral','Dismissed'], pending:['purple','Executing'], executed:['ok','Auto-executed'], cancelled:['neutral','Cancelled'], undone:['warn','Undone'], held:['crit','Held']};
+  function updateBell(){
+    var c=state.nudges.filter(function(n){ return !n.read; }).length, b=$('bellCount');
+    b.hidden=!c; b.textContent=c>9?'9+':String(c);
+    $('bellBtn').setAttribute('aria-label','Notifications'+(c?' — '+c+' unread':''));
+  }
+  function notifRows(){
+    var f=state.notifFilter;
+    var list=state.nudges.filter(function(n){
+      return f==='all' || (f==='action' && (n.status==='new'||n.status==='pending')) || (f==='auto' && n.fx && n.policy);
+    });
+    if(!list.length) return '<p class="muted empty">'+(state.nudges.length?'Nothing in this filter.':'No agent notifications yet — agents are watching.')+'</p>';
+    return list.map(function(n){
+      var st=STATUS_TAG[n.status];
+      var live=n.status==='new'||n.status==='pending'||(n.status==='executed'&&Date.now()<n.undoUntil);
+      var acts=live&&n.acts.length>1?nudgeButtons({id:n.id, acts:n.acts.slice(0,1)},'xs'):'';
+      return '<div class="nrow'+(n.read?'':' unread')+'"><span class="tag '+(n.level==='risk'?'crit':n.level==='watch'?'warn':'teal')+'">'+esc(n.agent)+'</span><div class="ib">'+
+        '<div class="it">'+esc(n.title)+'</div><div class="im" data-no-i18n>'+esc(n.t)+' · '+esc(n.kind)+' · conf '+n.conf.toFixed(2)+(n.status==='pending'?' · <span data-count="'+n.id+'">'+n.left+'s</span>':'')+'</div>'+
+        '<div class="od-cluster mt-2">'+(st?'<span class="tag '+st[0]+'">'+st[1]+'</span>':'')+acts+'<button class="btn ghost xs" data-nudge="'+n.id+'" data-ix="'+(n.acts.length-1)+'">Why?</button></div></div></div>';
+    }).join('');
+  }
+  function renderNotif(){
+    if($('notifPanel').hidden) return;
+    var l=$('notifList'); l.innerHTML=notifRows(); localize(l);
+    Array.prototype.forEach.call(document.querySelectorAll('[data-nf]'),function(b){ var on=b.getAttribute('data-nf')===state.notifFilter; b.classList.toggle('active',on); b.setAttribute('aria-selected',String(on)); });
+  }
+  function openNotif(){
+    var p=$('notifPanel'); p.hidden=false; $('bellBtn').setAttribute('aria-expanded','true');
+    $('autonomyChk').checked=state.autonomy;
+    renderNotif();
+    state.nudges.forEach(function(n){ n.read=true; }); updateBell();
+    var f=p.querySelector('button'); if(f) f.focus();
+  }
+  function closeNotif(){ $('notifPanel').hidden=true; $('bellBtn').setAttribute('aria-expanded','false'); }
+  function refreshNudgeUIs(){
+    renderNudges();
+    var ins=$('insightList'); if(ins){ ins.innerHTML=insightRows(); localize(ins); }
+    if(!$('notifPanel').hidden){ renderNotif(); state.nudges.forEach(function(n){ n.read=true; }); }
+    updateBell();
+  }
+
+  Object.assign(AR,{
+    'Agent notifications':'تنبيهات الوكلاء', 'Notifications':'التنبيهات', 'All':'الكل', 'Needs action':'بحاجة لإجراء', 'Autonomous':'ذاتي',
+    'Auto-execute pre-approved actions':'تنفيذ تلقائي للإجراءات المعتمدة مسبقًا', 'L1–L2 only · 10-second cancel window · 30-second undo':'المستويان 1–2 فقط · 10 ثوانٍ للإلغاء · 30 ثانية للتراجع',
+    'Cancel':'إلغاء', 'Undo':'تراجع', 'Approve & run':'اعتماد وتنفيذ', 'Simulate first':'حاكِ أولًا', 'Ask why':'اسأل لماذا', 'Pre-empt':'استباق',
+    'Executing':'قيد التنفيذ', 'Auto-executed':'نُفّذ تلقائيًا', 'Cancelled':'أُلغي', 'Undone':'تم التراجع', 'Held':'معلّق'
+  });
+
+  document.addEventListener('click',function(ev){
+    var t=ev.target;
+    if(t.closest('#bellBtn')){ if($('notifPanel').hidden) openNotif(); else closeNotif(); return; }
+    var nf=t.closest('[data-nf]'); if(nf){ state.notifFilter=nf.getAttribute('data-nf'); renderNotif(); return; }
+    if(t.closest('#notifClose')){ closeNotif(); $('bellBtn').focus(); return; }
+    if(!$('notifPanel').hidden && !t.closest('#notifPanel') && !t.closest('.drawer') && !t.closest('#modalRoot')) closeNotif();
+  });
+  $('autonomyChk').addEventListener('change',function(e){
+    state.autonomy=e.target.checked;
+    log('Auto-execution of pre-approved L1–L2 actions '+(state.autonomy?'enabled':'disabled')+' by CEO office');
+    pushActivity('A0',state.autonomy?'ok':'warn','Auto-execution of L1–L2 actions '+(state.autonomy?'enabled':'disabled'));
+    toast(state.autonomy?'Auto-execution on — L1–L2 actions run after a 10-second cancel window.':'Auto-execution off — every agent action now needs approval.', state.autonomy?'ok':'warn');
+  });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !$('notifPanel').hidden){ closeNotif(); $('bellBtn').focus(); } });
+
   var VIEWS={brief:viewBrief,branch:viewBranch,lab:viewLab,home:viewHome,cx:viewCX,mkt:viewMkt,orchestrator:viewOrchestrator,actions:viewActions,govern:viewGovern,vision:viewVision,health:viewHealth,blueprint:viewBlueprint,architecture:viewArchitecture,delivery:viewDelivery,alignment:viewAlignment};
 
   /* =========================================================
@@ -2604,9 +3803,12 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     document.getElementById('viewTitle').textContent=L(meta.title);
     document.getElementById('viewCrumb').textContent=L(meta.crumb);
     document.getElementById('view').innerHTML=(VIEWS[state.view]||viewBrief)();
+    mountViewInsight();
+    if(lastView!==state.view){ var pv=lastView; lastView=state.view; if(pv) onViewChange(state.view); }
     document.getElementById('freshPill').className='pill live'+(state.degraded?' ':'');
     document.getElementById('freshText').textContent=freshLabel(state.degraded?null:42);
     document.getElementById('estopBtn').className='btn '+(state.emergencyStop?'amber':'danger')+' sm';
+    renderNudges();
     localize(document.body);
     var m=document.querySelector('.content'); if(m) m.scrollTop=0;
   }
@@ -2778,8 +3980,8 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
 
     var act=el.getAttribute('data-act');
     if(act){
-      if(act==='refresh'){ log('Manual intelligence refresh requested'); toast('Signals refreshed from 9 sources.','ok'); render(); return; }
-      if(act==='brief'){ log('Daily CEO brief regenerated'); toast('Daily CEO brief regenerated from current signals.','ok'); return; }
+      if(act==='refresh'){ log('Manual intelligence refresh requested'); simTick(); toast('Signals refreshed from 9 sources — forecasts re-run.','ok'); return; }
+      if(act==='brief'){ openCopilot(); ask('Generate my daily CEO brief'); return; }
       if(act==='estop'){ estopModal(true); return; }
       if(act==='resume'){ estopModal(false); return; }
       if(act==='degrade'){ state.degraded=true; log('Integration failure simulated — HR/Attendance and CCTV/VMS marked stale'); pushActivity('A12','warn','Integration failure simulated — HR/Attendance and CCTV/VMS marked stale'); toast('Integration failure simulated. Dependent outputs flagged degraded.','warn'); render(); return; }
@@ -2796,6 +3998,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
       if(state.emergencyStop && dec==='approve'){ toast('Emergency stop engaged — approvals suspended.','err'); return; }
       var label={approve:'Approved',reject:'Rejected',evidence:'Evidence requested',delegate:'Delegated'}[dec];
       d.status=dec; d.disposition=label;
+      if(dec==='approve'){ followUp(d.id,decisionFx(d)); applyEffects(decisionFx(d)); }
       state.handled++;
       log('CEO '+label.toLowerCase()+' decision '+id+' ('+d.title.slice(0,42)+'…)');
       pushActivity('A1','decision','CEO '+label.toLowerCase()+' decision '+id+' — '+d.agent+' '+(d.domain||''));
@@ -2814,7 +4017,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
       var tid=el.getAttribute('data-id');
       var t=state.tickets.filter(function(x){return x.id===tid;})[0];
       if(t){
-        if(ta==='resolve'){ t.slaState='closed'; t.stage=7; t.close=1; log('Closure evidence added to '+tid+' — ticket closed after validation'); pushActivity('S2','ok','Closed '+tid+' after evidence validation'); toast(tid+' closed with verified evidence.','ok'); }
+        if(ta==='resolve'){ t.slaState='closed'; t.stage=7; t.close=1; applyEffects(ticketFx(t)); log('Closure evidence added to '+tid+' — ticket closed after validation'); pushActivity('S2','ok','Closed '+tid+' after evidence validation'); toast(tid+' closed with verified evidence.','ok'); }
         if(ta==='escalate'){ t.stage=Math.max(t.stage,5); t.slaState='due'; log(tid+' escalated to '+t.owner); pushActivity('S2','esc','Escalated '+tid+' to '+t.owner); toast(tid+' escalated to '+t.owner+'.','warn'); }
         if(ta==='reassign'){ log(tid+' reassigned by CEO office'); toast(tid+' reassignment recorded.','ok'); }
       }
@@ -2855,7 +4058,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     if(oa){
       var oid=el.getAttribute('data-id');
       var od=state.decisions.filter(function(x){return x.id===oid;})[0];
-      if(oa==='approve'){ if(od){ od.status='approve'; od.disposition='Approved via orchestrator'; state.handled++; } log('Orchestrator approved cross-domain action '+oid+' — routed to accountable owner'); pushActivity('A0','route','Approved and routed cross-domain action '+oid+' to accountable owner'); toast('Cross-domain action '+oid+' approved and routed.','ok'); }
+      if(oa==='approve'){ if(od){ od.status='approve'; od.disposition='Approved via orchestrator'; state.handled++; followUp(od.id,decisionFx(od)); applyEffects(decisionFx(od)); } log('Orchestrator approved cross-domain action '+oid+' — routed to accountable owner'); pushActivity('A0','route','Approved and routed cross-domain action '+oid+' to accountable owner'); toast('Cross-domain action '+oid+' approved and routed.','ok'); }
       if(oa==='hold'){ if(od){ od.status='evidence'; od.disposition='Held for evidence'; } log('Orchestrator held '+oid+' pending additional evidence'); pushActivity('A0','warn','Held '+oid+' pending additional evidence'); toast('Held pending additional evidence.','warn'); }
       render(); return;
     }
@@ -2887,7 +4090,6 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     railCollapseBtn.title = lbl;
   });
   document.getElementById('estopBtn').addEventListener('click',function(){ estopModal(!state.emergencyStop); });
-  document.getElementById('searchBtn').addEventListener('click',function(){ toast('Search is out of scope for this prototype.',''); });
 
   window.addEventListener('hashchange',function(){
     var v=location.hash.slice(1);

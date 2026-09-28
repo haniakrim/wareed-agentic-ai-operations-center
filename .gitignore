@@ -1,2 +1,4 @@
 .base-ast/
 .DS_Store
+.serena/
+node_modules/
