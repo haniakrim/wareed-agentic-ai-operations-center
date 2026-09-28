@@ -13,8 +13,9 @@ async function launch() {
   try { return await chromium.launch({ channel: 'chrome' }); } catch (e) { return chromium.launch(); }
 }
 
-async function open(browser, query, hash) {
+async function open(browser, query, hash, lang) {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  if (lang) await page.addInitScript(l => { try { localStorage.setItem('wareed.lang', l); } catch (e) {} }, lang);
   page.errors = [];
   page.on('pageerror', e => page.errors.push(e.message));
   page.on('console', m => { if (m.type() === 'error') page.errors.push(m.text()); });
@@ -114,11 +115,39 @@ async function guidedDemo(browser) {
   await page.close();
 }
 
+const ARABIC = /[\u0600-\u06FF]/;
+async function arabic(browser) {
+  const page = await open(browser, '?demo=1', 'brief', 'ar');
+  await page.clock.runFor(500);
+  assert.strictEqual(await page.evaluate(() => document.documentElement.dir), 'rtl', 'not RTL');
+  const total = await page.evaluate(() => document.querySelectorAll('[data-demo-jump] option').length);
+  for (let i = 0; i < total; i++) {
+    await page.clock.runFor(12000);
+    for (const sel of ['.pr-t', '.pr-s']) assert(ARABIC.test(await text(page, sel) || ''), 'presenter not Arabic at step ' + (i + 1));
+    const card = await text(page, '#viewInsight .vi-b');
+    if (card) assert(ARABIC.test(card) && !/ is waiting for you| forecast to breach| in 2h \(conf/.test(card), 'insight card not Arabic at step ' + (i + 1) + ': ' + card.slice(0, 120));
+    const nudges = await page.evaluate(() => [...document.querySelectorAll('.nudge .nt')].map(n => n.textContent));
+    nudges.forEach(t => assert(ARABIC.test(t), 'alert not Arabic: ' + t));
+    if (i < total - 1) await page.evaluate(() => document.querySelector('[data-demo-next]').click());
+  }
+  const answers = await page.evaluate(() => [...document.querySelectorAll('#cpLog .msg.ai .txt')].map(t => t.textContent));
+  assert(answers.length >= 3, 'copilot answered ' + answers.length + ' times');
+  answers.forEach(a => assert(ARABIC.test(a), 'copilot answer not Arabic: ' + a.slice(0, 80)));
+  assert(answers.some(a => /لا يمكنني المساعدة/.test(a)), 'Arabic clinical guardrail missing');
+  await page.evaluate(() => { document.getElementById('notifClose').click(); location.hash = 'alignment'; });
+  await page.clock.runFor(300);
+  assert.strictEqual(await text(page, '#viewInsight .tag'), 'عُرضت كلها', 'Arabic capability tag');
+  assert.deepStrictEqual(page.errors, [], 'console errors');
+  console.log('ok  Arabic (RTL): presenter, insight cards, alerts and ' + answers.length + ' copilot answers all in Arabic');
+  await page.close();
+}
+
 (async () => {
   const browser = await launch();
   try {
     await proactive(browser);
     await guidedDemo(browser);
+    await arabic(browser);
     console.log('all checks passed');
   } finally {
     await browser.close();

@@ -675,6 +675,9 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
 }
 @media print{ .presenter{ display:none !important; } }
 @media print{ .copilot, .nudgewrap, .notif{ display:none !important; } }
+/* Arabic in the AI layer: monospace spreads Arabic letters, and chips must follow their own text direction */
+html[lang="ar"] .thinking, html[lang="ar"] .msg .ev, html[lang="ar"] .vinsight .mono, html[lang="ar"] .pr-m, html[lang="ar"] .nudge .nh .mono{ font-family:var(--font-body); letter-spacing:0; }
+html[lang="ar"] .msg .ev{ unicode-bidi:plaintext; }
 .cpbtn{ position:relative; }
 .cpdot, .bdg{ position:absolute; top:-6px; inset-inline-end:-6px; min-width:18px; height:18px; padding:0 5px; border-radius:9px; background:var(--brand-coral); color:#fff; font-size:11px; font-weight:700; line-height:18px; text-align:center; box-shadow:0 0 0 2px var(--surface); }
 .cpdot[hidden], .bdg[hidden]{ display:none; }
@@ -1151,24 +1154,24 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
   ];
 
   var ALIGN = [
-    {n:1,  req:'Executive proposal and understanding of Wareed', status:'Proto',   view:'brief',        vlabel:'Executive Brief',   note:'AI-first executive brief, decision queue and one-click traceability.'},
-    {n:2,  req:'Agentic operating model and agent catalogue', status:'Proto',   view:'blueprint',    vlabel:'Blueprint',         note:'A0-A12 and S1-S3 catalogue with release phase and maximum authority.'},
+    {n:1,  req:'Executive proposal and understanding of Wareed', status:'Proto',   view:'brief',        vlabel:'Executive Brief',   note:'AI-first executive brief, decision queue and one-click traceability, now with live 2-hour KPI forecasts, a what-if simulator and a guided demo.'},
+    {n:2,  req:'Agentic operating model and agent catalogue', status:'Proto',   view:'blueprint',    vlabel:'Blueprint',         note:'A0-A12 and S1-S3 catalogue with release phase and maximum authority; agents act proactively on screen, raising alerts and running pre-approved L1–L2 actions.'},
     {n:3,  req:'Sovereign AI / hosting architecture', status:'Proto',   view:'architecture', vlabel:'Sovereign Architecture', note:'Layer model, mandatory controls and the open sovereignty questions are now on screen; the named hosting provider remains a Phase 1 decision.'},
     {n:4,  req:'Solution architecture', status:'Proto', view:'architecture', vlabel:'Sovereign Architecture',      note:'Six-layer architecture table now on screen alongside the orchestrator control-plane walkthrough.'},
     {n:5,  req:'Integration architecture and Responsibility Matrix', status:'Proto',   view:'health',       vlabel:'Integration Health',note:'Nine sources with freshness and degradation, plus Wareed/NeoLimits/acceptance matrix.'},
     {n:6,  req:'Data architecture, governance and quality model', status:'Proto', view:'health',       vlabel:'Integration Health',        note:'Catalogue, MDM, quality and freshness measures shown live; retention/privacy policy text remains in the response.'},
-    {n:7,  req:'Agentic control plane, policy and approval model', status:'Proto',   view:'govern',       vlabel:'Governance',        note:'Authority levels 1-5, non-delegable boundaries and emergency stop.'},
+    {n:7,  req:'Agentic control plane, policy and approval model', status:'Proto',   view:'govern',       vlabel:'Governance',        note:'Authority levels 1-5, non-delegable boundaries and emergency stop, plus human-on-the-loop autonomy: 10-second cancel window, 30-second undo and an auto-execution switch.'},
     {n:8,  req:'Detailed role definition for each proposed agent', status:'Proto',   view:'blueprint',    vlabel:'Catalogue',         note:'Every one of the 16 agents/services has a full mission/monitors/reasoning/actions/escalation/KPI drawer sourced from RFP §5; MVP+Foundation agents also get a live domain view.'},
-    {n:9,  req:'Dashboard / executive experience concept', status:'Proto',   view:'brief',        vlabel:'All views',         note:'This prototype is the artifact that proves the executive-experience concept.'},
-    {n:10, req:'Alert, ticketing and corrective-action workflow', status:'Proto',   view:'actions',      vlabel:'Corrective Actions',note:'S2 lifecycle Detect to Learn with SLA states and mandatory closure evidence.'},
+    {n:9,  req:'Dashboard / executive experience concept', status:'Proto',   view:'brief',        vlabel:'All views',         note:'This prototype is the executive experience: a live, predictive dashboard with a conversational copilot, proactive insight on every page and a notification center.'},
+    {n:10, req:'Alert, ticketing and corrective-action workflow', status:'Proto',   view:'actions',      vlabel:'Corrective Actions',note:'S2 lifecycle Detect to Learn with SLA states and mandatory closure evidence; agents open tasks when a KPI crosses its alert line and pre-empt forecast breaches.'},
     {n:11, req:'Cybersecurity and privacy architecture', status:'Proto', view:'architecture',       vlabel:'Sovereign Architecture', note:'Secure design, access, AI security, monitoring, privacy and continuity now tabulated on screen.'},
-    {n:12, req:'POC plan', status:'Proto', view:'delivery',    vlabel:'Delivery',         note:'Full eight-week POC schedule with exit evidence and demonstrable proofs on screen.'},
+    {n:12, req:'POC plan', status:'Proto', view:'delivery',    vlabel:'Delivery',         note:'Full eight-week POC schedule with exit evidence; the guided demo rehearses the POC storyline end to end on synthetic data.'},
     {n:13, req:'Phased implementation schedule', status:'Proto',   view:'blueprint',    vlabel:'Blueprint',         note:'Five-phase, 48-week roadmap stating what each phase must prove.'},
-    {n:14, req:'Testing and acceptance plan', status:'Proto',   view:'delivery',           vlabel:'Delivery', note:'Six-stream testing and acceptance table (data, agent, workflow, security, performance, UAT/ORT) on screen.'},
+    {n:14, req:'Testing and acceptance plan', status:'Proto',   view:'delivery',           vlabel:'Delivery', note:'Six-stream testing and acceptance table (data, agent, workflow, security, performance, UAT/ORT) on screen; an automated headless-browser test exercises agent behaviour, autonomy guardrails and every view.'},
     {n:15, req:'Training and change-management plan', status:'Proto',   view:'delivery',           vlabel:'Delivery', note:'Audience-by-audience training outcomes and formats on screen.'},
     {n:16, req:'Support / SLA and managed service model', status:'Partial',   view:'delivery',           vlabel:'Delivery', note:'Priority tiers and managed-service scope on screen; committed response-time SLAs remain to confirm with Wareed hours and topology.'},
     {n:17, req:'Commercial proposal and recurring-cost model', status:'Partial',   view:'delivery',           vlabel:'Delivery', note:'Work-package structure and payment principles on screen; SAR figures remain to confirm pending volumes and hosting choice.'},
-    {n:18, req:'Risk register', status:'Proto', view:'delivery',    vlabel:'Delivery',         note:'Full twelve-risk register with rating and mitigation on screen alongside the three root-cause findings in Blueprint.'},
+    {n:18, req:'Risk register', status:'Proto', view:'delivery',    vlabel:'Delivery',         note:'Full twelve-risk register with rating and mitigation on screen alongside the three root-cause findings in Blueprint; Delivery streams live signals for R3, R4, R5 and R9.'},
     {n:19, req:'Assumptions, exclusions and deviation log', status:'Proto',   view:'delivery',           vlabel:'Delivery', note:'Assumptions, exclusions and deviation log fully tabulated on screen.'},
     {n:20, req:'IP, data ownership, model ownership and portability position', status:'Proto',   view:'delivery',           vlabel:'Delivery', note:'Asset-by-asset ownership and exit/portability position tabulated on screen.'}
   ];
@@ -2485,6 +2488,15 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     '</div>';
     body+='</div>';
 
+    body+='<div class="sectiontitle"><h2>Agentic capabilities demonstrated live</h2><span class="hint">Live evidence from this session · each links to its step in the guided demo</span></div>';
+    body+='<div class="card"><div class="tblwrap"><table class="tbl"><thead><tr><th>Capability</th><th>What the prototype shows</th><th>RFP items</th><th>This session</th><th></th></tr></thead><tbody>'+
+      capabilitiesShown().map(function(c){
+        return '<tr><td class="cellmain" data-no-i18n>'+esc(T(c.en,c.ar))+'</td><td class="muted" data-no-i18n>'+esc(T(c.what,c.whatAr))+'</td><td class="mono">'+esc(c.rfp)+'</td>'+
+          '<td data-no-i18n>'+(c.on?'<span class="tag ok">'+I.check+' '+esc(T('Shown','عُرض'))+'</span>':'<span class="tag neutral">'+esc(T('Not yet','ليس بعد'))+'</span>')+'</td>'+
+          '<td data-no-i18n><button class="btn ghost xs" data-demo-step="'+c.step+'">'+I.arrow+' '+esc(T('Show me','أرني'))+'</button></td></tr>';
+      }).join('')+
+    '</tbody></table></div></div>';
+
     body+='<div class="sectiontitle"><h2>Vendor response requirements</h2><span class="hint">RFP §12 · twenty items mapped to screen evidence and response status</span></div>';
     body+='<div class="card"><div class="tblwrap"><table class="tbl"><thead><tr><th class="w-num">#</th><th>Requirement</th><th>Where addressed</th><th>Prototype evidence</th><th>Status</th></tr></thead><tbody>'+
       ALIGN.map(function(a){
@@ -2805,6 +2817,18 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     resol:{name:'Resolution time', labels:['Resolution time'], v:9.4, tgt:8, crit:11, hi:false, dp:1, min:5, max:14, trend:0.015, noise:0.06, unit:'h'},
     dq:   {name:'Data-quality score', labels:['Data-quality score'], v:94, tgt:95, crit:90, hi:true, dp:1, min:84, max:99, trend:0, noise:0.12, unit:'%'}
   };
+  /* ---------- bilingual helpers for the live AI layer ----------
+     Agent-authored Arabic — requires native review before client use. */
+  function both(fn){ var keep=LANG; LANG='en'; var en=fn(); LANG='ar'; var ar=fn(); LANG=keep; return {en:en, ar:ar}; }
+  function reg(en,ar){ if(ar) AR[en]=ar; return en; }   /* register a runtime string so localize() can translate it */
+  function nt(n,f){ return LANG==='ar' && n.ar && n.ar[f] ? n.ar[f] : L(n[f]); }
+  function nlabel(a){ return LANG==='ar' && a.ar ? a.ar : L(a.label); }
+  var KIND_AR=[[/^Auto-executing/,'تنفيذ تلقائي'],[/^Auto-executed/,'نُفّذ تلقائيًا'],[/^Executed \(approved\)/,'نُفّذ بعد الاعتماد'],[/^Suggested/,'مقترح'],[/^Autonomous/,'ذاتي'],[/^Predictive/,'تنبؤي'],[/^Proactive/,'استباقي'],[/^Cancelled by CEO office/,'ألغاه مكتب الرئيس التنفيذي'],[/^Undone by CEO office/,'تراجع عنه مكتب الرئيس التنفيذي'],[/^Held · emergency stop/,'معلّق · إيقاف طارئ']];
+  function kindT(k){ if(LANG!=='ar') return k; for(var i=0;i<KIND_AR.length;i++){ if(KIND_AR[i][0].test(k)) return k.replace(KIND_AR[i][0],KIND_AR[i][1]); } return k; }
+
+  var KPI_AR={rev:'إيرادات اليوم', tat:'التزام زمن إنجاز المختبر', hv:'التزام مواعيد الزيارات', csat:'رضا العملاء', sla:'الالتزام باتفاقية الخدمة', wait:'متوسط وقت الانتظار', delay:'متوسط تأخر الزيارات', util:'استغلال السعة', a2o:'زمن الإسناد للمالك', resol:'زمن حل الشكاوى', dq:'مؤشر جودة البيانات'};
+  Object.keys(KPI_AR).forEach(function(k){ KPI[k].ar=KPI_AR[k]; });
+  var UNIT_AR={'%':'%', min:'د', h:'س', 'k SAR':'ألف ريال', '':''};
   var KPI_BY_LABEL={};
   var DEGRADE_DEP={hv:1, delay:1, util:1, wait:1, dq:1};
   Object.keys(KPI).forEach(function(key){
@@ -2824,7 +2848,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
 
   function gauss(){ var u=1-rnd(), v=rnd(); return Math.max(-2.5,Math.min(2.5,Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)))*0.6; }
   function kfmt(key){ var k=KPI[key]; return k.v.toFixed(k.dp); }
-  function fmtV(key,v){ var k=KPI[key]; return (Number.isInteger(v)?String(v):v.toFixed(k.dp))+(k.unit==='%'?'%':k.unit?' '+k.unit:''); }
+  function fmtV(key,v){ var k=KPI[key], u=LANG==='ar'?UNIT_AR[k.unit]:k.unit; return (Number.isInteger(v)?String(v):v.toFixed(k.dp))+(u==='%'?'%':u?' '+u:''); }
   function fmtDur(min){ min=Math.max(5,Math.round(min/5)*5); var h=Math.floor(min/60), m=min%60; return LANG==='ar'? (h?h+' س ':'')+(m?m+' د':'') : (h?h+'h ':'')+(m?m+'m':'').trim(); }
   function clockAt(min){ var d=new Date(Date.now()+min*60000); return d.toTimeString().slice(0,5); }
   function worse(k,a,b){ return k.hi? a<b : a>b; }
@@ -2925,16 +2949,25 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     rev:{agent:'A2', src:'A2 Branch Ops', owner:'Regional Director · South', action:'Open Abha service-recovery task and hold price changes', fx:[{k:'rev',d:0.35,n:22,fix:1}],
       why:'Al Sad (Abha) is 19% under target with falling footfall and 6 complaints sharing a staffing root cause.', ev:['BR-ABH-01','rev 81%','cmp 6']}
   };
+  var PREEMPT_AR={
+    tat:{action:'إعادة توجيه 18 مزرعة معلّقة إلى الخط الاحتياطي', why:'يحتفظ قسم الأحياء الدقيقة بـ **61 عينة معلّقة** وجهاز التلقيح في الصيانة، ونسبة الالتزام تتراجع بثبات خلال الساعة الأخيرة. لدى الخط الاحتياطي نحو 30% من السعة المتاحة.', ev:['قائمة LIS','صيانة AN-3','61 عينة معلّقة','الخط الاحتياطي 62%']},
+    hv:{action:'نقل 3 فنيين غير مشغولين من شمال الرياض إلى مواعيد غرب جدة', why:'يعمل غرب جدة عند **96% من حمل المنطقة** بينما شمال الرياض شبه متوقف، وتُظهر أوقات الوصول الحية عبر GPS تأخر 6 زيارات. التزام HV-231 عند 64%.', ev:['أوقات الوصول GPS','حمل المنطقة 96%','HV-231 عند 64%','شمال الرياض متاح']},
+    sla:{action:'تصعيد الإجراءات التصحيحية المستحقة خلال الساعة تلقائيًا', why:'إجراءان حرجان في ساعتهما الأخيرة وآخر تجاوز الاتفاقية بالفعل؛ ويكلّف كل تجاوز نحو نصف نقطة من الالتزام.', ev:['CA-2040','CA-2038','تجاوز CA-2041']},
+    wait:{action:'نشر موظفَين متنقلَين في فرعي العليا والسد (أبها)', why:'العليا (6 من 8 موظفين) والسد (4 من 6) لديهما أكبر فجوة في الكوادر، ووقت الانتظار يتبع فجوة الكوادر بوضوح عبر الفروع (r≈0.8).', ev:['جدول الموارد البشرية','انتظار العليا 24 د','كوادر السد 4 من 6']},
+    csat:{action:'بدء اتصالات استعادة الخدمة بالنموذج المعتمد', why:'48 شكوى تتعلق بوقت الانتظار هذا الأسبوع بزيادة 12، والاتصال خلال 24 ساعة استعاد تاريخيًا نحو نقطتين من رضا العملاء.', ev:['حالات CRM','موضوع: وقت الانتظار','النموذج T-07']},
+    rev:{action:'فتح مهمة استعادة خدمة في أبها وتعليق تغييرات الأسعار', why:'فرع السد (أبها) أقل من المستهدف بنسبة 19% مع تراجع الزوار و6 شكاوى يجمعها سبب جذري متعلق بالكوادر.', ev:['BR-ABH-01','الإيرادات 81%','6 شكاوى']}
+  };
+  Object.keys(PREEMPT_AR).forEach(function(k){ PREEMPT[k].ar=PREEMPT_AR[k]; });
   ['delay','util','a2o','resol','dq'].forEach(function(k){ var map={delay:'hv',util:'hv',a2o:'sla',resol:'csat',dq:'sla'}; PREEMPT[k]=PREEMPT[map[k]]; });
 
   function preempt(key){
     var p=PREEMPT[key]; if(!p) return;
-    if(state.emergencyStop){ toast('Emergency stop engaged — pre-emptive actions suspended.','err'); return; }
-    var t=createTicket({title:'Pre-emptive — '+p.action, src:p.src, sev:'warning', owner:p.owner, sla:'SLA 2h', dueMin:120, evidence:3});
-    followUp('pre-emptive action '+t.id,p.fx);
+    if(state.emergencyStop){ toast(T('Emergency stop engaged — pre-emptive actions suspended.','الإيقاف الطارئ مفعّل — الإجراءات الاستباقية معلّقة.'),'err'); return; }
+    var t=createTicket({title:reg('Pre-emptive — '+p.action,'استباقي — '+p.ar.action), src:p.src, sev:'warning', owner:p.owner, sla:'SLA 2h', dueMin:120, evidence:3});
+    followUp({en:'pre-emptive action '+t.id, ar:'الإجراء الاستباقي '+t.id},p.fx);
     applyEffects(p.fx);
     log(p.agent+' pre-emptive action '+t.id+' approved from forecast — '+p.action);
-    toast('Pre-emptive action '+t.id+' opened — forecast updated.','ok');
+    toast(T('Pre-emptive action '+t.id+' opened — forecast updated.','فُتح الإجراء الاستباقي '+t.id+' — تحدّث التوقع.'),'ok');
     state.nudges.forEach(function(n){ if(n.key===key && n.status==='new') n.status='acted'; });
     paintLive(); softRender();
   }
@@ -2990,23 +3023,26 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
   }
   function predictiveNudge(key,f){
     var k=KPI[key], p=PREEMPT[key];
-    return {key:key, agent:p.agent, kind:'Predictive', level:f.crossTick<=12?'risk':'watch',
-      title:k.name+' forecast to breach its '+fmtV(key,k.crit)+' alert line in ~'+fmtDur(f.crossMin),
-      body:'Projected '+fmtV(key,f.p2)+' by '+clockAt(HORIZON*SIM_MIN)+' (confidence '+f.conf.toFixed(2)+'). Pre-emptive option: '+p.action+'.',
+    var t=both(function(){ return T(k.name+' forecast to breach its '+fmtV(key,k.crit)+' alert line in ~'+fmtDur(f.crossMin),'يُتوقع أن يتجاوز '+k.ar+' حد التنبيه '+fmtV(key,k.crit)+' خلال '+fmtDur(f.crossMin)); });
+    var b=both(function(){ return T('Projected '+fmtV(key,f.p2)+' by '+clockAt(HORIZON*SIM_MIN)+' (confidence '+f.conf.toFixed(2)+'). Pre-emptive option: '+p.action+'.','المتوقع '+fmtV(key,f.p2)+' بحلول '+clockAt(HORIZON*SIM_MIN)+' (ثقة '+f.conf.toFixed(2)+'). الخيار الاستباقي: '+p.ar.action+'.'); });
+    return {key:key, agent:p.agent, kind:'Predictive', level:f.crossTick<=12?'risk':'watch', title:t.en, body:b.en, ar:{title:t.ar, body:b.ar},
       conf:f.conf, acts:[{label:'Pre-empt now', a:'preempt:'+key, primary:1, mut:1},{label:'Why?', a:'ask'}]};
   }
   function autoRespond(key){
     var k=KPI[key], p=PREEMPT[key];
     if(state.emergencyStop){
-      raiseNudge({key:key, agent:p.agent, kind:'Proactive', level:'risk', title:k.name+' crossed its alert line', body:'Autonomous task creation is suspended by the emergency stop. Human action is required.', conf:0.95, acts:[{label:'Why?', a:'ask'}]});
+      raiseNudge({key:key, agent:p.agent, kind:'Proactive', level:'risk', title:k.name+' crossed its alert line', body:'Autonomous task creation is suspended by the emergency stop. Human action is required.',
+        ar:{title:'تجاوز '+k.ar+' حد التنبيه', body:'إنشاء المهام الذاتي معلّق بسبب الإيقاف الطارئ. يلزم تدخل بشري.'}, conf:0.95, acts:[{label:'Why?', a:'ask'}]});
       return;
     }
-    var t=createTicket({title:'Auto-opened — '+k.name+' past alert line ('+kfmt(key)+(k.unit==='%'?'%':' '+k.unit)+')', src:p.src, sev:'critical', owner:p.owner, sla:'SLA 1h', dueMin:60, evidence:3});
+    var tt=both(function(){ return T('Auto-opened — '+k.name+' past alert line ('+fmtV(key,k.v)+')','فُتح تلقائيًا — '+k.ar+' تجاوز حد التنبيه ('+fmtV(key,k.v)+')'); });
+    var t=createTicket({title:reg(tt.en,tt.ar), src:p.src, sev:'critical', owner:p.owner, sla:'SLA 1h', dueMin:60, evidence:3});
     applyEffects(p.fx.map(function(e){ return {k:e.k, d:e.d*0.4, n:e.n}; }));
     k.trend*=0.5;   /* the agent's task contains the decline; the full fix still needs a human */
     raiseNudge({key:key, agent:p.agent, kind:'Autonomous · L3', level:'risk', title:p.agent+' opened '+t.id+': '+k.name+' crossed its alert line',
-      body:'Within policy, agents may open and assign tasks. The full fix ("'+p.action+'") still needs your approval.', conf:0.93,
-      acts:[{label:'Approve full fix', a:'preempt:'+key, primary:1, mut:1},{label:'Open '+t.id, a:'ticket:'+t.id},{label:'Why?', a:'ask'}]});
+      body:'Within policy, agents may open and assign tasks. The full fix ("'+p.action+'") still needs your approval.',
+      ar:{title:'فتح '+p.agent+' المهمة '+t.id+': تجاوز '+k.ar+' حد التنبيه', body:'ضمن السياسة يمكن للوكلاء فتح المهام وإسنادها. أما الحل الكامل («'+p.ar.action+'») فما زال يتطلب اعتمادك.'}, conf:0.93,
+      acts:[{label:'Approve full fix', a:'preempt:'+key, primary:1, mut:1},{label:'Open '+t.id, ar:'فتح '+t.id, a:'ticket:'+t.id},{label:'Why?', a:'ask'}]});
     softRender();
   }
 
@@ -3079,6 +3115,32 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
       why:{text:'Inbound STAT orders are up **34%** over the last hour. Chemistry Line B is at 88% utilization and STAT is protected first, so routine work queues behind it.', ev:['STAT +34%','Chem 88%','Line B']}}
   ];
 
+  var NUDGE_AR=[
+    {title:'انحراف جودة PCR-2: ثلاثة ضوابط متتالية تتجه للارتفاع', body:'يتشكّل نمط Westgard 2-2s على جهاز PCR-2 الجزيئي. يُتوقع فشل الجودة خلال نحو 50 دقيقة، ما سيوقف 31 عينة معلّقة.', ca:'إعادة معايرة استباقية — انحراف جودة PCR-2 الجزيئي',
+      why:'تحركت ثلاثة ضوابط متتالية من المستوى الثاني على **PCR-2** بمقدار +1.6 و+1.9 و+2.1 انحراف معياري. هذا الانحراف المتصاعد يطابق النمط الذي سبق 7 من آخر 9 حالات فشل جودة في PCR.\n- إعادة المعايرة الآن تكلّف نحو 20 دقيقة من وقت الجهاز\n- فشل الجودة لاحقًا سيوقف **31 عينة معلّقة** لنحو ساعتين\n- جودة تشغيلية فقط — لا تُفسَّر أي نتيجة ولا تُعتمد للإصدار'},
+    {title:'توقع ذروة المساء في العليا — وقت الانتظار سيبلغ 31 دقيقة', body:'يتوقع نموذج الزوار زيادة 22% بين 16:00 و18:00 مقابل 6 من 8 موظفين. صيغ قرار وأُضيف إلى قائمتك.',
+      why:'يعتمد نموذج الزوار على آخر 8 أسابيع من الأيام المماثلة وحجوزات اليوم ونمط ذروة ما بعد الدوام. ومع **6 من 8** موظفين، يتوقع نموذج الطوابير متوسط انتظار **31 دقيقة** عند 17:00.\n- فرع الملز مكتمل الكوادر (9 من 9) ويبعد 11 دقيقة\n- تغييرات الكوادر تتطلب اعتمادًا بشريًا (L3)'},
+    {title:'حملة HBA1c للأمراض المزمنة لديها هامش لنحو 15 ألف ريال إضافية بعائد يتجاوز 3.2x', body:'التحويل اليوم 7.2% (+18% عن متوسط 7 أيام). حملة باقة ما قبل العمليات في رمضان تعيد 0.4x على إنفاق 35 ألف ريال.',
+      why:'تحوّل حملة HBA1c للأمراض المزمنة بنسبة **7.2%** اليوم وبعائد **3.5x**. يبقى منحنى العائد الحدّي فوق 3.0x حتى نحو 15–20 ألف ريال إنفاقًا إضافيًا، بينما تعيد باقة رمضان **0.4x**.\n- إعادة التخصيص توصية فقط — المالية تعتمد نقل الميزانية\n- لا يستطيع A6 إطلاق الحملات أو تغييرها ذاتيًا'},
+    {title:'تضاعفت وتيرة الشكاوى في الروضة ثلاث مرات خلال 30 دقيقة', body:'جميع الحالات الجديدة موسومة بوقت الانتظار. بهذه الوتيرة تتشكل مجموعة من 5 شكاوى قبل 12:00.', ca:'تصاعد الشكاوى — وقت الانتظار في الروضة',
+      why:'ارتفع تدفق الشكاوى في **الروضة (جدة)** من شكوى واحدة في الساعة إلى 3 خلال آخر 30 دقيقة، وكلها موسومة بوقت الانتظار. يعمل الفرع بـ 6 من 8 موظفين وبانتظار 31 دقيقة، الأعلى في الشبكة.\n- بهذه الوتيرة تشكّلت مجموعات من 5 شكاوى أو أكثر خلال ساعتين في 80% من الحالات السابقة\n- الاستعادة المبكرة للخدمة تقلل الشكاوى المتكررة بنحو 40%'},
+    {title:'منذ موجز 06:45: ظهر خطران جديدان وحُلّ خطر واحد', body:'يمكنني تقديم تحديث في 30 ثانية عمّا تغيّر وما يحتاجك تاليًا.'},
+    {title:'حادث مروري على طريق الملك عبدالله — يُتوقع تأخر 6 زيارات في غرب جدة', body:'تغيّرت أوقات الوصول عبر GPS بمقدار 15 إلى 25 دقيقة. إعادة ترتيب 4 مسارات تُبقي 5 من 6 زيارات في موعدها.', ca:'إعادة ترتيب المسارات — حادث مروري في غرب جدة',
+      why:'تُظهر بيانات GPS والمرور إغلاق مسار على **طريق الملك عبدالله**. ست زيارات في غرب جدة تمر بهذا الممر خلال 90 دقيقة.\n- إعادة ترتيب 4 مسارات تتجنب الممر لخمس من الزيارات الست\n- توصيات المسارات مؤتمتة؛ أما تغييرات الإسناد فتتبع القواعد المعتمدة'},
+    {title:'يُتوقع نفاد مخزون كواشف HbA1c خلال يومين ونصف', body:'الطلب المدفوع بالحملة ارتفع 31%. صيغ قرار شراء وأُضيف إلى قائمتك.',
+      why:'يغطي المخزون الحالي **412 فحصًا**. ارتفع الطلب على HbA1c بنسبة **31%** منذ تسارع حملة الأمراض المزمنة، فيبلغ الاستهلاك المخزون خلال نحو يومين ونصف، بينما مهلة التوريد 3 أيام.\n- هذا أثر عابر للمجالات بين A6 (التسويق) وA3 (المختبر) رصده A0'},
+    {title:'زمن استجابة CRM في ارتفاع: من 310 إلى 640 ملّي ثانية', body:'يُتوقع تجاوز مهلة الاستجابة خلال نحو 35 دقيقة، وستُوسم إشارات العملاء لدى A5 بالتدهور.', ca:'زمن استجابة CRM — فحص استباقي للتحويل الاحتياطي',
+      why:'تضاعف زمن الاستجابة p95 لـ CRM خلال 40 دقيقة باتجاه خطي. وبهذا الميل تُتجاوز مهلة 1500 ملّي ثانية خلال نحو 35 دقيقة.\n- الوكيل المعتمد: سيُوسم A5 **بالتدهور** ويُثبَّت عند L2\n- إعادة المحاولة الآلية في الطابور؛ والتحويل الاحتياطي يتطلب اعتماد تقنية المعلومات'},
+    {title:'ارتباط: A2 وA5 وS3 تشير جميعها إلى تغطية الاستقبال في النسيم', body:'دُمجت في استثناء واحد على CA-2038 لتجنب ثلاثة تنبيهات منفصلة.',
+      why:'رفعت ثلاثة وكلاء إشارات مترابطة خلال 20 دقيقة: **A2** (الانتظار +9 د)، و**A5** (4 شكاوى)، و**S3** (مكتب دون موظف بثقة 0.92). ربطها A0 بسبب واحد وكتم التكرار.\n- بهذه الطريقة انخفضت التنبيهات المكررة بنسبة 31% في التجربة'},
+    {title:'ازدحام طابور في التحلية منذ 12 دقيقة (ثقة 0.91)', body:'يتوقع نموذج الطوابير زيادة الانتظار 9 دقائق خلال 30 دقيقة إن لم يُفتح شباك إضافي.', ca:'رؤية — ازدحام طابور في التحلية، فتح شباك ثانٍ',
+      why:'تُبلغ الكاميرا CAM-TH-07 عن طول طابور فوق الحد لمدة 12 دقيقة متواصلة. بيانات وصفية للأحداث فقط — **لا تُعالج أي وجوه أو هويات**.'},
+    {title:'يُتوقع أن يدخل تأخر تسليم التقارير أعلى 3 مواضيع للشكاوى', body:'في ارتفاع بنسبة 9% يوميًا ومرتبط بزمن إنجاز الجزيئي. صيغ قرار بذلك.',
+      why:'22 حالة تأخر تقارير ترتفع **9% يوميًا**؛ 70% منها طلبات جزيئية حيث زمن الإنجاز 82%. الإسقاط يضع الموضوع ضمن الثلاثة الأوائل بحلول الخميس.'},
+    {title:'حجم العينات العاجلة من شركاء الطوارئ ارتفع 34% — الكيمياء عند 88% من السعة', body:'لدى أمراض الدم هامش؛ ويُتوقع تشكّل طابور في الكيمياء خلال نحو 40 دقيقة.', ca:'طفرة العينات العاجلة — موازنة حمل الكيمياء مسبقًا',
+      why:'ارتفعت طلبات العينات العاجلة الواردة **34%** خلال الساعة الأخيرة. يعمل خط الكيمياء B عند 88% ويُحمى العاجل أولًا، فتتراكم الأعمال الروتينية خلفه.'}
+  ];
+  NUDGE_POOL.forEach(function(s,i){ s.ar=NUDGE_AR[i]; });
   function scriptedNudge(){
     if(!state.sim.on || state.visible.length>=2) return;
     for(var tries=0;tries<NUDGE_POOL.length;tries++){
@@ -3113,8 +3175,8 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     w.innerHTML=state.visible.map(function(id){
       var n=nudgeById(id); if(!n) return '';
       var fresh=!n.shown; n.shown=true;
-      return '<div class="nudge '+n.level+(n.policy?' auto':'')+(fresh?' enter':'')+'" role="status"><div class="nh"><span class="tag '+(n.level==='risk'?'crit':n.level==='watch'?'warn':'teal')+'">'+esc(n.agent)+'</span><span>'+esc(n.kind)+(n.status==='pending'?' · <span data-count="'+n.id+'">'+n.left+'s</span>':'')+'</span><span class="grow"></span><span class="mono">'+esc(n.t)+'</span><button class="iconbtn" data-nudge-x="'+n.id+'" aria-label="Dismiss">'+I.x+'</button></div>'+
-        '<div class="nt">'+esc(n.title)+'</div><div class="nb">'+esc(n.body)+'</div>'+(n.status==='pending'?'<div class="cdbar"><span data-bar="'+n.id+'" style="width:'+Math.round(n.left/AUTO_SECS*100)+'%"></span></div>':'')+
+      return '<div class="nudge '+n.level+(n.policy?' auto':'')+(fresh?' enter':'')+'" role="status"><div class="nh"><span class="tag '+(n.level==='risk'?'crit':n.level==='watch'?'warn':'teal')+'">'+esc(n.agent)+'</span><span>'+esc(kindT(n.kind))+(n.status==='pending'?' · <span data-count="'+n.id+'">'+n.left+'s</span>':'')+'</span><span class="grow"></span><span class="mono">'+esc(n.t)+'</span><button class="iconbtn" data-nudge-x="'+n.id+'" aria-label="Dismiss">'+I.x+'</button></div>'+
+        '<div class="nt">'+esc(nt(n,'title'))+'</div><div class="nb">'+esc(nt(n,'body'))+'</div>'+(n.status==='pending'?'<div class="cdbar"><span data-bar="'+n.id+'" style="width:'+Math.round(n.left/AUTO_SECS*100)+'%"></span></div>':'')+
         '<div class="na">'+nudgeButtons(n,'xs')+'<span class="mono muted fs-xs ms-auto">conf '+n.conf.toFixed(2)+'</span></div></div>';
     }).join('');
     localize(w);
@@ -3122,7 +3184,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
   function nudgeButtons(n,size){
     return n.acts.map(function(a,i){
       var dis = a.mut && state.emergencyStop;
-      return '<button class="btn '+size+(a.primary?' primary':'')+'" data-nudge="'+n.id+'" data-ix="'+i+'"'+(dis?' disabled title="Emergency stop engaged"':'')+'>'+esc(a.label)+'</button>';
+      return '<button class="btn '+size+(a.primary?' primary':'')+'" data-nudge="'+n.id+'" data-ix="'+i+'"'+(dis?' disabled title="Emergency stop engaged"':'')+'>'+esc(nlabel(a))+'</button>';
     }).join('');
   }
   function nudgeById(id){ return state.nudges.filter(function(x){ return x.id===id; })[0]; }
@@ -3133,20 +3195,20 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
   }
   function runNudgeAct(n,a){
     if(runProactiveAct(n,a)) return;
-    if(a.a==='ask'){ openCopilot(); ask('Why did '+n.agent+' flag this: "'+n.title+'"?', explainNudge(n)); return; }
+    if(a.a==='ask'){ openCopilot(); ask(T('Why did '+n.agent+' flag this: "'+n.title+'"?','لماذا نبّه '+n.agent+' إلى: «'+nt(n,'title')+'»؟'), explainNudge(n)); return; }
     if(a.a.indexOf('preempt:')===0){ preempt(a.a.slice(8)); n.status='acted'; dismissNudge(n.id); return; }
     if(a.a.indexOf('ticket:')===0){ ticketDrawer(a.a.slice(7)); return; }
     /* scripted act */
     if(a.ca){
       if(state.emergencyStop){ toast('Emergency stop engaged — agent actions suspended.','err'); return; }
-      var t=createTicket(a.ca); followUp(t.id,a.fx); applyEffects(a.fx); toast('Corrective action '+t.id+' created from '+n.agent+' insight.','ok'); softRender(); ticketDrawer(t.id);
+      if(n.ar && n.ar.ca) reg(a.ca.title,n.ar.ca); var t=createTicket(a.ca); followUp(t.id,a.fx); applyEffects(a.fx); toast(T('Corrective action '+t.id+' created from '+n.agent+' insight.','أُنشئ الإجراء التصحيحي '+t.id+' من رؤية '+n.agent+'.'),'ok'); softRender(); ticketDrawer(t.id);
     } else if(a.decision){
       if(!hasDecision(a.decision)){ var d=Object.assign({status:'open'},DEC_POOL[a.decision]); state.decisions.unshift(d); log(n.agent+' drafted decision '+d.id+' — added to CEO queue at L'+d.level); pushActivity('A0','route','Routed new decision '+d.id+' to CEO queue'); }
-      toast('Decision '+a.decision+' added to your queue.','ok'); softRender();
+      toast(T('Decision '+a.decision+' added to your queue.','أُضيف القرار '+a.decision+' إلى قائمتك.'),'ok'); softRender();
     } else if(a.whatif){
       Object.assign(state.whatif,a.whatif); go('brief'); setTimeout(function(){ var c=$('whatifCard'); if(c) c.scrollIntoView({behavior:REDUCED?'auto':'smooth', block:'center'}); },60);
     } else if(a.ticket){ ticketDrawer(a.ticket); }
-    else if(a.ask){ openCopilot(); ask(a.ask); }
+    else if(a.ask){ openCopilot(); ask(L(a.ask)); }
     n.status='acted'; dismissNudge(n.id);
     var ins=$('insightList'); if(ins){ ins.innerHTML=insightRows(); localize(ins); }
   }
@@ -3154,7 +3216,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     if(!state.nudges.length) return '<p class="muted empty">Agents are watching. Insights appear here as soon as they are raised.</p>';
     return state.nudges.slice(0,6).map(function(n){
       var sx=STATUS_TAG[n.status], st=sx?'<span class="tag '+sx[0]+'">'+sx[1]+'</span>':'';
-      return '<div class="insight"><span class="tag '+(n.level==='risk'?'crit':n.level==='watch'?'warn':'teal')+'">'+esc(n.agent)+'</span><div class="ib"><div class="it">'+esc(n.title)+'</div><div class="im"><span data-no-i18n>'+esc(n.t)+' · '+esc(n.kind)+' · conf '+n.conf.toFixed(2)+'</span> '+st+'</div></div>'+
+      return '<div class="insight"><span class="tag '+(n.level==='risk'?'crit':n.level==='watch'?'warn':'teal')+'">'+esc(n.agent)+'</span><div class="ib"><div class="it">'+esc(nt(n,'title'))+'</div><div class="im"><span data-no-i18n>'+esc(n.t)+' · '+esc(kindT(n.kind))+' · conf '+n.conf.toFixed(2)+'</span> '+st+'</div></div>'+
         '<div class="od-cluster">'+((n.status==='new'||n.status==='pending')&&n.acts.length>1?nudgeButtons({id:n.id,acts:n.acts.slice(0,1)},'xs'):'')+'<button class="btn ghost xs" data-nudge="'+n.id+'" data-ix="'+(n.acts.length-1)+'">Why?</button></div></div>';
     }).join('');
   }
@@ -3166,7 +3228,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     s+='<div class="sectiontitle"><h2>Predictive intelligence</h2><span class="hint">Forecasts re-run every 5 s on streaming signals · 1 tick = 5 simulated minutes · 2-hour horizon</span></div>';
     s+='<div class="grid2">';
     s+='<div class="card"><div class="card-h"><h3>2-hour forecast</h3><span class="sub">Trend regression + approved-action effect model</span></div><div class="card-b">'+
-      '<div class="seg wrapseg" role="tablist" aria-label="Forecast metric">'+FC_KEYS.map(function(k){ return '<button type="button" role="tab" aria-selected="'+(k===sel)+'" class="'+(k===sel?'active':'')+'" data-fc-sel="'+k+'">'+esc(KPI[k].name)+'</button>'; }).join('')+'</div>'+
+      '<div class="seg wrapseg" role="tablist" aria-label="Forecast metric">'+FC_KEYS.map(function(k){ return '<button type="button" role="tab" aria-selected="'+(k===sel)+'" class="'+(k===sel?'active':'')+'" data-fc-sel="'+k+'">'+esc(kn(k))+'</button>'; }).join('')+'</div>'+
       '<div id="fcChart" class="mt-3">'+forecastChart(sel)+'</div>'+
       '<div id="fcSum">'+fcSummary(sel)+'</div>'+
     '</div></div>';
@@ -3176,15 +3238,23 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     return s;
   }
   function fcSummary(key){
-    var k=KPI[key], f=fc(key), p=PREEMPT[key];
-    var tag=f.level==='risk'?'<span class="tag crit">Risk</span>':f.level==='watch'?'<span class="tag warn">Watch</span>':f.level==='good'?'<span class="tag ok">Improving</span>':'<span class="tag neutral">Stable</span>';
-    var txt='<b>'+esc(k.name)+'</b> is <b>'+esc(fmtV(key,k.v))+'</b> now and forecast at <b>'+esc(fmtV(key,f.p2))+'</b> by '+clockAt(HORIZON*SIM_MIN)+' (±'+esc(f.band[HORIZON].toFixed(1))+'). ';
-    if(f.breached) txt+='It is already past the alert line; '+esc(p.agent)+' is responding. ';
-    else if(f.crossMin!=null) txt+='Breach of the '+esc(fmtV(key,k.crit))+' alert line predicted at <b>'+clockAt(f.crossMin)+'</b>. ';
-    else if(f.tgtTick!=null) txt+='Target reached at ~'+clockAt(f.tgtTick*SIM_MIN)+'. ';
-    if(k.boosts.length) txt+='Includes the effect of '+k.boosts.length+' approved action'+(k.boosts.length>1?'s':'')+'. ';
-    var act = (f.level==='risk'||f.level==='watch') ? '<button class="btn primary sm" data-preempt="'+key+'"'+(state.emergencyStop?' disabled':'')+'>'+I.check+' Pre-empt: '+esc(p.action)+'</button>' : '';
-    return '<div class="fcsum"><div>'+tag+'</div><div class="od-fill"><span data-no-i18n>'+txt+'</span><div class="mt-2 fs-xs muted" data-no-i18n>Confidence '+f.conf.toFixed(2)+' <span class="confbar"><span class="cf" style="width:'+Math.round(f.conf*100)+'%;background:var(--teal-500)"></span></span></div>'+(act?'<div class="mt-3">'+act+'</div>':'')+'</div></div>';
+    var k=KPI[key], f=fc(key), p=PREEMPT[key], txt;
+    var tg=f.level==='risk'?['crit','Risk']:f.level==='watch'?['warn','Watch']:f.level==='good'?['ok','Improving']:['neutral','Stable'];
+    if(LANG==='ar'){
+      txt='<b>'+esc(k.ar)+'</b> '+esc(fmtV(key,k.v))+' الآن، والمتوقع <b>'+esc(fmtV(key,f.p2))+'</b> بحلول '+clockAt(HORIZON*SIM_MIN)+' (±'+f.band[HORIZON].toFixed(1)+'). ';
+      if(f.breached) txt+='تجاوز حد التنبيه بالفعل ويستجيب '+esc(p.agent)+'. ';
+      else if(f.crossMin!=null) txt+='يُتوقع تجاوز حد التنبيه '+esc(fmtV(key,k.crit))+' نحو الساعة <b>'+clockAt(f.crossMin)+'</b>. ';
+      else if(f.tgtTick!=null) txt+='يبلغ المستهدف نحو الساعة '+clockAt(f.tgtTick*SIM_MIN)+'. ';
+      if(k.boosts.length) txt+='يشمل أثر '+k.boosts.length+' من الإجراءات المعتمدة. ';
+    } else {
+      txt='<b>'+esc(k.name)+'</b> is <b>'+esc(fmtV(key,k.v))+'</b> now and forecast at <b>'+esc(fmtV(key,f.p2))+'</b> by '+clockAt(HORIZON*SIM_MIN)+' (±'+esc(f.band[HORIZON].toFixed(1))+'). ';
+      if(f.breached) txt+='It is already past the alert line; '+esc(p.agent)+' is responding. ';
+      else if(f.crossMin!=null) txt+='Breach of the '+esc(fmtV(key,k.crit))+' alert line predicted at <b>'+clockAt(f.crossMin)+'</b>. ';
+      else if(f.tgtTick!=null) txt+='Target reached at ~'+clockAt(f.tgtTick*SIM_MIN)+'. ';
+      if(k.boosts.length) txt+='Includes the effect of '+k.boosts.length+' approved action'+(k.boosts.length>1?'s':'')+'. ';
+    }
+    var act=(f.level==='risk'||f.level==='watch')?'<button class="btn primary sm" data-preempt="'+key+'"'+(state.emergencyStop?' disabled':'')+'>'+I.check+' '+esc(T('Pre-empt: ','استباق: ')+pa(p,'action'))+'</button>':'';
+    return '<div class="fcsum"><div><span class="tag '+tg[0]+'" data-no-i18n>'+esc(L(tg[1]))+'</span></div><div class="od-fill"><span data-no-i18n>'+txt+'</span><div class="mt-2 fs-xs muted" data-no-i18n>'+T('Confidence ','الثقة ')+f.conf.toFixed(2)+' <span class="confbar"><span class="cf" style="width:'+Math.round(f.conf*100)+'%;background:var(--teal-500)"></span></span></div>'+(act?'<div class="mt-3" data-no-i18n>'+act+'</div>':'')+'</div></div>';
   }
 
   /* ---------- what-if simulator ---------- */
@@ -3202,10 +3272,10 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     r.risk=Math.round(Math.max(8,68-w.tech*5-w.cult*0.35-w.hv*3-w.budget/5000*1.2+(r.backup>90?8:0)+(r.donor>4?5:0)));
     r.conf=Math.max(0.55,0.9-(w.tech>3?0.06:0)-(r.backup>90?0.1:0)-(w.budget>25000?0.08:0)-(state.degraded?0.1:0));
     r.trade=[];
-    if(r.donor>4) r.trade.push('Donor branches lose '+r.donor.toFixed(1)+' min of wait-time headroom.');
-    if(r.backup>90) r.trade.push('Backup line above 90% load ('+Math.round(r.backup)+'%) — little room for STAT surges.');
-    if(w.budget>25000) r.trade.push('Beyond ~SAR 25k, HBA1c returns flatten and reagent stock-out risk rises (links to A3).');
-    if(w.hv>4) r.trade.push('North Riyadh loses same-day slack; late bookings there may wait until tomorrow.');
+    if(r.donor>4) r.trade.push(T('Donor branches lose '+r.donor.toFixed(1)+' min of wait-time headroom.','تفقد الفروع المانحة '+r.donor.toFixed(1)+' دقيقة من هامش وقت الانتظار.'));
+    if(r.backup>90) r.trade.push(T('Backup line above 90% load ('+Math.round(r.backup)+'%) — little room for STAT surges.','الخط الاحتياطي فوق 90% من الحمل ('+Math.round(r.backup)+'%) — هامش ضئيل لطفرات العينات العاجلة.'));
+    if(w.budget>25000) r.trade.push(T('Beyond ~SAR 25k, HBA1c returns flatten and reagent stock-out risk rises (links to A3).','بعد نحو 25 ألف ريال يتسطّح عائد HBA1c ويرتفع خطر نفاد الكواشف (مرتبط بـ A3).'));
+    if(w.hv>4) r.trade.push(T('North Riyadh loses same-day slack; late bookings there may wait until tomorrow.','يفقد شمال الرياض هامش اليوم نفسه؛ وقد تنتظر الحجوزات المتأخرة هناك إلى الغد.'));
     return r;
   }
   function wiFmt(key,v){ return key==='budget'?'SAR '+Number(v).toLocaleString('en-US'):String(v); }
@@ -3223,42 +3293,43 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
       '<div id="wiOut">'+whatifOut()+'</div></div></div>';
   }
   function wtile(label,val,delta,good){
-    return '<div class="tile"><div class="tt">'+esc(label)+'</div><div class="tv" data-no-i18n>'+esc(val)+'</div><div class="td '+(delta?(good?'up':'down'):'')+'" data-no-i18n>'+esc(delta||'no change')+'</div></div>';
+    return '<div class="tile"><div class="tt">'+esc(label)+'</div><div class="tv" data-no-i18n>'+esc(val)+'</div><div class="td '+(delta?(good?'up':'down'):'')+'" data-no-i18n>'+esc(delta||T('no change','دون تغيير'))+'</div></div>';
   }
   function whatifOut(){
-    var w=state.whatif, r=whatifModel(w), any=w.tech||w.cult||w.budget||w.hv;
+    var w=state.whatif, r=whatifModel(w), any=w.tech||w.cult||w.budget||w.hv, mn=T(' min',' د'), pts=T(' pts',' نقطة');
     var s='<div class="wiout">'+
-      wtile('Al Sad wait',r.wait.toFixed(0)+' min',w.tech?'−'+(ABHA.wait-r.wait).toFixed(0)+' min':'',true)+
-      wtile('Abha revenue recovered',money(r.revRec)+' /wk',w.tech?'+'+Math.round(r.revRec/(ABHA.tgt-ABHA.rev)*100)+'% of gap':'',true)+
-      wtile('Micro TAT on-time',r.micro.toFixed(0)+'%',w.cult?'+'+(r.micro-71).toFixed(0)+' pts':'',true)+
-      wtile('Campaign incremental revenue',money(Math.max(0,r.inc)),w.budget?'+SAR '+money(r.inc):'',true)+
-      wtile('Jeddah West on-time',r.jw.toFixed(0)+'%',w.hv?'+'+(r.jw-64).toFixed(0)+' pts':'',true)+
-      wtile('Enterprise risk score',String(r.risk),any?'−'+(68-r.risk)+' vs now':'',true)+
+      wtile('Al Sad wait',r.wait.toFixed(0)+mn,w.tech?'−'+(ABHA.wait-r.wait).toFixed(0)+mn:'',true)+
+      wtile('Abha revenue recovered',money(r.revRec)+T(' /wk',' / أسبوع'),w.tech?'+'+Math.round(r.revRec/(ABHA.tgt-ABHA.rev)*100)+T('% of gap','% من الفجوة'):'',true)+
+      wtile('Micro TAT on-time',r.micro.toFixed(0)+'%',w.cult?'+'+(r.micro-71).toFixed(0)+pts:'',true)+
+      wtile('Campaign incremental revenue',money(Math.max(0,r.inc)),w.budget?T('+SAR '+money(r.inc),'+'+money(r.inc)+' ريال'):'',true)+
+      wtile('Jeddah West on-time',r.jw.toFixed(0)+'%',w.hv?'+'+(r.jw-64).toFixed(0)+pts:'',true)+
+      wtile('Enterprise risk score',String(r.risk),any?'−'+(68-r.risk)+T(' vs now',' عن الآن'):'',true)+
     '</div>';
-    s+=r.trade.map(function(t){ return '<div class="tradeoff">'+I.warn.replace('<svg','<svg class="ic-14" style="width:14px;height:14px;vertical-align:-2px"')+' '+esc(t)+'</div>'; }).join('');
-    s+='<div class="od-cluster mt-3"><span class="fs-xs muted" data-no-i18n>Model confidence '+r.conf.toFixed(2)+' <span class="confbar"><span class="cf" style="width:'+Math.round(r.conf*100)+'%;background:var(--teal-500)"></span></span></span><span class="grow"></span>'+
+    s+=r.trade.map(function(t){ return '<div class="tradeoff" data-no-i18n>'+I.warn.replace('<svg','<svg class="ic-14" style="width:14px;height:14px;vertical-align:-2px"')+' '+esc(t)+'</div>'; }).join('');
+    s+='<div class="od-cluster mt-3"><span class="fs-xs muted" data-no-i18n>'+T('Model confidence ','ثقة النموذج ')+r.conf.toFixed(2)+' <span class="confbar"><span class="cf" style="width:'+Math.round(r.conf*100)+'%;background:var(--teal-500)"></span></span></span><span class="grow"></span>'+
       '<button class="btn ghost sm" data-wi-reset'+(any?'':' disabled')+'>Reset</button>'+
       '<button class="btn primary sm" data-wi-submit'+(any&&!state.emergencyStop?'':' disabled')+'>'+I.check+' Submit plan for approval</button></div>';
     return s;
   }
   function nextDecisionId(){ var mx=109; state.decisions.forEach(function(d){ var x=parseInt(String(d.id).replace('DQ-',''),10); if(x>mx) mx=x; }); return 'DQ-'+(mx+1); }
   function submitWhatif(){
-    var w=state.whatif, r=whatifModel(w), parts=[], fx=[];
-    if(w.tech){ parts.push(w.tech+' technician'+(w.tech>1?'s':'')+' → Abha'); fx.push({k:'wait',d:-0.08*w.tech,n:24,fix:w.tech>=2},{k:'rev',d:0.08*w.tech,n:22},{k:'csat',d:0.01*w.tech,n:22}); }
-    if(w.cult){ parts.push(w.cult+' cultures → backup line'); fx.push({k:'tat',d:0.012*w.cult,n:22,fix:w.cult>=12}); }
-    if(w.budget){ parts.push('SAR '+money(w.budget)+' → HBA1c'); fx.push({k:'rev',d:w.budget/100000,n:24}); }
-    if(w.hv){ parts.push(w.hv+' HV technician'+(w.hv>1?'s':'')+' → Jeddah West'); fx.push({k:'hv',d:0.05*w.hv,n:22,fix:w.hv>=2},{k:'delay',d:-0.05*w.hv,n:22}); }
-    var d={id:nextDecisionId(), sev:'warn', domain:'Cross-domain plan', agent:'A0', level:3, status:'open',
-      title:'What-if plan: '+parts.join(' · '),
-      change:'Plan simulated by the CEO office with model confidence '+r.conf.toFixed(2)+'.',
-      impact:'Predicted: Al Sad wait '+r.wait.toFixed(0)+' min, Micro TAT '+r.micro.toFixed(0)+'%, Jeddah West on-time '+r.jw.toFixed(0)+'%, enterprise risk '+r.risk+'/100.',
-      rec:'Approve to route each change to its accountable owner; A0 monitors outcomes against this forecast.'+(r.trade.length?' Trade-offs: '+r.trade.join(' '):''),
-      owner:'CEO office', due:'Today', evidence:['what-if model','conf '+r.conf.toFixed(2),'risk '+r.risk], fx:fx};
+    var w=state.whatif, r=whatifModel(w), en=[], ar=[], fx=[];
+    if(w.tech){ en.push(w.tech+' technician'+(w.tech>1?'s':'')+' → Abha'); ar.push(w.tech+' فنيين ← أبها'); fx.push({k:'wait',d:-0.08*w.tech,n:24,fix:w.tech>=2},{k:'rev',d:0.08*w.tech,n:22},{k:'csat',d:0.01*w.tech,n:22}); }
+    if(w.cult){ en.push(w.cult+' cultures → backup line'); ar.push(w.cult+' مزرعة ← الخط الاحتياطي'); fx.push({k:'tat',d:0.012*w.cult,n:22,fix:w.cult>=12}); }
+    if(w.budget){ en.push('SAR '+money(w.budget)+' → HBA1c'); ar.push(money(w.budget)+' ريال ← HBA1c'); fx.push({k:'rev',d:w.budget/100000,n:24}); }
+    if(w.hv){ en.push(w.hv+' HV technician'+(w.hv>1?'s':'')+' → Jeddah West'); ar.push(w.hv+' فنيي زيارات ← غرب جدة'); fx.push({k:'hv',d:0.05*w.hv,n:22,fix:w.hv>=2},{k:'delay',d:-0.05*w.hv,n:22}); }
+    var trade=both(function(){ return whatifModel(w).trade.join(' '); }), c=r.conf.toFixed(2);
+    var d={id:nextDecisionId(), sev:'warn', domain:reg('Cross-domain plan','خطة عابرة للمجالات'), agent:'A0', level:3, status:'open',
+      title:reg('What-if plan: '+en.join(' · '),'خطة محاكاة: '+ar.join(' · ')),
+      change:reg('Plan simulated by the CEO office with model confidence '+c+'.','خطة حاكاها مكتب الرئيس التنفيذي بثقة نموذج '+c+'.'),
+      impact:reg('Predicted: Al Sad wait '+r.wait.toFixed(0)+' min, Micro TAT '+r.micro.toFixed(0)+'%, Jeddah West on-time '+r.jw.toFixed(0)+'%, enterprise risk '+r.risk+'/100.','المتوقع: انتظار السد '+r.wait.toFixed(0)+' دقيقة، والتزام الأحياء الدقيقة '+r.micro.toFixed(0)+'%، والتزام غرب جدة '+r.jw.toFixed(0)+'%، ومخاطر المنشأة '+r.risk+'/100.'),
+      rec:reg('Approve to route each change to its accountable owner; A0 monitors outcomes against this forecast.'+(trade.en?' Trade-offs: '+trade.en:''),'اعتمد لتوجيه كل تغيير إلى مالكه المساءل؛ ويراقب A0 النتائج مقابل هذا التوقع.'+(trade.ar?' المفاضلات: '+trade.ar:'')),
+      owner:'CEO office', due:reg('Today','اليوم'), evidence:[T('what-if model','نموذج المحاكاة'),'conf '+c,'risk '+r.risk], fx:fx};
     state.decisions.unshift(d);
-    log('What-if plan '+d.id+' submitted for approval — '+parts.join(', '));
+    log('What-if plan '+d.id+' submitted for approval — '+en.join(', '));
     pushActivity('A0','route','What-if plan '+d.id+' added to decision queue');
     state.whatif={tech:0,cult:0,budget:0,hv:0};
-    toast('Plan '+d.id+' added to the decision queue for approval.','ok');
+    toast(T('Plan '+d.id+' added to the decision queue for approval.','أُضيفت الخطة '+d.id+' إلى قائمة القرارات للاعتماد.'),'ok');
     softRender();
     return d;
   }
@@ -3270,8 +3341,18 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
   function agentName(id){ var a=AGENTS.filter(function(x){ return x.id===id; })[0]; return a?a.name:''; }
   function openDec(id){ return state.decisions.filter(function(d){ return d.id===id && d.status==='open'; })[0]; }
   function openTickets(){ return state.tickets.filter(function(t){ return t.slaState!=='closed'; }); }
+  function kn(key){ var k=KPI[key]; return T(k.name,k.ar); }
+  function pa(p,f){ return LANG==='ar' && p.ar && p.ar[f] ? p.ar[f] : p[f]; }
   function fcSentence(key){
-    var k=KPI[key], f=fc(key), s='**'+k.name+'** '+fmtV(key,k.v)+' → '+fmtV(key,f.p2)+' in 2h (conf '+f.conf.toFixed(2)+')';
+    var k=KPI[key], f=fc(key), c=f.conf.toFixed(2), s;
+    if(LANG==='ar'){
+      s='**'+k.ar+'** '+fmtV(key,k.v)+' الآن، والمتوقع '+fmtV(key,f.p2)+' خلال ساعتين (ثقة '+c+')';
+      if(f.breached) s+=' — تجاوز حد التنبيه '+fmtV(key,k.crit)+' بالفعل';
+      else if(f.crossMin!=null) s+=' — يُتوقع تجاوز '+fmtV(key,k.crit)+' نحو الساعة '+clockAt(f.crossMin);
+      else if(f.tgtTick!=null) s+=' — يعود إلى المستهدف نحو الساعة '+clockAt(f.tgtTick*SIM_MIN);
+      return s;
+    }
+    s='**'+k.name+'** '+fmtV(key,k.v)+' → '+fmtV(key,f.p2)+' in 2h (conf '+c+')';
     if(f.breached) s+=' — already past the '+fmtV(key,k.crit)+' alert line';
     else if(f.crossMin!=null) s+=' — breach of '+fmtV(key,k.crit)+' predicted ~'+clockAt(f.crossMin);
     else if(f.tgtTick!=null) s+=' — back on target ~'+clockAt(f.tgtTick*SIM_MIN);
@@ -3282,165 +3363,232 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
       .filter(function(x){ return x.f.breached||x.f.crossMin!=null; })
       .sort(function(a,b){ return (a.f.breached?-1:a.f.crossMin)-(b.f.breached?-1:b.f.crossMin); });
   }
-  function preemptAct(key){ return {label:'Pre-empt '+KPI[key].name, preempt:key, primary:1}; }
-  function decAct(id){ return openDec(id)?{label:'Approve '+id, decision:id, primary:1}:null; }
+  function preemptAct(key){ return {label:T('Pre-empt '+KPI[key].name,'استباق: '+KPI[key].ar), preempt:key, primary:1}; }
+  function decAct(id){ return openDec(id)?{label:T('Approve ','اعتماد ')+id, decision:id, primary:1}:null; }
+  function routed(id){ return T('Routed to '+id+' '+agentName(id),'وُجّه إلى '+id+' '+L(agentName(id))); }
 
   var INTENTS=[
-    {re:/diagnos|clinical|interpret.*result|result.*(mean|normal|abnormal)|medical advice|prescri|release.*result|تشخيص|سريري/i, fn:ansClinical},
-    {re:/(change|cut|raise|lower|set).{0,24}price|discount|launch.{0,20}campaign|send.{0,12}(sms|message|whatsapp)|message.{0,10}customers|fire |terminate/i, fn:ansNonDelegable},
-    {re:/what[\s-]?if|if we|simulat|scenario|move \d|reassign \d|shift \d/i, fn:ansWhatif},
-    {re:/changed|since the|since 06|update me/i, fn:ansChanged},
-    {re:/brief|summar|overview|morning|30.second/i, fn:ansBrief},
-    {re:/forecast|predict|next (2|two) hours|outlook|will .*(breach|miss|hit)|going to|projection|توقع/i, fn:ansForecast},
-    {re:/camera|vision|cctv|ppe|queue congestion/i, fn:ansVision},
-    {re:/\blab\b|tat|micro|sample|analy[sz]er|\bqc\b|culture|reagent|مختبر/i, fn:ansLab},
-    {re:/home|visit|technician|route|field|jeddah west|gps/i, fn:ansHome},
-    {re:/branch|abha|olaya|al sad|wait|footfall|revenue|staff|فرع/i, fn:ansBranch},
-    {re:/complain|csat|customer|call cent|satisf|experience/i, fn:ansCX},
-    {re:/campaign|marketing|roi|budget|growth|hba1c|ramadan/i, fn:ansMkt},
-    {re:/sla|ticket|corrective|overdue|escalat|breach/i, fn:ansSla},
-    {re:/source|integration|stale|data quality|health|degrad|api|latency/i, fn:ansHealth},
-    {re:/priorit|attention|focus|should i|urgent|\btop\b|risk|decide|decision/i, fn:ansPriorities},
-    {re:/^(hi|hello|hey|salam|good (morning|afternoon)|مرحبا|السلام)/i, fn:ansHello}
+    {re:/diagnos|clinical|interpret.*result|result.*(mean|normal|abnormal)|medical advice|prescri|release.*result|تشخيص|سريري|تفسير|نتيجة المريض|نتائج المريض|وصفة/i, fn:ansClinical},
+    {re:/(change|cut|raise|lower|set).{0,24}price|discount|launch.{0,20}campaign|send.{0,12}(sms|message|whatsapp)|message.{0,10}customers|fire |terminate|سعر|أسعار|خصم|إطلاق حملة|أرسل|رسالة نصية|رسائل/i, fn:ansNonDelegable},
+    {re:/what[\s-]?if|if we|simulat|scenario|move \d|reassign \d|shift \d|ماذا لو|سيناريو|محاكاة|لو نقلنا|لو حوّلنا/i, fn:ansWhatif},
+    {re:/changed|since the|since 06|update me|تغيّر|تغير|منذ/i, fn:ansChanged},
+    {re:/brief|summar|overview|morning|30.second|موجز|ملخص|لخّص|لخص/i, fn:ansBrief},
+    {re:/forecast|predict|next (2|two) hours|outlook|will .*(breach|miss|hit)|going to|projection|توقع|تنبؤ|الساعتين/i, fn:ansForecast},
+    {re:/camera|vision|cctv|ppe|queue congestion|facial|كاميرا|كاميرات|الرؤية|الوجه/i, fn:ansVision},
+    {re:/\blab\b|tat|micro|sample|analy[sz]er|\bqc\b|culture|reagent|مختبر|المختبر|عينات|زمن الإنجاز|الأحياء الدقيقة|كواشف/i, fn:ansLab},
+    {re:/home|visit|technician|route|field|jeddah west|gps|زيارات|الزيارات|منزلية|فني|فنيين|غرب جدة|مسارات/i, fn:ansHome},
+    {re:/branch|abha|olaya|al sad|wait|footfall|revenue|staff|فرع|فروع|أبها|العليا|انتظار|إيرادات|كوادر/i, fn:ansBranch},
+    {re:/complain|csat|customer|call cent|satisf|experience|شكاوى|شكوى|العملاء|رضا|مركز الاتصال/i, fn:ansCX},
+    {re:/campaign|marketing|roi|budget|growth|hba1c|ramadan|حملة|حملات|تسويق|ميزانية|العائد/i, fn:ansMkt},
+    {re:/sla|ticket|corrective|overdue|escalat|breach|اتفاقي|تذاكر|الإجراءات التصحيحية|تصعيد|متأخرة/i, fn:ansSla},
+    {re:/source|integration|stale|data quality|health|degrad|api|latency|مصادر|تكامل|بيانات|متقادم|تقادم/i, fn:ansHealth},
+    {re:/priorit|attention|focus|should i|urgent|\btop\b|risk|decide|decision|أولوية|أولويات|انتباه|عاجل|قرار|قرارات|مخاطر/i, fn:ansPriorities},
+    {re:/^(hi|hello|hey|salam|good (morning|afternoon)|مرحبا|مرحبًا|السلام|صباح)/i, fn:ansHello}
   ];
   function answer(q){
     for(var i=0;i<INTENTS.length;i++){ if(INTENTS[i].re.test(q)) return INTENTS[i].fn(q); }
     return ansFallback(q);
   }
   function A(o){ o.acts=(o.acts||[]).filter(Boolean); o.level=o.level||2; o.conf=o.conf||0.86; o.sources=o.sources||(o.ev?o.ev.length:3); return o; }
+  function openDecs(){
+    return state.decisions.filter(function(d){ return d.status==='open'; }).sort(function(a,b){ return (a.sev==='crit'?0:a.sev==='warn'?1:2)-(b.sev==='crit'?0:b.sev==='warn'?1:2); });
+  }
 
-  function ansHello(){ return A({agent:'A0', steps:['Identity verified · CEO office','Loaded live context'], text:greetingText(), ev:['9 sources','12 agents'], acts:[{label:'What needs my attention?', ask:'What needs my attention right now?', primary:1}]}); }
+  function ansHello(){ return A({agent:'A0', steps:T(['Identity verified · CEO office','Loaded live context'],['تم التحقق من الهوية · مكتب الرئيس التنفيذي','حُمّل السياق الحي']), text:greetingText(), ev:T(['9 sources','12 agents'],['9 مصادر','12 وكيلًا']), acts:[{label:T('What needs my attention?','ما الذي يحتاج انتباهي؟'), ask:T('What needs my attention right now?','ما الذي يحتاج انتباهي الآن؟'), primary:1}]}); }
   function greetingText(){
-    var open=state.decisions.filter(function(d){ return d.status==='open'; }).length, r=riskiest();
+    var open=openDecs().length, r=riskiest();
+    if(LANG==='ar') return 'مرحبًا. أراقب **9 مصادر** عبر **12 وكيلًا**. عدد القرارات التي تنتظرك الآن: **'+open+'**'+(r.length?(r[0].f.breached?'، و**'+kn(r[0].k)+'** تجاوز حد التنبيه بالفعل':'، وأتوقع أن يتجاوز **'+kn(r[0].k)+'** حد التنبيه نحو الساعة '+clockAt(r[0].f.crossMin)):'')+'.\nاسألني عن العمليات أو التوقعات أو المفاضلات، أو اختر أحد الاقتراحات أدناه.';
     return 'Good day. I\'m watching **9 sources** across **12 agents**. Right now **'+open+' decision'+(open===1?'':'s')+'** await you'+(r.length?', and I predict **'+KPI[r[0].k].name+'** '+(r[0].f.breached?'is already past its alert line':'will breach its alert line around '+clockAt(r[0].f.crossMin)):'')+'.\nAsk me anything about operations, forecasts or trade-offs — or pick a suggestion below.';
   }
   function ansPriorities(){
-    var open=state.decisions.filter(function(d){ return d.status==='open'; }).sort(function(a,b){ return (a.sev==='crit'?0:a.sev==='warn'?1:2)-(b.sev==='crit'?0:b.sev==='warn'?1:2); });
-    var r=riskiest(), br=state.tickets.filter(function(t){ return t.slaState==='breach'; });
-    var txt='Here is what needs you, ranked by severity, urgency and business impact:\n';
-    open.slice(0,3).forEach(function(d,i){ txt+='- **'+(i+1)+'. '+d.id+'** ('+d.agent+', L'+d.level+') — '+d.title+'. Due '+d.due+'.\n'; });
-    if(!open.length) txt+='- No decisions are pending — the queue is clear.\n';
-    if(r.length) txt+='- **Predicted:** '+fcSentence(r[0].k)+'.\n';
-    if(br.length) txt+='- **'+br.length+' SLA breach'+(br.length>1?'es':'')+'** already auto-escalated ('+br.map(function(t){return t.id;}).join(', ')+').\n';
-    txt+='My recommendation: act on **'+(open[0]?open[0].id:(r[0]?KPI[r[0].k].name:'the forecast'))+'** first — it has the highest combined impact.';
-    return A({agent:'A0', level:4, steps:['Routed to A0 Orchestrator','Ranked '+(open.length+openTickets().length)+' open items by severity × urgency × impact','Ran 2-hour forecasts on 6 KPIs','Policy check: recommend only (L4 routing)'],
-      text:txt, ev:open.slice(0,3).map(function(d){return d.id;}).concat(r.length?[KPI[r[0].k].name+' fcst']:[]), acts:[open[0]?decAct(open[0].id):null, r.length?preemptAct(r[0].k):null, {label:'Open orchestrator', nav:'orchestrator'}], conf:0.9});
+    var open=openDecs(), r=riskiest(), br=state.tickets.filter(function(t){ return t.slaState==='breach'; }), txt;
+    if(LANG==='ar'){
+      txt='إليك ما يحتاج إلى قرارك، مرتّبًا حسب الخطورة والإلحاح والأثر على الأعمال:\n';
+      open.slice(0,3).forEach(function(d,i){ txt+='- **'+(i+1)+'. '+d.id+'** ('+d.agent+'، L'+d.level+') — '+L(d.title)+'. الاستحقاق: '+L(d.due)+'.\n'; });
+      if(!open.length) txt+='- لا توجد قرارات معلّقة — القائمة فارغة.\n';
+      if(r.length) txt+='- **متوقع:** '+fcSentence(r[0].k)+'.\n';
+      if(br.length) txt+='- حالات تجاوز اتفاقية الخدمة المصعّدة تلقائيًا: **'+br.length+'** ('+br.map(function(t){return t.id;}).join('، ')+').\n';
+      txt+='توصيتي: ابدأ بـ **'+(open[0]?open[0].id:(r[0]?kn(r[0].k):'التوقع'))+'** — فهو صاحب الأثر المجمّع الأعلى.';
+    } else {
+      txt='Here is what needs you, ranked by severity, urgency and business impact:\n';
+      open.slice(0,3).forEach(function(d,i){ txt+='- **'+(i+1)+'. '+d.id+'** ('+d.agent+', L'+d.level+') — '+d.title+'. Due '+d.due+'.\n'; });
+      if(!open.length) txt+='- No decisions are pending — the queue is clear.\n';
+      if(r.length) txt+='- **Predicted:** '+fcSentence(r[0].k)+'.\n';
+      if(br.length) txt+='- **'+br.length+' SLA breach'+(br.length>1?'es':'')+'** already auto-escalated ('+br.map(function(t){return t.id;}).join(', ')+').\n';
+      txt+='My recommendation: act on **'+(open[0]?open[0].id:(r[0]?KPI[r[0].k].name:'the forecast'))+'** first — it has the highest combined impact.';
+    }
+    var n=open.length+openTickets().length;
+    return A({agent:'A0', level:4, steps:T(['Routed to A0 Orchestrator','Ranked '+n+' open items by severity × urgency × impact','Ran 2-hour forecasts on 6 KPIs','Policy check: recommend only (L4 routing)'],['وُجّه إلى المنسّق A0','رُتّب '+n+' بندًا مفتوحًا حسب الخطورة × الإلحاح × الأثر','شُغّلت توقعات الساعتين على 6 مؤشرات','فحص السياسة: توصية فقط (توجيه L4)']),
+      text:txt, ev:open.slice(0,3).map(function(d){return d.id;}).concat(r.length?[kn(r[0].k)]:[]), acts:[open[0]?decAct(open[0].id):null, r.length?preemptAct(r[0].k):null, {label:T('Open orchestrator','فتح المنسّق'), nav:'orchestrator'}], conf:0.9});
   }
   function ansBrief(){
-    var open=state.decisions.filter(function(d){ return d.status==='open'; }), r=riskiest();
-    var txt='**Daily CEO brief — '+nowTime().slice(0,5)+'**\n';
-    txt+='- **Revenue** '+fmtV('rev',KPI.rev.v)+' vs 430k plan; '+fcSentence('rev').replace(/^\*\*[^*]+\*\* /,'forecast ')+'.\n';
-    txt+='- **Lab** — '+fcSentence('tat')+'. Microbiology is the bottleneck (61 pending).\n';
-    txt+='- **Branches** — Al Sad (Abha) at 81% of target; Olaya wait 24 min on 6 of 8 staff.\n';
-    txt+='- **Home visit** — '+fcSentence('hv')+'.\n';
-    txt+='- **Customers** — CSAT '+fmtV('csat',KPI.csat.v)+'; waiting time is the top complaint theme (48).\n';
-    txt+='**'+open.length+' decision'+(open.length===1?'':'s')+'** need you today'+(r.length?'; the most urgent predicted risk is **'+KPI[r[0].k].name+'**':'')+'.';
+    var open=openDecs(), r=riskiest(), txt;
+    if(LANG==='ar'){
+      txt='**الموجز التنفيذي اليومي — '+nowTime().slice(0,5)+'**\n'+
+        '- '+fcSentence('rev')+' (الخطة 430 ألف ريال).\n'+
+        '- **المختبر:** '+fcSentence('tat')+'. الأحياء الدقيقة هي عنق الزجاجة (61 عينة معلّقة).\n'+
+        '- **الفروع:** فرع السد (أبها) عند 81% من المستهدف؛ وانتظار العليا 24 دقيقة مع 6 من 8 موظفين.\n'+
+        '- **الزيارات المنزلية:** '+fcSentence('hv')+'.\n'+
+        '- **العملاء:** رضا العملاء '+fmtV('csat',KPI.csat.v)+'؛ ووقت الانتظار هو أبرز موضوع للشكاوى (48).\n'+
+        'عدد القرارات التي تحتاجك اليوم: **'+open.length+'**'+(r.length?'؛ وأكثر المخاطر المتوقعة إلحاحًا: **'+kn(r[0].k)+'**':'')+'.';
+    } else {
+      txt='**Daily CEO brief — '+nowTime().slice(0,5)+'**\n'+
+        '- '+fcSentence('rev')+' (plan 430k).\n'+
+        '- **Lab**: '+fcSentence('tat')+'. Microbiology is the bottleneck (61 pending).\n'+
+        '- **Branches**: Al Sad (Abha) at 81% of target; Olaya wait 24 min on 6 of 8 staff.\n'+
+        '- **Home visit**: '+fcSentence('hv')+'.\n'+
+        '- **Customers**: CSAT '+fmtV('csat',KPI.csat.v)+'; waiting time is the top complaint theme (48).\n'+
+        '**'+open.length+' decision'+(open.length===1?'':'s')+'** need you today'+(r.length?'; the most urgent predicted risk is **'+KPI[r[0].k].name+'**':'')+'.';
+    }
     log('Daily CEO brief regenerated by A1');
-    return A({agent:'A1', steps:['Routed to A1 Executive Intelligence','Collected signals from A2, A3, A4, A5, A6','Ran forecasts on 6 KPIs','Deduplicated with S2 (9 merges)','Composed brief · no clinical data referenced'],
-      text:txt, ev:['LIS','ERP','CRM','GPS','HR roster'], acts:[{label:'What needs my attention?', ask:'What needs my attention right now?', primary:1},{label:'Show forecasts', ask:'Forecast the next 2 hours'}], conf:0.9});
+    return A({agent:'A1', steps:T(['Routed to A1 Executive Intelligence','Collected signals from A2, A3, A4, A5, A6','Ran forecasts on 6 KPIs','Deduplicated with S2 (9 merges)','Composed brief · no clinical data referenced'],['وُجّه إلى الذكاء التنفيذي A1','جُمعت الإشارات من A2 وA3 وA4 وA5 وA6','شُغّلت التوقعات على 6 مؤشرات','أُزيل التكرار عبر S2 (9 عمليات دمج)','صيغ الموجز · دون الرجوع إلى أي بيانات سريرية']),
+      text:txt, ev:['LIS','ERP','CRM','GPS',T('HR roster','جدول الموارد البشرية')], acts:[{label:T('What needs my attention?','ما الذي يحتاج انتباهي؟'), ask:T('What needs my attention right now?','ما الذي يحتاج انتباهي الآن؟'), primary:1},{label:T('Show forecasts','عرض التوقعات'), ask:T('Forecast the next 2 hours','توقع الساعتين القادمتين')}], conf:0.9});
   }
   function ansChanged(){
     var created=state.tickets.filter(function(t){ return !TICKETS.some(function(o){ return o.id===t.id; }); });
     var acted=state.nudges.filter(function(n){ return n.status==='acted'; }).length;
     var moved=FC_KEYS.map(function(k){ var x=KPI[k], d=x.v-x.hist[Math.max(0,x.hist.length-13)]; return {k:k,d:d,good:x.hi?d>0:d<0}; }).filter(function(m){ return Math.abs(m.d)>=(KPI[m.k].dp?0.3:1); });
-    var txt='Since the 06:45 brief:\n';
-    txt+='- **'+state.handled+'** decision'+(state.handled===1?'':'s')+' dispositioned by you, **'+created.length+'** new corrective action'+(created.length===1?'':'s')+' opened, **'+state.nudges.length+'** proactive insight'+(state.nudges.length===1?'':'s')+' raised ('+acted+' actioned).\n';
-    moved.forEach(function(m){ txt+='- **'+KPI[m.k].name+'** '+(m.d>0?'up':'down')+' '+Math.abs(m.d).toFixed(KPI[m.k].dp)+' in the last hour — '+(m.good?'improving':'worsening')+'.\n'; });
-    if(!moved.length) txt+='- KPIs have been broadly stable over the last hour.\n';
-    var r=riskiest(); if(r.length) txt+='Next risk to watch: '+fcSentence(r[0].k)+'.';
-    return A({agent:'A1', steps:['Routed to A1 Executive Intelligence','Diffed state against 06:45 snapshot','Read audit trail ('+state.audit.length+' entries)'], text:txt, ev:['audit trail','activity feed','KPI history'], acts:[r.length?preemptAct(r[0].k):null,{label:'Open brief', nav:'brief'}]});
+    var r=riskiest(), txt;
+    if(LANG==='ar'){
+      txt='منذ موجز الساعة 06:45:\n- قرارات بتَّ فيها: **'+state.handled+'**، إجراءات تصحيحية جديدة: **'+created.length+'**، تنبيهات استباقية: **'+state.nudges.length+'** (نُفّذ منها '+acted+').\n';
+      moved.forEach(function(m){ txt+='- **'+kn(m.k)+'** '+(m.d>0?'ارتفع':'انخفض')+' بمقدار '+Math.abs(m.d).toFixed(KPI[m.k].dp)+' خلال الساعة الأخيرة — '+(m.good?'تحسّن':'تراجع')+'.\n'; });
+      if(!moved.length) txt+='- ظلت المؤشرات مستقرة إجمالًا خلال الساعة الأخيرة.\n';
+      if(r.length) txt+='الخطر التالي الذي يستحق المتابعة: '+fcSentence(r[0].k)+'.';
+    } else {
+      txt='Since the 06:45 brief:\n- **'+state.handled+'** decision'+(state.handled===1?'':'s')+' dispositioned by you, **'+created.length+'** new corrective action'+(created.length===1?'':'s')+' opened, **'+state.nudges.length+'** proactive insight'+(state.nudges.length===1?'':'s')+' raised ('+acted+' actioned).\n';
+      moved.forEach(function(m){ txt+='- **'+KPI[m.k].name+'** '+(m.d>0?'up':'down')+' '+Math.abs(m.d).toFixed(KPI[m.k].dp)+' in the last hour — '+(m.good?'improving':'worsening')+'.\n'; });
+      if(!moved.length) txt+='- KPIs have been broadly stable over the last hour.\n';
+      if(r.length) txt+='Next risk to watch: '+fcSentence(r[0].k)+'.';
+    }
+    return A({agent:'A1', steps:T(['Routed to A1 Executive Intelligence','Diffed state against 06:45 snapshot','Read audit trail ('+state.audit.length+' entries)'],['وُجّه إلى الذكاء التنفيذي A1','قورنت الحالة بلقطة 06:45','قُرئ سجل التدقيق ('+state.audit.length+' قيدًا)']), text:txt, ev:T(['audit trail','activity feed','KPI history'],['سجل التدقيق','سجل النشاط','تاريخ المؤشرات']), acts:[r.length?preemptAct(r[0].k):null,{label:T('Open brief','فتح الموجز'), nav:'brief'}]});
   }
   function kpiFromQ(q){
-    if(/lab|tat|micro/i.test(q)) return 'tat';
-    if(/home|visit/i.test(q)) return 'hv';
-    if(/wait/i.test(q)) return 'wait';
-    if(/sla/i.test(q)) return 'sla';
-    if(/csat|satisf|customer/i.test(q)) return 'csat';
-    if(/revenue|sales/i.test(q)) return 'rev';
+    if(/lab|tat|micro|مختبر|زمن الإنجاز/i.test(q)) return 'tat';
+    if(/home|visit|زيار/i.test(q)) return 'hv';
+    if(/wait|انتظار/i.test(q)) return 'wait';
+    if(/sla|اتفاقي/i.test(q)) return 'sla';
+    if(/csat|satisf|customer|رضا|عملاء/i.test(q)) return 'csat';
+    if(/revenue|sales|إيراد/i.test(q)) return 'rev';
     return null;
   }
   function ansForecast(q){
     var key=kpiFromQ(q);
     if(key){
-      var f=fc(key), k=KPI[key], p=PREEMPT[key];
-      var txt=fcSentence(key)+'.\n- Method: regression on the last hour of 5-minute signals, blended with the expected effect of '+(k.boosts.length?k.boosts.length+' approved action'+(k.boosts.length>1?'s':''):'no approved actions yet')+'.\n- 80% band at 2h: ±'+f.band[HORIZON].toFixed(1)+'.\n- Driver: '+p.why+'\n';
-      txt+=(f.level==='risk'||f.level==='watch')?'Recommended pre-emptive action: **'+p.action+'** (L3, requires your approval).':'No pre-emptive action is needed right now; I will alert you if the trajectory changes.';
+      var f=fc(key), k=KPI[key], p=PREEMPT[key], act=(f.level==='risk'||f.level==='watch'), txt;
+      if(LANG==='ar') txt=fcSentence(key)+'.\n- المنهجية: انحدار على آخر ساعة من إشارات كل 5 دقائق، مدموج مع الأثر المتوقع '+(k.boosts.length?'لعدد '+k.boosts.length+' من الإجراءات المعتمدة':'دون إجراءات معتمدة حتى الآن')+'.\n- نطاق الثقة 80% بعد ساعتين: ±'+f.band[HORIZON].toFixed(1)+'.\n- المحرّك: '+pa(p,'why')+'\n'+(act?'الإجراء الاستباقي الموصى به: **'+pa(p,'action')+'** (L3، يتطلب اعتمادك).':'لا حاجة لإجراء استباقي الآن؛ سأنبهك إن تغيّر المسار.');
+      else txt=fcSentence(key)+'.\n- Method: regression on the last hour of 5-minute signals, blended with the expected effect of '+(k.boosts.length?k.boosts.length+' approved action'+(k.boosts.length>1?'s':''):'no approved actions yet')+'.\n- 80% band at 2h: ±'+f.band[HORIZON].toFixed(1)+'.\n- Driver: '+p.why+'\n'+(act?'Recommended pre-emptive action: **'+p.action+'** (L3, requires your approval).':'No pre-emptive action is needed right now; I will alert you if the trajectory changes.');
       state.fcSel=FC_KEYS.indexOf(key)>=0?key:state.fcSel;
-      return A({agent:p.agent, level:3, steps:['Routed to '+p.agent+' '+agentName(p.agent),'Pulled 12 points of 5-min history','Fitted trend + action-effect model','Computed 80% confidence band'], text:txt, ev:p.ev, acts:[(f.level==='risk'||f.level==='watch')?preemptAct(key):null,{label:'Show chart', nav:'brief'}], conf:f.conf});
+      return A({agent:p.agent, level:3, steps:T([routed(p.agent),'Pulled 12 points of 5-min history','Fitted trend + action-effect model','Computed 80% confidence band'],[routed(p.agent),'سُحبت 12 نقطة من تاريخ كل 5 دقائق','طُبّق نموذج الاتجاه وأثر الإجراءات','حُسب نطاق الثقة 80%']), text:txt, ev:pa(p,'ev'), acts:[act?preemptAct(key):null,{label:T('Show chart','عرض الرسم'), nav:'brief'}], conf:f.conf});
     }
-    var txt2='2-hour outlook across the enterprise:\n'+FC_KEYS.map(function(k){ return '- '+fcSentence(k); }).join('\n');
-    var r=riskiest();
-    txt2+='\n'+(r.length?'Highest-risk trajectory: **'+KPI[r[0].k].name+'**. Pre-empting now is cheaper than recovering after the breach.':'No KPI is forecast to breach its alert line in the next 2 hours.');
-    return A({agent:'A0', level:3, steps:['Fan-out to A2, A3, A4, A5, S2','Ran 6 forecast models','Ranked by time-to-breach'], text:txt2, ev:FC_KEYS.map(function(k){ return KPI[k].name; }).slice(0,4), acts:[r.length?preemptAct(r[0].k):null,{label:'Open forecast chart', nav:'brief'}], conf:0.84});
+    var r=riskiest(), txt2;
+    if(LANG==='ar') txt2='توقعات الساعتين القادمتين على مستوى المنشأة:\n'+FC_KEYS.map(function(k){ return '- '+fcSentence(k); }).join('\n')+'\n'+(r.length?'المسار الأعلى خطورة: **'+kn(r[0].k)+'**. الاستباق الآن أقل كلفة من التعافي بعد التجاوز.':'لا يُتوقع أن يتجاوز أي مؤشر حد التنبيه خلال الساعتين القادمتين.');
+    else txt2='2-hour outlook across the enterprise:\n'+FC_KEYS.map(function(k){ return '- '+fcSentence(k); }).join('\n')+'\n'+(r.length?'Highest-risk trajectory: **'+KPI[r[0].k].name+'**. Pre-empting now is cheaper than recovering after the breach.':'No KPI is forecast to breach its alert line in the next 2 hours.');
+    return A({agent:'A0', level:3, steps:T(['Fan-out to A2, A3, A4, A5, S2','Ran 6 forecast models','Ranked by time-to-breach'],['وُزّع الطلب على A2 وA3 وA4 وA5 وS2','شُغّلت 6 نماذج توقع','رُتّبت حسب الوقت حتى التجاوز']), text:txt2, ev:FC_KEYS.slice(0,4).map(kn), acts:[r.length?preemptAct(r[0].k):null,{label:T('Open forecast chart','فتح رسم التوقع'), nav:'brief'}], conf:0.84});
   }
   function ansLab(){
-    var micro=LAB_DEPTS.filter(function(d){ return d.name==='Microbiology'; })[0];
-    var txt='Laboratory is the most time-critical area today.\n- '+fcSentence('tat')+'.\n- **Microbiology** '+micro.tat+'% on time with **'+micro.pend+' pending** and '+micro.delay+' delayed — the Micro Inoculator is in maintenance.\n- Molecular PCR-2 has a QC warning; Chemistry is running at 88%.\n';
-    txt+='Recommendation: '+(openDec('DQ-105')?'approve **DQ-105** (approved weekend maintenance slot + reroute 18 cultures).':'reroute pending cultures to the backup line; DQ-105 is already dispositioned.')+'\n_Operational only — A3 does not interpret or release clinical results._';
-    return A({agent:'A3', level:3, steps:['Routed to A3 Main Laboratory & TAT','Read LIS queue and analyzer status','Checked QC log (no clinical data referenced)','Forecast TAT on-time for 2h','Policy check: L3 — recommend and open tasks'], text:txt.replace(/_([^_]+)_/g,'$1'), ev:['LIS','Micro pend '+micro.pend,'AN-3 maint','QC log'], acts:[decAct('DQ-105')||preemptAct('tat'),{label:'Open lab view', nav:'lab'}], conf:fc('tat').conf});
+    var micro=LAB_DEPTS.filter(function(d){ return d.name==='Microbiology'; })[0], has=openDec('DQ-105'), txt;
+    if(LANG==='ar') txt='المختبر هو المجال الأكثر حساسية للوقت اليوم.\n- '+fcSentence('tat')+'.\n- **الأحياء الدقيقة** '+micro.tat+'% في الموعد، مع **'+micro.pend+' عينة معلّقة** و'+micro.delay+' متأخرة — جهاز التلقيح في الصيانة.\n- جهاز PCR-2 الجزيئي عليه تحذير جودة، والكيمياء تعمل عند 88%.\nالتوصية: '+(has?'اعتماد **DQ-105** (نافذة الصيانة المعتمدة وإعادة توجيه 18 مزرعة).':'إعادة توجيه المزارع المعلّقة إلى الخط الاحتياطي؛ فقد بُتّ في DQ-105.')+'\nتشغيلي فقط — لا يفسّر A3 النتائج السريرية ولا يعتمد إصدارها.';
+    else txt='Laboratory is the most time-critical area today.\n- '+fcSentence('tat')+'.\n- **Microbiology** '+micro.tat+'% on time with **'+micro.pend+' pending** and '+micro.delay+' delayed — the Micro Inoculator is in maintenance.\n- Molecular PCR-2 has a QC warning; Chemistry is running at 88%.\nRecommendation: '+(has?'approve **DQ-105** (approved weekend maintenance slot + reroute 18 cultures).':'reroute pending cultures to the backup line; DQ-105 is already dispositioned.')+'\nOperational only — A3 does not interpret or release clinical results.';
+    return A({agent:'A3', level:3, steps:T([routed('A3'),'Read LIS queue and analyzer status','Checked QC log (no clinical data referenced)','Forecast TAT on-time for 2h','Policy check: L3 — recommend and open tasks'],[routed('A3'),'قُرئت قائمة LIS وحالة الأجهزة','رُوجع سجل الجودة (دون بيانات سريرية)','توقع التزام زمن الإنجاز لساعتين','فحص السياسة: L3 — توصية وفتح مهام']), text:txt, ev:['LIS','Micro pend '+micro.pend,'AN-3 maint','QC log'], acts:[decAct('DQ-105')||preemptAct('tat'),{label:T('Open lab view','فتح شاشة المختبر'), nav:'lab'}], conf:fc('tat').conf});
   }
   function ansBranch(){
-    var txt='Branch network: '+fcSentence('wait')+'.\n- **Al Sad (Abha)** — revenue SAR '+money(ABHA.rev)+' vs '+money(ABHA.tgt)+' target (81%), staff '+ABHA.staff+'/'+ABHA.need+', wait '+ABHA.wait+' min, '+ABHA.cmp+' complaints. Footfall, wait and complaints share one staffing root cause.\n- **Olaya** — 6 of 8 staff, 24-min wait; CA-2041 has breached SLA.\n- **Al Rawdah** — 31-min wait, highest in the network.\n';
-    txt+='Recommendation: '+(openDec('DQ-104')?'approve **DQ-104** — reassign 2 technicians to Abha for 5 days and hold pricing changes.':'deploy floater staff to Olaya ahead of the evening peak.')+' You can test the staffing trade-off in the what-if simulator first.';
-    return A({agent:'A2', level:3, steps:['Routed to A2 Branch Operations','Joined ERP revenue, HR roster, queue and CRM signals','Correlated 4 signals per branch','Policy check: staffing changes need approval'], text:txt, ev:['BR-ABH-01','BR-RUH-01','HR roster','queue model'], acts:[decAct('DQ-104')||preemptAct('wait'),{label:'Try 2 technicians in what-if', whatif:{tech:2}},{label:'Open branches', nav:'branch'}], conf:0.87});
+    var has=openDec('DQ-104'), txt;
+    if(LANG==='ar') txt='شبكة الفروع: '+fcSentence('wait')+'.\n- **السد (أبها)** — الإيرادات '+money(ABHA.rev)+' ريال مقابل مستهدف '+money(ABHA.tgt)+' (81%)، الكوادر '+ABHA.staff+' من '+ABHA.need+'، الانتظار '+ABHA.wait+' دقيقة، و'+ABHA.cmp+' شكاوى. تراجع الزوار والانتظار والشكاوى يجمعها سبب جذري واحد متعلق بالكوادر.\n- **العليا** — 6 من 8 موظفين وانتظار 24 دقيقة؛ وقد تجاوز CA-2041 اتفاقية الخدمة.\n- **الروضة** — انتظار 31 دقيقة، الأعلى في الشبكة.\nالتوصية: '+(has?'اعتماد **DQ-104** — إعادة إسناد فنيَّين إلى أبها لخمسة أيام وتعليق تغييرات الأسعار.':'نشر موظفين متنقلين في العليا قبل ذروة المساء.')+' يمكنك اختبار مفاضلة الكوادر في محاكي السيناريوهات أولًا.';
+    else txt='Branch network: '+fcSentence('wait')+'.\n- **Al Sad (Abha)** — revenue SAR '+money(ABHA.rev)+' vs '+money(ABHA.tgt)+' target (81%), staff '+ABHA.staff+'/'+ABHA.need+', wait '+ABHA.wait+' min, '+ABHA.cmp+' complaints. Footfall, wait and complaints share one staffing root cause.\n- **Olaya** — 6 of 8 staff, 24-min wait; CA-2041 has breached SLA.\n- **Al Rawdah** — 31-min wait, highest in the network.\nRecommendation: '+(has?'approve **DQ-104** — reassign 2 technicians to Abha for 5 days and hold pricing changes.':'deploy floater staff to Olaya ahead of the evening peak.')+' You can test the staffing trade-off in the what-if simulator first.';
+    return A({agent:'A2', level:3, steps:T([routed('A2'),'Joined ERP revenue, HR roster, queue and CRM signals','Correlated 4 signals per branch','Policy check: staffing changes need approval'],[routed('A2'),'رُبطت إيرادات ERP وجدول الموارد البشرية والطوابير وإشارات CRM','رُبطت 4 إشارات لكل فرع','فحص السياسة: تغييرات الكوادر تتطلب اعتمادًا']), text:txt, ev:['BR-ABH-01','BR-RUH-01',T('HR roster','جدول الموارد البشرية'),T('queue model','نموذج الطوابير')], acts:[decAct('DQ-104')||preemptAct('wait'),{label:T('Try 2 technicians in what-if','جرّب فنيَّين في المحاكي'), whatif:{tech:2}},{label:T('Open branches','فتح الفروع'), nav:'branch'}], conf:0.87});
   }
   function ansHome(){
-    var txt='Home visit: '+fcSentence('hv')+'.\n- **Jeddah West** is at 96% zone load; HV-231 (S. Al-Dosari) is at 64% on-time.\n- **North Riyadh** has idle capacity (HV-118 at 82% productivity).\n'+(state.degraded?'- GPS/HR sources are **stale**, so dispatch is held at L2 and confidence is reduced.\n':'')+'Recommendation: **'+PREEMPT.hv.action+'**. Route recommendations are automated; dispatch changes follow approved rules.';
-    return A({agent:'A4', level:state.degraded?2:3, steps:['Routed to A4 Home Visit Operations','Read GPS ETAs for 74 technicians','Computed zone load','Policy check: dispatch rule set R-4'], text:txt, ev:PREEMPT.hv.ev, acts:[preemptAct('hv'),{label:'Try 3 technicians in what-if', whatif:{hv:3}},{label:'Open home visit', nav:'home'}], conf:fc('hv').conf});
+    var txt;
+    if(LANG==='ar') txt='الزيارات المنزلية: '+fcSentence('hv')+'.\n- **غرب جدة** عند 96% من حمل المنطقة؛ والفني HV-231 (س. الدوسري) عند 64% التزام بالمواعيد.\n- **شمال الرياض** لديه سعة غير مستغلة (HV-118 عند 82% إنتاجية).\n'+(state.degraded?'- مصدرا GPS والموارد البشرية **متقادمان**، لذا يُثبَّت الإسناد عند L2 وتنخفض الثقة.\n':'')+'التوصية: **'+pa(PREEMPT.hv,'action')+'**. توصيات المسارات مؤتمتة؛ أما تغييرات الإسناد فتتبع القواعد المعتمدة.';
+    else txt='Home visit: '+fcSentence('hv')+'.\n- **Jeddah West** is at 96% zone load; HV-231 (S. Al-Dosari) is at 64% on-time.\n- **North Riyadh** has idle capacity (HV-118 at 82% productivity).\n'+(state.degraded?'- GPS/HR sources are **stale**, so dispatch is held at L2 and confidence is reduced.\n':'')+'Recommendation: **'+PREEMPT.hv.action+'**. Route recommendations are automated; dispatch changes follow approved rules.';
+    return A({agent:'A4', level:state.degraded?2:3, steps:T([routed('A4'),'Read GPS ETAs for 74 technicians','Computed zone load','Policy check: dispatch rule set R-4'],[routed('A4'),'قُرئت أوقات الوصول عبر GPS لـ 74 فنيًا','حُسب حمل المناطق','فحص السياسة: قواعد الإسناد R-4']), text:txt, ev:pa(PREEMPT.hv,'ev'), acts:[preemptAct('hv'),{label:T('Try 3 technicians in what-if','جرّب 3 فنيين في المحاكي'), whatif:{hv:3}},{label:T('Open home visit','فتح الزيارات المنزلية'), nav:'home'}], conf:fc('hv').conf});
   }
   function ansCX(){
-    var txt='Customer experience: '+fcSentence('csat')+'.\nTop complaint themes this week:\n'+CX_THEMES.slice(0,3).map(function(t){ return '- **'+t.theme+'** — '+t.n+' cases ('+(t.trend>0?'+':'')+t.trend+'), owner '+t.owner; }).join('\n')+'\nWaiting time links back to branch staffing (A2). Recommendation: **'+PREEMPT.csat.action+'** — customer messages only use approved templates and human authorization.';
-    return A({agent:'A5', level:3, steps:['Routed to A5 Customer Experience','Clustered 58 open complaints','Linked themes to branch and lab signals','Policy check: sensitive comms need approval'], text:txt, ev:['CRM','58 complaints','6 themes'], acts:[preemptAct('csat'),{label:'Open customer experience', nav:'cx'}], conf:0.85});
+    var th=CX_THEMES.slice(0,3), txt;
+    if(LANG==='ar') txt='تجربة العملاء: '+fcSentence('csat')+'.\nأبرز مواضيع الشكاوى هذا الأسبوع:\n'+th.map(function(t){ return '- **'+L(t.theme)+'** — '+t.n+' حالة ('+(t.trend>0?'+':'')+t.trend+')، المالك: '+L(t.owner); }).join('\n')+'\nيرتبط وقت الانتظار بكوادر الفروع (A2). التوصية: **'+pa(PREEMPT.csat,'action')+'** — لا تُرسل رسائل للعملاء إلا بنماذج معتمدة وتفويض بشري.';
+    else txt='Customer experience: '+fcSentence('csat')+'.\nTop complaint themes this week:\n'+th.map(function(t){ return '- **'+t.theme+'** — '+t.n+' cases ('+(t.trend>0?'+':'')+t.trend+'), owner '+t.owner; }).join('\n')+'\nWaiting time links back to branch staffing (A2). Recommendation: **'+PREEMPT.csat.action+'** — customer messages only use approved templates and human authorization.';
+    return A({agent:'A5', level:3, steps:T([routed('A5'),'Clustered 58 open complaints','Linked themes to branch and lab signals','Policy check: sensitive comms need approval'],[routed('A5'),'جُمّعت 58 شكوى مفتوحة','رُبطت المواضيع بإشارات الفروع والمختبر','فحص السياسة: التواصل الحساس يتطلب اعتمادًا']), text:txt, ev:['CRM',T('58 complaints','58 شكوى'),T('6 themes','6 مواضيع')], acts:[preemptAct('csat'),{label:T('Open customer experience','فتح تجربة العملاء'), nav:'cx'}], conf:0.85});
   }
   function ansMkt(){
     var ram=CAMPAIGNS.filter(function(c){ return c.rec==='stop'; })[0], hb=CAMPAIGNS.filter(function(c){ return /HBA1c/.test(c.name); })[0];
-    var inc=whatifModel({tech:0,cult:0,budget:18000,hv:0}).inc;
-    var txt='Marketing: 5 active campaigns, blended ROI 3.3x.\n- **'+ram.name+'** — ROI '+ram.roi+'x on SAR '+money(ram.spend)+', conversion '+ram.conv+'%. Recommend **Stop**.\n- **'+hb.name+'** — ROI '+hb.roi+'x, conversion '+hb.conv+'% and rising.\n- Shifting SAR 18k is predicted to add **SAR '+money(inc)+'** incremental revenue (diminishing returns applied).\nWatch-out: HbA1c demand is already +31%, which pressures reagent stock (A3). Budget moves need Finance approval — A6 will not change spend itself.';
-    return A({agent:'A6', level:2, steps:['Routed to A6 Marketing & Growth','Attributed revenue across 5 campaigns','Fitted marginal-return curve','Cross-checked A3 reagent stock','Policy check: non-delegable budget decision'], text:txt, ev:['CMP-3 ROI 0.4x','CMP-4 ROI 3.5x','attribution model'], acts:[decAct('DQ-106'),{label:'Simulate SAR 18k shift', whatif:{budget:18000}},{label:'Open marketing', nav:'mkt'}], conf:0.82});
+    var inc=whatifModel({tech:0,cult:0,budget:18000,hv:0}).inc, txt;
+    if(LANG==='ar') txt='التسويق: 5 حملات نشطة بعائد مجمّع 3.3x.\n- **'+L(ram.name)+'** — عائد '+ram.roi+'x على إنفاق '+money(ram.spend)+' ريال، وتحويل '+ram.conv+'%. التوصية: **إيقاف**.\n- **'+L(hb.name)+'** — عائد '+hb.roi+'x وتحويل '+hb.conv+'% في ارتفاع.\n- يُتوقع أن يضيف تحويل 18 ألف ريال **'+money(inc)+' ريال** إيرادات إضافية (مع احتساب تناقص العائد).\nتنبيه: الطلب على HbA1c مرتفع أصلًا بنسبة 31%، ما يضغط على مخزون الكواشف (A3). نقل الميزانية يتطلب اعتماد المالية — لن يغيّر A6 الإنفاق بنفسه.';
+    else txt='Marketing: 5 active campaigns, blended ROI 3.3x.\n- **'+ram.name+'** — ROI '+ram.roi+'x on SAR '+money(ram.spend)+', conversion '+ram.conv+'%. Recommend **Stop**.\n- **'+hb.name+'** — ROI '+hb.roi+'x, conversion '+hb.conv+'% and rising.\n- Shifting SAR 18k is predicted to add **SAR '+money(inc)+'** incremental revenue (diminishing returns applied).\nWatch-out: HbA1c demand is already +31%, which pressures reagent stock (A3). Budget moves need Finance approval — A6 will not change spend itself.';
+    return A({agent:'A6', level:2, steps:T([routed('A6'),'Attributed revenue across 5 campaigns','Fitted marginal-return curve','Cross-checked A3 reagent stock','Policy check: non-delegable budget decision'],[routed('A6'),'نُسبت الإيرادات عبر 5 حملات','طُبّق منحنى العائد الحدّي','رُوجع مخزون الكواشف لدى A3','فحص السياسة: قرار الميزانية غير قابل للتفويض']), text:txt, ev:['CMP-3 ROI 0.4x','CMP-4 ROI 3.5x',T('attribution model','نموذج الإسناد')], acts:[decAct('DQ-106'),{label:T('Simulate SAR 18k shift','محاكاة تحويل 18 ألف ريال'), whatif:{budget:18000}},{label:T('Open marketing','فتح التسويق'), nav:'mkt'}], conf:0.82});
   }
   function ansSla(){
     var ot=openTickets(), br=ot.filter(function(t){ return t.slaState==='breach'; }), due=ot.filter(function(t){ return t.dueAt!=null && t.dueAt-Date.now()<3600000 && t.slaState!=='breach'; });
-    var txt='Corrective actions: **'+ot.length+' open**, **'+br.length+'** breached, **'+due.length+'** due within the hour.\n'+br.concat(due).slice(0,4).map(function(t){ return '- **'+t.id+'** '+t.title+' — '+t.owner+' · '+slaText(t); }).join('\n')+'\n'+fcSentence('sla')+'. S2 escalates breaches automatically; closure requires evidence validation.';
+    var list=br.concat(due).slice(0,4), txt;
+    if(LANG==='ar') txt='الإجراءات التصحيحية: **'+ot.length+'** مفتوحة، منها **'+br.length+'** تجاوزت الاتفاقية و**'+due.length+'** مستحقة خلال الساعة.\n'+list.map(function(t){ return '- **'+t.id+'** '+L(t.title)+' — '+L(t.owner)+' · '+slaText(t); }).join('\n')+'\n'+fcSentence('sla')+'. يصعّد S2 التجاوزات تلقائيًا، ويتطلب الإغلاق التحقق من الدليل.';
+    else txt='Corrective actions: **'+ot.length+' open**, **'+br.length+'** breached, **'+due.length+'** due within the hour.\n'+list.map(function(t){ return '- **'+t.id+'** '+t.title+' — '+t.owner+' · '+slaText(t); }).join('\n')+'\n'+fcSentence('sla')+'. S2 escalates breaches automatically; closure requires evidence validation.';
     var top=br[0]||due[0];
-    return A({agent:'S2', level:4, steps:['Routed to S2 Alert & Corrective Action','Evaluated SLA timers on '+ot.length+' tickets','Checked escalation matrix'], text:txt, ev:br.concat(due).slice(0,3).map(function(t){ return t.id; }), acts:[top?{label:'Open '+top.id, ticket:top.id, primary:1}:null, preemptAct('sla'), {label:'Open corrective actions', nav:'actions'}], conf:0.93});
+    return A({agent:'S2', level:4, steps:T([routed('S2'),'Evaluated SLA timers on '+ot.length+' tickets','Checked escalation matrix'],[routed('S2'),'قُيّمت مؤقتات الاتفاقية لـ '+ot.length+' تذكرة','رُوجعت مصفوفة التصعيد']), text:txt, ev:list.slice(0,3).map(function(t){ return t.id; }), acts:[top?{label:T('Open ','فتح ')+top.id, ticket:top.id, primary:1}:null, preemptAct('sla'), {label:T('Open corrective actions','فتح الإجراءات التصحيحية'), nav:'actions'}], conf:0.93});
   }
   function ansHealth(){
-    var txt=(state.degraded?'**Degraded:** HR/Attendance (26 min) and CCTV/VMS are stale. Dependent outputs (A2 staffing, A4 dispatch, S3 events) are flagged degraded and will not drive automated assignment.\n':'All 9 sources are within freshness policy.\n')+'- Data-quality score '+fmtV('dq',KPI.dq.v)+' on critical fields.\n- Integration uptime 99.6% (30-day), mean time to recover 6.4 min.\n- Watch: CRM p95 latency has been rising.\nYou can run the recovery drill to see degradation and automated retry end to end.';
-    return A({agent:'A12', level:5, steps:['Routed to A12 Integration & Data Health','Polled freshness on 9 sources','Scored data quality'], text:txt, ev:['S1 freshness','9 sources','DQ score'], acts:[{label:'Run recovery drill', act:'poc', primary:1},{label:'Open integration health', nav:'health'}], conf:0.95});
+    var txt;
+    if(LANG==='ar') txt=(state.degraded?'**متدهور:** مصدرا الحضور والانصراف (26 دقيقة) والكاميرات متقادمان. المخرجات المعتمدة عليهما (كوادر A2، إسناد A4، أحداث S3) موسومة بالتدهور ولن تقود أي إسناد آلي.\n':'جميع المصادر التسعة ضمن سياسة الحداثة.\n')+'- مؤشر جودة البيانات '+fmtV('dq',KPI.dq.v)+' على الحقول الحرجة.\n- جاهزية التكامل 99.6% (30 يومًا)، ومتوسط زمن التعافي 6.4 دقيقة.\n- للمتابعة: زمن استجابة CRM في ارتفاع.\nيمكنك تشغيل تمرين التعافي لرؤية التدهور وإعادة المحاولة الآلية من البداية إلى النهاية.';
+    else txt=(state.degraded?'**Degraded:** HR/Attendance (26 min) and CCTV/VMS are stale. Dependent outputs (A2 staffing, A4 dispatch, S3 events) are flagged degraded and will not drive automated assignment.\n':'All 9 sources are within freshness policy.\n')+'- Data-quality score '+fmtV('dq',KPI.dq.v)+' on critical fields.\n- Integration uptime 99.6% (30-day), mean time to recover 6.4 min.\n- Watch: CRM p95 latency has been rising.\nYou can run the recovery drill to see degradation and automated retry end to end.';
+    return A({agent:'A12', level:5, steps:T([routed('A12'),'Polled freshness on 9 sources','Scored data quality'],[routed('A12'),'فُحصت حداثة 9 مصادر','قُيّمت جودة البيانات']), text:txt, ev:T(['S1 freshness','9 sources','DQ score'],['حداثة S1','9 مصادر','مؤشر الجودة']), acts:[{label:T('Run recovery drill','تشغيل تمرين التعافي'), act:'poc', primary:1},{label:T('Open integration health','فتح صحة التكامل'), nav:'health'}], conf:0.95});
   }
   function ansVision(){
-    return A({agent:'S3', level:2, steps:['Routed to S3 AI Vision Event Service','Filtered events by confidence ≥ '+state.visionThreshold.toFixed(2),'Privacy check: metadata only'], text:'Vision events are privacy-aware and event-driven: **no faces, identities or raw video** reach the agents.\n- Top open events: no receptionist at Olaya desk (0.94), queue congestion at Tahlia (0.88), unattended desk at Quba (0.92).\n- Precision 94%, false-positive rate 6% (target ≤ 8%).\nEvents become corrective actions only after the confidence gate and owner routing.', ev:['CAM-OL-03','CAM-TH-07','CAM-QB-01'], acts:[{label:'Open vision events', nav:'vision', primary:1}], conf:0.88});
+    var th=state.visionThreshold.toFixed(2);
+    return A({agent:'S3', level:2, steps:T([routed('S3'),'Filtered events by confidence ≥ '+th,'Privacy check: metadata only'],[routed('S3'),'رُشّحت الأحداث بثقة ≥ '+th,'فحص الخصوصية: بيانات وصفية فقط']),
+      text:T('Vision events are privacy-aware and event-driven: **no faces, identities or raw video** reach the agents.\n- Top open events: no receptionist at Olaya desk (0.94), queue congestion at Tahlia (0.88), unattended desk at Quba (0.92).\n- Precision 94%, false-positive rate 6% (target ≤ 8%).\nEvents become corrective actions only after the confidence gate and owner routing.',
+        'أحداث الرؤية قائمة على الأحداث وتحترم الخصوصية: **لا تصل أي وجوه أو هويات أو فيديو خام** إلى الوكلاء.\n- أبرز الأحداث المفتوحة: لا موظف استقبال في مكتب العليا (0.94)، ازدحام طابور في التحلية (0.88)، مكتب خدمة دون موظف في قباء (0.92).\n- الدقة 94%، ومعدل الإنذارات الكاذبة 6% (المستهدف ≤ 8%).\nلا تتحول الأحداث إلى إجراءات تصحيحية إلا بعد بوابة الثقة وتوجيهها إلى المالك.'),
+      ev:['CAM-OL-03','CAM-TH-07','CAM-QB-01'], acts:[{label:T('Open vision events','فتح أحداث الرؤية'), nav:'vision', primary:1}], conf:0.88});
   }
   function ansWhatif(q){
     var w={tech:0,cult:0,budget:0,hv:0}, num=(q.match(/\d[\d,]*/)||[])[0], n=num?parseInt(num.replace(/,/g,''),10):0;
-    if(/abha|al sad|branch/i.test(q)) w.tech=Math.min(4,n||2);
-    else if(/cultur|backup|lab|micro/i.test(q)) w.cult=Math.min(40,n||18);
-    else if(/budget|campaign|sar|hba1c/i.test(q)) w.budget=Math.min(35000,(n&&n<100?n*1000:n)||15000);
-    else if(/home|jeddah|technician|visit/i.test(q)) w.hv=Math.min(6,n||3);
+    if(/abha|al sad|branch|أبها|فرع/i.test(q)) w.tech=Math.min(4,n||2);
+    else if(/cultur|backup|lab|micro|مزارع|مزرعة|المختبر|الاحتياطي/i.test(q)) w.cult=Math.min(40,n||18);
+    else if(/budget|campaign|sar|hba1c|ميزانية|حملة|ريال/i.test(q)) w.budget=Math.min(35000,(n&&n<100?n*1000:n)||15000);
+    else if(/home|jeddah|technician|visit|جدة|فني|زيارات/i.test(q)) w.hv=Math.min(6,n||3);
     else w={tech:2,cult:18,budget:15000,hv:3};
-    var r=whatifModel(w);
-    var txt='Simulated scenario ('+Object.keys(w).filter(function(k){ return w[k]; }).map(function(k){ return k==='tech'?w.tech+' technicians → Abha':k==='cult'?w.cult+' cultures → backup':k==='budget'?'SAR '+money(w.budget)+' → HBA1c':w.hv+' HV techs → Jeddah West'; }).join(', ')+'):\n';
-    if(w.tech) txt+='- Al Sad wait **'+ABHA.wait+' → '+r.wait.toFixed(0)+' min**, revenue recovered **SAR '+money(r.revRec)+'/week**.\n';
-    if(w.cult) txt+='- Microbiology on-time **71% → '+r.micro.toFixed(0)+'%**; backup line load '+Math.round(r.backup)+'%.\n';
-    if(w.budget) txt+='- Incremental campaign revenue **SAR '+money(r.inc)+'**.\n';
-    if(w.hv) txt+='- Jeddah West on-time **64% → '+r.jw.toFixed(0)+'%**.\n';
-    txt+='- Enterprise risk score **68 → '+r.risk+'** (model confidence '+r.conf.toFixed(2)+').\n';
-    if(r.trade.length) txt+='Trade-offs: '+r.trade.join(' ');
-    return A({agent:'A0', level:3, steps:['Parsed scenario levers','Ran what-if model across A2, A3, A4, A6','Checked cross-domain side effects'], text:txt, ev:['what-if model','BR-ABH-01','Micro queue'], acts:[{label:'Open in simulator', whatif:w, primary:1}], conf:r.conf});
+    var r=whatifModel(w), parts=[], txt;
+    if(LANG==='ar'){
+      if(w.tech) parts.push(w.tech+' فنيين ← أبها'); if(w.cult) parts.push(w.cult+' مزرعة ← الخط الاحتياطي'); if(w.budget) parts.push(money(w.budget)+' ريال ← HBA1c'); if(w.hv) parts.push(w.hv+' فنيي زيارات ← غرب جدة');
+      txt='السيناريو المُحاكى ('+parts.join('، ')+'):\n';
+      if(w.tech) txt+='- انتظار السد **'+ABHA.wait+' ← '+r.wait.toFixed(0)+' دقيقة**، واستعادة إيرادات **'+money(r.revRec)+' ريال أسبوعيًا**.\n';
+      if(w.cult) txt+='- التزام الأحياء الدقيقة **71% ← '+r.micro.toFixed(0)+'%**؛ وحمل الخط الاحتياطي '+Math.round(r.backup)+'%.\n';
+      if(w.budget) txt+='- إيرادات إضافية للحملة **'+money(r.inc)+' ريال**.\n';
+      if(w.hv) txt+='- التزام غرب جدة **64% ← '+r.jw.toFixed(0)+'%**.\n';
+      txt+='- مؤشر مخاطر المنشأة **68 ← '+r.risk+'** (ثقة النموذج '+r.conf.toFixed(2)+').\n';
+      if(r.trade.length) txt+='المفاضلات: '+r.trade.join(' ');
+    } else {
+      if(w.tech) parts.push(w.tech+' technicians → Abha'); if(w.cult) parts.push(w.cult+' cultures → backup'); if(w.budget) parts.push('SAR '+money(w.budget)+' → HBA1c'); if(w.hv) parts.push(w.hv+' HV techs → Jeddah West');
+      txt='Simulated scenario ('+parts.join(', ')+'):\n';
+      if(w.tech) txt+='- Al Sad wait **'+ABHA.wait+' → '+r.wait.toFixed(0)+' min**, revenue recovered **SAR '+money(r.revRec)+'/week**.\n';
+      if(w.cult) txt+='- Microbiology on-time **71% → '+r.micro.toFixed(0)+'%**; backup line load '+Math.round(r.backup)+'%.\n';
+      if(w.budget) txt+='- Incremental campaign revenue **SAR '+money(r.inc)+'**.\n';
+      if(w.hv) txt+='- Jeddah West on-time **64% → '+r.jw.toFixed(0)+'%**.\n';
+      txt+='- Enterprise risk score **68 → '+r.risk+'** (model confidence '+r.conf.toFixed(2)+').\n';
+      if(r.trade.length) txt+='Trade-offs: '+r.trade.join(' ');
+    }
+    return A({agent:'A0', level:3, steps:T(['Parsed scenario levers','Ran what-if model across A2, A3, A4, A6','Checked cross-domain side effects'],['حُلّلت روافع السيناريو','شُغّل نموذج المحاكاة عبر A2 وA3 وA4 وA6','فُحصت الآثار الجانبية بين المجالات']), text:txt, ev:[T('what-if model','نموذج المحاكاة'),'BR-ABH-01','Micro queue'], acts:[{label:T('Open in simulator','فتح في المحاكي'), whatif:w, primary:1}], conf:r.conf});
   }
   function ansClinical(){
-    return A({agent:'A0', level:0, steps:['Routed to A0 policy engine',{t:'Policy: clinical interpretation is non-delegable — blocked',block:1}], text:'I can\'t help with that. Clinical diagnosis, result interpretation and result release are **outside every agent\'s authority** — they stay with licensed clinicians under Wareed\'s clinical governance.\nWhat I can do: report **operational** status — TAT, sample queues, analyzer and QC state — without referencing clinical data.', ev:['policy P-01','non-delegable'], acts:[{label:'Show lab operations', ask:'How is the lab doing?', primary:1}], conf:0.99, sources:1});
+    return A({agent:'A0', level:0, steps:[T('Routed to A0 policy engine','وُجّه إلى محرك السياسات A0'),{t:T('Policy: clinical interpretation is non-delegable — blocked','السياسة: التفسير السريري غير قابل للتفويض — تم الحظر'),block:1}],
+      text:T('I can\'t help with that. Clinical diagnosis, result interpretation and result release are **outside every agent\'s authority** — they stay with licensed clinicians under Wareed\'s clinical governance.\nWhat I can do: report **operational** status — TAT, sample queues, analyzer and QC state — without referencing clinical data.',
+        'لا يمكنني المساعدة في ذلك. التشخيص السريري وتفسير النتائج واعتماد إصدارها **خارج صلاحيات جميع الوكلاء** — وتبقى لدى الأطباء المرخّصين ضمن الحوكمة السريرية في وريد.\nما يمكنني فعله: عرض الحالة **التشغيلية** — زمن الإنجاز وطوابير العينات وحالة الأجهزة والجودة — دون الرجوع إلى أي بيانات سريرية.'),
+      ev:[T('policy P-01','السياسة P-01'),T('non-delegable','غير قابل للتفويض')], acts:[{label:T('Show lab operations','عرض عمليات المختبر'), ask:T('How is the lab doing?','كيف حال المختبر؟'), primary:1}], conf:0.99, sources:1});
   }
   function ansNonDelegable(){
-    return A({agent:'A0', level:2, steps:['Routed to A0 policy engine',{t:'Policy: pricing / campaign / customer messaging require human authority',block:1}], text:'Agents can **prepare** that recommendation with evidence, but they can\'t execute it. Pricing, campaign launches, sensitive customer communication and HR actions are **non-delegable** — they need an authorized human approval and use approved templates.\nI can draft the recommendation for your decision queue or simulate its impact first.', ev:['authority matrix','policy P-04'], acts:[{label:'Open governance', nav:'govern', primary:1},{label:'Simulate impact', ask:'What if we shift SAR 15k to HBA1c?'}], conf:0.98, sources:1});
+    return A({agent:'A0', level:2, steps:[T('Routed to A0 policy engine','وُجّه إلى محرك السياسات A0'),{t:T('Policy: pricing / campaign / customer messaging require human authority','السياسة: الأسعار والحملات ومراسلة العملاء تتطلب صلاحية بشرية'),block:1}],
+      text:T('Agents can **prepare** that recommendation with evidence, but they can\'t execute it. Pricing, campaign launches, sensitive customer communication and HR actions are **non-delegable** — they need an authorized human approval and use approved templates.\nI can draft the recommendation for your decision queue or simulate its impact first.',
+        'يستطيع الوكلاء **إعداد** هذه التوصية مع الأدلة، لكنهم لا يستطيعون تنفيذها. الأسعار وإطلاق الحملات والتواصل الحساس مع العملاء وإجراءات الموارد البشرية **غير قابلة للتفويض** — وتتطلب اعتمادًا بشريًا مفوّضًا ونماذج معتمدة.\nيمكنني صياغة التوصية لقائمة قراراتك أو محاكاة أثرها أولًا.'),
+      ev:[T('authority matrix','مصفوفة الصلاحيات'),T('policy P-04','السياسة P-04')], acts:[{label:T('Open governance','فتح الحوكمة'), nav:'govern', primary:1},{label:T('Simulate impact','محاكاة الأثر'), ask:T('What if we shift SAR 15k to HBA1c?','ماذا لو حوّلنا 15 ألف ريال إلى HBA1c؟')}], conf:0.98, sources:1});
   }
   function ansFallback(){
-    return A({agent:'A0', steps:['Routed to A0 Orchestrator','No specific domain matched — summarizing'], text:'I didn\'t map that to a specific domain, so here is the live picture:\n- '+fcSentence('tat')+'\n- '+fcSentence('wait')+'\n- '+fcSentence('hv')+'\nTry asking about the lab, branches, home visits, customers, campaigns, SLAs, data health — or a what-if such as "what if we move 2 technicians to Abha?".', ev:['live KPIs'], acts:[{label:'What needs my attention?', ask:'What needs my attention right now?', primary:1}], conf:0.7});
+    return A({agent:'A0', steps:T(['Routed to A0 Orchestrator','No specific domain matched — summarizing'],['وُجّه إلى المنسّق A0','لم يُطابق مجال محدد — يجري التلخيص']),
+      text:T('I didn\'t map that to a specific domain, so here is the live picture:\n','لم أربط سؤالك بمجال محدد، لذا إليك الصورة الحية:\n')+'- '+fcSentence('tat')+'\n- '+fcSentence('wait')+'\n- '+fcSentence('hv')+'\n'+T('Try asking about the lab, branches, home visits, customers, campaigns, SLAs, data health — or a what-if such as "what if we move 2 technicians to Abha?".','جرّب السؤال عن المختبر أو الفروع أو الزيارات المنزلية أو العملاء أو الحملات أو اتفاقيات الخدمة أو صحة البيانات — أو سيناريو مثل «ماذا لو نقلنا فنيَّين إلى أبها؟».'),
+      ev:[T('live KPIs','المؤشرات الحية')], acts:[{label:T('What needs my attention?','ما الذي يحتاج انتباهي؟'), ask:T('What needs my attention right now?','ما الذي يحتاج انتباهي الآن؟'), primary:1}], conf:0.7});
   }
   function explainNudge(n){
-    if(n.key){ var a=ansForecast(KPI[n.key].name+' forecast'); return a; }
-    var w=n.why||{text:n.body, ev:[]};
-    return A({agent:n.agent, level:3, steps:['Routed to '+n.agent+' '+agentName(n.agent),'Retrieved '+(w.ev.length||2)+' evidence items','Replayed detection logic','Policy check: recommend / open task only'], text:w.text, ev:w.ev, acts:n.status==='new'?[{label:n.acts[0].label, nudge:n.id, primary:1, mut:n.acts[0].mut}]:[], conf:n.conf});
+    if(n.key) return ansForecast(KPI[n.key].name+' forecast');
+    var w=n.why||{text:n.body, ev:[]}, wt=LANG==='ar' && n.ar && n.ar.why ? n.ar.why : w.text;
+    var first=n.acts[0];
+    return A({agent:n.agent, level:3, steps:T([routed(n.agent),'Retrieved '+(w.ev.length||2)+' evidence items','Replayed detection logic','Policy check: recommend / open task only'],[routed(n.agent),'استُرجع '+(w.ev.length||2)+' من عناصر الأدلة','أُعيد تشغيل منطق الرصد','فحص السياسة: توصية أو فتح مهمة فقط']), text:wt, ev:w.ev,
+      acts:(n.status==='new'||n.status==='pending')&&n.acts.length>1?[{label:nlabel(first), nudge:n.id, primary:1, mut:first.mut}]:[], conf:n.conf});
   }
 
   function md(s){
@@ -3463,7 +3611,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
   function stream(ans){
     cp.busy=true; $('cpSend').disabled=true;
     var node=document.createElement('div'); node.className='msg ai'+(ans.proactive?' pro':'');
-    node.innerHTML='<div class="mhd">'+(ans.proactive?'<span class="tag purple">'+esc(ans.proactive)+'</span>':'')+'<span class="tag teal">'+esc(ans.agent)+'</span><span>'+esc(agentName(ans.agent))+'</span></div><ul class="thinking" aria-label="Agent reasoning steps"></ul><div class="txt"></div>';
+    node.innerHTML='<div class="mhd">'+(ans.proactive?'<span class="tag purple">'+esc(L(ans.proactive))+'</span>':'')+'<span class="tag teal">'+esc(ans.agent)+'</span><span>'+esc(L(agentName(ans.agent)))+'</span></div><ul class="thinking" aria-label="Agent reasoning steps"></ul><div class="txt"></div>';
     $('cpLog').appendChild(node); cpScroll();
     var ul=node.querySelector('.thinking'), txt=node.querySelector('.txt'), i=0, prev=null;
     function step(){
@@ -3486,7 +3634,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     function finish(){
       var f='';
       if(ans.acts.length) f+='<div class="acts">'+ans.acts.map(actBtn).join('')+'</div>';
-      f+='<div class="mft"><span>Confidence '+ans.conf.toFixed(2)+'</span><span class="confbar"><span class="cf" style="width:'+Math.round(ans.conf*100)+'%;background:var(--teal-500)"></span></span><span>· '+(ans.level?'L'+ans.level+' authority':'blocked by policy')+' · '+ans.sources+' source'+(ans.sources===1?'':'s')+' · trace '+Math.random().toString(16).slice(2,8)+'</span></div>';
+      f+='<div class="mft"><span>'+T('Confidence ','الثقة ')+ans.conf.toFixed(2)+'</span><span class="confbar"><span class="cf" style="width:'+Math.round(ans.conf*100)+'%;background:var(--teal-500)"></span></span><span>· '+(ans.level?T('L'+ans.level+' authority','صلاحية L'+ans.level):T('blocked by policy','محظور بالسياسة'))+' · '+T(ans.sources+' source'+(ans.sources===1?'':'s'),'المصادر: '+ans.sources)+' · '+T('trace ','الأثر ')+Math.random().toString(16).slice(2,8)+'</span></div>';
       if(ans.ev && ans.ev.length) f='<div class="evidence">'+ans.ev.map(function(e){ return '<span class="ev">'+esc(e)+'</span>'; }).join('')+'</div>'+f;
       txt.insertAdjacentHTML('afterend',f);
       cp.busy=false; $('cpSend').disabled=false; cpScroll();
@@ -3518,7 +3666,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
   };
   function renderSug(){
     var list=SUGGEST[state.view]||['What needs my attention right now?','Forecast the next 2 hours','Can you interpret this patient\'s result?'];
-    $('cpSug').innerHTML=list.map(function(s){ return '<button type="button" class="chip" data-cp-ask="'+esc(s)+'">'+esc(s)+'</button>'; }).join('');
+    $('cpSug').innerHTML=list.map(function(s){ s=L(s); return '<button type="button" class="chip" data-cp-ask="'+esc(s)+'">'+esc(s)+'</button>'; }).join('');
   }
   function openCopilot(){
     var p=$('copilot');
@@ -3582,7 +3730,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
   $('simBtn').addEventListener('click',function(){
     state.sim.on=!state.sim.on; paintSimBtn();
     log('Live simulation '+(state.sim.on?'resumed':'paused'));
-    toast(state.sim.on?'Live simulation resumed.':'Live simulation paused — values frozen.', state.sim.on?'ok':'');
+    toast(state.sim.on?T('Live simulation resumed.','استُؤنفت المحاكاة الحية.'):T('Live simulation paused — values frozen.','أُوقفت المحاكاة الحية — القيم مجمّدة.'), state.sim.on?'ok':'');
   });
   setInterval(function(){ if(state.sim.on && !document.hidden) simTick(); }, TICK_MS);
 
@@ -3617,32 +3765,46 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
       body:'Moves 14 routine samples behind incoming STAT work. No result or clinical data is touched.', fx:[{k:'tat',d:0.08,n:14}],
       why:{text:'Queue re-prioritisation is pre-approved under workflow **W-2** (L2). It is purely operational — no clinical interpretation or result release.', ev:['STAT +34%','Chem 88%','workflow W-2']}}
   ];
+  var AUTO_AR=[
+    {title:'إعادة ترتيب 4 مسارات في غرب جدة حول إغلاق طريق', body:'تُبقي 5 من 6 زيارات معرّضة للتأخر في موعدها. لا يُعاد حجز أي عميل؛ وتُحدَّث أوقات الوصول تلقائيًا.',
+      why:'تُظهر بيانات المرور الحية إغلاق مسار على **طريق الملك عبدالله**. ست زيارات في غرب جدة تستخدم هذا الممر خلال 90 دقيقة.\n- إعادة ترتيب المسارات معتمدة مسبقًا بموجب القاعدة **R-4** (L2) — دون أي تغيير في الإسناد أو الكوادر أو العملاء\n- يمكنك الإلغاء خلال نافذة الثواني العشر أو التراجع خلال 30 ثانية بعدها'},
+    {title:'تصعيد الإجراءات التصحيحية الداخلة في ساعتها الأخيرة', body:'يُصعَّد ملاك الإجراءات المستحقة خلال 60 دقيقة مستوى واحدًا وفق مصفوفة الخطورة المعتمدة.',
+      why:'الإجراءات في ساعتها الأخيرة تتجاوز الاتفاقية بنحو ثلاثة أضعاف غيرها. التصعيد مستوى واحدًا معتمد مسبقًا بموجب المصفوفة **E-2** (L2).\n- لا تُغلق أي تذكرة ولا يُعاد إسنادها خارج السياسة'},
+    {title:'إعادة محاولة مزامنة CRM وتحويل القراءة إلى النسخة السليمة', body:'زمن الاستجابة p95 لـ CRM عند 640 ملّي ثانية، ونسخة القراءة سليمة. عمليات الكتابة لا تتأثر.',
+      why:'إعادة المحاولة والتحويل إلى نسخة القراءة خطوتان قياسيتان في دليل التشغيل (**IR-3**، L1). تحافظان على حداثة إشارات العملاء لدى A5 دون المساس بسجلات العملاء.'},
+    {title:'دمج 3 تنبيهات مكررة عن وقت الانتظار في استثناء واحد', body:'نفس الفرع ونفس نافذة الثلاثين دقيقة ونفس السبب. يتلقى الملاك تنبيهًا واحدًا بدل ثلاثة.',
+      why:'إزالة التكرار بموجب القاعدة **D-1** (L1) تحدّ من إرهاق التنبيهات — انخفضت التنبيهات المكررة 31% في التجربة. وتبقى التنبيهات المدمجة في سجل التدقيق.'},
+    {title:'إعادة ترتيب أولويات طابور الكيمياء لحماية العينات العاجلة', body:'تُنقل 14 عينة روتينية خلف الأعمال العاجلة الواردة. لا تُمس أي نتيجة أو بيانات سريرية.',
+      why:'إعادة ترتيب الطابور معتمدة مسبقًا بموجب سير العمل **W-2** (L2). وهي تشغيلية بحتة — دون أي تفسير سريري أو إصدار للنتائج.'}
+  ];
+  AUTO_POOL.forEach(function(s,i){ s.ar=AUTO_AR[i]; });
   function autoNudge(force){
     if(!force && (!state.sim.on || state.visible.length>=2)) return false;
     var list=AUTO_POOL.filter(function(a){ return !a.cond || a.cond(); });
     if(!force && !list.length) return false;
     state.sim.autoIx=(state.sim.autoIx||0)+1;
     var src=force||list[state.sim.autoIx%list.length];
-    var n={agent:src.agent, level:'info', title:src.title, body:src.body, conf:src.conf, why:src.why, policy:src.policy, lvl:src.lvl, fx:src.fx};
+    var n={agent:src.agent, level:'info', title:src.title, body:src.body, ar:{title:src.ar.title, body:src.ar.body, why:src.ar.why}, conf:src.conf, why:src.why, policy:src.policy, lvl:src.lvl, fx:src.fx};
     if(state.autonomy && !state.emergencyStop){
       n.kind='Auto-executing · L'+src.lvl; n.status0='pending'; n.left=AUTO_SECS;
       n.acts=[{label:'Cancel', a:'cancel'},{label:'Why?', a:'ask'}];
     } else {
       n.kind='Suggested · L'+src.lvl;
       n.body+=state.emergencyStop?' Held: the emergency stop is engaged.':' Auto-execution is off, so this needs your approval.';
+      n.ar.body+=state.emergencyStop?' معلّق: الإيقاف الطارئ مفعّل.':' التنفيذ التلقائي متوقف، لذا يتطلب اعتمادك.';
       n.acts=[{label:'Approve & run', a:'runauto', primary:1, mut:1},{label:'Why?', a:'ask'}];
     }
     raiseNudge(n);
     return true;
   }
   function execAuto(n,approved){
-    followUp(n.agent+' '+(approved?'approved':'auto')+'-action', n.fx);
+    followUp({en:n.agent+' '+(approved?'approved':'auto')+'-action', ar:(approved?'الإجراء المعتمد لـ ':'الإجراء التلقائي لـ ')+n.agent}, n.fx);
     applyEffects(n.fx);
     n.status='executed'; n.kind=(approved?'Executed (approved)':'Auto-executed')+' · L'+n.lvl; n.undoUntil=Date.now()+UNDO_MS;
     n.acts=[{label:'Undo', a:'undo'},{label:'Why?', a:'ask'}];
     log(n.agent+(approved?' executed after CEO approval':' auto-executed under '+n.policy)+' (L'+n.lvl+') — '+n.title);
     pushActivity(n.agent,'ok',(approved?'Executed: ':'Auto-executed: ')+n.title);
-    toast(n.agent+' '+(approved?'executed':'auto-executed')+': '+n.title+'.','ok');
+    toast(T(n.agent+' '+(approved?'executed':'auto-executed')+': '+n.title+'.',n.agent+' '+(approved?'نفّذ':'نفّذ تلقائيًا')+': '+nt(n,'title')+'.'),'ok');
     setTimeout(function(){ dismissNudge(n.id,true); },12000);
     refreshNudgeUIs(); paintLive();
   }
@@ -3668,14 +3830,14 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
       if(n.status!=='pending') return true;
       n.status='cancelled'; n.kind='Cancelled by CEO office';
       log('CEO cancelled '+n.agent+' auto-action — '+n.title); pushActivity(n.agent,'dedup','Auto-action cancelled by CEO office: '+n.title);
-      toast('Cancelled — '+n.agent+' will not run this action.',''); dismissNudge(n.id); return true;
+      toast(T('Cancelled — '+n.agent+' will not run this action.','أُلغي — لن ينفّذ '+n.agent+' هذا الإجراء.'),''); dismissNudge(n.id); return true;
     }
     if(a.a==='undo'){
-      if(Date.now()>n.undoUntil){ toast('The 30-second undo window has closed — open a corrective action instead.','warn'); return true; }
+      if(Date.now()>n.undoUntil){ toast(T('The 30-second undo window has closed — open a corrective action instead.','انتهت نافذة التراجع البالغة 30 ثانية — افتح إجراءً تصحيحيًا بدلًا من ذلك.'),'warn'); return true; }
       applyEffects(n.fx.map(function(e){ return {k:e.k, d:-e.d, n:e.n}; }));
       n.status='undone'; n.kind='Undone by CEO office'; n.acts=[{label:'Why?', a:'ask'}];
       log('CEO undid '+n.agent+' auto-action — '+n.title); pushActivity(n.agent,'warn','Auto-action undone: '+n.title);
-      toast('Undone — the action has been rolled back.','warn'); dismissNudge(n.id); paintLive(); return true;
+      toast(T('Undone — the action has been rolled back.','تم التراجع — أُعيد الإجراء.'),'warn'); dismissNudge(n.id); paintLive(); return true;
     }
     if(a.a==='runauto'){
       if(state.emergencyStop){ toast('Emergency stop engaged — agent actions suspended.','err'); return true; }
@@ -3694,13 +3856,14 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
   function runFollowups(){
     state.followups=state.followups.filter(function(f){
       if(state.sim.tick<f.at) return true;
-      var txt='Follow-up on **'+f.label+'** — the forecast after the action:\n';
+      var lb=typeof f.label==='string'?f.label:T(f.label.en,f.label.ar);
+      var txt=T('Follow-up on **'+lb+'** — the forecast after the action:\n','متابعة **'+lb+'** — التوقع بعد الإجراء:\n');
       f.keys.forEach(function(k,i){
         var x=fc(k), b=f.before[i], better=KPI[k].hi? x.p2>b : x.p2<b;
-        txt+='- '+fcSentence(k)+'. The 2h projection '+(better?'improved':'moved')+' from '+fmtV(k,b)+' to **'+fmtV(k,x.p2)+'**.\n';
+        txt+='- '+fcSentence(k)+T('. The 2h projection '+(better?'improved':'moved')+' from '+fmtV(k,b)+' to **'+fmtV(k,x.p2)+'**.\n','. '+(better?'تحسّن':'تغيّر')+' إسقاط الساعتين من '+fmtV(k,b)+' إلى **'+fmtV(k,x.p2)+'**.\n');
       });
-      txt+='I will keep comparing outcomes with this forecast and flag any drift.';
-      cpProactive(A({agent:'A0', level:3, steps:['Re-ran forecasts after the action','Compared with the pre-action projection'], text:txt, ev:f.keys.map(function(k){ return KPI[k].name; }), acts:[{label:'Open forecast chart', nav:'brief'}], conf:0.88}),'Follow-up');
+      txt+=T('I will keep comparing outcomes with this forecast and flag any drift.','سأواصل مقارنة النتائج بهذا التوقع وأنبّه إلى أي انحراف.');
+      cpProactive(A({agent:'A0', level:3, steps:T(['Re-ran forecasts after the action','Compared with the pre-action projection'],['أُعيد تشغيل التوقعات بعد الإجراء','قورن بإسقاط ما قبل الإجراء']), text:txt, ev:f.keys.map(kn), acts:[{label:T('Open forecast chart','فتح رسم التوقع'), nav:'brief'}], conf:0.88}),'Follow-up');
       return false;
     });
   }
@@ -3713,7 +3876,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     cp.pending.push(ans); if(cp.pending.length>4) cp.pending.shift();
     updateCpBadge();
   }
-  function updateCpBadge(){ var b=$('cpDot'), c=cp.pending.length; b.hidden=!c; b.textContent=c; $('cpBtn').setAttribute('title', c?'Wareed AI has '+c+' new insight'+(c>1?'s':''):'Ask Wareed AI'); }
+  function updateCpBadge(){ var b=$('cpDot'), c=cp.pending.length; b.hidden=!c; b.textContent=c; $('cpBtn').setAttribute('title', c?T('Wareed AI has '+c+' new insight'+(c>1?'s':''),'لدى وريد الذكي رؤى جديدة: '+c):T('Ask Wareed AI','اسأل وريد الذكي')); }
   function flushPending(){
     if(cp.busy || !cp.pending.length || !$('copilot').classList.contains('show')) return;
     var it=cp.pending.shift(); updateCpBadge();
@@ -3721,13 +3884,13 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
   }
   var VIEW_ANS={branch:ansBranch, lab:ansLab, home:ansHome, cx:ansCX, mkt:ansMkt, actions:ansSla, health:ansHealth, vision:ansVision, orchestrator:ansPriorities};
   function onViewChange(v){
-    var nav=NAV.filter(function(x){ return x.view===v; })[0], title=nav?nav.title:v, a;
+    var nav=NAV.filter(function(x){ return x.view===v; })[0], title=L(nav?nav.title:v), a;
     if(VIEW_ANS[v]){
       a=VIEW_ANS[v]('');
-      a.text='You opened **'+title+'**. Here is what '+a.agent+' is seeing right now:\n'+a.text;
+      a.text=T('You opened **'+title+'**. Here is what '+a.agent+' is seeing right now:\n','فتحت **'+title+'**. إليك ما يرصده '+a.agent+' الآن:\n')+a.text;
     } else {
       var sp=insightSpec(v); if(!sp) return;
-      a=A({agent:sp.agent, level:2, steps:['Routed to '+sp.agent+' '+agentName(sp.agent),'Read live session evidence'], text:'You opened **'+title+'**. '+sp.text, ev:sp.ev||['audit trail','live state'], acts:sp.acts.slice(), conf:sp.conf});
+      a=A({agent:sp.agent, level:2, steps:[routed(sp.agent),T('Read live session evidence','قُرئت أدلة الجلسة الحية')], text:T('You opened **'+title+'**. ','فتحت **'+title+'**. ')+sp.text, ev:sp.ev||[T('audit trail','سجل التدقيق'),T('live state','الحالة الحية')], acts:sp.acts.slice(), conf:sp.conf});
     }
     a.viewKey=v;
     a.acts=a.acts.filter(function(x){ return x.nav!==v; });
@@ -3749,53 +3912,73 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     s.preempt=fresh.filter(function(t){ return /^(Pre-emptive|Auto-opened)/.test(t.title); }).length;
     return s;
   }
+  /* the five agentic capabilities the prototype proves on screen, with live session status */
+  function capabilitiesShown(){
+    var s=sessionStats();
+    return [
+      {en:'Predictive forecasting', ar:'التنبؤ الاستباقي', rfp:'1, 9', step:2, on:true,
+        what:'Every live KPI carries a 2-hour forecast with a confidence band; breach times are predicted before they happen.', whatAr:'لكل مؤشر حي توقع لساعتين مع نطاق ثقة، ويُتنبأ بوقت التجاوز قبل حدوثه.'},
+      {en:'Proactive agent alerts', ar:'تنبيهات استباقية من الوكلاء', rfp:'2, 10', step:9, on:s.alerts>0,
+        what:'Agents raise alerts unprompted, open L3 tasks when a KPI crosses its alert line and brief the CEO on every page.', whatAr:'يرفع الوكلاء التنبيهات دون طلب، ويفتحون مهام L3 عند تجاوز المؤشر حد التنبيه، ويقدمون موجزًا للرئيس التنفيذي في كل صفحة.'},
+      {en:'Human-on-the-loop autonomy', ar:'استقلالية بإشراف بشري', rfp:'7', step:4, on:s.auto+s.cancelled>0,
+        what:'Pre-approved L1–L2 actions run after a 10-second cancel window with 30-second undo; the emergency stop holds them.', whatAr:'تُنفَّذ إجراءات L1–L2 المعتمدة مسبقًا بعد نافذة إلغاء 10 ثوانٍ مع تراجع خلال 30 ثانية، ويعلّقها الإيقاف الطارئ.'},
+      {en:'Conversational copilot with guardrails', ar:'مساعد حواري بضوابط', rfp:'7, 9', step:5, on:s.questions>0,
+        what:'Grounded answers with reasoning steps, evidence and confidence; non-delegable requests are refused.', whatAr:'إجابات مستندة إلى البيانات مع خطوات الاستدلال والأدلة والثقة، ورفض الطلبات غير القابلة للتفويض.'},
+      {en:'What-if simulation', ar:'محاكاة السيناريوهات', rfp:'1, 9', step:7, on:state.decisions.some(function(d){ return /^What-if plan/.test(d.title); }),
+        what:'Plans are simulated with trade-offs and confidence, then routed for L3 approval.', whatAr:'تُحاكى الخطط مع المفاضلات والثقة، ثم تُوجَّه لاعتماد L3.'}
+    ];
+  }
   var VIEW_INSIGHT={
     brief:{agent:'A1', custom:function(){
-      var s=sessionStats(), r=riskiest(), open=state.decisions.filter(function(d){ return d.status==='open'; }).length;
+      var s=sessionStats(), r=riskiest(), open=openDecs().length;
       return {agent:'A1', level:r.length?r[0].f.level:'stable', conf:0.9,
-        text:'Since the 06:45 brief, agents raised **'+plural(s.alerts,'proactive alert')+'**, ran **'+plural(s.auto,'pre-approved action')+'** and opened **'+plural(s.created,'corrective action')+'**. **'+plural(open,'decision')+'** still need you. '+(r.length?'Top predicted risk: '+fcSentence(r[0].k)+'.':'No KPI is forecast to breach in the next 2 hours.'),
-        acts:[r.length?{label:'Pre-empt '+KPI[r[0].k].name, preempt:r[0].k, primary:1}:null, {label:'What changed?', ask:'What changed since the 06:45 brief?', ghost:1}].filter(Boolean)};
+        text:T('Since the 06:45 brief, agents raised **'+plural(s.alerts,'proactive alert')+'**, ran **'+plural(s.auto,'pre-approved action')+'** and opened **'+plural(s.created,'corrective action')+'**. **'+plural(open,'decision')+'** still need you. ',
+               'منذ موجز 06:45 رفع الوكلاء **'+s.alerts+'** من التنبيهات الاستباقية، ونفّذوا **'+s.auto+'** من الإجراءات المعتمدة مسبقًا، وفتحوا **'+s.created+'** من الإجراءات التصحيحية. القرارات التي ما زالت تحتاجك: **'+open+'**. ')+
+          (r.length?T('Top predicted risk: ','أعلى خطر متوقع: ')+fcSentence(r[0].k)+'.':T('No KPI is forecast to breach in the next 2 hours.','لا يُتوقع أن يتجاوز أي مؤشر حده خلال الساعتين القادمتين.')),
+        acts:[r.length?preemptAct(r[0].k):null, {label:T('What changed?','ما الذي تغيّر؟'), ask:T('What changed since the 06:45 brief?','ما الذي تغيّر منذ موجز 06:45؟'), ghost:1}].filter(Boolean)};
     }},
     branch:{key:'wait', agent:'A2', dec:['DQ-107','DQ-104'], whatif:{tech:2}, q:'Why is Abha declining?'},
     lab:{key:'tat', agent:'A3', dec:['DQ-105','DQ-108'], whatif:{cult:18}, q:'Will lab TAT breach today?'},
     home:{key:'hv', agent:'A4', whatif:{hv:3}, q:'Why is Jeddah West late?'},
     cx:{key:'csat', agent:'A5', dec:['DQ-109'], q:'What are customers complaining about?'},
-    mkt:{key:'rev', agent:'A6', dec:['DQ-106'], whatif:{budget:15000}, lead:'HBA1c Chronic Care has headroom for ~SAR 15k more spend at ROI above 3.2x, while Ramadan Pre-Op returns 0.4x.', q:'Which campaign should we stop?'},
+    mkt:{key:'rev', agent:'A6', dec:['DQ-106'], whatif:{budget:15000}, lead:'HBA1c Chronic Care has headroom for ~SAR 15k more spend at ROI above 3.2x, while Ramadan Pre-Op returns 0.4x.', leadAr:'لدى حملة HBA1c للأمراض المزمنة هامش لنحو 15 ألف ريال إضافية بعائد يتجاوز 3.2x، بينما تعيد باقة رمضان 0.4x.', q:'Which campaign should we stop?'},
     orchestrator:{agent:'A0', q:'What needs my attention right now?'},
     actions:{key:'sla', agent:'S2', q:'Which SLAs are at risk?'},
-    vision:{key:'wait', agent:'S3', lead:'Queue-congestion events at Tahlia and Olaya are today\'s strongest early signal of rising branch wait times.', q:'What are the cameras detecting?'},
+    vision:{key:'wait', agent:'S3', lead:'Queue-congestion events at Tahlia and Olaya are today\'s strongest early signal of rising branch wait times.', leadAr:'أحداث ازدحام الطوابير في التحلية والعليا هي أقوى إشارة مبكرة اليوم على ارتفاع أوقات الانتظار في الفروع.', q:'What are the cameras detecting?'},
     govern:{agent:'A0', custom:function(){
       var s=sessionStats();
-      return {agent:'A0', level:state.emergencyStop?'risk':'stable', tag:state.emergencyStop?['crit','Emergency stop']:['ok','Within policy'], conf:0.97,
-        text:'Policy engine this session: **'+plural(s.handled,'human approval')+'**, **'+plural(s.auto,'L1–L2 auto-action')+'** ('+s.cancelled+' cancelled, '+s.undone+' undone, '+s.held+' held). **0** actions above L2 ran without approval. Auto-execution is **'+(state.autonomy?'on':'off')+'**'+(state.emergencyStop?' and the **emergency stop is engaged**':'')+'.',
-        acts:[{label:'Open notifications', notif:1, primary:1},{label:'Test a guardrail', ask:'Can you interpret this patient\'s result?', ghost:1}]};
+      return {agent:'A0', level:state.emergencyStop?'risk':'stable', tag:state.emergencyStop?['crit',T('Emergency stop','إيقاف طارئ')]:['ok',T('Within policy','ضمن السياسة')], conf:0.97,
+        text:T('Policy engine this session: **'+plural(s.handled,'human approval')+'**, **'+plural(s.auto,'L1–L2 auto-action')+'** ('+s.cancelled+' cancelled, '+s.undone+' undone, '+s.held+' held). **0** actions above L2 ran without approval. Auto-execution is **'+(state.autonomy?'on':'off')+'**'+(state.emergencyStop?' and the **emergency stop is engaged**':'')+'.',
+               'محرك السياسات في هذه الجلسة: **'+s.handled+'** من الاعتمادات البشرية، و**'+s.auto+'** من الإجراءات التلقائية L1–L2 (أُلغي '+s.cancelled+'، وتُراجع عن '+s.undone+'، وعُلّق '+s.held+'). **0** إجراءات فوق L2 نُفّذت دون اعتماد. التنفيذ التلقائي **'+(state.autonomy?'مفعّل':'متوقف')+'**'+(state.emergencyStop?' و**الإيقاف الطارئ مفعّل**':'')+'.'),
+        acts:[{label:T('Open notifications','فتح التنبيهات'), notif:1, primary:1},{label:T('Test a guardrail','اختبر ضابطًا'), ask:T('Can you interpret this patient\'s result?','هل يمكنك تفسير نتيجة هذا المريض؟'), ghost:1}]};
     }},
     architecture:{agent:'A12', custom:function(){
-      var s=sessionStats(), calls=s.questions*6+s.alerts*4+state.sim.tick*11+120;
-      return {agent:'A12', level:state.degraded?'watch':'stable', tag:state.degraded?['warn','Degraded']:['ok','Sovereign'], conf:0.95,
-        text:'All **'+calls.toLocaleString('en-US')+'** agent and model calls this session ran inside the **Saudi sovereign boundary**, with 0 cross-border egress. Model-gateway p95 is **'+Math.round(420+(KPI.a2o.v-4)*60)+' ms** and the data-quality score is '+fmtV('dq',KPI.dq.v)+'.'+(state.degraded?' Two sources are stale, so dependent agents are held at L2.':''),
-        acts:[{label:'Open integration health', nav:'health', primary:1},{label:'Ask about data freshness', ask:'Are any data sources stale?', ghost:1}]};
+      var s=sessionStats(), calls=(s.questions*6+s.alerts*4+state.sim.tick*11+120).toLocaleString('en-US'), p95=Math.round(420+(KPI.a2o.v-4)*60);
+      return {agent:'A12', level:state.degraded?'watch':'stable', tag:state.degraded?['warn',T('Degraded','متدهور')]:['ok',T('Sovereign','سيادي')], conf:0.95,
+        text:T('All **'+calls+'** agent and model calls this session ran inside the **Saudi sovereign boundary**, with 0 cross-border egress. Model-gateway p95 is **'+p95+' ms** and the data-quality score is '+fmtV('dq',KPI.dq.v)+'.'+(state.degraded?' Two sources are stale, so dependent agents are held at L2.':''),
+               'جرت جميع استدعاءات الوكلاء والنماذج في هذه الجلسة (**'+calls+'**) داخل **النطاق السيادي السعودي** دون أي خروج عابر للحدود. زمن استجابة بوابة النماذج p95 هو **'+p95+' ملّي ثانية** ومؤشر جودة البيانات '+fmtV('dq',KPI.dq.v)+'.'+(state.degraded?' مصدران متقادمان، لذا تُثبَّت الوكلاء المعتمدة عليهما عند L2.':'')),
+        acts:[{label:T('Open integration health','فتح صحة التكامل'), nav:'health', primary:1},{label:T('Ask about data freshness','اسأل عن حداثة البيانات'), ask:T('Are any data sources stale?','هل هناك مصادر بيانات متقادمة؟'), ghost:1}]};
     }},
     health:{key:'dq', agent:'A12', q:'Are any data sources stale?'},
     blueprint:{agent:'A0', custom:function(){
       var s=sessionStats();
-      return {agent:'A0', level:'stable', tag:['teal','Gate evidence'], conf:0.9,
-        text:'Evidence for the Phase 2 gate is building live: **'+plural(s.handled,'decision')+'** dispositioned, **'+plural(s.preempt+s.auto,'pre-emptive or autonomous action')+'**, **'+plural(s.alerts,'proactive alert')+'** and **'+plural(s.questions,'copilot answer')+'**, each with trace, confidence and an accountable owner.',
-        acts:[{label:'Open delivery & risk', nav:'delivery', primary:1},{label:'What changed today?', ask:'What changed since the 06:45 brief?', ghost:1}]};
+      return {agent:'A0', level:'stable', tag:['teal',T('Gate evidence','أدلة البوابة')], conf:0.9,
+        text:T('Evidence for the Phase 2 gate is building live: **'+plural(s.handled,'decision')+'** dispositioned, **'+plural(s.preempt+s.auto,'pre-emptive or autonomous action')+'**, **'+plural(s.alerts,'proactive alert')+'** and **'+plural(s.questions,'copilot answer')+'**, each with trace, confidence and an accountable owner.',
+               'تتراكم أدلة بوابة المرحلة الثانية مباشرة: **'+s.handled+'** من القرارات المبتوت فيها، و**'+(s.preempt+s.auto)+'** من الإجراءات الاستباقية أو الذاتية، و**'+s.alerts+'** من التنبيهات الاستباقية، و**'+s.questions+'** من إجابات المساعد — لكل منها أثر وثقة ومالك مساءل.'),
+        acts:[{label:T('Open delivery & risk','فتح التسليم والمخاطر'), nav:'delivery', primary:1},{label:T('What changed today?','ما الذي تغيّر اليوم؟'), ask:T('What changed since the 06:45 brief?','ما الذي تغيّر منذ موجز 06:45؟'), ghost:1}]};
     }},
     delivery:{agent:'A0', custom:function(){
       var s=sessionStats();
-      return {agent:'A0', level:state.degraded?'watch':'stable', tag:state.degraded?['warn','Watch']:['ok','On track'], conf:0.9,
-        text:'Live risk-register signals: **R3 alert fatigue**: duplicate alerts down 31% (target ≥ 30%). **R4 unsupported confidence**: every AI answer shows confidence and evidence. **R5 unauthorized action**: 0 actions above L2 without approval; '+plural(s.cancelled,'cancel')+' and '+plural(s.undone,'undo')+' recorded. **R9 API instability**: '+(state.degraded?'2 sources stale, degraded mode active':'all sources fresh')+'.',
-        acts:[{label:'Open notifications', notif:1, primary:1},{label:'Open governance', nav:'govern'}]};
+      return {agent:'A0', level:state.degraded?'watch':'stable', tag:state.degraded?['warn',T('Watch','مراقبة')]:['ok',T('On track','على المسار')], conf:0.9,
+        text:T('Live risk-register signals: **R3 alert fatigue**: duplicate alerts down 31% (target ≥ 30%). **R4 unsupported confidence**: every AI answer shows confidence and evidence. **R5 unauthorized action**: 0 actions above L2 without approval; '+plural(s.cancelled,'cancel')+' and '+plural(s.undone,'undo')+' recorded. **R9 API instability**: '+(state.degraded?'2 sources stale, degraded mode active':'all sources fresh')+'.',
+               'إشارات حية من سجل المخاطر: **R3 إرهاق التنبيهات**: انخفضت التنبيهات المكررة 31% (المستهدف ≥ 30%). **R4 ثقة غير مسندة**: كل إجابة ذكاء اصطناعي تعرض الثقة والأدلة. **R5 إجراء غير مصرح**: 0 إجراءات فوق L2 دون اعتماد؛ وسُجّل '+s.cancelled+' إلغاء و'+s.undone+' تراجع. **R9 عدم استقرار الواجهات**: '+(state.degraded?'مصدران متقادمان ووضع التدهور مفعّل':'جميع المصادر حديثة')+'.'),
+        acts:[{label:T('Open notifications','فتح التنبيهات'), notif:1, primary:1},{label:T('Open governance','فتح الحوكمة'), nav:'govern'}]};
     }},
     alignment:{agent:'A1', custom:function(){
-      var s=sessionStats();
-      var shown=[['Predictive forecasting',true],['Proactive agent alerts',s.alerts>0],['Human-on-the-loop autonomy',s.auto+s.cancelled>0],['Conversational copilot',s.questions>0],['What-if simulation',state.decisions.some(function(d){ return /^What-if plan/.test(d.title); })]];
-      var n=shown.filter(function(x){ return x[1]; }).length;
-      return {agent:'A1', level:n===5?'good':'watch', tag:n===5?['ok','All shown']:['warn',n+' of 5 shown'], conf:0.92,
-        text:'This session has demonstrated **'+n+' of 5** agentic capabilities live on screen: '+shown.map(function(x){ return (x[1]?'✓ ':'○ ')+x[0]; }).join(' · ')+'. The audit trail holds the evidence behind the written response.',
-        acts:[{label:DEMO?'Restart guided demo':'Run the guided demo', demo:1, primary:!DEMO},{label:'Print / export PDF', act:'print'}]};
+      var caps=capabilitiesShown(), n=caps.filter(function(c){ return c.on; }).length;
+      return {agent:'A1', level:n===5?'good':'watch', tag:n===5?['ok',T('All shown','عُرضت كلها')]:['warn',T(n+' of 5 shown','عُرض '+n+' من 5')], conf:0.92,
+        text:T('This session has demonstrated **'+n+' of 5** agentic capabilities live on screen: ','عرضت هذه الجلسة مباشرة **'+n+' من 5** قدرات وكيلية: ')+caps.map(function(c){ return (c.on?'✓ ':'○ ')+T(c.en,c.ar); }).join(' · ')+T('. The audit trail holds the evidence behind the written response.','. ويحتفظ سجل التدقيق بالأدلة الداعمة للرد المكتوب.'),
+        acts:[{label:DEMO?T('Restart guided demo','إعادة العرض الموجّه'):T('Run the guided demo','تشغيل العرض الموجّه'), demo:1, primary:!DEMO},{label:T('Print / export PDF','طباعة / تصدير PDF'), act:'print'}]};
     }}
   };
   var LEVEL_TAG={risk:['crit','Risk'], watch:['warn','Watch'], good:['ok','Improving'], stable:['teal','Stable']};
@@ -3804,21 +3987,21 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     if(c.custom) return c.custom();
     var key=c.key||((riskiest()[0]||{k:'tat'}).k), f=fc(key), p=PREEMPT[key];
     var dec=(c.dec||[]).map(openDec).filter(Boolean)[0];
-    var lead=c.lead?c.lead+' ':'';
-    if(v==='health' && state.degraded) lead='**HR/Attendance and CCTV/VMS are stale.** Dependent outputs are held at L2 until the sources recover. ';
+    var lead=c.lead?T(c.lead,c.leadAr)+' ':'';
+    if(v==='health' && state.degraded) lead=T('**HR/Attendance and CCTV/VMS are stale.** Dependent outputs are held at L2 until the sources recover. ','**مصدرا الحضور والكاميرات متقادمان.** تُثبَّت المخرجات المعتمدة عليهما عند L2 حتى يتعافى المصدران. ');
     var rec, acts=[];
-    if(dec){ rec='Decision **'+dec.id+'** is waiting for you: '+dec.rec; acts.push({label:'Approve '+dec.id, decision:dec.id, primary:1}); }
-    else if(f.level==='risk'||f.level==='watch'){ rec='Pre-empt now: **'+p.action+'**.'; acts.push({label:'Pre-empt', preempt:key, primary:1}); }
-    else rec='No action needed — '+c.agent+' will alert you if the trajectory changes.';
-    if(c.whatif) acts.push({label:'Simulate first', whatif:c.whatif});
-    acts.push({label:'Ask why', ask:c.q, ghost:1});
-    return {agent:c.agent, level:f.level, conf:f.conf, text:lead+fcSentence(key)+'. '+rec, acts:acts, ev:p.ev};
+    if(dec){ rec=T('Decision **'+dec.id+'** is waiting for you: '+dec.rec,'القرار **'+dec.id+'** بانتظارك: '+L(dec.rec)); acts.push({label:T('Approve ','اعتماد ')+dec.id, decision:dec.id, primary:1}); }
+    else if(f.level==='risk'||f.level==='watch'){ rec=T('Pre-empt now: **'+p.action+'**.','استبق الآن: **'+pa(p,'action')+'**.'); acts.push({label:T('Pre-empt','استباق'), preempt:key, primary:1}); }
+    else rec=T('No action needed — '+c.agent+' will alert you if the trajectory changes.','لا حاجة لإجراء — سينبهك '+c.agent+' إن تغيّر المسار.');
+    if(c.whatif) acts.push({label:T('Simulate first','حاكِ أولًا'), whatif:c.whatif});
+    acts.push({label:T('Ask why','اسأل لماذا'), ask:L(c.q), ghost:1});
+    return {agent:c.agent, level:f.level, conf:f.conf, text:lead+fcSentence(key)+'. '+rec, acts:acts, ev:pa(p,'ev')};
   }
   function insightCard(v){
     var sp=insightSpec(v); if(!sp) return '';
     var t=sp.tag||LEVEL_TAG[sp.level];
-    return '<div class="vinsight '+sp.level+' mb-4" id="viewInsight" role="region" aria-label="Proactive agent insight"><div class="vi-h"><span class="vi-ic" aria-hidden="true">'+I.spark+'</span><span class="fw-6">'+esc(sp.agent)+' · Proactive insight</span><span class="tag '+t[0]+'">'+esc(t[1])+'</span><span class="grow"></span><span class="mono muted fs-xs" data-no-i18n>live · conf '+sp.conf.toFixed(2)+'</span></div>'+
-      '<div class="vi-b" data-no-i18n>'+md(sp.text)+'</div><div class="od-cluster mt-3">'+sp.acts.map(actBtn).join('')+'</div></div>';
+    return '<div class="vinsight '+sp.level+' mb-4" id="viewInsight" role="region" aria-label="'+esc(T('Proactive agent insight','رؤية استباقية من الوكيل'))+'"><div class="vi-h"><span class="vi-ic" aria-hidden="true">'+I.spark+'</span><span class="fw-6" data-no-i18n>'+esc(sp.agent)+' · '+esc(T('Proactive insight','رؤية استباقية'))+'</span><span class="tag '+t[0]+'" data-no-i18n>'+esc(L(t[1]))+'</span><span class="grow"></span><span class="mono muted fs-xs" data-no-i18n>'+T('live · conf ','مباشر · ثقة ')+sp.conf.toFixed(2)+'</span></div>'+
+      '<div class="vi-b" data-no-i18n>'+md(sp.text)+'</div><div class="od-cluster mt-3" data-no-i18n>'+sp.acts.map(actBtn).join('')+'</div></div>';
   }
   function mountViewInsight(){
     if(!VIEW_INSIGHT[state.view]) return;
@@ -3849,7 +4032,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
       var live=n.status==='new'||n.status==='pending'||(n.status==='executed'&&Date.now()<n.undoUntil);
       var acts=live&&n.acts.length>1?nudgeButtons({id:n.id, acts:n.acts.slice(0,1)},'xs'):'';
       return '<div class="nrow'+(n.read?'':' unread')+'"><span class="tag '+(n.level==='risk'?'crit':n.level==='watch'?'warn':'teal')+'">'+esc(n.agent)+'</span><div class="ib">'+
-        '<div class="it">'+esc(n.title)+'</div><div class="im" data-no-i18n>'+esc(n.t)+' · '+esc(n.kind)+' · conf '+n.conf.toFixed(2)+(n.status==='pending'?' · <span data-count="'+n.id+'">'+n.left+'s</span>':'')+'</div>'+
+        '<div class="it">'+esc(nt(n,'title'))+'</div><div class="im" data-no-i18n>'+esc(n.t)+' · '+esc(kindT(n.kind))+' · conf '+n.conf.toFixed(2)+(n.status==='pending'?' · <span data-count="'+n.id+'">'+n.left+'s</span>':'')+'</div>'+
         '<div class="od-cluster mt-2">'+(st?'<span class="tag '+st[0]+'">'+st[1]+'</span>':'')+acts+'<button class="btn ghost xs" data-nudge="'+n.id+'" data-ix="'+(n.acts.length-1)+'">Why?</button></div></div></div>';
     }).join('');
   }
@@ -3891,7 +4074,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     state.autonomy=e.target.checked;
     log('Auto-execution of pre-approved L1–L2 actions '+(state.autonomy?'enabled':'disabled')+' by CEO office');
     pushActivity('A0',state.autonomy?'ok':'warn','Auto-execution of L1–L2 actions '+(state.autonomy?'enabled':'disabled'));
-    toast(state.autonomy?'Auto-execution on — L1–L2 actions run after a 10-second cancel window.':'Auto-execution off — every agent action now needs approval.', state.autonomy?'ok':'warn');
+    toast(state.autonomy?T('Auto-execution on — L1–L2 actions run after a 10-second cancel window.','التنفيذ التلقائي مفعّل — تُنفَّذ إجراءات L1–L2 بعد نافذة إلغاء 10 ثوانٍ.'):T('Auto-execution off — every agent action now needs approval.','التنفيذ التلقائي متوقف — كل إجراء للوكلاء يتطلب اعتمادًا الآن.'), state.autonomy?'ok':'warn');
   });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !$('notifPanel').hidden){ closeNotif(); $('bellBtn').focus(); } });
 
@@ -3905,14 +4088,14 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     el.scrollIntoView({block:'center', behavior:REDUCED?'auto':'smooth'});
   }
   function demoView(v){ closeNotif(); closeDrawer(); closeModal(); go(v); demoScroll(); }
-  function tour(v,say,extra){
-    var nav=NAV.filter(function(n){ return n.view===v; })[0];
-    return {title:(nav?nav.label:v)+' — proactive', say:say, run:function(){ closeCopilot(); demoView(v); if(extra) setTimeout(extra,700); }};
+  function tour(v,say,sayAr,extra){
+    var nav=NAV.filter(function(n){ return n.view===v; })[0], label=nav?nav.label:v;
+    return {title:label+' — proactive', titleAr:L(label)+' — استباقي', say:say, sayAr:sayAr, run:function(){ closeCopilot(); demoView(v); if(extra) setTimeout(extra,700); }};
   }
   var DEMO_STEPS=[
-    {title:'Live enterprise view', say:'Everything on this screen is live. Each KPI streams every 5 seconds and carries a 2-hour AI forecast beneath it. Watch Lab TAT drifting down.',
+    {title:'Live enterprise view', titleAr:'عرض حي للمنشأة', say:'Everything on this screen is live. Each KPI streams every 5 seconds and carries a 2-hour AI forecast beneath it. Watch Lab TAT drifting down.', sayAr:'كل ما على هذه الشاشة حي. يتدفق كل مؤشر كل 5 ثوانٍ ويحمل تحته توقعًا ذكيًا لساعتين. لاحظ تراجع زمن إنجاز المختبر.',
       run:function(){ closeCopilot(); demoView('brief'); }},
-    {title:'Predictive alert', say:'A3 forecasts the exact time Lab TAT will breach its alert line, before it happens. The purple line and band are the forecast and its confidence range.',
+    {title:'Predictive alert', titleAr:'تنبيه تنبؤي', say:'A3 forecasts the exact time Lab TAT will breach its alert line, before it happens. The purple line and band are the forecast and its confidence range.', sayAr:'يتوقع A3 الوقت الدقيق لتجاوز زمن إنجاز المختبر حد التنبيه قبل حدوثه. الخط والنطاق البنفسجيان هما التوقع ونطاق ثقته.',
       run:function(){
         closeCopilot(); var k=KPI.tat;
         if(!k.boosts.length){ k.v=Math.min(k.v,85.6); k.trend=-0.12; }
@@ -3920,17 +4103,17 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
         var f=fc('tat'); if(f.crossMin!=null) raiseNudge(predictiveNudge('tat',f));
         setTimeout(function(){ demoScroll($('fcChart')); },300);
       }},
-    {title:'Pre-empt with one click', say:'One click opens a governed pre-emptive action. The forecast bends back toward target straight away, because the model includes the effect of approved actions.',
+    {title:'Pre-empt with one click', titleAr:'الاستباق بنقرة واحدة', say:'One click opens a governed pre-emptive action. The forecast bends back toward target straight away, because the model includes the effect of approved actions.', sayAr:'نقرة واحدة تفتح إجراءً استباقيًا محكومًا. ينعطف التوقع فورًا نحو المستهدف، لأن النموذج يحتسب أثر الإجراءات المعتمدة.',
       run:function(){ closeCopilot(); state.fcSel='tat'; demoView('brief'); preempt('tat'); setTimeout(function(){ demoScroll($('fcChart')); },300); }},
-    {title:'Autonomy with a safety net', say:'Low-risk actions pre-approved at L1–L2 run on their own after a 10-second cancel window, with 30 seconds to undo. Anything above L2 still needs a human.',
+    {title:'Autonomy with a safety net', titleAr:'استقلالية مع شبكة أمان', say:'Low-risk actions pre-approved at L1–L2 run on their own after a 10-second cancel window, with 30 seconds to undo. Anything above L2 still needs a human.', sayAr:'تُنفَّذ الإجراءات منخفضة المخاطر المعتمدة مسبقًا عند L1–L2 ذاتيًا بعد نافذة إلغاء 10 ثوانٍ، مع 30 ثانية للتراجع. وكل ما فوق L2 يتطلب إنسانًا.',
       run:function(){ closeCopilot(); state.autonomy=true; autoNudge(AUTO_POOL[0]); }},
-    {title:'Ask the copilot', say:'The copilot works on the same live state: it routes to the right agent, shows its reasoning, cites evidence and offers one-click actions.',
-      run:function(){ openCopilot(); ask('What needs my attention right now?'); }},
-    {title:'Guardrails', say:'Clinical interpretation, pricing and sensitive customer messages are non-delegable. The policy engine blocks them and explains why, every time.',
-      run:function(){ openCopilot(); ask('Can you interpret this patient\'s result?'); }},
-    {title:'Simulate before deciding', say:'Before approving, the CEO can simulate a plan: two technicians to Abha, 18 cultures to the backup line, SAR 15k moved to HBA1c. Outcomes, trade-offs and confidence update instantly.',
+    {title:'Ask the copilot', titleAr:'اسأل المساعد', say:'The copilot works on the same live state: it routes to the right agent, shows its reasoning, cites evidence and offers one-click actions.', sayAr:'يعمل المساعد على الحالة الحية نفسها: يوجّه السؤال إلى الوكيل المناسب، ويعرض استدلاله، ويستشهد بالأدلة، ويقدّم إجراءات بنقرة واحدة.',
+      run:function(){ openCopilot(); ask(T('What needs my attention right now?','ما الذي يحتاج انتباهي الآن؟')); }},
+    {title:'Guardrails', titleAr:'الضوابط', say:'Clinical interpretation, pricing and sensitive customer messages are non-delegable. The policy engine blocks them and explains why, every time.', sayAr:'التفسير السريري والأسعار ورسائل العملاء الحساسة غير قابلة للتفويض. يحظرها محرك السياسات ويشرح السبب في كل مرة.',
+      run:function(){ openCopilot(); ask(T('Can you interpret this patient\'s result?','هل يمكنك تفسير نتيجة هذا المريض؟')); }},
+    {title:'Simulate before deciding', titleAr:'حاكِ قبل أن تقرر', say:'Before approving, the CEO can simulate a plan: two technicians to Abha, 18 cultures to the backup line, SAR 15k moved to HBA1c. Outcomes, trade-offs and confidence update instantly.', sayAr:'قبل الاعتماد يستطيع الرئيس التنفيذي محاكاة خطة: فنيان إلى أبها، و18 مزرعة إلى الخط الاحتياطي، ونقل 15 ألف ريال إلى HBA1c. تتحدث النتائج والمفاضلات والثقة فورًا.',
       run:function(){ closeCopilot(); state.whatif={tech:2,cult:18,budget:15000,hv:0}; demoView('brief'); setTimeout(function(){ demoScroll($('whatifCard')); },300); }},
-    {title:'Approve, and the AI reports back', say:'The plan enters the decision queue at L3. Once approved, A0 routes each change to its owner, and the copilot reports on the forecast a few seconds later.',
+    {title:'Approve, and the AI reports back', titleAr:'اعتمد، ويعود الذكاء الاصطناعي بالتقرير', say:'The plan enters the decision queue at L3. Once approved, A0 routes each change to its owner, and the copilot reports on the forecast a few seconds later.', sayAr:'تدخل الخطة قائمة القرارات عند L3. وبعد الاعتماد يوجّه A0 كل تغيير إلى مالكه، ويعود المساعد بتقرير عن التوقع بعد ثوانٍ.',
       run:function(){
         demoView('brief');
         var w=state.whatif; if(!(w.tech||w.cult||w.budget||w.hv)) state.whatif={tech:2,cult:18,budget:15000,hv:0};
@@ -3938,31 +4121,31 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
         if(b) b.click();
         openCopilot();
       }},
-    tour('branch','On every page the agent opens with a live insight and one next step. Here A2 has spotted the Olaya evening peak hours ahead and drafted a decision.', function(){ poolNudge(/Olaya evening peak/); }),
-    tour('lab','A3 watches the lab continuously and catches a QC drift pattern on PCR-2 about 50 minutes before a likely QC failure.', function(){ poolNudge(/PCR-2 QC drift/); }),
-    tour('home','A4 reacts to live traffic, proposing route re-sequencing before visits run late.', function(){ poolNudge(/Traffic incident/); }),
-    tour('cx','A5 sees complaint velocity triple at Al Rawdah and proposes service recovery before a cluster forms.', function(){ poolNudge(/Complaint velocity/); }),
-    tour('mkt','A6 finds budget headroom on a high-ROI campaign and links it to lab reagent stock, a cross-domain effect.', function(){ poolNudge(/HBA1c Chronic Care has headroom/); }),
-    tour('orchestrator','A0 correlates signals from three agents into one exception, so owners get one alert instead of three.', function(){ poolNudge(/Correlated: A2, A5 and S3/); }),
-    tour('actions','S2 escalates actions entering their final hour automatically: a pre-approved L2 action with a cancel window.', function(){ autoNudge(AUTO_POOL[1]); }),
-    tour('vision','S3 turns camera analytics into events (metadata only, no faces or identities) and forecasts the wait-time impact.', function(){ poolNudge(/Queue congestion at Tahlia/); }),
-    tour('govern','The control plane tracks every approval, auto-action, cancel and undo live. Nothing above L2 runs without a human.'),
-    tour('architecture','A12 confirms that every agent and model call stays inside the Saudi sovereign boundary.'),
-    tour('health','A12 predicts an API timeout before it happens and runs the standard retry and failover runbook on its own.', function(){ autoNudge(AUTO_POOL[2]); }),
-    tour('blueprint','Evidence for the phase gates builds up live: decisions, actions, alerts and copilot answers, each with a trace.'),
-    tour('delivery','The risk register is monitored live: alert fatigue, unsupported confidence, unauthorized action and API instability.'),
-    tour('alignment','A1 tracks which agentic capabilities this session has shown on screen: the proof behind the written response.'),
-    {title:'Control & audit', say:'Every alert, auto-action, cancel and undo lands in the notification center and the audit trail. Auto-execution can be switched off, and the emergency stop suspends all L3–L5 actions instantly.',
+    tour('branch','On every page the agent opens with a live insight and one next step. Here A2 has spotted the Olaya evening peak hours ahead and drafted a decision.','في كل صفحة يبدأ الوكيل برؤية حية وخطوة تالية واحدة. هنا رصد A2 ذروة المساء في العليا قبل ساعات وصاغ قرارًا.', function(){ poolNudge(/Olaya evening peak/); }),
+    tour('lab','A3 watches the lab continuously and catches a QC drift pattern on PCR-2 about 50 minutes before a likely QC failure.','يراقب A3 المختبر باستمرار ويلتقط نمط انحراف جودة على PCR-2 قبل نحو 50 دقيقة من فشل محتمل.', function(){ poolNudge(/PCR-2 QC drift/); }),
+    tour('home','A4 reacts to live traffic, proposing route re-sequencing before visits run late.','يتفاعل A4 مع حركة المرور الحية ويقترح إعادة ترتيب المسارات قبل تأخر الزيارات.', function(){ poolNudge(/Traffic incident/); }),
+    tour('cx','A5 sees complaint velocity triple at Al Rawdah and proposes service recovery before a cluster forms.','يلاحظ A5 تضاعف وتيرة الشكاوى ثلاث مرات في الروضة ويقترح استعادة الخدمة قبل تشكّل مجموعة شكاوى.', function(){ poolNudge(/Complaint velocity/); }),
+    tour('mkt','A6 finds budget headroom on a high-ROI campaign and links it to lab reagent stock, a cross-domain effect.','يجد A6 هامشًا في ميزانية حملة عالية العائد ويربطه بمخزون كواشف المختبر، وهو أثر عابر للمجالات.', function(){ poolNudge(/HBA1c Chronic Care has headroom/); }),
+    tour('orchestrator','A0 correlates signals from three agents into one exception, so owners get one alert instead of three.','يربط A0 إشارات ثلاثة وكلاء في استثناء واحد، فيتلقى الملاك تنبيهًا واحدًا بدل ثلاثة.', function(){ poolNudge(/Correlated: A2, A5 and S3/); }),
+    tour('actions','S2 escalates actions entering their final hour automatically: a pre-approved L2 action with a cancel window.','يصعّد S2 تلقائيًا الإجراءات الداخلة في ساعتها الأخيرة: إجراء L2 معتمد مسبقًا مع نافذة إلغاء.', function(){ autoNudge(AUTO_POOL[1]); }),
+    tour('vision','S3 turns camera analytics into events (metadata only, no faces or identities) and forecasts the wait-time impact.','يحوّل S3 تحليلات الكاميرات إلى أحداث (بيانات وصفية فقط، دون وجوه أو هويات) ويتوقع أثرها على وقت الانتظار.', function(){ poolNudge(/Queue congestion at Tahlia/); }),
+    tour('govern','The control plane tracks every approval, auto-action, cancel and undo live. Nothing above L2 runs without a human.','تتتبع طبقة التحكم كل اعتماد وإجراء تلقائي وإلغاء وتراجع مباشرة. ولا يُنفَّذ شيء فوق L2 دون إنسان.'),
+    tour('architecture','A12 confirms that every agent and model call stays inside the Saudi sovereign boundary.','يؤكد A12 أن كل استدعاء للوكلاء والنماذج يبقى داخل النطاق السيادي السعودي.'),
+    tour('health','A12 predicts an API timeout before it happens and runs the standard retry and failover runbook on its own.','يتوقع A12 انتهاء مهلة الواجهة قبل حدوثه وينفّذ ذاتيًا دليل إعادة المحاولة والتحويل الاحتياطي القياسي.', function(){ autoNudge(AUTO_POOL[2]); }),
+    tour('blueprint','Evidence for the phase gates builds up live: decisions, actions, alerts and copilot answers, each with a trace.','تتراكم أدلة بوابات المراحل مباشرة: قرارات وإجراءات وتنبيهات وإجابات المساعد، لكل منها أثر.'),
+    tour('delivery','The risk register is monitored live: alert fatigue, unsupported confidence, unauthorized action and API instability.','يُراقَب سجل المخاطر مباشرة: إرهاق التنبيهات، والثقة غير المسندة، والإجراء غير المصرح، وعدم استقرار الواجهات.'),
+    tour('alignment','A1 tracks which agentic capabilities this session has shown on screen: the proof behind the written response.','يتتبع A1 القدرات الوكيلية التي عرضتها هذه الجلسة على الشاشة: البرهان وراء الرد المكتوب.'),
+    {title:'Control & audit', titleAr:'التحكم والتدقيق', say:'Every alert, auto-action, cancel and undo lands in the notification center and the audit trail. Auto-execution can be switched off, and the emergency stop suspends all L3–L5 actions instantly.', sayAr:'كل تنبيه وإجراء تلقائي وإلغاء وتراجع يصل إلى مركز التنبيهات وسجل التدقيق. يمكن إيقاف التنفيذ التلقائي، ويعلّق الإيقاف الطارئ جميع إجراءات L3–L5 فورًا.',
       run:function(){ closeCopilot(); demoView('brief'); openNotif(); }}
   ];
   var demoIx=0;
   function renderPresenter(){
     var s=DEMO_STEPS[demoIx], n=DEMO_STEPS.length, last=demoIx===n-1;
-    $('presenter').innerHTML='<div class="pr-h"><span class="tag purple">Guided demo</span><span class="mono fs-xs pr-m" data-no-i18n>Step '+(demoIx+1)+' / '+n+'</span><span class="grow"></span><button class="iconbtn" type="button" data-demo-exit aria-label="Exit demo">'+I.x+'</button></div>'+
-      '<div class="pr-t">'+esc(s.title)+'</div><p class="pr-s">'+esc(s.say)+'</p>'+
-      '<div class="pr-a"><select data-demo-jump aria-label="Jump to step">'+DEMO_STEPS.map(function(x,i){ return '<option value="'+i+'"'+(i===demoIx?' selected':'')+'>'+(i+1)+'. '+esc(x.title)+'</option>'; }).join('')+'</select>'+
-      '<button class="btn sm" type="button" data-demo-prev'+(demoIx?'':' disabled')+'>Back</button>'+
-      (last?'<button class="btn primary sm" type="button" data-demo>Restart</button>':'<button class="btn primary sm" type="button" data-demo-next>Next '+I.arrow+'</button>')+'</div>'+
+    $('presenter').innerHTML='<div class="pr-h"><span class="tag purple" data-no-i18n>'+esc(T('Guided demo','عرض توضيحي موجّه'))+'</span><span class="mono fs-xs pr-m" data-no-i18n>'+T('Step ','الخطوة ')+(demoIx+1)+' / '+n+'</span><span class="grow"></span><button class="iconbtn" type="button" data-demo-exit aria-label="'+esc(T('Exit demo','إنهاء العرض'))+'">'+I.x+'</button></div>'+
+      '<div class="pr-t" data-no-i18n>'+esc(T(s.title,s.titleAr))+'</div><p class="pr-s" data-no-i18n>'+esc(T(s.say,s.sayAr))+'</p>'+
+      '<div class="pr-a" data-no-i18n><select data-demo-jump aria-label="'+esc(T('Jump to step','انتقل إلى خطوة'))+'">'+DEMO_STEPS.map(function(x,i){ return '<option value="'+i+'"'+(i===demoIx?' selected':'')+'>'+(i+1)+'. '+esc(T(x.title,x.titleAr))+'</option>'; }).join('')+'</select>'+
+      '<button class="btn sm" type="button" data-demo-prev'+(demoIx?'':' disabled')+'>'+esc(T('Back','رجوع'))+'</button>'+
+      (last?'<button class="btn primary sm" type="button" data-demo>'+esc(T('Restart','إعادة'))+'</button>':'<button class="btn primary sm" type="button" data-demo-next>'+esc(T('Next','التالي'))+' '+I.arrow+'</button>')+'</div>'+
       '<div class="pr-p" aria-hidden="true"><span style="width:'+Math.round((demoIx+1)/n*100)+'%"></span></div>';
   }
   function demoGo(i){
@@ -3975,6 +4158,8 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
   }
   document.addEventListener('click',function(ev){
     var t=ev.target;
+    var ds=t.closest('[data-demo-step]');
+    if(ds){ var sn=+ds.getAttribute('data-demo-step'); if(DEMO) demoGo(sn-1); else location.href=location.pathname+'?demo=1&step='+sn+'#brief'; return; }
     if(t.closest('[data-demo]')){ location.href=location.pathname+'?demo=1&run='+Date.now()+'#brief'; return; }
     if(t.closest('[data-demo-exit]')){ location.href=location.pathname+'#brief'; return; }
     if(t.closest('[data-demo-next]')){ demoGo(demoIx+1); return; }
@@ -3988,8 +4173,66 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     if(e.key==='ArrowRight' && demoIx<DEMO_STEPS.length-1){ e.preventDefault(); demoGo(demoIx+1); }
     else if(e.key==='ArrowLeft' && demoIx>0){ e.preventDefault(); demoGo(demoIx-1); }
   });
-  if(DEMO){ $('presenter').hidden=false; document.body.classList.add('demo-on'); setTimeout(function(){ demoGo(0); },0); }
+  if(DEMO){ var stepQ=location.search.match(/[?&]step=(\d+)/); $('presenter').hidden=false; document.body.classList.add('demo-on'); setTimeout(function(){ demoGo(stepQ?+stepQ[1]-1:0); },0); }
 
+  Object.assign(AR,{
+    /* predictive section and what-if */
+    'Forecasts re-run every 5 s on streaming signals · 1 tick = 5 simulated minutes · 2-hour horizon':'تُعاد التوقعات كل 5 ثوانٍ على الإشارات المتدفقة · النبضة = 5 دقائق محاكاة · أفق ساعتين',
+    'Trend regression + approved-action effect model':'انحدار الاتجاه + نموذج أثر الإجراءات المعتمدة',
+    'Technicians reassigned to Al Sad (Abha)':'فنيون يُعاد إسنادهم إلى السد (أبها)', 'From fully staffed Al Malaz / Khobar North':'من الملز وشمال الخبر المكتملَي الكوادر',
+    'Cultures rerouted to backup line':'مزارع يُعاد توجيهها إلى الخط الاحتياطي', 'Microbiology pending queue: 61':'طابور الأحياء الدقيقة المعلّق: 61',
+    'Budget shift: Ramadan Pre-Op → HBA1c':'نقل ميزانية: باقة رمضان ← HBA1c', 'SAR · Finance approval required':'ريال · يتطلب اعتماد المالية',
+    'Home-visit technicians: North Riyadh → Jeddah West':'فنيو الزيارات: شمال الرياض ← غرب جدة', 'North Riyadh currently idle':'شمال الرياض غير مشغول حاليًا',
+    'Al Sad wait':'انتظار السد', 'Abha revenue recovered':'إيرادات أبها المستعادة', 'Micro TAT on-time':'التزام الأحياء الدقيقة', 'Campaign incremental revenue':'إيرادات الحملة الإضافية', 'Jeddah West on-time':'التزام غرب جدة', 'Enterprise risk score':'مؤشر مخاطر المنشأة',
+    /* nudge and copilot actions */
+    'Pre-empt now':'استبق الآن', 'Approve full fix':'اعتماد الحل الكامل', 'Schedule recalibration':'جدولة إعادة المعايرة', 'Add to decision queue':'إضافة إلى قائمة القرارات', 'Test in what-if':'اختبر في المحاكي',
+    'Open service recovery':'فتح استعادة الخدمة', 'Summarize for me':'لخّص لي', 'Re-sequence routes':'إعادة ترتيب المسارات', 'Open failover check':'فتح فحص التحويل الاحتياطي', 'Open CA-2038':'فتح CA-2038', 'Open counter action':'فتح إجراء الشباك', 'Pre-balance workload':'موازنة الحمل مسبقًا',
+    'Proactive':'استباقي', 'Follow-up':'متابعة', 'Guided demo':'عرض توضيحي موجّه', 'Restart guided demo':'إعادة العرض الموجّه',
+    'A0-orchestrated · simulated responses on synthetic data':'بتنسيق A0 · ردود محاكاة على بيانات تجريبية', 'Illustrative agent responses — no live model or Wareed data is connected.':'ردود توضيحية للوكلاء — لا يتصل أي نموذج حي أو بيانات وريد.',
+    /* suggestions (the Arabic text is also what gets asked) */
+    'What needs my attention right now?':'ما الذي يحتاج انتباهي الآن؟', 'Forecast the next 2 hours':'توقع الساعتين القادمتين', 'What changed since the 06:45 brief?':'ما الذي تغيّر منذ موجز 06:45؟',
+    'How is the lab doing?':'كيف حال المختبر؟', 'Will lab TAT breach today?':'هل سيتجاوز زمن إنجاز المختبر اليوم؟', 'What if we reroute 20 cultures?':'ماذا لو أعدنا توجيه 20 مزرعة إلى الخط الاحتياطي؟',
+    'Why is Abha declining?':'لماذا يتراجع فرع أبها؟', 'What if we move 2 technicians to Abha?':'ماذا لو نقلنا فنيَّين إلى فرع أبها؟', 'Forecast waiting time':'توقع وقت الانتظار',
+    'Why is Jeddah West late?':'لماذا تتأخر زيارات غرب جدة؟', 'What if we shift 3 technicians to Jeddah West?':'ماذا لو نقلنا 3 فنيين إلى غرب جدة؟', 'Forecast home visit on-time':'توقع التزام مواعيد الزيارات',
+    'What are customers complaining about?':'مم يشتكي العملاء؟', 'Forecast CSAT':'توقع رضا العملاء', 'Send an SMS to all waiting customers':'أرسل رسالة نصية لجميع العملاء المنتظرين',
+    'Which campaign should we stop?':'أي حملة يجب أن نوقف؟', 'What if we shift SAR 15k to HBA1c?':'ماذا لو حوّلنا 15 ألف ريال إلى حملة HBA1c؟', 'Cut the price of the checkup bundle':'خفّض سعر باقة الفحص الشامل',
+    'Which SLAs are at risk?':'أي اتفاقيات خدمة معرضة للخطر؟', 'Forecast SLA compliance':'توقع الالتزام باتفاقية الخدمة',
+    'Are any data sources stale?':'هل هناك مصادر بيانات متقادمة؟', 'What happens if HR data goes stale?':'ماذا يحدث إذا تقادمت بيانات الموارد البشرية؟',
+    'What are the cameras detecting?':'ماذا ترصد الكاميرات؟', 'Is any facial recognition used?':'هل يُستخدم التعرف على الوجه؟', 'Can you interpret this patient\'s result?':'هل يمكنك تفسير نتيجة هذا المريض؟',
+    'Generate my daily CEO brief':'أنشئ موجزي التنفيذي اليومي',
+    /* drafted decisions */
+    'Olaya evening peak: waiting time forecast to reach 31 min between 16:00 and 18:00':'ذروة المساء في العليا: يُتوقع أن يبلغ الانتظار 31 دقيقة بين 16:00 و18:00',
+    'Footfall forecast +22% against a roster of 6 of 8 staff.':'توقع زيادة الزوار 22% مقابل جدول 6 من 8 موظفين.',
+    '~40 walk-aways and SAR 11k revenue at risk; complaint cluster likely.':'نحو 40 مغادرة دون خدمة و11 ألف ريال إيرادات معرضة للخطر؛ ومجموعة شكاوى مرجحة.',
+    'Approve 2 floater staff from Al Malaz for 16:00–19:00; A2 re-checks wait every 5 min.':'اعتماد موظفَين متنقلَين من الملز من 16:00 إلى 19:00؛ ويعيد A2 فحص الانتظار كل 5 دقائق.',
+    'HbA1c reagent stock forecast to run out in 2.5 days at current demand':'يُتوقع نفاد مخزون كواشف HbA1c خلال يومين ونصف بالطلب الحالي',
+    'HbA1c volume +31% (campaign-driven); 412 tests of stock left.':'حجم HbA1c ارتفع 31% (بدفع الحملة)؛ ويتبقى مخزون 412 فحصًا.',
+    'Campaign success would trigger a stock-out and a Chemistry TAT breach on Thursday.':'نجاح الحملة سيؤدي إلى نفاد المخزون وتجاوز زمن إنجاز الكيمياء يوم الخميس.',
+    'Raise an emergency purchase request for 3 kits (Procurement approval) and pace the campaign by 15% until delivery.':'رفع طلب شراء عاجل لـ 3 عبوات (باعتماد المشتريات) وإبطاء الحملة 15% حتى التوريد.',
+    'Report-delivery delay forecast to become a top-3 complaint theme by Thursday':'يُتوقع أن يصبح تأخر تسليم التقارير ضمن أعلى 3 مواضيع للشكاوى بحلول الخميس',
+    '22 cases, rising 9% a day; linked to Molecular TAT at 82%.':'22 حالة ترتفع 9% يوميًا؛ ومرتبطة بزمن إنجاز الجزيئي عند 82%.',
+    'CSAT forecast −1.5 pts over 7 days if unaddressed.':'يُتوقع انخفاض رضا العملاء 1.5 نقطة خلال 7 أيام إن لم يُعالج.',
+    'Send proactive delay notices (approved template) for Molecular orders older than 48h.':'إرسال إشعارات تأخير استباقية (بنموذج معتمد) للطلبات الجزيئية الأقدم من 48 ساعة.',
+    'Lab Supply Lead':'مسؤول إمداد المختبر', 'Today 15:00':'اليوم 15:00', 'Tomorrow 10:00':'غدًا 10:00', 'Today 17:00':'اليوم 17:00', 'Cross-domain plan':'خطة عابرة للمجالات', 'Today':'اليوم',
+    /* agent names used by the copilot */
+    'Agentic Orchestrator & Operations Control':'المنسّق الوكيلي والتحكم بالعمليات', 'Executive Intelligence & CEO Briefing':'الذكاء التنفيذي وموجز الرئيس التنفيذي', 'Main Laboratory & TAT':'المختبر الرئيسي وزمن الإنجاز',
+    'Home Visit Operations':'عمليات الزيارات المنزلية', 'Customer Experience & Call Center':'تجربة العملاء ومركز الاتصال', 'Marketing & Growth Intelligence':'ذكاء التسويق والنمو',
+    'IT & Integration Health':'صحة التقنية والتكامل', 'Integration & Data Health':'صحة التكامل والبيانات', 'Alert, Ticketing & Corrective Action':'التنبيهات والتذاكر والإجراءات التصحيحية', 'AI Vision Event Service':'خدمة أحداث الرؤية الذكية',
+    /* guided demo, alignment capabilities */
+    'Agentic capabilities demonstrated live':'القدرات الوكيلية المعروضة مباشرة', 'Live evidence from this session · each links to its step in the guided demo':'أدلة حية من هذه الجلسة · كل منها يرتبط بخطوته في العرض الموجّه',
+    'Capability':'القدرة', 'What the prototype shows':'ما يعرضه النموذج', 'RFP items':'بنود كراسة الطلب', 'This session':'هذه الجلسة'
+  ,
+    'AI-first executive brief, decision queue and one-click traceability, now with live 2-hour KPI forecasts, a what-if simulator and a guided demo.':'موجز تنفيذي قائم على الذكاء الاصطناعي وقائمة قرارات وتتبع بنقرة واحدة، مع توقعات حية لساعتين للمؤشرات ومحاكي سيناريوهات وعرض توضيحي موجّه.',
+    'A0-A12 and S1-S3 catalogue with release phase and maximum authority; agents act proactively on screen, raising alerts and running pre-approved L1–L2 actions.':'كتالوج A0–A12 وS1–S3 مع مرحلة الإطلاق والصلاحية القصوى؛ ويعمل الوكلاء استباقيًا على الشاشة برفع التنبيهات وتنفيذ إجراءات L1–L2 المعتمدة مسبقًا.',
+    'Authority levels 1-5, non-delegable boundaries and emergency stop, plus human-on-the-loop autonomy: 10-second cancel window, 30-second undo and an auto-execution switch.':'مستويات الصلاحية 1–5 والحدود غير القابلة للتفويض والإيقاف الطارئ، إضافة إلى استقلالية بإشراف بشري: نافذة إلغاء 10 ثوانٍ وتراجع خلال 30 ثانية ومفتاح للتنفيذ التلقائي.',
+    'This prototype is the executive experience: a live, predictive dashboard with a conversational copilot, proactive insight on every page and a notification center.':'هذا النموذج هو التجربة التنفيذية ذاتها: لوحة حية تنبؤية مع مساعد حواري ورؤية استباقية في كل صفحة ومركز للتنبيهات.',
+    'S2 lifecycle Detect to Learn with SLA states and mandatory closure evidence; agents open tasks when a KPI crosses its alert line and pre-empt forecast breaches.':'دورة حياة S2 من الرصد إلى التعلّم مع حالات اتفاقية الخدمة ودليل إغلاق إلزامي؛ ويفتح الوكلاء المهام عند تجاوز المؤشر حد التنبيه ويستبقون التجاوزات المتوقعة.',
+    'Full eight-week POC schedule with exit evidence; the guided demo rehearses the POC storyline end to end on synthetic data.':'جدول كامل لإثبات المفهوم في ثمانية أسابيع مع أدلة الخروج؛ ويستعرض العرض الموجّه قصة إثبات المفهوم كاملة على بيانات تجريبية.',
+    'Six-stream testing and acceptance table (data, agent, workflow, security, performance, UAT/ORT) on screen; an automated headless-browser test exercises agent behaviour, autonomy guardrails and every view.':'جدول الاختبار والقبول بستة مسارات (البيانات، الوكلاء، سير العمل، الأمن، الأداء، UAT/ORT) على الشاشة؛ ويختبر فحص آلي بمتصفح دون واجهة سلوك الوكلاء وضوابط الاستقلالية وكل الشاشات.',
+    'Full twelve-risk register with rating and mitigation on screen alongside the three root-cause findings in Blueprint; Delivery streams live signals for R3, R4, R5 and R9.':'سجل كامل من اثني عشر خطرًا مع التقييم والمعالجة إلى جانب نتائج الأسباب الجذرية الثلاث في المخطط؛ وتعرض شاشة التسليم إشارات حية للمخاطر R3 وR4 وR5 وR9.',
+    'AI Vision Event':'حدث الرؤية الذكية',
+    'Data Quality & Governance':'جودة البيانات وحوكمتها'
+  });
   var VIEWS={brief:viewBrief,branch:viewBranch,lab:viewLab,home:viewHome,cx:viewCX,mkt:viewMkt,orchestrator:viewOrchestrator,actions:viewActions,govern:viewGovern,vision:viewVision,health:viewHealth,blueprint:viewBlueprint,architecture:viewArchitecture,delivery:viewDelivery,alignment:viewAlignment};
 
   /* =========================================================
@@ -4007,6 +4250,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     document.getElementById('freshText').textContent=freshLabel(state.degraded?null:42);
     document.getElementById('estopBtn').className='btn '+(state.emergencyStop?'amber':'danger')+' sm';
     renderNudges();
+    $('cpInput').placeholder=T('Ask about TAT, branches, forecasts, what-if…','اسأل عن زمن الإنجاز أو الفروع أو التوقعات أو السيناريوهات…');
     localize(document.body);
     var m=document.querySelector('.content'); if(m) m.scrollTop=0;
   }
@@ -4179,7 +4423,7 @@ html[lang="ar"] .navgroup, html[lang="ar"] .brand .bsub, html[lang="ar"] .tbl th
     var act=el.getAttribute('data-act');
     if(act){
       if(act==='refresh'){ log('Manual intelligence refresh requested'); simTick(); toast('Signals refreshed from 9 sources — forecasts re-run.','ok'); return; }
-      if(act==='brief'){ openCopilot(); ask('Generate my daily CEO brief'); return; }
+      if(act==='brief'){ openCopilot(); ask(L('Generate my daily CEO brief')); return; }
       if(act==='estop'){ estopModal(true); return; }
       if(act==='resume'){ estopModal(false); return; }
       if(act==='degrade'){ state.degraded=true; log('Integration failure simulated — HR/Attendance and CCTV/VMS marked stale'); pushActivity('A12','warn','Integration failure simulated — HR/Attendance and CCTV/VMS marked stale'); toast('Integration failure simulated. Dependent outputs flagged degraded.','warn'); render(); return; }
